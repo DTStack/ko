@@ -1,6 +1,6 @@
 {
   "name": "ko-script",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "this is cli",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "bin": {
     "ko": "./bin/ko.js"
   },
-  "author": "",
+  "author": "dtux",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.2.0",
