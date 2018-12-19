@@ -1,13 +1,20 @@
 const webpack = require('webpack');
 const paths = require('./defaultPaths');
-let assetObj = require(paths.appAsset);
+const colors=require('colors');
+const {existsSync}=require('../util/fileService')
 module.exports = function () {
     let plugins = [];
     if(!existsSync(paths.appDll)){
-        console.log(colors.red('请先执行 ko dll,生成dll文件，再执行ko build或者ko dev'));
+        console.log(
+            [
+              `    - tip:    ${colors.yellow("请先执行 ko dll,生成dll文件")}`,
+              `    - tip:    ${colors.yellow("然后执行ko build或者ko dev")}`
+            ].join('\n')
+          );
         process.exit(500);
     }
-    let {keys, values, entries} = Object;
+    let assetObj = require(paths.appAsset);
+    let {keys} = Object;
     for (let key of keys(assetObj)) {
         plugins.push( 
             new webpack.DllReferencePlugin({

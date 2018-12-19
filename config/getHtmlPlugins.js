@@ -3,13 +3,12 @@ const fs = require('fs');
 const paths = require('./defaultPaths');
 const getScript=require('./getScript');
 const verifyHtml =require('../util/verifyHtml')
-const scripts=getScript();
 
 //console.log(scripts,scripts);
 module.exports = function getHtmlPlugins(entries) {
   //验证模板文件
   verifyHtml(paths.appHtml);
-
+  const scripts=getScript();
   if (typeof entries === 'string' || Array.isArray(entries)) {
     return [
       new HtmlWebpackPlugin({
