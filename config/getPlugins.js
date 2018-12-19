@@ -1,6 +1,5 @@
 
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
@@ -18,14 +17,7 @@ let cleanOpt = {
     dry:      false
   }
 module.exports = ({ entry }) => {
-  const defineVriables = {
-    'process.env.NODE_ENV': JSON.stringify(
-      process.env.NODE_ENV || 'development'
-    ),
-  };
-
   const plugins = [
-    new CleanWebpackPlugin(cleanPath, cleanOpt),
     new MiniCssExtractPlugin({
       filename:'css/[name].[hash:6].css',
       chunkFilename:'css/[id].[hash:6].css' 
@@ -39,7 +31,10 @@ module.exports = ({ entry }) => {
     new SimpleProgressPlugin(),
     new CaseSensitivePathsPlugin()
   ];
-  //是否引入 dll 
+  if(process.env.NODE_ENV=='production'){
+    plugins.push(new CleanWebpackPlugin(cleanPath, cleanOpt));
+  }
+  //引入 dll 文件
   Array.prototype.push.apply(plugins, getDllPlugins());
   // 增加 html 输出，支持多页面应用
   Array.prototype.push.apply(plugins, getHtmlPlugins(entry));
