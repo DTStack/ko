@@ -37,7 +37,7 @@ module.exports = async function(program) {
       console.log(colors.cyan('Starting the development server...'));
       console.log(
         [
-          `    - Local:   ${colors.yellow("http://"+host+":"+port+'/dist')}`
+          `    - Local:   ${colors.yellow("http://"+host+":"+port)}`
         ].join('\n')
       );
     }

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const getWebpackDll = require('../config/webpackDll');
 const colors=require('colors');
 const log=console.log;
-module.exports = function () {
+module.exports = ()=> {
     let webpackDll = getWebpackDll();
 
     log(colors.green('start dll ...'));

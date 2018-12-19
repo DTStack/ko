@@ -1,14 +1,23 @@
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackMerge = require('webpack-merge');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const paths=require('./defaultPaths')
+const {existsSync}=require('../util/fileService');
 const getWebpackBase = require('./webpackBase');
 
 module.exports = function getWebpackPro() {
   const baseConfig = getWebpackBase();
+  if(existsSync(paths.appDll)){
+    baseConfig.plugins.push(
+      new CopyWebpackPlugin([
+        { from: paths.appDll,to:paths.appDist+'/dll'},
+      ])
+    )
+  }
   return webpackMerge(baseConfig, {
     optimization: {
-      minimize: !process.env.DEBUG,
+      minimize: false,
       minimizer: [
         new UglifyJsPlugin({
           cache: true,

@@ -9,7 +9,7 @@ module.exports = (args) => {
       compress: true,
       clientLogLevel: 'none',
       hot: true,
-      publicPath: '/dist',
+      publicPath: '/',
       quiet: true,
       proxy: [],
       watchOptions: {

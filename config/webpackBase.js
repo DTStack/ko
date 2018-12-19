@@ -5,9 +5,7 @@ const getUserConf = require('./getUserConf');
 const getRules = require('./getRules');
 const getPlugins = require('./getPlugins');
 const processEntry = require('./processEntry');
-//const getEntryByPages = require('./getEntryByPages');
 const getEntry=require ('./getEntry')
-//const pkg = require('./packageJson');
 const paths = require('./defaultPaths');
 
 /**
@@ -35,12 +33,14 @@ module.exports = function getWebpackBase() {
   const webpackConfig = {
     mode: process.env.NODE_ENV,
     context: paths.appDirectory,
-    entry,
+    entry:{
+      index:entry
+    },
     output: Object.assign(
       {
         path: paths.appDist,
         filename:'js/[name].[hash].js',
-        publicPath:process.env.NODE_ENV=='development'? '/dist':'/',
+        publicPath:'/',
       }
     ),
     resolve: {
@@ -53,6 +53,11 @@ module.exports = function getWebpackBase() {
     plugins: getPlugins({ entry}),
     optimization: {
       splitChunks: {
+        minSize: 30000,
+        maxSize: 3000000,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
@@ -66,19 +71,12 @@ module.exports = function getWebpackBase() {
   };
 
   const userConfig = getUserConf();
-  const {server={},proxy=[],webpack={}}=userConfig;
+  const {webpack={}}=userConfig;
 
   const finalWebpackConfig = webpackMerge({
     customizeArray: pluginsUnique(['HtmlWebpackPlugin']),
-  })(webpackConfig, {});
+  })(webpackConfig, webpack);
 
-  
-  // // 单页应用 or 多页应用
-  // if (finalWebpackConfig.entry) {
-  //   finalWebpackConfig.entry = processEntry(finalWebpackConfig.entry);
-  // } else {
-  //   finalWebpackConfig.entry = processEntry(getEntryByPages());
-  // }
-  finalWebpackConfig.entry=processEntry(entry);
+  finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;
 };

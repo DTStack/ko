@@ -6,11 +6,10 @@ module.exports = function () {
  
     let {keys, values, entries} = Object;
     for (let key of keys(assetObj)) {
-        console.log(paths.resolveApp(`dist/dll/${key}-manifest.json`),'dll-manifest');
         plugins.push( 
             new webpack.DllReferencePlugin({
             context: paths.appDirectory, // 与DllPlugin中的那个context保持一致
-            manifest:paths.resolveApp(`dist/dll/${key}-manifest.json`)
+            manifest:paths.appDll+`/${key}-manifest.json`
         }))
     }
     return plugins;

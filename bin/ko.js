@@ -11,7 +11,8 @@ program
   .usage('<command> [options]')
   .command('build', 'build project')
   .command('dev', 'start server')
-  .command('dll', 'build dll');
+  .command('dll', 'build dll')
+  .command('preview', '预览应用...');
   program.parse(process.argv);
 
 const proc = program.runningCommand;

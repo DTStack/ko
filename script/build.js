@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const webpack = require('webpack');
 const getWebpackPro = require('../config/webpackPro');
 
-module.exports = function () {
+module.exports =()=> {
   const webpackConfig = getWebpackPro();
   gulp.task('build', () => {
     gulp.start(['webpack']);

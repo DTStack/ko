@@ -9,12 +9,12 @@ function resolveApp(relativePath) {
 module.exports = {
   appBuild: resolveApp('build'),
   appDist: resolveApp('dist'),
-  appDll: resolveApp('dist/dll'),
+  appDll: resolveApp('dll'),
   appHtml:resolveApp('src/index.html'),
   appPkg: resolveApp('package.json'),
-  appAsset:resolveApp('dist/dll/bundle.json'),
+  appAsset:resolveApp('dll/bundle.json'),
   appSrc: resolveApp('src'),
   appModules: resolveApp('node_modules'),
   resolveApp,
-  appDirectory,
+  appDirectory
 };
