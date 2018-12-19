@@ -12,7 +12,7 @@ program
   .command('build', 'build project')
   .command('dev', 'start server')
   .command('dll', 'build dll')
-  .command('preview', '预览应用...');
+  .command('preview', 'view app');
   program.parse(process.argv);
 
 const proc = program.runningCommand;

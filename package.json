@@ -1,7 +1,7 @@
 {
-  "name": "commander",
+  "name": "ko-script",
   "version": "1.0.0",
-  "description": "this is test",
+  "description": "this is cli",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -47,7 +47,6 @@
     "css-loader": "^2.0.0",
     "deep-assign": "^3.0.0",
     "deepmerge": "^3.0.0",
-    "gulp": "^3.9.1",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",

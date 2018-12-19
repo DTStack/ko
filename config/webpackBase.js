@@ -50,6 +50,9 @@ module.exports = function getWebpackBase() {
     module: {
       rules: getRules(),
     },
+    performance: { //打包性能配置
+      hints: false, // 关闭性能提示
+    },
     plugins: getPlugins({ entry}),
     optimization: {
       splitChunks: {

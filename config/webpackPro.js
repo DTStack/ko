@@ -5,16 +5,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const paths=require('./defaultPaths')
 const {existsSync}=require('../util/fileService');
 const getWebpackBase = require('./webpackBase');
+const colors=require('colors');
 
 module.exports = function getWebpackPro() {
   const baseConfig = getWebpackBase();
-  if(existsSync(paths.appDll)){
-    baseConfig.plugins.push(
-      new CopyWebpackPlugin([
-        { from: paths.appDll,to:paths.appDist+'/dll'},
-      ])
-    )
-  }
+  baseConfig.plugins.push(
+    new CopyWebpackPlugin([
+      { from: paths.appDll,to:paths.appDist+'/dll'},
+    ])
+  )
   return webpackMerge(baseConfig, {
     optimization: {
       minimize: false,

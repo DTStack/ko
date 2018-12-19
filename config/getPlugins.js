@@ -39,10 +39,9 @@ module.exports = ({ entry }) => {
     new SimpleProgressPlugin(),
     new CaseSensitivePathsPlugin()
   ];
-
-  // 增加 html 输出，支持多页面应用
-  Array.prototype.push.apply(plugins, getHtmlPlugins(entry));
   //是否引入 dll 
   Array.prototype.push.apply(plugins, getDllPlugins());
+  // 增加 html 输出，支持多页面应用
+  Array.prototype.push.apply(plugins, getHtmlPlugins(entry));
   return plugins;
 };
