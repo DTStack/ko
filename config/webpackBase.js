@@ -7,6 +7,7 @@ const getPlugins = require('./getPlugins');
 const processEntry = require('./processEntry');
 const getEntry=require ('./getEntry')
 const paths = require('./defaultPaths');
+const {isAbsolute}=require('../util/fileService');
 
 /**
  * 合并 plugin 操作，
@@ -30,12 +31,13 @@ const pluginsUnique = (uniques) => {
 };
 const entry=getEntry();
 module.exports = function getWebpackBase() {
+  const userConfig = getUserConf();
+  const {webpack={}}=userConfig;
+  const entries={...entry,...webpack.entry};
   const webpackConfig = {
     mode: process.env.NODE_ENV,
     context: paths.appDirectory,
-    entry:{
-      index:entry
-    },
+    entry,
     output: Object.assign(
       {
         path: paths.appDist,
@@ -53,7 +55,7 @@ module.exports = function getWebpackBase() {
     performance: { //打包性能配置
       hints: false, // 关闭性能提示
     },
-    plugins: getPlugins({ entry}),
+    plugins: getPlugins(entries),
     optimization: {
       splitChunks: {
         minSize: 30000,
@@ -72,13 +74,11 @@ module.exports = function getWebpackBase() {
       },
     },
   };
-
-  const userConfig = getUserConf();
-  const {webpack={}}=userConfig;
-
+   
   const finalWebpackConfig = webpackMerge({
-    customizeArray: pluginsUnique(['HtmlWebpackPlugin']),
+    customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
   })(webpackConfig, webpack);
+  finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
 
   finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;

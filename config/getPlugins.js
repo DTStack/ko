@@ -16,7 +16,7 @@ let cleanOpt = {
     verbose:  false,
     dry:      false
   }
-module.exports = ({ entry }) => {
+module.exports = (entry) => {
   const plugins = [
     new MiniCssExtractPlugin({
       filename:'css/[name].[hash:6].css',
