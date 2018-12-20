@@ -50,7 +50,7 @@ module.exports = () => {
   } catch (err) {
     console.log(
       [
-        `    - Tip:   ${colors.green("目录移动失败")} ${err}`
+        `    - Tip:   ${colors.red("目录移动失败")} ${err}`
       ].join('\n')
     );
   }

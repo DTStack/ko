@@ -20,7 +20,6 @@ module.exports = function getHtmlPlugins(entries) {
     ];
   }
   const entriesNames = Object.keys(entries);
-  console.log( entriesNames.filter((n) => n !== 'about'));
   return entriesNames.map((entryName) => {
     return new HtmlWebpackPlugin({
       excludeChunks: entriesNames.filter((n) => n !== entryName),

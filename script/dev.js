@@ -38,7 +38,7 @@ module.exports = async function(program) {
       console.log(
         [
           `    - Local:   ${colors.yellow("http://"+host+":"+port)}`,
-          `    - tip:   非index.html文件，请访问:${colors.yellow("http://"+host+":"+port+"xxx.html")}`
+          `    - tip:   ${colors.red("非index.html文件，请访问:")}${colors.yellow("http://"+host+":"+port+"/xxx.html")}`
         ].join('\n')
       );
     }
