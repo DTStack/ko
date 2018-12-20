@@ -41,7 +41,7 @@ module.exports = function getWebpackBase() {
     output: Object.assign(
       {
         path: paths.appDist,
-        filename:'js/[name].[hash].js',
+        filename:'js/[name].js',
         publicPath:'/',
       }
     ),
@@ -58,11 +58,6 @@ module.exports = function getWebpackBase() {
     plugins: getPlugins(entries),
     optimization: {
       splitChunks: {
-        minSize: 30000,
-        maxSize: 3000000,
-        minChunks: 1,
-        maxAsyncRequests: 5,
-        maxInitialRequests: 3,
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
@@ -72,14 +67,14 @@ module.exports = function getWebpackBase() {
           },
         },
       },
-    },
+    }
   };
    
   const finalWebpackConfig = webpackMerge({
     customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
   })(webpackConfig, webpack);
   finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
-
+  console.log(finalWebpackConfig.entry,'121312312313ppd',finalWebpackConfig.output);
   finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;
 };

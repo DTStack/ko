@@ -9,6 +9,7 @@ module.exports = (args) => {
       compress: true,
       clientLogLevel: 'none',
       hot: true,
+      inline:true,
       publicPath: '/',
       quiet: true,
       proxy: [],
