@@ -10,17 +10,19 @@ function getUserConf () {
         return {
             proxy:[],
             server:{},
-            webpack:{}
+            webpack:{},
+            move:{}
         };
     }
 }
 
 module.exports = () => {
     const userConf=getUserConf();
-    const {proxy={},server={},webpack={}}=userConf;
+    const {proxy={},server={},webpack={},move={}}=userConf;
      return{
         proxy,
         server,
-        webpack
+        webpack,
+        move
      }
 }

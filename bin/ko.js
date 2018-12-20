@@ -12,7 +12,8 @@ program
   .command('build', 'build project')
   .command('dev', 'start server')
   .command('dll', 'build dll')
-  .command('preview', 'view app');
+  .command('preview', 'view app')
+  .command('move', 'move to gh-pages');
   program.parse(process.argv);
 
 const proc = program.runningCommand;

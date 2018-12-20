@@ -74,7 +74,6 @@ module.exports = function getWebpackBase() {
     customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
   })(webpackConfig, webpack);
   finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
-  console.log(finalWebpackConfig.entry,'121312312313ppd',finalWebpackConfig.output);
   finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;
 };

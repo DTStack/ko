@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+'use strict';
+const program = require('commander');
+const log=console.log;
+const attachToEnv = require('../util/attachToEnv');
+const colors = require('colors');
+const move =require('../script/move')
+
+program
+  .option('-d, --dir <dir>', '自定义目录名')
+  .parse(process.argv);
+  attachToEnv(program);
+  
+  try{
+    move();
+  }catch(err){
+    console.log(colors.red('移动文件失败，请重试。'));
+  }
+ 

@@ -37,7 +37,8 @@ module.exports = async function(program) {
       console.log(colors.cyan('Starting the development server...'));
       console.log(
         [
-          `    - Local:   ${colors.yellow("http://"+host+":"+port)}`
+          `    - Local:   ${colors.yellow("http://"+host+":"+port)}`,
+          `    - tip:   非index.html文件，请访问:${colors.yellow("http://"+host+":"+port+"xxx.html")}`
         ].join('\n')
       );
     }

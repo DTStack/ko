@@ -15,6 +15,7 @@ module.exports = {
   appAsset:resolveApp('dll/bundle.json'),
   appSrc: resolveApp('src'),
   appModules: resolveApp('node_modules'),
+  appGhPage:resolveApp('gh-pages'),
   resolveApp,
   appDirectory
 };
