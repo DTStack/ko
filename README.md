@@ -1,7 +1,7 @@
 
 
-## 基础使用
- kangaroo项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率：
+### 基础使用
+ ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率：
 
  ```text
   1. ko dll   生成动态连接库
@@ -11,11 +11,11 @@
   5. ko move  默认移动文件到gh-pages
  ```
 
-## 定制构建器
+### 定制构建器
 
-kangaroo的[工程](https:///ko-script)使用了 `webpack` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
+ko的[工程](https:///ko-script)使用了 `webpack` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
 
-## 要求
+### 要求
 
 * devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
 ```
@@ -35,7 +35,7 @@ project
 └── README.md              // 项目说明
 ```
 
-## 如何配置
+### 如何配置
 
 KO 项目支持在项目根目录创建 `ko.config.js` 文件对 `webpack` 项目进行定制和覆盖，`ko-config.js` 文件需要导出一个 `userConf` 对象，其支持的参数可以参考 `webpack` [官方文档](https://webpack.js.org/concepts/output/)。
 
@@ -47,7 +47,7 @@ module.exports =()=> {
 };
 ```
 
-## 配置举例
+### 配置举例
 
 ```js
 
