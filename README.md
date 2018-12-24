@@ -9,10 +9,10 @@
 
    ko dll -s number //可以更改分组个数，以避免编译包过大
   
-  3.可以分别打包react和vue项目，并可以自定义webpack配置详细（使用请阅读本文档）
+  3.可以分别打包react和vue项目，并可以自定义webpack配置信息（使用请详细阅读本文档）
 
  ```
- * devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
+ * devDependencies 里的 ko-script 依赖版本号为 1.2.6 及以上及项目目录
 
 ```
 project
@@ -32,7 +32,7 @@ project
 ```
 
  ### 基础使用
- 
+
  ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
 
  ```text
@@ -53,7 +53,7 @@ project
 
    import "@babel/polyfill"
 
-  2.入口文件尽量不要加入业务包，dll会自行打包优化；另位 dependencies 依赖项，必须是项目编译后需要依赖的包，
+  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外dependencies 依赖项，必须是项目编译后需要依赖的包，
    其他包放入 devpendencies中;
 
     entry: {
