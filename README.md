@@ -1,6 +1,7 @@
 ### 说明
  ``` text
-  1.已封装包 webpack4 ,webpack-cli,webpack-dev-server, scss, babel ,copy,less,scss,autoprefixer,
+
+  1.已封装包 webpack4 ,webpack-cli,webpack-dev-server, scss, babel ,babel-plugin-xxx,copy,less,scss,autoprefixer,
   
   postcss-loader,vue-loader,clean-webpack-plugin,html-webpack-plugin 等；
 
@@ -8,7 +9,7 @@
 
    ko dll -s number //可以更改分组个数，以避免编译包过大
   
-  3.可以分别打包react和vue项目，并可以自定义webpack配置
+  3.可以分别打包react和vue项目，并可以自定义webpack配置详细（使用请阅读本文档）
 
  ```
 
@@ -140,7 +141,7 @@ module.exports = (context) => {
 ### 待更新
 
 * 引入全局 config 配置
-* dll打包优化 
+* dll打包进一步优化 
 * 加入happypack提高编译性能
 
 
