@@ -12,10 +12,44 @@
   3.可以分别打包react和vue项目，并可以自定义webpack配置详细（使用请阅读本文档）
 
  ```
+ * devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
+
+```
+project
+├── src
+│     ├── components       // 公共组件
+│     ├── layouts          // 通用布局
+│     ├── pages            // 页面
+│     └── index.js         // 入口文件
+├── dll                  // 构建后的动态链接库文件
+├── dist                  // 构建后的前端静态资源
+│     ├── index.html
+│     ├── css
+│     └── js
+├── ko.config.js          // 自定义 webpack 配置
+├── package.json           // package.json
+└── README.md              // 项目说明
+```
+
+ ### 基础使用
+ 
+ ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
+
+ ```text
+  1. ko dll   生成动态连接库
+
+  2. ko dev   启动本地开发环境
+
+  3. ko build 编译项目到生产环境
+
+  4. ko preview 预览编译后项目静态文件
+
+  5. ko move  默认移动文件到gh-pages
+ ```
 
 ### 要求
  ```js
-  1.引入新实例方法 如 string.includes('xx'),需在项目入口文件引入垫片如下方式：
+  1.引入es6新实例方法 如 string.includes('xx'),需在项目入口文件加入垫片 如下方式：
 
    import "@babel/polyfill"
 
@@ -36,40 +70,6 @@
             }
         }
     }
- ```
-
-* devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
-
-```
-project
-├── src
-│     ├── components       // 公共组件
-│     ├── layouts          // 通用布局
-│     ├── pages            // 页面
-│     └── index.js         // 入口文件
-├── dll                  // 构建后的动态链接库文件
-├── dist                  // 构建后的前端静态资源
-│     ├── index.html
-│     ├── css
-│     └── js
-├── ko.config.js          // 自定义 webpack 配置
-├── package.json           // package.json
-└── README.md              // 项目说明
-```
-
-### 基础使用
- ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
-
- ```text
-  1. ko dll   生成动态连接库
-
-  2. ko dev   启动本地开发环境
-
-  3. ko build 编译项目到生产环境
-
-  4. ko preview 预览编译后项目静态文件
-
-  5. ko move  默认移动文件到gh-pages
  ```
 
 ### 定制构建器
