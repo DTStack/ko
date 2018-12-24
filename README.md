@@ -1,6 +1,18 @@
-
-
 ### 说明
+ ``` text
+  1.已封装包 webpack4 ,webpack-cli,webpack-dev-server, scss, babel ,copy,less,scss,autoprefixer,
+  
+  postcss-loader,vue-loader,clean-webpack-plugin,html-webpack-plugin 等；
+
+  2.为提高编译效率，采用 webpack.DllPlugin 进行编译， 并以项目dependencies依赖项分组打包，默认以3个业务包为一组进行划分
+
+   ko dll -s number //可以更改分组个数，以避免编译包过大
+  
+  3.可以分别打包react和vue项目，并可以自定义webpack配置
+
+ ```
+
+### 要求
  ```js
   1.引入新实例方法 如 string.includes('xx'),需在项目入口文件引入垫片如下方式：
 
@@ -13,11 +25,7 @@
           index:'src/index'
     }
 
-  3.编译是以项目中package.json中 dependencies 依赖的项目包进行编译，默认以3个业务包为一组进行划分
-
-   ko dll -s number //可以更改分组个数，以避免编译包过大；
-
-  4.用户自定义配置路径，尽量写绝对路径 如：
+  3.用户自定义配置路径，尽量写绝对路径 如：
 
     {
       resolve: {
@@ -29,10 +37,8 @@
     }
  ```
 
+* devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
 
-### 要求
-
-devDependencies 里的 ko-script 依赖版本号为 1.2.0 及以上及项目目录
 ```
 project
 ├── src
@@ -135,7 +141,7 @@ module.exports = (context) => {
 
 * 引入全局 config 配置
 * dll打包优化 
-*  加入happypack提高编译性能
+* 加入happypack提高编译性能
 
 
 
