@@ -8,7 +8,7 @@ module.exports=function (){
         ' * @name           ' + 'dtux',
         ' * @author         ' + 'dtux',
         ' * @build          ' + moment().format('llll') + ' ET',
-        ' * @release        ' + 'v1.0.0',
+        ' * @release        ' + 'v1.2.8',
         ' * @copyright      Copyright (c) ' + moment().format('YYYY') + ' ' + "袋鼠云",
         ' *',
         ' */',
