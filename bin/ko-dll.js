@@ -8,7 +8,7 @@ const colors = require('colors');
 const dll = require('../script/dll');
 
 program
-  .option('-s, --split <split>', '文件分割文件数')
+  .option('-s, --split <split>', '分组最小包数，默认3')
   .parse(process.argv);
   attachToEnv(program);
   try{

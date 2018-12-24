@@ -15,7 +15,8 @@ module.exports = function getHtmlPlugins(entries) {
         template: paths.appHtml,
         filename: "index.html",
         minify: true,
-        scripts
+        scripts,
+        config_js:''
       }),
     ];
   }
@@ -26,7 +27,8 @@ module.exports = function getHtmlPlugins(entries) {
       filename: `${entryName}.html`,
       template: paths.appHtml,
       minify: true,
-      scripts
+      scripts,
+      config_js:''
     });
   });
 };

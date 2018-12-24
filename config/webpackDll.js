@@ -5,7 +5,13 @@ const paths = require('./defaultPaths');
 const pkg=require(paths.appPkg);
 const {formatBundle}=require('../util');
 let dependencies = Object.keys(pkg.dependencies) || [];
-
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+let cleanPath = ['dll']
+let cleanOpt = {
+    root:paths.appDirectory,
+    verbose:  false,
+    dry:      false
+  }
 module.exports=function(){
  return {
         mode:"production",
@@ -24,7 +30,8 @@ module.exports=function(){
             prettyPrint: true,
             filename: 'bundle.json',
             path: paths.appDll
-        })
+        }),
+        new CleanWebpackPlugin(cleanPath, cleanOpt)
        ],
     
         performance: { //打包性能配置

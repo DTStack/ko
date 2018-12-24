@@ -35,12 +35,13 @@ module.exports = async function(program) {
     if (isFirstCompile) {
       isFirstCompile = false;
       console.log(colors.cyan('Starting the development server...'));
-      console.log(
+      let tips=
         [
           `    - Local:   ${colors.yellow("http://"+host+":"+port)}`,
-          `    - tip:   ${colors.red("非index.html文件，请访问:")}${colors.yellow("http://"+host+":"+port+"/xxx.html")}`
-        ].join('\n')
-      );
+          `    - Html:   ${colors.red("非index.html文件，请访问:")}${colors.yellow("http://"+host+":"+port+"/xxx.html")}`
+        ];
+      //let report = `    - Report:   ${colors.yellow("http://"+host+":"+port+'/report.html')}`;
+      console.log(tips.join('\n'));
     }
     const json = stats.toJson({}, true);
     const messages = formatWebpackMessages(json);
