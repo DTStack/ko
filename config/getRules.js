@@ -14,11 +14,12 @@ const POSTCSS_LOADER = require.resolve('postcss-loader');
 const SASS_LOADER = require.resolve('sass-loader');
 const CSS_HOT_LOADER = require.resolve('css-hot-loader');
 const URL_LOADER = require.resolve('url-loader');
+const FILE_LOADER=require.resolve('file-loader');
+const VUE_LOADER=require.resolve('vue-loader');
 const URL_LOADER_LIMIT = 8192;
 
 function withCssHotLoader(loaders) {
     if (process.env.NODE_ENV !== 'production') {
-        //console.log(process.env.NODE_ENV,'process.env.NODE_ENV');
         return [CSS_HOT_LOADER].concat(loaders);
     }
     return loaders;
@@ -105,51 +106,23 @@ module.exports = () => {
                 cacheDirectory: true
             }),
         },
-
-        // extra url loader usage
         {
-            test: /\.woff2?$/,
-            loader: URL_LOADER,
-            options: {
-                limit: URL_LOADER_LIMIT,
-                minetype: 'application/font-woff',
-                name: 'assets/[hash].[ext]',
-            },
+            test:/\.vue$/,
+            loader:VUE_LOADER
         },
         {
-            test: /\.ttf$/,
-            loader: URL_LOADER,
+            test: /\.(woff|woff2|svg|ttf|eot)$/,
+            loader:FILE_LOADER ,
             options: {
-                limit: URL_LOADER_LIMIT,
-                minetype: 'application/octet-stream',
-                name: 'assets/[hash].[ext]',
-            },
-        },
-        {
-            test: /\.eot$/,
-            loader: URL_LOADER,
-            options: {
-                limit: URL_LOADER_LIMIT,
-                minetype: 'application/vnd.ms-fontobject',
-                name: 'assets/[hash].[ext]',
-            },
-        },
-        {
-            test: /\.svg$/,
-            loader: URL_LOADER,
-            options: {
-                limit: URL_LOADER_LIMIT,
-                minetype: 'image/svg+xml',
-                name: 'assets/[hash].[ext]',
-            },
-        },
-        {
+                name: 'fonts/[hash].[ext]',
+            }
+          },
+          {
             test: /\.(png|jpg|jpeg|gif)$/i,
-            loader: URL_LOADER,
+            loader: FILE_LOADER,
             options: {
-                limit: URL_LOADER_LIMIT,
-                name: 'assets/[hash].[ext]',
+              name: 'imgs/[hash].[ext]',
             },
-        },
+          },
     ];
 };

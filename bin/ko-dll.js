@@ -8,12 +8,7 @@ const colors = require('colors');
 const dll = require('../script/dll');
 
 program
-  .option(
-    '--inject-babel <type>',
-    '注入 babel 运行环境, Enum: polyfill|runtime',
-    /^(polyfill|runtime)$/,
-    'polyfill'
-  )
+  .option('-s, --split <split>', '文件分割文件数')
   .parse(process.argv);
   attachToEnv(program);
   try{

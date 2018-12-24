@@ -7,6 +7,7 @@ const getHtmlPlugins = require('./getHtmlPlugins');
 const getDllPlugins=require('./getDllPlugins');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const paths = require('./defaultPaths');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const getTopBanner=require ('./getTopBanner');
 const webpack = require('webpack');
 let cleanPath = ['dist']
@@ -18,6 +19,7 @@ let cleanOpt = {
   }
 module.exports = (entry) => {
   const plugins = [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename:'css/[name].[hash:6].css',
       chunkFilename:'css/[id].[hash:6].css' 

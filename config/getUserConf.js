@@ -19,7 +19,7 @@ function getUserConf () {
 
 module.exports = () => {
     const userConf=getUserConf();
-    console.log(userConf,'http://172.16.8.170/webapp.html#/home');
+    //console.log(userConf,'http://172.16.8.170/webapp.html#/home');
     const {proxy={},server={},webpack={},move={}}=userConf;
      return{
         proxy,

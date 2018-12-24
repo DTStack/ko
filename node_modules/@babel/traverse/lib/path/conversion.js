@@ -324,7 +324,7 @@ function getThisBinding(thisEnvFn, inConstructor) {
         if (!child.get("callee").isSuper()) return;
         if (supers.has(child.node)) return;
         supers.add(child.node);
-        child.replaceWith(t().assignmentExpression("=", t().identifier(thisBinding), child.node));
+        child.replaceWithMultiple([child.node, t().assignmentExpression("=", t().identifier(thisBinding), t().identifier("this"))]);
       }
 
     });

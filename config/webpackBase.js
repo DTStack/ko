@@ -47,7 +47,10 @@ module.exports = function getWebpackBase() {
     ),
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', '.json','.html']
+      extensions: ['.js', '.jsx', '.scss', '.css', '.json','.html','.vue'],
+      alias:{
+        'vue$':'vue/dist/vue.esm.js'
+      }
     },
     module: {
       rules: getRules(),

@@ -69,6 +69,10 @@ function skipAllButComputedKey(path) {
 }
 
 const environmentVisitor = {
+  TypeAnnotation(path) {
+    path.skip();
+  },
+
   Function(path) {
     if (path.isMethod()) return;
     if (path.isArrowFunctionExpression()) return;
