@@ -9,6 +9,14 @@
   "bin": {
     "ko": "./bin/ko.js"
   },
+  "keywords": [
+    "Ko",
+    "Kangaroo",
+    "CLI",
+    "React",
+    "vue",
+    "script"
+  ],
   "author": "dtux",
   "license": "ISC",
   "dependencies": {

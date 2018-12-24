@@ -31,10 +31,16 @@ project
 └── README.md              // 项目说明
 ```
 
- ### 基础使用
+### 基础使用
 
- ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
+ * 安装 
+ ```text
+  npm install -g ko-script 或者 yarn add -g ko-script
 
+ ```
+
+ * ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
+  
  ```text
   1. ko dll   生成动态连接库
 
@@ -44,7 +50,7 @@ project
 
   4. ko preview 预览编译后项目静态文件
 
-  5. ko move  默认移动文件到gh-pages
+  5. ko move  默认移动文件(可配置)
  ```
 
 ### 要求
