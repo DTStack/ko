@@ -17,6 +17,10 @@ module.exports={
     existsSync:function(filePath){
      return fs.existsSync(filePath);
     },
+    mkdir:function(path){
+        fs.mkdirSync(path, 0777);
+        return ;
+    },
     getCurFilePath:function(relativePath){
         let curDirPath=process.cwd();
         return resolve(curDirPath, relativePath);

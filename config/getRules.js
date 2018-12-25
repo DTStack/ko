@@ -94,6 +94,7 @@ module.exports = () => {
                     loader: LESS_LOADER,
                     options: {
                         sourceMap: true,
+                        javascriptEnabled: true 
                     },
                 },
             ]),

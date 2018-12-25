@@ -2,12 +2,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const paths = require('./defaultPaths');
 const getScript=require('./getScript');
-const verifyHtml =require('../util/verifyHtml')
+const verifyHtml =require('../util/verifyHtml');
+const verifyConfig=require('../util/verifyConfig')
 
 //console.log(scripts,scripts);
 module.exports = function getHtmlPlugins(entries) {
   //验证模板文件
   verifyHtml(paths.appHtml);
+  const config=verifyConfig(paths.appConfig);
   const scripts=getScript();
   if (typeof entries === 'string' || Array.isArray(entries)) {
     return [
@@ -15,8 +17,12 @@ module.exports = function getHtmlPlugins(entries) {
         template: paths.appHtml,
         filename: "index.html",
         minify: true,
-        scripts,
-        config_js:''
+        title:'',
+        assets:{
+          scripts,
+          config
+        },
+        chunksSortMode:"none"
       }),
     ];
   }
@@ -27,8 +33,12 @@ module.exports = function getHtmlPlugins(entries) {
       filename: `${entryName}.html`,
       template: paths.appHtml,
       minify: true,
-      scripts,
-      config_js:''
+      title:'',
+      assets:{
+        scripts,
+        config
+      },
+      chunksSortMode:"none"
     });
   });
 };
