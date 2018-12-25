@@ -16,6 +16,7 @@
 
 ```
 project
+├── public                 // 公共资源文件(第三方资源库，项目模板文件，全局配置文件config)
 ├── src
 │     ├── components       // 公共组件
 │     ├── layouts          // 通用布局
@@ -30,6 +31,31 @@ project
 ├── package.json           // package.json
 └── README.md              // 项目说明
 ```
+### 要求
+ ```js
+  1.引入es6新实例方法 如 string.includes('xx'),需在项目入口文件加入垫片 如下方式：
+
+   import "@babel/polyfill"
+
+  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项，必须是项目编译后需要依赖的包
+
+  并且包中不可引用 node API，其他包放入 devpendencies 中;
+
+    entry: {
+          index:'src/index'
+    }
+
+  3.用户自定义配置路径，尽量写绝对路径 如：
+
+    {
+      resolve: {
+            alias: {
+                '@': path.resolve(__dirname, 'src'),
+                '@public': path.resolve(__dirname, 'src/public')
+            }
+        }
+    }
+ ```
 
 ### 基础使用
 
@@ -51,31 +77,6 @@ project
   4. ko preview 预览编译后项目静态文件
 
   5. ko move  默认移动文件(可配置)
- ```
-
-### 要求
- ```js
-  1.引入es6新实例方法 如 string.includes('xx'),需在项目入口文件加入垫片 如下方式：
-
-   import "@babel/polyfill"
-
-  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外dependencies 依赖项，必须是项目编译后需要依赖的包，
-   其他包放入 devpendencies中;
-
-    entry: {
-          index:'src/index'
-    }
-
-  3.用户自定义配置路径，尽量写绝对路径 如：
-
-    {
-      resolve: {
-            alias: {
-                '@': path.resolve(__dirname, 'src'),
-                '@public': path.resolve(__dirname, 'src/public')
-            }
-        }
-    }
  ```
 
 ### 定制构建器
