@@ -37,9 +37,9 @@ project
 
    import "@babel/polyfill"
 
-  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项，必须是项目编译后需要依赖的包
+  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项必须是项目编译后需要依赖的包
 
-  并且包中不可引用 node API，其他包放入 devpendencies 中;
+  并且包中不可引用 node API(若引入请放在 devpendencies )，其他包放入 devpendencies 中;
 
     entry: {
           index:'src/index'
@@ -61,13 +61,15 @@ project
 
  * 安装 
  ```text
-  npm install -g ko-script 或者 yarn add -g ko-script
+
+  npm install -g ko-script 或者 yarn add ko-script
 
  ```
 
- * ko项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率，并兼容vue和react;
+ * ko 项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率并兼容 [vue] 和 [react];
   
  ```text
+
   1. ko dll   生成动态连接库
 
   2. ko dev   启动本地开发环境
@@ -81,18 +83,20 @@ project
 
 ### 定制构建器
 
-ko项目使用了 `webpack` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
+ko项目使用了 `webpack，DllPlugin` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
 
 ### 如何配置
 
-ko项目支持在项目根目录创建 `ko.config.js` 文件对 `webpack` 项目进行定制和覆盖，`ko-config.js` 文件需要导出一个 `userConf` 对象，其支持的参数可以参考 `webpack` [官方文档](https://webpack.js.org/concepts/output/)。
+ko项目支持在项目根目录创建 `ko.config.js` 文件对 `webpack` 项目进行定制和覆盖，`ko.config.js` 文件需要导出一个 `userConf` 对象，其支持的参数可以参考 `webpack` [官方文档](https://webpack.js.org/concepts/output/)。
 
 `ko.config.js` 文件采用您操作系统中安装的 Node.js 所支持的语法，所以您可以使用除了 `import`, `export` 等之外的几乎所有 ES6 语法。
 
 ```js
+
 module.exports =()=> {
   // userConf
 };
+
 ```
 
 ### 配置举例
@@ -145,9 +149,21 @@ module.exports = (context) => {
 };
 
 ```
+### 全局配置使用
+
+* 在当前项目 public 目录新建config目录，并分别新建文件conf.dev.js(代表开发环境)， conf.prod.js(生产环境配置)
+
+* conf 代码示例如下：
+``` js
+
+var FRONT_CONF = {
+   LOGO: '/img/logo.png', // 项目logo
+  COPY_RIGHT: (new Date()).getFullYear() + ' 杭州玳数科技有限公司 浙ICP备15044486号-1',
+}
+
+```
 ### 待更新
 
-* 引入全局 config 配置
 * dll打包进一步优化 
 * 加入happypack提高编译性能
 
