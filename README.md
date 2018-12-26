@@ -11,6 +11,8 @@
   
   3.可以分别打包react和vue项目，并可以自定义webpack配置信息（使用请详细阅读本文档）
 
+  4.antd 样式默认按需动态引入，无需在项目中再配置
+
  ```
  * devDependencies 里的 ko-script 依赖版本号为 1.2.6 及以上及项目目录
 
@@ -167,6 +169,8 @@ var FRONT_CONF = {
 * dll打包进一步优化 
 
 * 加入happypack提高编译性能
+
+* typescript 支持
 
 
 
