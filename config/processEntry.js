@@ -1,3 +1,12 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-12 14:44:17
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:24:40
+ */
 const fs = require('fs');
 const path = require('path');
 const appDirectory = fs.realpathSync(process.cwd());
@@ -31,7 +40,13 @@ function enhanceEntries(entries, chunk) {
 
   return hotEntries;
 }
-
+/**
+ * @description: 实时监测文件变化
+ * @param2: 入口文件对象
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:24:00
+ */
 module.exports = (entry) => {
   // 需要区分项目类型，新版的项目直接返回 src/index.js
   let entries = {};

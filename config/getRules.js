@@ -1,3 +1,13 @@
+/*
+ * @Description: 设置webpack rule 配置
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-24 15:51:59
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:27:42
+ */
+
 const getBabelConf = require('./getBabelConf');
 const colors = require('colors');
 const deepAssign = require('deep-assign');

@@ -1,3 +1,12 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-10 16:29:17
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:29:29
+ */
 const detect = require('detect-port');
 const inquirer = require('inquirer');
 const isInteractive = process.stdout.isTTY;
@@ -10,7 +19,14 @@ const isInteractive = process.stdout.isTTY;
       return changePort(newPort,defaultPort);
      }
    }
-
+   /**
+    * @description: 检查端口是否存在
+    * @param1: newPort 启用新端口
+    * @param2: default 默认端口
+    * @return: ret
+    * @Author: Charles
+    * @Date: 2018-12-26 11:28:42
+    */
    async function changePort(newPort,defaultPort){
     const question = {
         type: 'confirm',

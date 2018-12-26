@@ -1,5 +1,21 @@
+/*
+ * @Description: 设置babel插件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-11 14:57:12
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:14:04
+ */
 
 
+/**
+ * @description: 获取插件绝对路径
+ * @param1: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:13:44
+ */ 
 function resolvePlugin(plugins) {
     return plugins.filter(Boolean).map((plugin) => {
         if (Array.isArray(plugin)) {

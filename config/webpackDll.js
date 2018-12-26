@@ -1,3 +1,12 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-17 19:53:52
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:27:30
+ */
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -12,6 +21,13 @@ let cleanOpt = {
     verbose:  false,
     dry:      false
   }
+/**
+ * @description: DllPlugin生产配置
+ * @param1: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:26:58
+ */  
 module.exports=function(){
  return {
         mode:"production",

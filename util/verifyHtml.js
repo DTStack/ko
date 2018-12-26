@@ -1,5 +1,21 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-19 14:05:34
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:32:55
+ */
 const {createFileSync,readFileSync,existsSync,mkdir}=require("./fileService");
 const {appPublic}=require('../config/defaultPaths');
+/**
+ * @description: 模版文件默认引入
+ * @param1: path 模版文件路径
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:32:09
+ */
 module.exports=function(path){
     if(!existsSync(appPublic)) mkdir(appPublic);
     let txt=`<!DOCTYPE html>

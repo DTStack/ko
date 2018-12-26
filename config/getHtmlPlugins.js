@@ -1,3 +1,13 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-11 15:56:30
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:16:56
+ */
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const paths = require('./defaultPaths');
@@ -6,6 +16,13 @@ const verifyHtml =require('../util/verifyHtml');
 const verifyConfig=require('../util/verifyConfig')
 
 //console.log(scripts,scripts);
+/**
+ * @description: 设置htmlPlugins 针对单个文件及多个文件
+ * @param1: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:16:24
+ */
 module.exports = function getHtmlPlugins(entries) {
   //验证模板文件
   verifyHtml(paths.appHtml);

@@ -1,3 +1,12 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-24 15:51:59
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:25:04
+ */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
 
@@ -30,6 +39,14 @@ const pluginsUnique = (uniques) => {
   };
 };
 const entry=getEntry();
+/**
+ * @description: webpack基本配置
+ * @param1: param
+ * @param2: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:24:53
+ */
 module.exports = function getWebpackBase() {
   const userConfig = getUserConf();
   const {webpack={}}=userConfig;

@@ -1,7 +1,24 @@
+/*
+ * @Description: 文件
+ * @version: 1.0.0
+ * @Company: 袋鼠云
+ * @Author: Charles
+ * @Date: 2018-12-11 15:57:17
+ * @LastEditors: Charles
+ * @LastEditTime: 2018-12-26 11:14:52
+ */
+
 const webpack = require('webpack');
 const paths = require('./defaultPaths');
 const colors=require('colors');
 const {existsSync}=require('../util/fileService')
+/**
+ * @description: DllReferencePlugin文件名设置
+ * @param1: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2018-12-26 11:14:26
+ */
 module.exports = function () {
     let plugins = [];
     if(!existsSync(paths.appDll)){
