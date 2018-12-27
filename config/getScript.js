@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-18 14:11:26
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:19:25
+ * @LastEditTime: 2018-12-26 13:51:03
  */
 const webpack = require('webpack');
 const paths = require('./defaultPaths');
@@ -13,7 +13,6 @@ const paths = require('./defaultPaths');
 /**
  * @description: 根据生成的bound.json ，设置dll脚本文件
  * @param1: param
- * @param2: param
  * @return: ret
  * @Author: Charles
  * @Date: 2018-12-26 11:18:49

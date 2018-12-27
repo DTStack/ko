@@ -172,5 +172,7 @@ var FRONT_CONF = {
 
 * typescript 支持
 
+* 提供模版文件 如 [create-react-app]
+
 
 
