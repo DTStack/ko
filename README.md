@@ -164,6 +164,10 @@ var FRONT_CONF = {
 }
 
 ```
+### 参考项目示例 
+
+ * 基于react，react-router，bizchart，等简单脚手架 [pc-react-sample](https://github.com/dtux-kangaroo/pc-react-sample.git)
+
 ### 待更新
 
 * dll打包进一步优化 
