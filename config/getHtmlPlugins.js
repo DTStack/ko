@@ -5,15 +5,13 @@
  * @Author: Charles
  * @Date: 2018-12-11 15:56:30
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:16:56
+ * @LastEditTime: 2019-01-07 14:18:56
  */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const fs = require('fs');
 const paths = require('./defaultPaths');
-const getScript=require('./getScript');
+const {getConfJsPath,getDllJsPath}=require('./getScriptPaths');
 const verifyHtml =require('../util/verifyHtml');
-const verifyConfig=require('../util/verifyConfig')
 
 //console.log(scripts,scripts);
 /**
@@ -26,8 +24,8 @@ const verifyConfig=require('../util/verifyConfig')
 module.exports = function getHtmlPlugins(entries) {
   //验证模板文件
   verifyHtml(paths.appHtml);
-  const config=verifyConfig(paths.appConfig);
-  const scripts=getScript();
+  const config=getConfJsPath()
+  const scripts=getDllJsPath();
   if (typeof entries === 'string' || Array.isArray(entries)) {
     return [
       new HtmlWebpackPlugin({
