@@ -5,13 +5,14 @@
  * @Author: Charles
  * @Date: 2018-12-20 21:10:24
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:12:41
+ * @LastEditTime: 2019-01-08 16:22:27
  */
 
 
 
 const { realpathSync } = require('fs');
 const { resolve } = require('path');
+const userHome=require('user-home');
 const appDirectory = realpathSync(process.cwd());
 
 /**
@@ -38,5 +39,7 @@ module.exports = {
   appModules: resolveApp('node_modules'),
   appGhPage:resolveApp('gh-pages'),
   resolveApp,
-  appDirectory
+  appDirectory,
+  userCacheRepoDir:resolve(userHome,'.ko-scaffold'),
+  scaffoldConfUrl:'https://dtux-kangaroo.github.io/roo-config/ko-script.json'
 };

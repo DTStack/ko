@@ -9,6 +9,7 @@ const pkg = require('../package.json');
 program
   .version(pkg.version)
   .usage('<command> [options]')
+  .command('init', 'init scaffold')
   .command('build', 'build project')
   .command('dev', 'start server')
   .command('dll', 'build dll')
