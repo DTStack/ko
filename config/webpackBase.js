@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:25:04
+ * @LastEditTime: 2019-01-08 19:49:55
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
@@ -58,8 +58,8 @@ module.exports = function getWebpackBase() {
     output: Object.assign(
       {
         path: paths.appDist,
-        filename:'js/[name].js',
-        publicPath:'/',
+        filename:process.env.HASH ? 'js/[name].[hash:6].js' : 'js/[name].js',
+        publicPath:'/'
       }
     ),
     resolve: {
