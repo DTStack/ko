@@ -5,8 +5,10 @@
  * @Author: Charles
  * @Date: 2019-01-07 17:06:53
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-08 16:30:44
+ * @LastEditTime: 2019-01-08 16:49:48
  */
+
+
 const colors = require('colors');
 const download=require('download-git-repo');
 const paths=require('path');
@@ -29,7 +31,14 @@ async function inquirerAnswer(inquireType){
 }
 
 
-
+/**
+ * @description: 初始化脚手架
+ * @param1: param
+ * @param2: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2019-01-08 16:48:38
+ */
 async function initScaffold(tempRepo){
     let curPath=process.cwd();
     let inquireProject={
@@ -51,8 +60,17 @@ async function initScaffold(tempRepo){
         `  - tip:   ${colors.yellow("scaffold init success")}`,
         
         `  - tip:   ${colors.yellow(`The address of project is  ${dest}`)}`,
+
     ].join('\n'));
 }
+/**
+ * @description:下载脚手架
+ * @param1: param
+ * @param2: param
+ * @return: ret
+ * @Author: Charles
+ * @Date: 2019-01-08 16:49:19
+ */
 function downScaffold(gitRepo,tempRepo){
     const spinner=ora('downloading scaffold...');
     spinner.start();
@@ -80,7 +98,7 @@ module.exports =async () => {
     type:'list',
     name:'scaffold',
     choices,
-    message:'Choose scaffold you want'
+    message:'choose scaffold you want'
    };
    let scaffoldRet=await inquirerAnswer(inquireScaffold);
    let scaffoldInfo=scaffoldRet.scaffold.split('|');
