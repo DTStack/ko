@@ -8,11 +8,11 @@ const colors = require('colors');
 const dll = require('../script/dll');
 
 program
-  .option('-s, --split <split>', '分组最小包数，默认3')
+  .option('-s, --split <split>', '分组最小包数，默认3',parseInt)
   .parse(process.argv);
   attachToEnv(program);
   try{
-    dll();
+    dll(program.split);
   }catch(err){
     log(colors.red)(err, 'dll编译失败，请检查package中dependencies依赖包或者ko.config.json');
   }

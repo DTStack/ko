@@ -8,10 +8,9 @@ const dev = require('../script/dev');
 const colors = require('colors');
 const log = console.log;
 program
-  .option('-p, --port <port>', '服务端口号')
+  .option('-p, --port <port>', '服务端口号',parseInt)
   .option('-h, --host <host>', '服务主机名')
-  .option('--analyzer', '开启构建分析')
-  .option('--analyzer-port', '设置分析端口号')
+  .option('-a,--analyzer', '开启构建分析')
   .parse(process.argv);
   attachToEnv(program); //当前终端命令假如环境变量，避免权限无法执行问题；
 

@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:27:30
+ * @LastEditTime: 2019-01-08 20:53:06
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -28,10 +28,10 @@ let cleanOpt = {
  * @Author: Charles
  * @Date: 2018-12-26 11:26:58
  */  
-module.exports=function(){
+module.exports=function(s){
  return {
         mode:"production",
-        entry:formatBundle(dependencies),
+        entry:formatBundle(dependencies,s),
         output: {
           path: paths.appDll,
           filename: '[name]_[hash].js',

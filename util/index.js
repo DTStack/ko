@@ -9,10 +9,10 @@ module.exports={
         let curDirPath=process.cwd();
         return resolve(curDirPath, relativePath);
     },
-    formatBundle:function(data){
-        let obj={},entryLen=Math.ceil(data.length/3)+1;
+    formatBundle:function(data,s){
+        let obj={},entryLen=Math.ceil(data.length/s)+1;
         for(let i=1;i<entryLen;i++){
-            obj[`vendor_${i}`]=data.slice((i-1)*3,i*3);
+            obj[`vendor_${i}`]=data.slice((i-1)*s,i*s);
         }
         return obj;
     },

@@ -3,9 +3,12 @@ const webpack = require('webpack');
 const getWebpackDll = require('../config/webpackDll');
 const colors=require('colors');
 const log=console.log;
-module.exports = ()=> {
-    let webpackDll = getWebpackDll();
-
+module.exports = (s)=> {
+    if(s<1||!s){
+      log(colors.yellow(`warning :分割组数必须是大于1的正整数；根据包大小，可以自由组合，默认3个包一组`));
+      s=3;
+    }
+    let webpackDll = getWebpackDll(s);
     log(colors.green('start dll ...'));
     webpack(webpackDll, (error, stats) => {
         if (error) {

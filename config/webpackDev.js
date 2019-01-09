@@ -5,13 +5,12 @@
  * @Author: Charles
  * @Date: 2018-12-20 14:17:11
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:25:25
+ * @LastEditTime: 2019-01-08 20:18:34
  */
 
 const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//   .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const getWebpackBase = require('./webpackBase');
 
 module.exports = function getWebpackDev() {
@@ -19,13 +18,13 @@ module.exports = function getWebpackDev() {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ];
-  // if (process.env.ANALYZER) {
-  //   plugins.push(
-  //     new BundleAnalyzerPlugin({
-  //       analyzerPort: process.env.ANALYZER_PORT || '9000',
-  //     })
-  //   );
-  // }
+  if (process.env.ANALYZER) {
+    plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerPort: 8888,
+      })
+    );
+  }
   /**
    * @description: 开发环境配置
    * @param1: param
