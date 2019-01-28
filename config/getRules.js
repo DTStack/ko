@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-08 19:36:54
+ * @LastEditTime: 2019-01-28 19:24:17
  */
 
 const getBabelConf = require('./getBabelConf');
@@ -106,7 +106,7 @@ module.exports = () => {
         },
         {
             test: /\.jsx|.js?$/,
-            exclude: /node_modules/,
+            //exclude: /node_modules/,
             loader: BABEL_LOADER,
             options: deepAssign({}, babelConfig, {
                 cacheDirectory: true

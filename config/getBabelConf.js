@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:14:04
+ * @LastEditTime: 2019-01-28 16:35:21
  */
 
 
@@ -42,7 +42,7 @@ module.exports = () => {
                             '> 1%',
                             'ie >= 9',
                             'iOS >= 8',
-                            'Android >= 4',
+                            'Android >= 4.1'
                         ],
                     },
                 },
@@ -79,11 +79,10 @@ module.exports = () => {
             ['@babel/plugin-proposal-class-properties', {
                 loose: true
             }],
-            '@babel/plugin-proposal-json-strings',
+            '@babel/plugin-proposal-json-strings'
             [
                 'babel-plugin-import',
-                { "libraryName": "antd", "style": true },
-                "antd"
+                { "libraryName": "antd" }
               ],
         ]),
     };

@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 15:56:30
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-07 14:18:56
+ * @LastEditTime: 2019-01-28 17:17:55
  */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -53,7 +53,8 @@ module.exports = function getHtmlPlugins(entries) {
         scripts,
         config
       },
-      chunksSortMode:"none"
+      //chunksSortMode:"none",
+      chunksSortMode: 'none'
     });
   });
 };

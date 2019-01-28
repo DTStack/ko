@@ -5,9 +5,10 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-08 20:53:06
+ * @LastEditTime: 2019-01-28 20:39:55
  */
 const path = require('path');
+const getBabelConf = require('./getBabelConf');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const paths = require('./defaultPaths');
@@ -15,6 +16,10 @@ const pkg=require(paths.appPkg);
 const {formatBundle}=require('../util');
 let dependencies = Object.keys(pkg.dependencies) || [];
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BABEL_LOADER = require.resolve('babel-loader');
+const deepAssign = require('deep-assign');
 let cleanPath = ['dll']
 let cleanOpt = {
     root:paths.appDirectory,
@@ -29,28 +34,57 @@ let cleanOpt = {
  * @Date: 2018-12-26 11:26:58
  */  
 module.exports=function(s){
+ const babelConfig = getBabelConf();
  return {
-        mode:"production",
+        mode:"production", //process.env.NODE_ENV === 'production' ? 'production' : 'development',
         entry:formatBundle(dependencies,s),
+        module: {
+          rules: [
+            {
+              test: /\.jsx|.js?$/,
+              exclude: /node_modules/,
+              loader: BABEL_LOADER,
+              options: deepAssign({}, babelConfig, {
+                  cacheDirectory: true
+              }),
+          },
+          ]
+        },
         output: {
           path: paths.appDll,
           filename: '[name]_[hash].js',
           library: '[name]_[hash]'
         },
-        plugins: [new webpack.DllPlugin({
-          name: '[name]_[hash]',
-          path: path.resolve(paths.appDll, '[name]-manifest.json'),
-          context:paths.appDirectory
-        }),
-        new AssetsPlugin({
-            prettyPrint: true,
-            filename: 'bundle.json',
-            path: paths.appDll
-        }),
-        new CleanWebpackPlugin(cleanPath, cleanOpt)
+        resolve: {
+          alias: {vue: 'vue/dist/vue.js'}
+        },
+        optimization: {
+          minimizer: [
+            new UglifyJsPlugin({
+              cache: true,
+              parallel: true,
+              sourceMap: false // set to true if you want JS source maps
+            }),
+            new OptimizeCSSAssetsPlugin({})
+          ]
+        },
+        plugins: [
+          new webpack.optimize.ModuleConcatenationPlugin(),
+          new webpack.DllPlugin({
+            name: '[name]_[hash]',
+            path: path.resolve(paths.appDll, '[name]-manifest.json'),
+            context:paths.appDirectory
+          }),
+        
+          new AssetsPlugin({
+              prettyPrint: true,
+              filename: 'bundle.json',
+              path: paths.appDll
+          }),
+          new CleanWebpackPlugin(cleanPath, cleanOpt)
        ],
     
-        performance: { //打包性能配置
+        performance: { //打包性能配置s
             hints: false, // 关闭性能提示
         },
       }
