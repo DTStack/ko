@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-28 20:04:57
+ * @LastEditTime: 2019-01-29 09:41:37
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
@@ -64,7 +64,7 @@ module.exports = function getWebpackBase() {
     ),
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', 'less','.json','.html','.vue'],
+      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue'],
       alias:{
         'vue$':'vue/dist/vue.esm.js'
       }

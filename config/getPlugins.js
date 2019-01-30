@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-09 10:31:04
+ * @LastEditTime: 2019-01-30 15:43:42
  */
 
 
@@ -20,10 +20,11 @@ const paths = require('./defaultPaths');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const getTopBanner=require ('./getTopBanner');
 const webpack = require('webpack');
-let cleanPath = ['dist']
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const getRulesHappy=require('./getRulesHappy');
+let cleanPath = ['dist'];
 let cleanOpt = {
     root:paths.appDirectory,
-    //exclude:  ['dll'],
     verbose:  false,
     dry:      false
   }
@@ -41,7 +42,11 @@ module.exports = (entry) => {
       getTopBanner()
     ),
     new SimpleProgressPlugin(),
-    new CaseSensitivePathsPlugin()
+    new CaseSensitivePathsPlugin(),
+    new HardSourceWebpackPlugin(),
+    new webpack.ProvidePlugin({
+      _: 'lodash',
+  }),
   ];
   if(process.env.NODE_ENV=='production'){
     plugins.push(new CleanWebpackPlugin(cleanPath, cleanOpt));
@@ -50,5 +55,7 @@ module.exports = (entry) => {
   Array.prototype.push.apply(plugins, getDllPlugins());
   // 增加 html 输出，支持多页面应用
   Array.prototype.push.apply(plugins, getHtmlPlugins(entry));
+  //加载happypackplugin
+  Array.prototype.push.apply(plugins, getRulesHappy());
   return plugins;
 };
