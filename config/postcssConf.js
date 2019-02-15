@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:35:23
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:21:34
+ * @LastEditTime: 2019-02-13 17:26:11
  */
 const autoprefixer = require('autoprefixer');
 
@@ -19,8 +19,8 @@ module.exports = {
         '> 1%',
         'ie >= 9',
         'iOS >= 8',
-        'Android >= 4',
+        'Android >= 4.1'
       ],
-    }),
-  ],
+    })
+  ]
 };

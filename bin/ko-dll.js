@@ -14,6 +14,6 @@ program
   try{
     dll(program.split);
   }catch(err){
-    log(colors.red)(err, 'dll编译失败，请检查package中dependencies依赖包或者ko.config.json');
+    log(colors.red(err, 'dll编译失败，请检查package中dependencies依赖包或者ko.config.json'));
   }
  

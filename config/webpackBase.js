@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-08 19:49:55
+ * @LastEditTime: 2019-01-29 09:41:37
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
@@ -64,7 +64,7 @@ module.exports = function getWebpackBase() {
     ),
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', '.json','.html','.vue'],
+      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue'],
       alias:{
         'vue$':'vue/dist/vue.esm.js'
       }
@@ -76,18 +76,7 @@ module.exports = function getWebpackBase() {
       hints: false, // 关闭性能提示
     },
     plugins: getPlugins(entries),
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'initial',
-            minChunks: 2,
-          },
-        },
-      },
-    }
+    optimization: {}
   };
    
   const finalWebpackConfig = webpackMerge({

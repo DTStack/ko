@@ -15,9 +15,9 @@ const getWebpackDev = require('../config/webpackDev');
 const getWebpackSer = require('../config/webpackSer');
 const {proxy=[],server={}}=require('../config/getUserConf')();
 module.exports = async function(program) {
-  const DEFAULT_PORT =server.port|| program.port || process.env.PORT || 4444;
+  const DEFAULT_PORT =server.port|| program.port || process.env.PORT || 4446;
   const defaultPort = parseInt(DEFAULT_PORT, 10);
-  const host =server.host||program.host || process.env.HOST || '0.0.0.0';
+  const host =server.host||program.host || process.env.HOST || '127.0.0.1';
   let port= await checkPort(defaultPort);
   if(!port) return;
   const webpackDev = getWebpackDev();
