@@ -1,11 +1,10 @@
 'use strict';
 const arrayUnion = require('array-union');
 const glob = require('glob');
-const pify = require('pify');
+const fastGlob = require('fast-glob');
 const dirGlob = require('dir-glob');
 const gitignore = require('./gitignore');
 
-const globP = pify(glob);
 const DEFAULT_FILTER = () => false;
 
 const isNegative = pattern => pattern[0] === '!';
@@ -23,13 +22,8 @@ const generateGlobTasks = (patterns, taskOpts) => {
 	const globTasks = [];
 
 	taskOpts = Object.assign({
-		cache: Object.create(null),
-		statCache: Object.create(null),
-		realpathCache: Object.create(null),
-		symlinks: Object.create(null),
 		ignore: [],
-		expandDirectories: true,
-		nodir: true
+		expandDirectories: true
 	}, taskOpts);
 
 	patterns.forEach((pattern, i) => {
@@ -53,15 +47,15 @@ const generateGlobTasks = (patterns, taskOpts) => {
 };
 
 const globDirs = (task, fn) => {
+	let opts = {cwd: task.opts.cwd};
+
 	if (Array.isArray(task.opts.expandDirectories)) {
-		return fn(task.pattern, {files: task.opts.expandDirectories});
+		opts = Object.assign(opts, {files: task.opts.expandDirectories});
+	} else if (typeof task.opts.expandDirectories === 'object') {
+		opts = Object.assign(opts, task.opts.expandDirectories);
 	}
 
-	if (typeof task.opts.expandDirectories === 'object') {
-		return fn(task.pattern, task.opts.expandDirectories);
-	}
-
-	return fn(task.pattern);
+	return fn(task.pattern, opts);
 };
 
 const getPattern = (task, fn) => task.opts.expandDirectories ? globDirs(task, fn) : [task.pattern];
@@ -94,7 +88,7 @@ module.exports = (patterns, opts) => {
 	return getFilter()
 		.then(filter => {
 			return getTasks
-				.then(tasks => Promise.all(tasks.map(task => globP(task.pattern, task.opts))))
+				.then(tasks => Promise.all(tasks.map(task => fastGlob(task.pattern, task.opts))))
 				.then(paths => arrayUnion.apply(null, paths))
 				.then(paths => paths.filter(p => !filter(p)));
 		});
@@ -120,7 +114,7 @@ module.exports.sync = (patterns, opts) => {
 	const filter = getFilter();
 
 	return tasks.reduce(
-		(matches, task) => arrayUnion(matches, glob.sync(task.pattern, task.opts)),
+		(matches, task) => arrayUnion(matches, fastGlob.sync(task.pattern, task.opts)),
 		[]
 	).filter(p => !filter(p));
 };

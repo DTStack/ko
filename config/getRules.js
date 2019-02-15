@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-30 16:28:24
+ * @LastEditTime: 2019-02-13 17:28:45
  */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -18,7 +18,6 @@ const SASS_LOADER = require.resolve('sass-loader');
 const FILE_LOADER = require.resolve('file-loader');
 const VUE_LOADER = require.resolve('vue-loader');
 const HAPPY_PACK = require.resolve('happypack/loader');
-const autoprefixer = require.resolve('autoprefixer');
 
 function resolvePlugin(plugins) {
     return plugins.filter(Boolean).map((plugin) => {
@@ -47,12 +46,37 @@ module.exports = () => {
                         sourceMap: true,
                     },
                 },
-                // {
-                //     loader: POSTCSS_LOADER,
-                //     options: Object.assign({
-                //         sourceMap: true
-                //     }, postcssConf),
-                // },
+                {
+                    loader: POSTCSS_LOADER,
+                    options: Object.assign({
+                        sourceMap: true
+                    }, postcssConf),
+                },
+            ],
+        },
+        {
+            test: /\.scss$/,
+            use: [
+                loaderType,
+                {
+                    loader: CSS_LOADER,
+                    options: {
+                        sourceMap: true,
+                    },
+                },
+                {
+                    loader: POSTCSS_LOADER,
+                    options: Object.assign({
+                        sourceMap: true
+                    }, postcssConf),
+                },
+                {
+                    loader: SASS_LOADER,
+                    options: {
+                        sourceMap: true,
+                        javascriptEnabled: true
+                    },
+                },
             ],
         },
         {
@@ -79,25 +103,6 @@ module.exports = () => {
                     },
                 },
             ],
-        },
-        // {
-        //     test: /\.less$/,
-        //     loader: HAPPY_PACK,
-        //     options: {
-        //         id: "happy-less"
-        //     }
-        // },
-        // {
-        //     test: /\.css$/,
-        //     loader:HAPPY_PACK,
-        //     options:{id:"happy-css"}
-        // },
-        {
-            test: /\.scss$/,
-            loader: HAPPY_PACK,
-            options: {
-                id: "happy-scss"
-            }
         },
         {
             test: /\.jsx|.js?$/,

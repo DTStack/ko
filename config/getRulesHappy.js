@@ -49,27 +49,27 @@ module.exports = () => {
                 cacheDirectory: true
             })
         }]),
-        createHappyPlugin('happy-scss', [
-            loaderType,
-            {
-                loader: CSS_LOADER,
-                options: {
-                    sourceMap: true,
-                },
-            },
-            {
-                loader: POSTCSS_LOADER,
-                options: Object.assign({
-                    sourceMap: true
-                }, postcssConf),
-            },
-            {
-                loader: SASS_LOADER,
-                options: {
-                    sourceMap: true,
-                },
-            }
-        ]),
+        // createHappyPlugin('happy-scss', [
+        //     loaderType,
+        //     {
+        //         loader: CSS_LOADER,
+        //         options: {
+        //             sourceMap: true,
+        //         },
+        //     },
+        //     {
+        //         loader: POSTCSS_LOADER,
+        //         options: Object.assign({
+        //             sourceMap: true
+        //         }, postcssConf),
+        //     },
+        //     {
+        //         loader: SASS_LOADER,
+        //         options: {
+        //             sourceMap: true,
+        //         },
+        //     }
+        // ]),
         // createHappyPlugin('happy-less', [
         //     loaderType,
         //     {

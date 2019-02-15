@@ -90,7 +90,7 @@
     "ora": "^3.0.0",
     "postcss-loader": "^3.0.0",
     "pushstate-server": "^3.0.1",
-    "react-dev-utils": "^7.0.0",
+    "react-dev-utils": "^7.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "sass-loader": "^7.1.0",

@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-28 16:35:21
+ * @LastEditTime: 2019-02-14 15:43:49
  */
 
 
@@ -83,7 +83,11 @@ module.exports = () => {
             [
                 'babel-plugin-import',
                 { "libraryName": "antd" }
-              ],
+            ],
+            [
+                'babel-plugin-import',
+                { "libraryName": "ant-mobile" }
+            ],
         ]),
     };
 };
