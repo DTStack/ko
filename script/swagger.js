@@ -117,7 +117,7 @@ module.exports = (path, filePath) => {
                     const method = Object.keys(res.paths[reqApi])[0];
                     const info = res.paths[reqApi][method];
                     let object = result.find(o => o.name == info.tags[0]);
-                    object.data.push({ ...info, path: reqApi, method, });
+                    !/(?<=\{)[^\},]*/.test(reqApi) && object.data.push({ ...info, path: reqApi, method, }); // 若存在restful风格的api接口,则直接过滤
                 })
                 let temp = fs.readFileSync(resolveApp('./template/restfulTemplate.mustache'), "utf-8").toString();
                 let renderString = Mustache.render(temp, { result: result });
