@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-20 14:17:11
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 10:38:25
+ * @LastEditTime: 2019-02-20 14:31:32
  */
 
 const webpackMerge = require('webpack-merge');
@@ -19,7 +19,6 @@ module.exports = function getWebpackDev(program) {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ];
-  console.log(process.env.ANALYZER,'1213123',process.env.TYPE);
   if (process.env.ANALYZER) {
     plugins.push(
       new BundleAnalyzerPlugin({

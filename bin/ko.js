@@ -15,7 +15,7 @@ program
   .command('dll', 'build dll')
   .command('preview', 'view app')
   .command('move', 'move to gh-pages')
-  .command('swagger','analyse swagger');
+  .command('swagger','generate swagger api');
   program.parse(process.argv);
 
 const proc = program.runningCommand;
