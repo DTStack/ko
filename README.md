@@ -1,5 +1,5 @@
 ### 说明
- ``` text
+ ```text
 
   1.已封装包 webpack4 ,webpack-cli,webpack-dev-server, scss, babel ,babel-plugin-xxx,copy,less,scss,autoprefixer,
   
@@ -11,7 +11,9 @@
   
   3.可以分别打包react和vue项目，并可以自定义webpack配置信息（使用请详细阅读本文档），支持react typescript
 
-  4.antd 样式默认按需动态引入，无需在项目中再配置
+  4.antd 相关框架组件(react,vue,pc,mobile) 默认按需动态引入，无需在项目中再配置，样式文件或主题通过less文件全局引入
+
+  [示例](https://ant.design/docs/react/customize-theme-cn)
 
  ```
  * devDependencies 里的 ko-script 依赖版本号为 1.2.6 及以上及项目目录
