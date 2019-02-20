@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-20 21:10:24
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-15 18:06:38
+ * @LastEditTime: 2019-02-20 15:44:16
  */
 
 
@@ -50,5 +50,5 @@ module.exports = {
   appDirectory,
   parsePath,
   userCacheRepoDir:resolve(userHome,'.ko-scaffold'),
-  scaffoldConfUrl:'https://dtux-kangaroo.github.io/roo-config/ko-script.json'
+  scaffoldConfUrl:'https://dtux-kangaroo.github.io/ko-config/ko-script.json'
 };

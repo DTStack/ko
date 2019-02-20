@@ -9,10 +9,9 @@ const log = console.log;
 const ora = require('ora');
 program
   .option('-p, --port <port>', '服务端口号',parseInt)
-  //.option('-h, --host <host>', '服务主机名')
-  .option('-t,--ts', 'typescript')
+  .option('--host <host>', '服务主机名')
+  .option('-t,--ts', '支持typescript')
   .option('-a,--analyzer', '开启构建分析')
-  .option('-h, --help ', '开启构建分析')
   .parse(process.argv);
   attachToEnv(program); //当前终端命令假如环境变量，避免权限无法执行问题；
 

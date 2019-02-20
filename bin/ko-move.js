@@ -10,7 +10,6 @@ const move =require('../script/move')
 program
   .option('-d, --dir <dir>', '自定义目录名')
   .parse(process.argv);
-  attachToEnv(program);
   
   try{
     move();
