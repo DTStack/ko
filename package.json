@@ -11,6 +11,8 @@
   },
   "keywords": [
     "ko",
+    "typescript",
+    "happypack",
     "kangaroo",
     "cli",
     "webpack",
@@ -20,6 +22,7 @@
     "server",
     "build",
     "preview",
+    "swagger",
     "vue",
     "React",
     "script"
