@@ -17,7 +17,8 @@ const { get } = require('../util/request');
 const { existsSync, mkdir } = require('../util/fileService');
 const Mustache = require('mustache');
 const Path = require('path');
-const DEFAULT_FILE_NAME = 'restfulApi.js';
+const DEFAULT_FILE_NAME = 'swagger.js';
+const DEFAULT_TEMPLATE_NAME = '../template/restfulTemplate.mustache';
 /**
  * @description 对象数组去重
  * @param {Array} arr 
@@ -134,7 +135,7 @@ module.exports = (path, filePath) => {
                     let object = result.find(o => o.name == info.tags[0]);
                     !/(?<=\{)[^\},]*/.test(reqApi) && object.data.push({ ...info, path: reqApi, method, }); // 若存在restful风格的api接口,则直接过滤
                 })
-                let temp = fs.readFileSync(require.resolve('./template/restfulTemplate.mustache'), "utf-8").toString();
+                let temp = fs.readFileSync(require.resolve(DEFAULT_TEMPLATE_NAME), "utf-8").toString();
                 let renderString = Mustache.render(temp, { result: result });
                 const folderExist = existsSync(filePath); //文件夹是否存在
                 if (folderExist) {
