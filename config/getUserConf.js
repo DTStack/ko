@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:21:09
+ * @LastEditTime: 2019-02-20 14:50:26
  */
 const path = require('path');
 const fs = require('fs');
@@ -19,6 +19,7 @@ function getUserConf () {
     } else {
         return {
             proxy:[],
+            dll:[],
             server:{},
             webpack:{},
             move:{}
@@ -36,11 +37,12 @@ function getUserConf () {
 module.exports = () => {
     const userConf=getUserConf();
     //console.log(userConf,'http://172.16.8.170/webapp.html#/home');
-    const {proxy={},server={},webpack={},move={}}=userConf;
+    const {proxy={},server={},webpack={},move={},dll=[]}=userConf;
      return{
         proxy,
         server,
         webpack,
-        move
+        move,
+        dll
      }
 }

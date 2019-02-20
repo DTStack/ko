@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-28 20:39:55
+ * @LastEditTime: 2019-02-20 14:53:45
  */
 const path = require('path');
 const getBabelConf = require('./getBabelConf');
@@ -20,6 +20,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BABEL_LOADER = require.resolve('babel-loader');
 const deepAssign = require('deep-assign');
+const getUserConf = require('./getUserConf');
 let cleanPath = ['dll']
 let cleanOpt = {
     root:paths.appDirectory,
@@ -35,9 +36,13 @@ let cleanOpt = {
  */  
 module.exports=function(s){
  const babelConfig = getBabelConf();
+ const userConfig = getUserConf();
+ const {dll=[]}=userConfig;
+ let splicModules=dll.length?dll:dependencies;
+ console.log(splicModules,'11212');
  return {
         mode:"production", //process.env.NODE_ENV === 'production' ? 'production' : 'development',
-        entry:formatBundle(dependencies,s),
+        entry:formatBundle(splicModules,s),
         module: {
           rules: [
             {
@@ -47,7 +52,15 @@ module.exports=function(s){
               options: deepAssign({}, babelConfig, {
                   cacheDirectory: true
               }),
-          },
+            },
+            // {
+            //   test: /\.jsx|.js?$/,
+            //   //exclude: /node_modules/,
+            //   loader: HAPPY_PACK,
+            //   options: {
+            //       id: "happy-babel-js"
+            //   }
+            //  }, 
           ]
         },
         output: {

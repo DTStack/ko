@@ -23,7 +23,7 @@ project
 │     ├── components       // 公共组件
 │     ├── layouts          // 通用布局
 │     ├── pages            // 页面
-│     └── index.js         // 入口文件
+│     └── index.js/index.tsx         // 入口文件
 ├── dll                  // 构建后的动态链接库文件
 ├── dist                  // 构建后的前端静态资源
 │     ├── index.html
@@ -64,7 +64,7 @@ project
  * 安装 
  ```text
 
-  npm install -g ko-script 或者 yarn add ko-script
+  npm install -g ko-script 或者 yarn add ko-script --dev
 
  ```
 
@@ -81,6 +81,8 @@ project
   4. ko preview 预览编译后项目静态文件
 
   5. ko move  默认移动文件(可配置)
+
+  6. ko swagger 生成restful接口js文件
  ```
 
 ### 定制构建器
@@ -112,6 +114,7 @@ module.exports = (context) => {
   const { webpack } = context;
   return {
      //修改开发环境端口及主机
+     "dll":[],// 自定义打包modules
     "server": {
       "host": "127.0.0.1",
       "port": 3002
