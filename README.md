@@ -41,7 +41,7 @@ project
 
    import "@babel/polyfill"
 
-  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项必须是项目编译后需要依赖的包
+  2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项必须是项目编译后需要依赖的包(自定义module除外)
 
   并且包中不可引用 node API(若引入请放在 devpendencies )，其他包放入 devpendencies 中;
 
@@ -73,18 +73,21 @@ project
  * ko 项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率并兼容 [vue] 和 [react];
   
  ```text
-  0  ko init  初始项目模版文件 如:[create-react-app]
-  1. ko dll   生成动态连接库
+  1  ko init  初始项目模版文件 如:[create-react-app]
 
-  2. ko dev   启动本地开发环境
+  2. ko dll   生成动态连接库
 
-  3. ko build 编译项目到生产环境
+  3. ko dev   启动本地开发环境
 
-  4. ko preview 预览编译后项目静态文件
+  4. ko build 编译项目到生产环境
 
-  5. ko move  默认移动文件(可配置)
+  5. ko preview 预览编译后项目静态文件
 
-  6. ko swagger 生成swagger接口js文件,用户自定义请放在restful.js
+  6. ko move  默认移动文件(可配置)
+
+  7. ko swagger 生成swagger接口js文件,用户自定义请放在restful.js
+
+  8. ko [xx] -h 查看相关命令参数
  ```
 
 ### 定制构建器
