@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-28 20:51:38
+ * @LastEditTime: 2019-02-20 11:24:25
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
@@ -24,8 +24,8 @@ const colors=require('colors');
  * @Author: Charles
  * @Date: 2018-12-26 11:26:26
  */
-module.exports = function getWebpackPro() {
-  const baseConfig = getWebpackBase();
+module.exports = function getWebpackPro(program) {
+  const baseConfig = getWebpackBase(program);
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       { from: paths.appDll,to:paths.appDist+'/dll'},

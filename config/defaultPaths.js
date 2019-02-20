@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-20 21:10:24
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-08 16:22:27
+ * @LastEditTime: 2019-02-15 18:06:38
  */
 
 
@@ -36,6 +36,7 @@ module.exports = {
   appPkg: resolveApp('package.json'),
   appAsset:resolveApp('dll/bundle.json'),
   appSrc: resolveApp('src'),
+  appTsConfig:resolveApp('tsconfig.json'),
   appModules: resolveApp('node_modules'),
   appGhPage:resolveApp('gh-pages'),
   resolveApp,

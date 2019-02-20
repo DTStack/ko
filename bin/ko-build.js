@@ -10,10 +10,11 @@ const build = require('../script/build');
 program
   .option('--hash', '构建后的资源带 hash 版本')
   .option('--debug', 'debug 模式下不压缩')
+  .option('-t,--ts', 'typescript')
   .parse(process.argv);
   attachToEnv(program);
   try{
-    build();
+    build(program);
   }catch(err){
    log(colors.red(err,"try yarn"))
   }

@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-14 15:43:49
+ * @LastEditTime: 2019-02-20 11:48:10
  */
 
 
@@ -80,14 +80,20 @@ module.exports = () => {
                 loose: true
             }],
             '@babel/plugin-proposal-json-strings'
-            [
-                'babel-plugin-import',
-                { "libraryName": "antd" }
-            ],
-            [
-                'babel-plugin-import',
-                { "libraryName": "ant-mobile" }
-            ],
+            // [
+            //  "@babel/plugin-transform-runtime",
+            //     {
+            //         "helpers": false,
+            //         "polyfill": false,
+            //         "regenerator": true,
+            //         "moduleName": "babel-runtime"
+            //     }
+            // ],
+    
+            ["babel-plugin-import", { "libraryName": "antd", "libraryDirectory": "lib"}, "ant"],
+            ["babel-plugin-import", { "libraryName": "ant-mobile", "libraryDirectory": "lib"}, "ant-mobile"]
+            ["babel-plugin-import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"]
+        
         ]),
     };
 };

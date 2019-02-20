@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-29 09:41:37
+ * @LastEditTime: 2019-02-20 11:59:37
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
@@ -17,6 +17,9 @@ const processEntry = require('./processEntry');
 const getEntry=require ('./getEntry')
 const paths = require('./defaultPaths');
 const {isAbsolute}=require('../util/fileService');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TS_LOADER = require.resolve('ts-loader');
 
 /**
  * 合并 plugin 操作，
@@ -38,7 +41,6 @@ const pluginsUnique = (uniques) => {
     }
   };
 };
-const entry=getEntry();
 /**
  * @description: webpack基本配置
  * @param1: param
@@ -47,14 +49,33 @@ const entry=getEntry();
  * @Author: Charles
  * @Date: 2018-12-26 11:24:53
  */
-module.exports = function getWebpackBase() {
+module.exports = function getWebpackBase(program) {
+  const entry=getEntry(program);
   const userConfig = getUserConf();
   const {webpack={}}=userConfig;
   const entries={...entry,...webpack.entry};
+  const tsRule= [{
+    test: /\.(ts|tsx)$/,
+    exclude: /node_modules/,
+    use: [
+      {
+        loader:TS_LOADER,
+        options: {
+          transpileOnly: true,
+        },
+      },
+    ],
+  }];
+  const tsPlugin=[  
+    new ForkTsCheckerWebpackPlugin({
+    async: false,
+    watch: paths.appSrc,
+    tsconfig: paths.appTsConfig
+   })]
   const webpackConfig = {
     mode: process.env.NODE_ENV,
     context: paths.appDirectory,
-    entry,
+    entry:entries,
     output: Object.assign(
       {
         path: paths.appDist,
@@ -64,19 +85,33 @@ module.exports = function getWebpackBase() {
     ),
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue'],
+      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue','.ts','.tsx',],
       alias:{
         'vue$':'vue/dist/vue.esm.js'
-      }
+      },
+      plugins:program.ts?
+      [
+        new TsconfigPathsPlugin({ 
+          configFile: paths.appTsConfig,
+          extensions: ['.ts', '.tsx', '.js', '.jsx']
+         }),
+      ]:[]
     },
     module: {
-      rules: getRules(),
+      rules: program.ts?getRules().concat(tsRule):getRules(),
     },
     performance: { //打包性能配置
       hints: false, // 关闭性能提示
     },
-    plugins: getPlugins(entries),
-    optimization: {}
+    plugins: program.ts? getPlugins(entries).concat(tsPlugin):getPlugins(entries),
+    optimization: {},
+    node: {
+      dgram: 'empty',
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      child_process: 'empty'
+    },
   };
    
   const finalWebpackConfig = webpackMerge({

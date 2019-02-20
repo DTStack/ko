@@ -2,8 +2,8 @@ process.env.NODE_ENV = 'production';
 const webpack = require('webpack');
 const getWebpackPro = require('../config/webpackPro');
 
-module.exports =()=> {
-  const webpackConfig = getWebpackPro();
+module.exports =(program)=> {
+  const webpackConfig = getWebpackPro(program);
   webpack(webpackConfig, (error, stats) => {
     if (error) {
       throw error;

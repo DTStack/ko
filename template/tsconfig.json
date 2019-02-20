@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "rootDirs": ["./src"],
+        "baseUrl": "./src",
+        "paths": {},
+        "jsx": "react",
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "lib": ["es7", "dom"],
+        "skipLibCheck": true,
+        "typeRoots": ["node", "node_modules/@types", "./typings"]
+    }
+  }
+  

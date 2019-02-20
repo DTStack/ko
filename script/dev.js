@@ -15,12 +15,13 @@ const getWebpackDev = require('../config/webpackDev');
 const getWebpackSer = require('../config/webpackSer');
 const {proxy=[],server={}}=require('../config/getUserConf')();
 module.exports = async function(program) {
+  console.log(process.env.PORT ,'wqe');
   const DEFAULT_PORT =server.port|| program.port || process.env.PORT || 4446;
   const defaultPort = parseInt(DEFAULT_PORT, 10);
   const host =server.host||program.host || process.env.HOST || '127.0.0.1';
   let port= await checkPort(defaultPort);
   if(!port) return;
-  const webpackDev = getWebpackDev();
+  const webpackDev = getWebpackDev(program);
   let isFirstCompile = true;
   const compiler = webpack(webpackDev);
   let webpackSer = getWebpackSer({host,port});
@@ -38,7 +39,7 @@ module.exports = async function(program) {
       let tips=
         [
           `    - Local:   ${colors.yellow("http://"+host+":"+port)}`,
-          `    - Html:   ${colors.red("非index.html文件，请访问:")}${colors.yellow("http://"+host+":"+port+"/xxx.html")}`
+          `    - Html:   ${colors.red("非index.html静态文件，请访问:")}${colors.yellow("http://"+host+":"+port+"/xxx.html")}`
         ];
       //let report = `    - Report:   ${colors.yellow("http://"+host+":"+port+'/report.html')}`;
       console.log(tips.join('\n'));

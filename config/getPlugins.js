@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-01-30 15:43:42
+ * @LastEditTime: 2019-02-20 11:57:58
  */
 
 
@@ -41,6 +41,7 @@ module.exports = (entry) => {
     new webpack.BannerPlugin(
       getTopBanner()
     ),
+    
     new SimpleProgressPlugin(),
     new CaseSensitivePathsPlugin(),
     new HardSourceWebpackPlugin(),
