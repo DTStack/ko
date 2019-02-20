@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 14:53:45
+ * @LastEditTime: 2019-02-20 15:20:24
  */
 const path = require('path');
 const getBabelConf = require('./getBabelConf');
@@ -39,7 +39,7 @@ module.exports=function(s){
  const userConfig = getUserConf();
  const {dll=[]}=userConfig;
  let splicModules=dll.length?dll:dependencies;
- console.log(splicModules,'11212');
+ //console.log(splicModules,'11212');
  return {
         mode:"production", //process.env.NODE_ENV === 'production' ? 'production' : 'development',
         entry:formatBundle(splicModules,s),

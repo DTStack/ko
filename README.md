@@ -7,9 +7,9 @@
 
   2.为提高编译效率，采用 webpack.DllPlugin 进行编译， 并以项目dependencies依赖项分组打包，默认以3个业务包为一组进行划分
 
-   ko dll -s number //可以更改分组个数，以避免编译包过大
+   ko dll -s number //可以更改分组个数，以避免编译包过大,也可自定义打包moudles
   
-  3.可以分别打包react和vue项目，并可以自定义webpack配置信息（使用请详细阅读本文档）
+  3.可以分别打包react和vue项目，并可以自定义webpack配置信息（使用请详细阅读本文档），支持react typescript
 
   4.antd 样式默认按需动态引入，无需在项目中再配置
 
@@ -71,7 +71,7 @@ project
  * ko 项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率并兼容 [vue] 和 [react];
   
  ```text
-
+  0  ko init  初始项目模版文件 如:[create-react-app]
   1. ko dll   生成动态连接库
 
   2. ko dev   启动本地开发环境
@@ -172,14 +172,7 @@ var FRONT_CONF = {
  * 基于react，react-router，bizchart，等简单脚手架 [pc-react-sample](https://github.com/dtux-kangaroo/pc-react-sample.git)
 
 ### 待更新
-
-* dll打包进一步优化 
-
-* 加入happypack提高编译性能
-
-* typescript 支持
-
-* 提供模版文件 如 [create-react-app]
+* ...
 
 
 

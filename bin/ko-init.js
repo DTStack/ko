@@ -6,7 +6,6 @@ const colors = require('colors');
 const init=require('../script/init');
 const log = console.log;
 program
-  .option('-p, --port <port>', '服务端口号')
   .parse(process.argv);
 
   try{
