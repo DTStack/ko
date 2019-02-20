@@ -5,7 +5,7 @@
   *  @Author:  xiuneng
   *  @Date:  2019-01-07  17:06:53
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 14:09:21
+ * @LastEditTime: 2019-02-20 15:40:58
   */
 
 
@@ -17,7 +17,7 @@
  const  {  existsSync,  mkdir  }  =  require('../util/fileService');
  const  Mustache  =  require('mustache');
  const  Path  =  require('path');
- const  DEFAULT_FILE_NAME  =  'restfulApi.js';
+ const  DEFAULT_FILE_NAME  =  'swagger.js';
  /**
    *  @description  对象数组去重
    *  @param  {Array}  arr  

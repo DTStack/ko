@@ -82,7 +82,7 @@ project
 
   5. ko move  默认移动文件(可配置)
 
-  6. ko swagger 生成restful接口js文件
+  6. ko swagger 生成swagger接口js文件,用户自定义请放在restful.js
  ```
 
 ### 定制构建器
