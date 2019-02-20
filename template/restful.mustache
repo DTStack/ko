@@ -2,7 +2,7 @@ export default {
     {{#result}}
     // ==== {{{name}}} {{{description}}} ==== //
     {{#data}}
-    {{operationId}}: `{{{path}}}`, // {{{summary}}}
+    {{operationId}}: { method: '{{method}}', url: `{{{path}}}` }, // {{{summary}}}
     {{/data}}
 
     {{/result}}

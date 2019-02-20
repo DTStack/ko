@@ -15,11 +15,7 @@ program
   .command('dll', 'build dll')
   .command('preview', 'view app')
   .command('move', 'move to gh-pages')
-<<<<<<< HEAD
-  .command('ko-ts', 'move to gh-pages');
-=======
   .command('swagger','analyse swagger');
->>>>>>> feature_v1.4.10_0128
   program.parse(process.argv);
 
 const proc = program.runningCommand;

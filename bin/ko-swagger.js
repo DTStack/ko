@@ -3,27 +3,36 @@
 const program = require('commander');
 const colors = require('colors');
 const inquirer = require('inquirer');
+const { resolveApp } = require('../config/defaultPaths');
 const swagger = require('../script/swagger.js');
 const logs = console.log;
 program
-    .option('-p, --port <port>', '服务端口号')
+    .option('-p, --path', '自定义生成目录')
     .parse(process.argv);
 
 try {
+    let question = [{
+        type: 'Input',
+        name: 'swagger',
+        message: '请输入swagger地址',
+        default: 'http://172.16.8.194:8891/swagger-ui.html#/'
+    }]
+    program.path && question.push({
+        type: 'Input',
+        name: 'path',
+        message: '请输入生成目录(绝对路径)',
+        default: ''
+    })
     inquirer
-        .prompt([
-            {
-                type: 'Input',
-                name: 'swagger',
-                message: '请输入swagger地址',
-                default: 'http://172.16.8.194:8891/swagger-ui.html#/'
-            }
-        ])
+        .prompt(question)
         .then((answers) => {
             if (answers.swagger == '') {
                 throw '请输入swagger地址';
             } else {
-                swagger(answers.swagger)
+                if(!answers.path || answers.path == ''){
+                    answers.path = resolveApp('src/api/');
+                }
+                swagger(answers.swagger, answers.path)
             }
         })
 } catch (err) {
