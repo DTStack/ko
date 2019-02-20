@@ -14,7 +14,7 @@ const { realpathSync } = require('fs');
 const { resolve } = require('path');
 const userHome=require('user-home');
 const appDirectory = realpathSync(process.cwd());
-
+const parseUrl = require('url');
 /**
  * @description: 根据相对路径获取绝对路径
  * @param1: param
@@ -25,7 +25,14 @@ const appDirectory = realpathSync(process.cwd());
 function resolveApp(relativePath) {
   return resolve(appDirectory, relativePath);
 }
-
+/**
+ * @description: 根据swagger地址获取接口内容
+ * @param {string} urlApi-swagger地址
+ * @returns {UrlWithStringQuery} 解析后的地址
+ */
+function parsePath(urlApi) {
+  return parseUrl.parse(urlApi);
+}
 module.exports = {
   appBuild: resolveApp('build'),
   appDist: resolveApp('dist'),
@@ -41,6 +48,7 @@ module.exports = {
   appGhPage:resolveApp('gh-pages'),
   resolveApp,
   appDirectory,
+  parsePath,
   userCacheRepoDir:resolve(userHome,'.ko-scaffold'),
   scaffoldConfUrl:'https://dtux-kangaroo.github.io/roo-config/ko-script.json'
 };
