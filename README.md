@@ -36,10 +36,10 @@ project
 └── README.md              // 项目说明
 ```
 ### 要求
- ```js
+ ```text
   1.引入es6新实例方法 如 string.includes('xx'),需在项目入口文件加入垫片 如下方式：
 
-   import "@babel/polyfill"
+   import "@babel/polyfill"`
 
   2.入口文件尽量不要加入业务包，dll会自行打包优化；另外 dependencies 依赖项必须是项目编译后需要依赖的包(自定义module除外)
 
