@@ -87,7 +87,6 @@ const parseRenderString = (str) => {
     let result = [];
     let obj = {};
     parseArr.forEach((item) => {
-        console.log(item)
         if (/(?<=(-------- )).*?(?=( --------)) /.test(item)) {
             result.push(obj);
             obj = {};
@@ -171,7 +170,6 @@ module.exports = (path, filePath) => {
                     }
                 }
             }).catch(err => {
-                Log(err)
                 Log(Colors.red('请检查Swagger地址是否包含特殊字符'));
             })
         }).catch(err => {
