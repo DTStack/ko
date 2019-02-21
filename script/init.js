@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2019-01-07 17:06:53
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 16:27:42
+ * @LastEditTime: 2019-02-21 14:55:09
  */
 
 
@@ -86,7 +86,7 @@ function downScaffold(gitRepo,tempRepo){
        
       })
 }
-module.exports =async () => {
+module.exports =async (program) => {
    let ret= await getKoScriptConf();
    const choices=(ret||[]).map(item=>{
     return {
