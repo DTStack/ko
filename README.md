@@ -3,7 +3,7 @@
 
   1.已封装包 webpack4 ,webpack-cli,webpack-dev-server, scss, babel ,babel-plugin-xxx,copy,less,scss,autoprefixer,
   
-  postcss-loader,vue-loader,clean-webpack-plugin,html-webpack-plugin 等；
+  postcss-loader,vue-loader,clean-webpack-plugin,html-webpack-plugin,ts 等；
 
   2.为提高编译效率，采用 webpack.DllPlugin 进行编译， 并以项目dependencies依赖项分组打包，默认以3个业务包为一组进行划分
 
@@ -31,7 +31,7 @@ project
 │     ├── index.html
 │     ├── css
 │     └── js
-├── ko.config.js          // 自定义 webpack 配置
+├── ko.config.js          // 自定义配置文件
 ├── package.json           // package.json
 └── README.md              // 项目说明
 ```
@@ -92,7 +92,7 @@ project
 
 ### 定制构建器
 
-ko项目使用了 `webpack，DllPlugin` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
+ko项目使用了 `webpack，DllPlugin` `happypack` 作为构建的基石，并且提供了零配置的构建配置，但是如果你对 `webpack` 配置有特别的需求，可以参考本文对默认配置进行定制。
 
 ### 如何配置
 
@@ -119,7 +119,7 @@ module.exports = (context) => {
   const { webpack } = context;
   return {
      //修改开发环境端口及主机
-     "dll":[],// 自定义打包modules
+     "dll":["react"],// 自定义打包modules
     "server": {
       "host": "127.0.0.1",
       "port": 3002
@@ -177,7 +177,8 @@ var FRONT_CONF = {
  * 基于react，react-router，bizchart，等简单脚手架 [pc-react-sample](https://github.com/dtux-kangaroo/pc-react-sample.git)
 
 ### 待更新
-* ...
+* vue jsx 支持
+* vue typescript 支持
 
 
 

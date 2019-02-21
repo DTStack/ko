@@ -14,8 +14,6 @@ program
   .parse(process.argv);
   attachToEnv(program);
   try{
-    console.log(program,program.help,'3222');
-    //if(program.help){return;}
     build(program);
   }catch(err){
    log(colors.red(err,"try yarn"))

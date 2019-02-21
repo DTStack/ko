@@ -14,8 +14,8 @@ try {
     let question = [{
         type: 'Input',
         name: 'swagger',
-        message: '请输入swagger地址',
-    }]
+        message: '请输入swagger地址(如:http://xxxxx/swagger-ui.html#/)',
+    }] 
     program.path && question.push({
         type: 'Input',
         name: 'path',

@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 11:59:56
+ * @LastEditTime: 2019-02-21 11:45:34
  */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -112,18 +112,6 @@ module.exports = () => {
                 id: "happy-babel-js"
             }
         },
-        // {
-        //     test: /\.(ts|tsx)$/,
-        //     exclude: /node_modules/,
-        //     use: [
-        //       {
-        //         loader:TS_LOADER,
-        //         options: {
-        //           transpileOnly: true,
-        //         },
-        //       },
-        //     ],
-        // },
         {
             test: /\.vue$/,
             loader: VUE_LOADER
