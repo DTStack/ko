@@ -15,7 +15,6 @@ try {
         type: 'Input',
         name: 'swagger',
         message: '请输入swagger地址',
-        default: 'http://172.16.8.194:8891/swagger-ui.html#/'
     }]
     program.path && question.push({
         type: 'Input',
@@ -27,7 +26,7 @@ try {
         .prompt(question)
         .then((answers) => {
             if (answers.swagger == '') {
-                throw '请输入swagger地址';
+                logs(colors.red('请输入swagger地址'));
             } else {
                 if(!answers.path || answers.path == ''){
                     answers.path = resolveApp('src/api/');
