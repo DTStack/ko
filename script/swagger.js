@@ -18,7 +18,7 @@ const { existsSync, mkdir } = require('../util/fileService');
 const Mustache = require('mustache');
 const Path = require('path');
 const DEFAULT_FILE_NAME = 'swagger.js';
-const DEFAULT_TEMPLATE_NAME = '../template/restfulTemplate.mustache';
+const DEFAULT_TEMPLATE_PATH = '../template/restfulTemplate.mustache';
 /**
  * @description 对象数组去重
  * @param {Array} arr 
@@ -83,14 +83,15 @@ const handleResolveArray = (arr1, arr2) => {
  * @param {string} str 
  */
 const parseRenderString = (str) => {
-    let parseArr = str.trim().split('\n').filter(o => o.trim() != '{' && o.trim() != '}' && o.trim());
+    let parseArr = str.trim().split('},').filter(o => o.trim() != '{' && o.trim() != '}' && o.trim());
     let result = [];
     let obj = {};
     parseArr.forEach((item) => {
-        if (/(?<=(= ))[^(=),]*/.test(item)) {
+        console.log(item)
+        if (/(?<=(-------- )).*?(?=( --------)) /.test(item)) {
             result.push(obj);
             obj = {};
-            obj.name = item.match(/(?<=(= ))[^(=),]*/)[0].trim();
+            obj.name = item.match(/(?<=(-------- )).*?(?=( --------)) /)[0].trim();
             obj.description = '';
             obj.data = [];
         } else {
@@ -98,7 +99,7 @@ const parseRenderString = (str) => {
                 let method = /(?<=method: \')[^\',]*/.test(item) ? item.match(/(?<=method: \')[^\',]*/)[0].trim() : '';
                 let url = /(?<=url: (\`|\'|\"))[^(\`|\'|\"),]*/.test(item) ? item.match(/(?<=url: (\`|\'|\"))[^(\`|\'|\"),]*/)[0].trim() : '';
                 let key = /[^:\`,]*/.test(item) ? item.match(/[^:\`,]*/)[0].trim() : '';
-                let note = /(?<=\/\/)[^]*/.test(item) ? item.match(/(?<=\/\/)[^]*/)[0].trim() : '';
+                let note = /(?<=\/\/)[^(\n)]*/.test(item) ? item.match(/(?<=\/\/)[^(\n)]*/)[0].trim() : '';
                 Array.isArray(obj.data) && obj.data.push({
                     path: url,
                     operationId: key,
@@ -122,7 +123,6 @@ module.exports = (path, filePath) => {
         .then((res) => {
             return `${parseUrl.protocol}//${parseUrl.host}${res}`
         }).then(api => {
-            Log(encodeURI(api))
             get({}, encodeURI(api)).then((res) => {
                 let result = [];
                 res.tags.map((item) => {
@@ -135,7 +135,7 @@ module.exports = (path, filePath) => {
                     let object = result.find(o => o.name == info.tags[0]);
                     !/(?<=\{)[^\},]*/.test(reqApi) && object.data.push({ ...info, path: reqApi, method, }); // 若存在restful风格的api接口,则直接过滤
                 })
-                let temp = fs.readFileSync(require.resolve(DEFAULT_TEMPLATE_NAME), "utf-8").toString();
+                let temp = fs.readFileSync(require.resolve(DEFAULT_TEMPLATE_PATH), "utf-8").toString();
                 let renderString = Mustache.render(temp, { result: result });
                 const folderExist = existsSync(filePath); //文件夹是否存在
                 if (folderExist) {

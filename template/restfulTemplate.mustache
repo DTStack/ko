@@ -1,8 +1,11 @@
 export default {
     {{#result}}
-    // ==== {{{name}}} {{{description}}} ==== //
+    /* -------- {{{name}}} {{{description}}} -------- */
     {{#data}}
-    {{operationId}}: { method: '{{method}}', url: `{{{path}}}` }, // {{{summary}}}
+    {{operationId}}: { // {{{summary}}}
+        method: '{{method}}',
+        url: `{{{path}}}` 
+    }, 
     {{/data}}
 
     {{/result}}
