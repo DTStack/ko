@@ -7,7 +7,7 @@ const program = require('commander');
 const pkg = require('../package.json');
 
 program
-  .version(pkg.version)
+  .version(pkg.version,'-v, --version')
   .usage('<command> [options]')
   .command('init', 'init scaffold')
   .command('build', 'build project')
