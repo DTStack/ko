@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-03-01 15:36:31
+ * @LastEditTime: 2019-03-01 15:50:36
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
@@ -51,9 +51,6 @@ const pluginsUnique = (uniques) => {
  */
 module.exports = function getWebpackBase(program) {
   const result=getEntry(program);
-  // const userConfig = getUserConf();
-  // const {webpack={}}=userConfig;
-  // const entries={...entry,...webpack.entry};
 const tsRule=[
   {
     test: /\.(ts|tsx)$/,

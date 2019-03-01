@@ -25,7 +25,7 @@ project
 │     ├── components       // 公共组件
 │     ├── layouts          // 通用布局
 │     ├── pages            // 页面
-│     └── index.js/index.tsx         // 入口文件
+│     └── index.js/index.tsx         // 默认入口文件，可手动配置
 ├── dll                  // 构建后的动态链接库文件
 ├── dist                  // 构建后的前端静态资源
 │     ├── index.html
@@ -175,6 +175,11 @@ var FRONT_CONF = {
 ### 参考项目示例 
 
  * 基于react，react-router，bizchart，等简单脚手架 [pc-react-sample](https://github.com/dtux-kangaroo/pc-react-sample.git)
+
+### 注意问题
+ * react支持ts，并且ts，tsx和js，jsx可以共存，但是如果使用es6新语法，诸如 await，箭头函数，const等，需要讲文件改为ts或者tsx
+ * 文件路径别名问题，如果使用tsx，webpack中别名配置将会报错，需要在tsconfig中配置path别名
+
 
 ### 待更新
 * vue jsx 支持
