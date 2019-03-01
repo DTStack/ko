@@ -1,0 +1,14 @@
+var myData = {
+        students : [
+            {name : null, years : 20, sex: 'man'},
+            {name : 'jiahua', years : 21, sex: 'man'},
+            {name : 'qinjie', years : 20, sex: 'woman'}
+        ]
+    };
+
+    var template = "<div><table><tr><td>name</td><td>years</td><td>sex</td></tr>
+    {{#students}}<tr><td>{{#name}}{{name}}</td><td>{{years}}</td><td>{{sex}}{{/name}}</td></tr>{{/students}}
+    </table></div>";
+    var viewTemplate = Mustache.render(template, myData);
+    container.innerHTML = viewTemplate;
+--------------------- 

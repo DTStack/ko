@@ -10,37 +10,20 @@ const VUE_LOADER = require.resolve('vue-loader');
 const deepAssign = require('deep-assign');
 const getBabelConf = require('./getBabelConf');
 const BABEL_LOADER = require.resolve('babel-loader');
-const autoprefixer = require.resolve('autoprefixer');
-const HappyPack = require('happypack');
-const os = require('os')
-const happyThreadPool = HappyPack.ThreadPool({
-    size: os.cpus().length
-});
-/**
- * @description: 创建happypackid
- * @param1: param
- * @param2: param
- * @return: ret
- * @Author: Charles
- * @Date: 2019-01-29 11:07:11
- */
-function createHappyPlugin(id, loaders) {
-    return new HappyPack({
-        id: id,
-        loaders: loaders,
-        threadPool: happyThreadPool
-    })
-}
+const {createHappyPlugin}=require("../util/createHappyPlugin")
+
+//const autoprefixer = require.resolve('autoprefixer');
+
 
 module.exports = () => {
     const babelConfig = getBabelConf();
-    const miniCssExtractPluginLoader = {
-        loader: MiniCssExtractPlugin.loader
-    };
-    const styleLoader = {
-        loader: STYLE_LOADER
-    }
-    const loaderType = process.env.NODE_ENV == 'production' ? miniCssExtractPluginLoader : styleLoader;
+    // const miniCssExtractPluginLoader = {
+    //     loader: MiniCssExtractPlugin.loader
+    // };
+    // const styleLoader = {
+    //     loader: STYLE_LOADER
+    // }
+    //const loaderType = process.env.NODE_ENV == 'production' ? miniCssExtractPluginLoader : styleLoader;
     let happyPlugins = [];
     happyPlugins.push(
         createHappyPlugin('happy-babel-js', [{

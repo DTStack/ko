@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:57:12
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 11:48:10
+ * @LastEditTime: 2019-03-01 11:52:34
  */
 
 
@@ -34,7 +34,7 @@ module.exports = () => {
                 '@babel/preset-env',
                 {
                     modules: false,
-                    useBuiltIns: 'entry',
+                    useBuiltIns:'entry',
                     targets: {
                         browsers: [
                             'last 2 versions',

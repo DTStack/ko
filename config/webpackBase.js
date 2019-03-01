@@ -5,12 +5,10 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 11:59:37
+ * @LastEditTime: 2019-03-01 15:36:31
  */
 const { differenceWith } = require('lodash');
 const webpackMerge = require('webpack-merge');
-
-const getUserConf = require('./getUserConf');
 const getRules = require('./getRules');
 const getPlugins = require('./getPlugins');
 const processEntry = require('./processEntry');
@@ -20,6 +18,8 @@ const {isAbsolute}=require('../util/fileService');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TS_LOADER = require.resolve('ts-loader');
+const {createHappyPlugin}=require("../util/createHappyPlugin")
+const HAPPY_PACK = require.resolve('happypack/loader');
 
 /**
  * 合并 plugin 操作，
@@ -50,32 +50,38 @@ const pluginsUnique = (uniques) => {
  * @Date: 2018-12-26 11:24:53
  */
 module.exports = function getWebpackBase(program) {
-  const entry=getEntry(program);
-  const userConfig = getUserConf();
-  const {webpack={}}=userConfig;
-  const entries={...entry,...webpack.entry};
-  const tsRule= [{
+  const result=getEntry(program);
+  // const userConfig = getUserConf();
+  // const {webpack={}}=userConfig;
+  // const entries={...entry,...webpack.entry};
+const tsRule=[
+  {
     test: /\.(ts|tsx)$/,
     exclude: /node_modules/,
-    use: [
-      {
-        loader:TS_LOADER,
-        options: {
-          transpileOnly: true,
-        },
-      },
-    ],
-  }];
+    loader: HAPPY_PACK,
+    options: {
+        id: "happy-babel-ts"
+    }
+}];
   const tsPlugin=[  
     new ForkTsCheckerWebpackPlugin({
     async: false,
     watch: paths.appSrc,
     tsconfig: paths.appTsConfig
-   })]
+   }),
+   createHappyPlugin('happy-babel-ts', [{
+    loader: TS_LOADER,
+    options:{
+      transpileOnly: true,
+      happyPackMode:true
+    }}])
+  ];
+  
+
   const webpackConfig = {
     mode: process.env.NODE_ENV,
     context: paths.appDirectory,
-    entry:entries,
+    entry:result.entry,
     output: Object.assign(
       {
         path: paths.appDist,
@@ -103,7 +109,7 @@ module.exports = function getWebpackBase(program) {
     performance: { //打包性能配置
       hints: false, // 关闭性能提示
     },
-    plugins: program.ts? getPlugins(entries).concat(tsPlugin):getPlugins(entries),
+    plugins: program.ts? getPlugins(result.entry).concat(tsPlugin):getPlugins(result.entry),
     optimization: {},
     node: {
       dgram: 'empty',
@@ -116,7 +122,7 @@ module.exports = function getWebpackBase(program) {
    
   const finalWebpackConfig = webpackMerge({
     customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
-  })(webpackConfig, webpack);
+  })(webpackConfig, result.webpack);
   finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
   finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;

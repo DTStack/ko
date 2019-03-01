@@ -16,7 +16,7 @@
   [示例](https://ant.design/docs/react/customize-theme-cn)
 
  ```
- * devDependencies 里的 ko-script 依赖版本号为 1.2.6 及以上及项目目录
+ * devDependencies 里的 ko-script 依赖版本号为 2.1.0 及以上及项目目录
 
 ```
 project
@@ -73,7 +73,7 @@ project
  * ko 项目默认使用 ko-script 作为开发工具，ko-script提供了丰富的功能帮助我们提高开发效率并兼容 [vue] 和 [react];
   
  ```text
-  1  ko init  初始项目模版文件 如:[create-react-app]
+  1. ko init  初始项目模版文件 如:[create-react-app]
 
   2. ko dll   生成动态连接库
 
