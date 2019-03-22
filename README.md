@@ -31,7 +31,7 @@ $ yarn add ko-script --dev
 
 6. ko move  默认移动文件(可配置)
 
-7. ko swagger 生成swagger接口js文件,用户自定义请放在restful.js
+7. ko swagger 生成swagger接口文件(可选js/ts),用户自定义请放在restful.js
 
 8. ko [xx] -h 查看相关命令参数使用
 ```
