@@ -8,6 +8,7 @@ const swagger = require('../script/swagger.js');
 const logs = console.log;
 program
     .option('-p, --path', '自定义生成目录')
+    .option('-t, --ts', '支持typescript')
     .parse(process.argv);
 
 try {
@@ -31,7 +32,7 @@ try {
                 if(!answers.path || answers.path == ''){
                     answers.path = resolveApp('src/api/');
                 }
-                swagger(answers.swagger, answers.path)
+                swagger(answers.swagger, answers.path, program.ts)
             }
         })
 } catch (err) {
