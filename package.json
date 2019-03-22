@@ -124,5 +124,7 @@
     "webpack-parallel-uglify-plugin": "^1.1.0",
     "webpack-simple-progress-plugin": "^0.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ko-script": "^2.2.8"
+  }
 }
