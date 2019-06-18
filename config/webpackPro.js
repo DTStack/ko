@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 11:24:25
+ * @LastEditTime: 2019-06-18 17:00:58
  */
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpackMerge = require('webpack-merge');
@@ -26,25 +26,23 @@ const colors=require('colors');
  */
 module.exports = function getWebpackPro(program) {
   const baseConfig = getWebpackBase(program);
+  const uglifyConf={output: {
+    comments: false,
+    beautify: false
+  },
+  compress: {
+    warnings: false,
+    drop_console: true,
+    collapse_vars: true,
+    reduce_vars: true
+  }}
+  const uglifyOpt=program.es6?{uglifyES:uglifyConf}:{uglifyJS:uglifyConf};
   baseConfig.plugins.push(
     new CopyWebpackPlugin([
       { from: paths.appDll,to:paths.appDist+'/dll'},
     ]),
-    new ParallelUglifyPlugin({
-      cacheDir: '.cache/',
-      uglifyJS: {
-        output: {
-          comments: false,
-          beautify: false
-        },
-        compress: {
-          warnings: false,
-          drop_console: true,
-          collapse_vars: true,
-          reduce_vars: true
-        }
-      }
-    }),
+    new ParallelUglifyPlugin(Object.assign({
+       cacheDir: '.cache/'},uglifyOpt)),
     new OptimizeCSSAssetsPlugin({}),
     new webpack.optimize.SplitChunksPlugin({
       // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；

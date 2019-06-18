@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-17 19:53:52
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 15:20:24
+ * @LastEditTime: 2019-06-18 17:03:29
  */
 const path = require('path');
 const getBabelConf = require('./getBabelConf');
