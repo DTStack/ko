@@ -10,12 +10,17 @@ program
   .version(pkg.version,'-v, --version')
   .usage('<command> [options]')
   .command('init', 'init scaffold')
+  .command('create', 'create webcomponent')
   .command('build', 'build project')
   .command('dev', 'start server')
   .command('dll', 'build dll')
-  .command('preview', 'view app')
+  .command('preview', 'browser app')
+  .command('install', 'install commponent')
   .command('move', 'move to gh-pages')
-  .command('swagger','generate swagger api');
+  .command('swagger','generate swagger api')
+  .command('createPage','create page and config router')
+  .command('createComp','create component')
+  .command('lint', 'lint precommit files');
   program.parse(process.argv);
 
 const proc = program.runningCommand;

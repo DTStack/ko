@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const appDirectory = fs.realpathSync(process.cwd());
-const hotDevClientPath = require.resolve('react-dev-utils/webpackHotDevClient');
+// const hotDevClientPath = require.resolve('react-dev-utils/webpackHotDevClient');
 
 function entryWithApp(entry) {
   if (typeof entry === 'string') {
@@ -59,9 +59,12 @@ module.exports = (entry) => {
       entries[key] = entryWithApp(entry[key]);
     });
   }
-  if (process.env.NODE_ENV !== 'production') {
-    entries = enhanceEntries(entries, hotDevClientPath);
-  }  
-  //.log(process.env.NODE_ENV,'23131--midd',entries);
+  //from offical docs:
+  //This is an alternative client for WebpackDevServer that shows a syntax error overlay.
+  //It currently supports only webpack 3.x.
+  //而且这里的处理逻辑有问题，在开发服和测试服部署的时候会将hotDevClientPath引入到第一位，而且不管是不是Vue环境，目前暂时删除，可以在各自的项目中自行引用
+  // if (process.env.NODE_ENV !== 'production') {
+  //   entries = enhanceEntries(entries, hotDevClientPath);
+  // }  
   return entries;
 };

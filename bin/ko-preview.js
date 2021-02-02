@@ -6,7 +6,7 @@
  * @Author: Charles
  * @Date: 2018-12-19 15:31:48
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-21 11:15:32
+ * @LastEditTime: 2019-11-21 09:51:47
  */
 'use strict';
 const program = require('commander');
@@ -16,6 +16,7 @@ const preview = require('../script/preview');
 
 program
   .option('-p, --port <port>', '预览端口号')
+  .option('-i, --ip <address>', '指定ip')
   .option('-d, --dist <dist>', '预览文件目录[相对路径 如./]')
   .parse(process.argv);
   

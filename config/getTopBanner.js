@@ -7,7 +7,9 @@
  * @LastEditors: Charles
  * @LastEditTime: 2018-12-26 11:20:31
  */
-const  moment =require('moment');
+
+const date = new Date();
+
 
 /**
  * @description: 设置文件打包banner
@@ -24,9 +26,9 @@ module.exports=function (){
         ' * @project        ' + 'dtux',
         ' * @name           ' + 'dtux',
         ' * @author         ' + 'dtux',
-        ' * @build          ' + moment().format('llll') + ' ET',
+        ' * @build          ' +  date.toString(),
         ' * @release        ' + 'v1.2.8',
-        ' * @copyright      Copyright (c) ' + moment().format('YYYY') + ' ',
+        ' * @copyright      Copyright (c) ' + date.getFullYear() + ' ',
         ' *',
         ' */',
         ''

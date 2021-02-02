@@ -1,76 +1,73 @@
 /*
- * @Description: 文件
+ * @Description: webpack生产环境配置
  * @version: 1.0.0
  * @Company: 袋鼠云
  * @Author: Charles
  * @Date: 2018-12-11 11:19:46
  * @LastEditors: Charles
- * @LastEditTime: 2019-06-18 17:00:58
+ * @LastEditTime: 2019-09-04 11:52:43
  */
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const paths=require('./defaultPaths')
-const webpack=require('webpack');
+const paths = require('./defaultPaths');
+const webpack = require('webpack');
 const getWebpackBase = require('./webpackBase');
-const colors=require('colors');
 
-/**
- * @description: webpack生产环境配置
- * @param1: param
- * @param2: param
- * @return: ret
- * @Author: Charles
- * @Date: 2018-12-26 11:26:26
- */
 module.exports = function getWebpackPro(program) {
+  const { micro, enableDll } = program;
   const baseConfig = getWebpackBase(program);
-  const uglifyConf={output: {
-    comments: false,
-    beautify: false
-  },
-  compress: {
-    warnings: false,
-    drop_console: true,
-    collapse_vars: true,
-    reduce_vars: true
-  }}
-  const uglifyOpt=program.es6?{uglifyES:uglifyConf}:{uglifyJS:uglifyConf};
-  baseConfig.plugins.push(
-    new CopyWebpackPlugin([
-      { from: paths.appDll,to:paths.appDist+'/dll'},
-    ]),
-    new ParallelUglifyPlugin(Object.assign({
-       cacheDir: '.cache/'},uglifyOpt)),
-    new OptimizeCSSAssetsPlugin({}),
-    new webpack.optimize.SplitChunksPlugin({
-      // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
-      chunks: 'all',
-      // （默认值：30000）块的最小大小
-      minSize: 30000,
-      // （默认值：1）分割前共享模块的最小块数
-      minChunks: 1,
-      // （缺省值5）按需加载时的最大并行请求数
-      maxAsyncRequests: 8,
-      // （默认值3）入口点上的最大并行请求数
-      maxInitialRequests: 8,
-      // webpack 将使用块的起源和名称来生成名称: `vendors~main.js`,如项目与"~"冲突，则可通过此值修改，Eg: '-'
-      automaticNameDelimiter: '~',
-      // cacheGroups is an object where keys are the cache group names.
-      name: true,
-      acheGroups: {
-        // 设置为 false 以禁用默认缓存组
-        default: false,
-        element: {
-          name: 'lodash',
-          test: /[\\/]node_modules[\\/]lodash[\\/]/,
-          chunks: 'initial',
-          // 默认组的优先级为负数，以允许任何自定义缓存组具有更高的优先级（默认值为0）
-          priority: -10
-        }
-      }
-    }),
-  )
-  return webpackMerge(baseConfig, {});
+  baseConfig.optimization = {
+    moduleIds: 'hashed',
+    minimizer: [new CssMinimizerPlugin()],
+  };
+  if (!micro && enableDll) {
+    baseConfig.plugins.push(
+      new CopyWebpackPlugin({
+        patterns: [{ from: paths.appDll, to: paths.appDist + '/dll' }],
+      })
+    );
+  }
+  if (!micro) {
+    baseConfig.plugins.push(
+      new webpack.optimize.SplitChunksPlugin({
+        // chunks: "initial"，"async"和"all"分别是：初始块，按需块或所有块；
+        chunks: 'async',
+        // （默认值：30000s）块的最小大小
+        minSize: 30000,
+        maxSize: 600000,
+        // （默认值：1）分割前共享模块的最小块数
+        minChunks: 1,
+        // （缺省值5）按需加载时的最大并行请求数
+        maxAsyncRequests: 5,
+        // （默认值3）入口点上的最大并行请求数
+        maxInitialRequests: 3,
+        // webpack 将使用块的起源和名称来生成名称: `vendors~main.js`,如项目与"~"冲突，则可通过此值修改，Eg: '-'
+        automaticNameDelimiter: '_',
+        //automaticNameMaxLength: 30,
+        // cacheGroups is an object where keys are the cache group names.
+        //name: true,
+        cacheGroups: {
+          antd: {
+            name: 'antd',
+            test: /[\\/]node_modules[\\/]antd[\\/]/,
+            chunks: 'initial',
+          },
+          lodash: {
+            name: 'lodash',
+            test: /[\\/]node_modules[\\/]lodash[\\/]/,
+            chunks: 'initial',
+            // 默认组的优先级为负数，以允许任何自定义缓存组具有更高的优先级（默认值为0）
+            priority: -10,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      })
+    );
+  }
+  return merge(baseConfig, {});
 };

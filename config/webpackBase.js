@@ -4,43 +4,34 @@
  * @Company: 袋鼠云
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
- * @LastEditors: Charles
- * @LastEditTime: 2019-06-18 17:03:42
+ * @LastEditors  : Charles
+ * @LastEditTime : 2020-01-08 16:46:39
  */
-const { differenceWith } = require('lodash');
-const webpackMerge = require('webpack-merge');
+const { mergeWithCustomize, unique } = require('webpack-merge');
 const getRules = require('./getRules');
 const getPlugins = require('./getPlugins');
 const processEntry = require('./processEntry');
-const getEntry=require ('./getEntry')
+const getEntry = require('./getEntry');
 const paths = require('./defaultPaths');
-const {isAbsolute}=require('../util/fileService');
+const { isAbsolute } = require('../util/fileService');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TS_LOADER = require.resolve('ts-loader');
-const {createHappyPlugin}=require("../util/createHappyPlugin")
+const { createHappyPlugin } = require('../util/createHappyPlugin');
 const HAPPY_PACK = require.resolve('happypack/loader');
+const getUserConf = require('./getUserConf');
 
 /**
  * 合并 plugin 操作，
  * @param  {array} uniques plugin 名单，在这名单内的插件会过滤掉，不会出现两份，以用户的配置为准。
  * @return {array}
  */
-const pluginsUnique = (uniques) => {
-  const getter = (plugin) => plugin.constructor && plugin.constructor.name;
-  return (a, b, k) => {
-    if (k === 'plugins') {
-      return [
-        ...differenceWith(a, b, (item, item2) => {
-          return (
-            uniques.indexOf(getter(item)) >= 0 && getter(item) === getter(item2)
-          );
-        }),
-        ...b,
-      ];
-    }
-  };
-};
+const pluginsUnique = pluginsName =>
+  unique(
+    'plugins',
+    pluginsName,
+    plugin => plugin.constructor && plugin.constructor.name
+  );
 /**
  * @description: webpack基本配置
  * @param1: param
@@ -49,78 +40,112 @@ const pluginsUnique = (uniques) => {
  * @Author: Charles
  * @Date: 2018-12-26 11:24:53
  */
+const ENV_PROD = 'production';
+const ENV_DEV = 'development';
+
 module.exports = function getWebpackBase(program) {
-  const result=getEntry(program);
-const tsRule=[
-  {
-    test: /\.(ts|tsx)$/,
-    exclude: /node_modules/,
-    loader: HAPPY_PACK,
-    options: {
-        id: "happy-babel-ts"
-    }
-}];
-  const tsPlugin=[  
-    new ForkTsCheckerWebpackPlugin({
-    async: false,
-    watch: paths.appSrc,
-    tsconfig: paths.appTsConfig
-   }),
-   createHappyPlugin('happy-babel-ts', [{
-    loader: TS_LOADER,
-    options:{
-      transpileOnly: true,
-      happyPackMode:true
-    }}])
+  const { micro } = program;
+  const result = getEntry(program);
+  const tsRule = [
+    {
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      loader: HAPPY_PACK,
+      options: {
+        id: 'happy-babel-ts',
+      },
+    },
   ];
-  
+  const tsPlugin = [
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+      typescript: {
+        configFile: paths.appTsConfig,
+      },
+    }),
+    //TODO: replace happy-loader instead of thread-loader: https://github.com/webpack-contrib/thread-loader
+    createHappyPlugin('happy-babel-ts', [
+      {
+        loader: TS_LOADER,
+        options: {
+          transpileOnly: true,
+          happyPackMode: true,
+        },
+      },
+    ]),
+  ];
+
+  const output = {
+    path: paths.appDist,
+    filename: micro ? 'js/[name].js' : 'js/[name].[hash:6].js',
+    publicPath: '/',
+  };
+
+  if (micro) {
+    output.library = '[name]';
+    output.libraryTarget = 'umd';
+    output.globalObject = `(() => {
+      if (typeof self !== 'undefined') {
+          return self;
+      } else if (typeof window !== 'undefined') {
+          return window;
+      } else if (typeof global !== 'undefined') {
+          return global;
+      } else {
+          return Function('return this')();
+      }
+    })()`;
+  }
 
   const webpackConfig = {
-    mode: process.env.NODE_ENV,
+    mode: process.env.NODE_ENV === ENV_DEV ? ENV_DEV : ENV_PROD,
     context: paths.appDirectory,
-    entry:result.entry,
-    output: Object.assign(
-      {
-        path: paths.appDist,
-        filename:process.env.HASH ? 'js/[name].[hash:6].js' : 'js/[name].js',
-        publicPath:'/'
-      }
-    ),
+    output: output,
     resolve: {
       modules: [paths.appModules, 'node_modules'],
-      extensions: ['.js', '.jsx', '.scss', '.css', '.less','.json','.html','.vue','.ts','.tsx',],
-      alias:{
-        'vue$':'vue/dist/vue.esm.js'
+      extensions: [
+        '.js',
+        '.jsx',
+        '.ts',
+        '.tsx',
+        '.vue',
+        '.css',
+        '.scss',
+        '.less',
+        '.json',
+        '.html',
+      ],
+      alias: {
+        vue$: 'vue/dist/vue.esm.js',
       },
-      plugins:program.ts?
-      [
-        new TsconfigPathsPlugin({ 
-          configFile: paths.appTsConfig,
-          extensions: ['.ts', '.tsx', '.js', '.jsx']
-         }),
-      ]:[]
+      plugins: program.ts
+        ? [
+            new TsconfigPathsPlugin({
+              configFile: paths.appTsConfig,
+              extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            }),
+          ]
+        : [],
     },
     module: {
-      rules: program.ts?getRules().concat(tsRule):getRules(),
+      rules: program.ts ? getRules().concat(tsRule) : getRules(),
     },
-    performance: { //打包性能配置
+    performance: {
+      //打包性能配置
       hints: false, // 关闭性能提示
     },
-    plugins: program.ts? getPlugins(result.entry).concat(tsPlugin):getPlugins(result.entry),
+    plugins: program.ts
+      ? getPlugins(result.entry, program).concat(tsPlugin)
+      : getPlugins(result.entry, program),
     optimization: {},
-    node: {
-      dgram: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty'
-    },
+    node: false,
   };
-   
-  const finalWebpackConfig = webpackMerge({
-    customizeArray: pluginsUnique(['HtmlWebpackPlugin'])
+
+  //TODO: 用户自定义的plugins覆盖相应的default配置
+  const finalWebpackConfig = mergeWithCustomize({
+    customizeArray: pluginsUnique(['HtmlWebpackPlugin']),
   })(webpackConfig, result.webpack);
-  finalWebpackConfig.output.path=isAbsolute(finalWebpackConfig.output.path);
-  finalWebpackConfig.entry=processEntry(finalWebpackConfig.entry);
+  finalWebpackConfig.output.path = isAbsolute(finalWebpackConfig.output.path);
+  finalWebpackConfig.entry = processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;
 };

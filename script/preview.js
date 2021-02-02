@@ -6,7 +6,7 @@ module.exports = (program) => {
     let directory=program.dist?paths.resolveApp(program.dist):paths.appDist;
 
     let port =program.port||1234,
-        host = '127.0.0.1';
+        host =program.ip||'127.0.0.1';
         server.start({
             port,
             host,

@@ -30,7 +30,7 @@ try {
                 logs(colors.red('请输入swagger地址'));
             } else {
                 if(!answers.path || answers.path == ''){
-                    answers.path = resolveApp('src/api/');
+                    answers.path = resolveApp('src/service/');
                 }
                 swagger(answers.swagger, answers.path, program.ts)
             }

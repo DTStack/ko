@@ -5,22 +5,13 @@
  * @Author: Charles
  * @Date: 2018-12-11 14:35:23
  * @LastEditors: Charles
- * @LastEditTime: 2019-02-13 17:26:11
+ * @LastEditTime: 2019-06-20 16:53:27
  */
 const autoprefixer = require('autoprefixer');
 
 //设置 postcss配置
 module.exports = {
-  plugins: [
-    autoprefixer({
-      browsers: [
-        'last 2 versions',
-        'Firefox ESR',
-        '> 1%',
-        'ie >= 9',
-        'iOS >= 8',
-        'Android >= 4.1'
-      ],
-    })
-  ]
+  postcssOptions: {
+    plugins: [autoprefixer()],
+  },
 };

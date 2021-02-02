@@ -7,24 +7,26 @@
  * @LastEditors: Charles
  * @LastEditTime: 2019-02-20 14:50:26
  */
-const path = require('path');
 const fs = require('fs');
 const userConfFile = 'ko.config.js';
 const { getCurFilePath } = require('../util');
-const webpack=require('webpack');
-function getUserConf () {
-    let curFilePath = getCurFilePath(userConfFile);
-    if (fs.existsSync(curFilePath)) {
-        return require(curFilePath)({webpack});
-    } else {
-        return {
-            proxy:[],
-            dll:[],
-            server:{},
-            webpack:{},
-            move:{}
-        };
-    }
+const webpack = require('webpack');
+function getUserConf() {
+  let curFilePath = getCurFilePath(userConfFile);
+  if (fs.existsSync(curFilePath)) {
+    return require(curFilePath)({ webpack });
+  } else {
+    return {
+      proxy: [],
+      dll: [],
+      server: {},
+      webpack: {},
+      move: {},
+      babel: {},
+      prettier: '',
+      eslint: '',
+    };
+  }
 }
 /**
  * @description: 获取用户自定义配置
@@ -35,14 +37,25 @@ function getUserConf () {
  * @Date: 2018-12-26 11:20:43
  */
 module.exports = () => {
-    const userConf=getUserConf();
-    //console.log(userConf,'http://172.16.8.170/webapp.html#/home');
-    const {proxy={},server={},webpack={},move={},dll=[]}=userConf;
-     return{
-        proxy,
-        server,
-        webpack,
-        move,
-        dll
-     }
-}
+  const userConf = getUserConf();
+  const {
+    proxy = {},
+    server = {},
+    webpack = {},
+    move = {},
+    dll = [],
+    babel = {},
+    prettier,
+    eslint,
+  } = userConf;
+  return {
+    proxy,
+    server,
+    webpack,
+    move,
+    dll,
+    babel,
+    prettier,
+    eslint,
+  };
+};

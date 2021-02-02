@@ -14,6 +14,7 @@ const Log = console.log;
 const fs = require('fs');
 const Mustache = require('mustache');
 const Path = require('path');
+const _ =require('lodash');
 
 const { resolveApp } = require('../config/defaultPaths');
 const { existsSync, mkdir, readFileSync } = require('./fileService');
@@ -48,57 +49,36 @@ function renderMustache (path, data) { // 渲染获取字符串
 }
 
 function parseString (str) {  // 解析文件内已有字符串
-  let tempArr = str.trim().split('const routerConf');
-  console.log(tempArr);
+  let tempArr = str.trim().split('const routerConf = [');
   let importedPks = tempArr[0].split('\n');
-  importedPks = importedPks.filter((str) => {
+  let importPackages = importedPks.filter((str) => {
     return str != '';
-  })
-  let oldConfArr = tempArr[1].split('[')[1].split(']')[0].replace(/\s/g,"");
-  let reg = /(?<={).*?(?=})/g;
-  let oldConfData = [];
-  oldConfArr = oldConfArr.match(reg);
-  oldConfArr.forEach(element => {
-    let tempObj = {}, 
-        tempArr = element.split(',').filter((str) => {
-          return str != '';
-        });
-    tempArr.forEach(str => {
-      tempObj[str.split(':')[0]] = str.split(':')[1];
-    })
-    oldConfData.push({
-      linkPath: tempObj.path.split('\'')[1],
-      layoutName: tempObj.layout,
-      compName: tempObj.component,
-    });
   });
+//   let initReg=/{(\n*.*)+}/g;
+//   let initStr=tempArr[1].match(initReg)[0];
+let index=tempArr[1].indexOf('];');
+let initStr=tempArr[1].substring(0,index+1)
   return {
-    importPackages: importedPks,
-    confData: oldConfData
-  }
+      initStr,
+      importPackages
+     };
 }
 
 function mergeRouterCData (path, newData) { // 合并新旧数据
-  let fileData = {};
+  let fileData =null;
   if (existsSync(path)) {
     let fileContent = readFileSync(path);
+    console.time('test');
     fileContent = parseString(fileContent);
-    // 判断布局文件是否已被导入
-    let isExist = false; 
-    for (let i = 0, length = fileContent.confData.length; i < length; i++) {
-      isExist = fileContent.confData[i].layoutName == newData.confData[0].layoutName ? true : false;
-      if (isExist) {
-        break;
-      }
-    }
-    fileData = {
-      importPackages: isExist ? [ ...fileContent.importPackages, newData.importPackages[0] ] : [ ...fileContent.importPackages, ...newData.importPackages ],
-      confData: [ ...newData.confData, ...fileContent.confData ],
-    }
-  } else {
-    fileData = newData
-  }
-  return fileData;
+    console.timeEnd('test');
+    newData.initRoutConf=fileContent.initStr;  // importPackages: importedPks,
+    let importPackages=[ ...fileContent.importPackages, ...newData.importPackages];
+   console.log(importPackages,'importPackages');
+   return {
+        importPackages,
+        ...newData
+   }
+  } 
 }
 
 module.exports = (compName, compPath, url, layoutName, isTs) => {
@@ -107,20 +87,10 @@ module.exports = (compName, compPath, url, layoutName, isTs) => {
   const folderPath = `${resolveApp(compPath)}/${folderName}`;
   const folderExist = existsSync(folderPath); //文件夹是否存在
 
-  let layoutPath = '', 
-      layoutExist = true, 
-      importPackages = [`import ${compName} from '../../${compPath}${folderName}';`];
-  if (layoutName != 'null') {
-    layoutPath = resolveApp('src/layout');
-    layoutPath = `${layoutPath}/${toCamel(layoutName)}`;
-    layoutExist = existsSync(layoutPath); 
-    importPackages.push(`import ${layoutName} from '../../src/layout/${toCamel(layoutName)}';`)
-  }
+  let  importPackages = [`import ${compName} from 'pages/${folderName}';`];
 
   if (folderExist) {
-    Log(Colors.red(`指定路径下组件已存在，请重新输入组件名`));
-  } else if (!layoutExist) {
-    Log(Colors.red(`布局组件不存在，请重新输入布局组件名`));
+    Log(Colors.red(`指定路径下页面已存在，请重新输入页面名`));
   } else {
     // 生成文件
     mkdir(folderPath);
@@ -128,6 +98,7 @@ module.exports = (compName, compPath, url, layoutName, isTs) => {
       name: compName,
       className
     });
+    console.log(indexContent,'indexContent');
     const styleContent = renderMustache(STYLE_TEMPLATE_PATH, {
       className
     });
@@ -137,15 +108,16 @@ module.exports = (compName, compPath, url, layoutName, isTs) => {
     // 配置路由
     const newConf = {
       importPackages,
-      confData: [{
-        linkPath: url == '' ? `/${className}` : url,
-        layoutName,
-        compName
-      }]
+      initRoutConf:'',
+      linkPath: url == '' ? `/${className}` : url,
+      layoutName,
+      compName
     }
     const routerCPath = resolveApp(isTs == 'y' ? `src/router/${ROUTERTC_N_TS}` : `src/router/${ROUTERTC_N}`)
     const allRouterConf = mergeRouterCData(routerCPath,newConf);
+    console.log(allRouterConf,'allRouterConf');
     const routerConfContent = renderMustache(ROUTERTC_TEMPLATE_PATH, allRouterConf);
+    console.log(routerConfContent,'routerConfContent');
     writerFile(routerCPath, routerConfContent);
   }
 }

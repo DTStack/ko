@@ -5,7 +5,7 @@
  * @Author: Charles
  * @Date: 2018-12-19 11:34:43
  * @LastEditors: Charles
- * @LastEditTime: 2018-12-26 11:30:23
+ * @LastEditTime: 2019-07-10 11:58:27
  */
 const fs = require('fs');
 const colors=require('colors')
@@ -26,6 +26,10 @@ module.exports={
                console.log(colors.grey(err));
             }
         });
+    },
+    createWriteStream:function(filePath){
+      let stream = fs.createWriteStream(filePath);
+      return stream;
     },
     readFileSync:function(filePath){
        let txt= fs.readFileSync(filePath,'utf8');
