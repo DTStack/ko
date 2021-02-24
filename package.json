@@ -1,10 +1,9 @@
 {
-  "name": "ko-script",
-  "author": "kodesign",
+  "name": "ko",
+  "author": "DTStack",
   "version": "5.0.3",
-  "description": "基于webpack打包cli工具",
+  "description": "building tools based on webpack",
   "main": "index.js",
-  "module": "",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w"
@@ -14,10 +13,10 @@
     "access": "public",
     "registry": "http://registry.npmjs.org"
   },
-  "homepage": "",
+  "homepage": "https://github.com/DTStack/ko",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dtux-kangaroo/ko-create-app"
+    "url": "https://github.com/DTStack/ko"
   },
   "bin": {
     "ko": "./bin/ko.js"
@@ -33,6 +32,7 @@
     "swagger",
     "happypack",
     "webpackdll",
+    "dll",
     "webpack",
     "template",
     "server",
@@ -44,7 +44,7 @@
     "script"
   ],
   "bugs": {
-    "url": "https://github.com/dtux-kangaroo/ko-create-app/issues"
+    "url": "https://github.com/DTStack/ko/issues"
   },
   "dependencies": {
     "assets-webpack-plugin": "^7.0.0",
@@ -108,6 +108,5 @@
     "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-merge": "^5.7.3",
     "webpack-simple-progress-plugin": "^0.0.4"
-  },
-  "gitHead": "b62d264650b9bb52d3c3316cfb69c45ed71d34a6"
+  }
 }

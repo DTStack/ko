@@ -1,23 +1,24 @@
-## ko-script
+## ko
 
-[![npm version](https://img.shields.io/npm/v/ts-loader.svg)](https://www.npmjs.com/package/ko-script)
-[![Linux Build Status](https://travis-ci.org/TypeStrong/ts-loader.svg?branch=master)](https://npmjs.org/package/ko-script)
-[![Downloads](http://img.shields.io/npm/dm/ts-loader.svg)](https://npmjs.org/package/ko-script)
-[![node version](https://img.shields.io/node/v/ts-loader.svg)](https://www.npmjs.com/package/ko-script)
-
-```text
 支持 react，vue, react-ts快速打包，让你不再纠结 webpack，vue，ts配置
-```
-## Installation
-```text
-$ yarn add ko-script  -g 
 
-$ yarn add ko-script --dev
+## Installation
+
+global install with:
+
+```
+$ yarn add ko -g
+```
+
+install as devDependencies:
+
+```
+$ yarn add ko --dev
 ```
 
 ## Getting Started
 
-### Use basics
+### Use Basics
 ```text
 1. ko init  初始项目模版文件 效果如:[create-react-app]
 
@@ -42,7 +43,7 @@ $ yarn add ko-script --dev
 12.ko [xx] -h 查看相关命令参数使用
 ```
 
-### Use advanced
+### Use Advanced
 > 自定义配置，遵循commjs语法，在项目根目录创建 ko.config.js 结构如下：
 ```js
 module.exports = (context) => {
@@ -71,7 +72,7 @@ module.exports = (context) => {
 }
 ```
 
-> [polyfill](https://babeljs.io/docs/en/babel-polyfill)
+> [babel polyfill](https://babeljs.io/docs/en/babel-polyfill)
 ```text
 import "core-js/stable" 
 import "regenerator-runtime/runtime"
@@ -92,7 +93,7 @@ import "regenerator-runtime/runtime"
 ```
 
 
-### Project directory
+### ko Project Directory
 ```
   project
   ├── public                 // 公共资源文件(第三方资源库，项目模板文件，全局配置文件config)
@@ -117,11 +118,11 @@ import "regenerator-runtime/runtime"
 - [Roadmap](https://github.com/dtux-kangaroo/ko-script/wiki/Roadmap)
 
 ### Tips
-> v3版本以上仅支持babel-loader8;
+* v3版本以上仅支持babel-loader8
 
-> react支持ts，并且ts，tsx和js，jsx可以共存，但是如果使用es6新语法，诸如 await，箭头函数，const等，需要将文件改为ts或者tsx;
+* react支持ts，并且ts，tsx和js，jsx可以共存，但是如果使用es6新语法，诸如 await，箭头函数，const等，需要将文件改为ts或者tsx
 
-> 文件路径别名问题，如果使用tsx，webpack中别名配置将会报错，需要在tsconfig中配置path别名
+* 文件路径别名问题，如果使用tsx，webpack中别名配置将会报错，需要在tsconfig中配置path别名
 
 
 

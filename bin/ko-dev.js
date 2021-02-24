@@ -21,7 +21,7 @@ try {
   const spinner = ora('dev ').start();
   setTimeout(() => {
     spinner.color = 'yellow';
-    spinner.text = 'complie ...';
+    spinner.text = 'compiling...';
   }, 100);
   dev(program);
   spinner.stop();
