@@ -5,12 +5,13 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const VueLoaderPlugin = require('vue-loader/lib/plugin'); //TODO: support vue loader when it adapted webpack 5
-const getRulesHappy = require('./getRulesHappy'); //TODO: remove happy-pack in the future
-const { appHtml } = require('../defaultPaths');
+const { appHtml, appTsConfig } = require('../defaultPaths');
 const userConf = require('../../util/userConfig');
 const { opts } = require('../../util/program');
+const { PROD } = require('../../constants/env');
+
+const { env, ts } = opts;
 
 //TODO: redefined plugins order
 module.exports = () => {
@@ -41,12 +42,25 @@ module.exports = () => {
       chunksSortMode: 'none',
     }),
     new HtmlWebpackTagsPlugin({
-      tags: [`config/conf.${opts.env}.js`],
+      tags: [`config/conf.${env}.js`],
       append: false,
     }),
   ];
-  plugins = plugins.concat(userDefinedPlugins); //TODO:maybe use webpack-merge
-  if (process.env.NODE_ENV == 'production') {
+  if (ts) {
+    const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+    const typescriptPlugins = [
+      new ForkTsCheckerWebpackPlugin({
+        async: false,
+        typescript: {
+          configFile: appTsConfig,
+        },
+      }),
+    ];
+    plugins = plugins.concat(typescriptPlugins);
+  }
+  plugins = plugins.concat(userDefinedPlugins);
+  if (process.env.NODE_ENV === PROD) {
+    const { CleanWebpackPlugin } = require('clean-webpack-plugin');
     plugins.push(
       new CleanWebpackPlugin({
         verbose: false,
@@ -54,6 +68,5 @@ module.exports = () => {
       })
     );
   }
-  Array.prototype.push.apply(plugins, getRulesHappy()); // TODO: happy plugin will be removed in The future
   return plugins;
 };

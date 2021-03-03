@@ -1,64 +1,68 @@
+const merge = require('deepmerge');
+const THREAD_LOADER = require.resolve('thread-loader');
 const CSS_LOADER = require.resolve('css-loader');
 const LESS_LOADER = require.resolve('less-loader');
-const STYLE_LOADER = require.resolve('style-loader');
-const POSTCSS_LOADER = require.resolve('postcss-loader');
 const SASS_LOADER = require.resolve('sass-loader');
+const POSTCSS_LOADER = require.resolve('postcss-loader');
+const BABEL_LOADER = require.resolve('babel-loader');
 const FILE_LOADER = require.resolve('file-loader');
 // const VUE_LOADER = require.resolve('vue-loader'); //TODO: added in the future
-const HAPPY_PACK = require.resolve('happypack/loader'); //TODO: remove in the future
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
+const { babel } = require('../../util/userConfig');
+const { opts } = require('../../util/program');
+const { PROD } = require('../../constants/env');
+
 module.exports = () => {
-  const miniCssExtractPluginLoader = {
-    loader: MiniCssExtractPlugin.loader,
+  let styleLoader;
+  if (process.env.NODE_ENV === PROD) {
+    const MiniCssExtractPluginLoader = require('mini-css-extract-plugin')
+      .loader;
+    styleLoader = {
+      loader: MiniCssExtractPluginLoader,
+    };
+  } else {
+    const STYLE_LOADER = require.resolve('style-loader');
+    styleLoader = {
+      loader: STYLE_LOADER,
+    };
+  }
+
+  const postcssLoader = {
+    loader: POSTCSS_LOADER,
+    options: {
+      sourceMap: true,
+      plugins: [autoprefixer()],
+    },
   };
-  const styleLoader = {
-    loader: STYLE_LOADER,
-  };
-  const loaderType =
-    process.env.NODE_ENV == 'production'
-      ? miniCssExtractPluginLoader
-      : styleLoader;
-  return [
+
+  const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
+
+  let loaders = [
     {
       test: /\.css$/,
       use: [
-        loaderType,
+        styleLoader,
         {
           loader: CSS_LOADER,
           options: {
             sourceMap: true,
           },
         },
-        {
-          loader: POSTCSS_LOADER,
-          options: {
-            sourceMap: true,
-            plugins: [autoprefixer()],
-          },
-        },
+        postcssLoader,
       ],
     },
     {
       test: /\.scss$/,
       use: [
-        loaderType,
+        styleLoader,
         {
           loader: CSS_LOADER,
           options: {
             sourceMap: true,
           },
         },
-        {
-          loader: POSTCSS_LOADER,
-          options: Object.assign(
-            {
-              sourceMap: true,
-            },
-            postcssConf
-          ),
-        },
+        postcssLoader,
         {
           loader: SASS_LOADER,
           options: {
@@ -77,15 +81,7 @@ module.exports = () => {
             sourceMap: true,
           },
         },
-        {
-          loader: POSTCSS_LOADER,
-          options: Object.assign(
-            {
-              sourceMap: true,
-            },
-            postcssConf
-          ),
-        },
+        postcssLoader,
         {
           loader: LESS_LOADER,
           options: {
@@ -98,11 +94,17 @@ module.exports = () => {
       ],
     },
     {
-      test: /\.jsx|.js?$/,
-      loader: HAPPY_PACK,
-      options: {
-        id: 'happy-babel-js',
-      },
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: [
+        THREAD_LOADER,
+        {
+          loader: BABEL_LOADER,
+          options: merge(babelConf, {
+            cacheDirectory: true,
+          }),
+        },
+      ],
     },
     {
       test: /\.(woff|woff2|svg|ttf|eot)$/,
@@ -119,4 +121,21 @@ module.exports = () => {
       },
     },
   ];
+  // support typescript
+  if (opts.ts) {
+    const TS_LOADER = require.resolve('ts-loader');
+    const typescriptLoaders = [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: TS_LOADER,
+        options: {
+          transpileOnly: true,
+          happyPackMode: true,
+        },
+      },
+    ];
+    loaders = loaders.concat(typescriptLoaders);
+  }
+  return loaders;
 };

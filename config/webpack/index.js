@@ -1,98 +1,40 @@
 const { mergeWithCustomize, unique } = require('webpack-merge');
-const getRules = require('./getRules');
-const getPlugins = require('./getPlugins');
-const processEntry = require('./processEntry');
+const rules = require('./loaders');
+const plugins = require('./plugins');
+const processEntry = require('../processEntry');
 const getEntry = require('./getEntry');
-const paths = require('./defaultPaths');
+const { appDirectory: context, appModules } = require('../defaultPaths');
 const { isAbsolute } = require('../util/fileService');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const TS_LOADER = require.resolve('ts-loader');
-const { createHappyPlugin } = require('../util/createHappyPlugin');
-const HAPPY_PACK = require.resolve('happypack/loader');
 
-/**
- * 合并 plugin 操作，
- * @param  {array} uniques plugin 名单，在这名单内的插件会过滤掉，不会出现两份，以用户的配置为准。
- * @return {array}
- */
+const { PROD, DEV } = require('../../constants/env');
+
 const pluginsUnique = pluginsName =>
   unique(
     'plugins',
     pluginsName,
     plugin => plugin.constructor && plugin.constructor.name
   );
-/**
- * @description: webpack基本配置
- * @param1: param
- * @param2: param
- * @return: ret
- * @Author: Charles
- * @Date: 2018-12-26 11:24:53
- */
-const ENV_PROD = 'production';
-const ENV_DEV = 'development';
 
-module.exports = function getWebpackBase(program) {
-  const { micro } = program;
+function getWebpackBaseConf(program) {
   const result = getEntry(program);
-  const tsRule = [
-    {
-      test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
-      loader: HAPPY_PACK,
-      options: {
-        id: 'happy-babel-ts',
-      },
-    },
-  ];
-  const tsPlugin = [
-    new ForkTsCheckerWebpackPlugin({
-      async: false,
-      typescript: {
-        configFile: paths.appTsConfig,
-      },
-    }),
-    //TODO: replace happy-loader instead of thread-loader: https://github.com/webpack-contrib/thread-loader
-    createHappyPlugin('happy-babel-ts', [
-      {
-        loader: TS_LOADER,
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-        },
-      },
-    ]),
-  ];
-
   const output = {
-    path: paths.appDist,
+    path: appDist,
     filename: micro ? 'js/[name].js' : 'js/[name].[hash:6].js',
     publicPath: '/',
   };
 
-  if (micro) {
-    output.library = '[name]';
-    output.libraryTarget = 'umd';
-    output.globalObject = `(() => {
-      if (typeof self !== 'undefined') {
-          return self;
-      } else if (typeof window !== 'undefined') {
-          return window;
-      } else if (typeof global !== 'undefined') {
-          return global;
-      } else {
-          return Function('return this')();
-      }
-    })()`;
-  }
-
   const webpackConfig = {
-    mode: process.env.NODE_ENV === ENV_DEV ? ENV_DEV : ENV_PROD,
-    context: paths.appDirectory,
-    output: output,
+    mode: process.env.NODE_ENV === PROD ? PROD : DEV,
+    context,
+    entry,
+    output,
+    module: {
+      rules,
+    },
+    plugins,
     resolve: {
-      modules: [paths.appModules, 'node_modules'],
+      modules: [appModules, 'node_modules'],
       extensions: [
         '.js',
         '.jsx',
@@ -117,17 +59,9 @@ module.exports = function getWebpackBase(program) {
           ]
         : [],
     },
-    module: {
-      rules: program.ts ? getRules().concat(tsRule) : getRules(),
-    },
     performance: {
-      //打包性能配置
-      hints: false, // 关闭性能提示
+      hints: false,
     },
-    plugins: program.ts
-      ? getPlugins(result.entry, program).concat(tsPlugin)
-      : getPlugins(result.entry, program),
-    optimization: {},
     node: false,
   };
 
@@ -138,4 +72,6 @@ module.exports = function getWebpackBase(program) {
   finalWebpackConfig.output.path = isAbsolute(finalWebpackConfig.output.path);
   finalWebpackConfig.entry = processEntry(finalWebpackConfig.entry);
   return finalWebpackConfig;
-};
+}
+
+module.exports = getWebpackBaseConf();
