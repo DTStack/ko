@@ -1,4 +1,3 @@
-const merge = require('deepmerge');
 const THREAD_LOADER = require.resolve('thread-loader');
 const CSS_LOADER = require.resolve('css-loader');
 const LESS_LOADER = require.resolve('less-loader');
@@ -100,7 +99,7 @@ module.exports = () => {
         THREAD_LOADER,
         {
           loader: BABEL_LOADER,
-          options: merge(babelConf, {
+          options: Object.assign({}, babelConf, {
             cacheDirectory: true,
           }),
         },

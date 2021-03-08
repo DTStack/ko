@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const webpackBaseConf = require('./base');
+const webpackDevServerConf = require('./devServer');
 const { opts } = require('../../util/program');
 
 const { analyzer } = opts;
@@ -58,6 +59,7 @@ function getWebpackPro() {
 }
 
 module.exports = {
-  getWebpackDev,
-  getWebpackPro,
+  webpackDevConf: getWebpackDev(),
+  webpackDevServerConf,
+  webpackProConf: getWebpackPro(),
 };

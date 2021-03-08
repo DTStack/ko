@@ -1,30 +1,28 @@
 #! /usr/bin/env node
-
 'use strict';
-const program = require('commander');
+
+const colors = require('colors');
+const { program } = require('../util/program');
+const { inProcess } = require('../util/stdout');
 const attachToEnv = require('../util/attachToEnv');
 const dev = require('../script/dev');
-const colors = require('colors');
-const log = console.log;
-const ora = require('ora');
+
 program
-  .option('-p, --port <port>', '服务端口号', parseInt)
-  .option('--host <host>', '服务主机名')
-  .option('-t, --ts', '支持typescript')
-  .option('-m, --micro', '开启微前端支持')
-  .option('--enable-dll', '开启dll支持')
-  .option('-a,--analyzer', '开启构建分析')
+  .option('-p, --port <port>', 'server start on which port', parseInt)
+  .option('--host <host>', 'specify a host to use')
+  .option('-t, --ts', 'typescript support')
+  .option('-a,--analyzer', 'support building analyzer')
   .parse(process.argv);
-attachToEnv(program); //当前终端命令假如环境变量，避免权限无法执行问题；
+attachToEnv(program);
 
 try {
-  const spinner = ora('dev ').start();
-  setTimeout(() => {
-    spinner.color = 'yellow';
-    spinner.text = 'compiling...';
-  }, 100);
-  dev(program);
-  spinner.stop();
+  const inProcessConf = {
+    initStr: 'ko dev server start!',
+    spinStr: 'compiling...',
+    spinColor: 'yellow',
+    process: dev,
+  };
+  inProcess(inProcessConf);
 } catch (err) {
-  log(colors.red)('服务启动失败，请检查package中dependencies依赖包');
+  console.log(colors.red('process init failed:'), err);
 }

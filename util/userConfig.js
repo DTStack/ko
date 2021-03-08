@@ -10,9 +10,6 @@ function getUserConf() {
   }
   return {
     //TODO: redefined default exports
-    proxy: [],
-    dll: [],
-    server: {},
     webpack: {},
     move: {},
     babel: {},
