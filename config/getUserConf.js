@@ -4,17 +4,17 @@
  * @Company: 袋鼠云
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
- * @LastEditors: Charles
- * @LastEditTime: 2019-02-20 14:50:26
+ * @LastEditors: 云乐
+ * @LastEditTime: 2021-03-09 13:31:28
  */
-const fs = require('fs');
-const userConfFile = 'ko.config.js';
-const { getCurFilePath } = require('../util');
-const webpack = require('webpack');
+const fs = require("fs");
+const userConfFile = "ko.config.js";
+const { getCurFilePath } = require("../util");
+const webpack2 = require("webpack");
 function getUserConf() {
   let curFilePath = getCurFilePath(userConfFile);
   if (fs.existsSync(curFilePath)) {
-    return require(curFilePath)({ webpack });
+    return require(curFilePath)({ webpack2 });
   } else {
     return {
       proxy: [],
@@ -23,8 +23,8 @@ function getUserConf() {
       webpack: {},
       move: {},
       babel: {},
-      prettier: '',
-      eslint: '',
+      prettier: "",
+      eslint: "",
     };
   }
 }
@@ -36,26 +36,25 @@ function getUserConf() {
  * @Author: Charles
  * @Date: 2018-12-26 11:20:43
  */
-module.exports = () => {
-  const userConf = getUserConf();
-  const {
-    proxy = {},
-    server = {},
-    webpack = {},
-    move = {},
-    dll = [],
-    babel = {},
-    prettier,
-    eslint,
-  } = userConf;
-  return {
-    proxy,
-    server,
-    webpack,
-    move,
-    dll,
-    babel,
-    prettier,
-    eslint,
-  };
+const userConf = getUserConf();
+const {
+  proxy = {},
+  server = {},
+  webpack = {},
+  move = {},
+  dll = [],
+  babel = {},
+  prettier={},
+  eslint = {},
+} = userConf;
+
+module.exports = {
+  proxy,
+  server,
+  webpack,
+  move,
+  dll,
+  babel,
+  prettier,
+  eslint,
 };

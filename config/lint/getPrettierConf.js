@@ -1,22 +1,16 @@
-const fs = require('fs');
-const { getCurFilePath } = require('../../util');
-const { prettier } = require('../getUserConf');
+const { prettier } = require("../getUserConf");
 
 const defaultPrettierConf = {
+  tabWidth: 4,
   bracketSpacing: true,
   singleQuote: true,
   jsxBracketSameLine: true,
-  trailingComma: 'es5',
-  arrowParens: 'always',
+  trailingComma: "es5",
+  arrowParens: "always",
   printWidth: 80,
-  parser: 'babel',
+  parser: "babel",
 };
 
-const userConfFile = prettier ? getCurFilePath(prettier) : '';
-const userConf = userConfFile
-  ? JSON.parse(fs.readFileSync(userConfFile, 'utf8'))
-  : {};
-
-const config = Object.assign({}, defaultPrettierConf, userConf);
+const config = Object.assign({}, defaultPrettierConf, prettier);
 
 module.exports = config;
