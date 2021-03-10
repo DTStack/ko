@@ -5,16 +5,16 @@
  * @Author: Charles
  * @Date: 2018-12-24 15:51:59
  * @LastEditors: 云乐
- * @LastEditTime: 2021-03-09 13:31:28
+ * @LastEditTime: 2021-03-10 10:52:35
  */
 const fs = require("fs");
 const userConfFile = "ko.config.js";
 const { getCurFilePath } = require("../util");
-const webpack2 = require("webpack");
+const webpackmodule = require("webpack");
 function getUserConf() {
   let curFilePath = getCurFilePath(userConfFile);
   if (fs.existsSync(curFilePath)) {
-    return require(curFilePath)({ webpack2 });
+    return require(curFilePath)({ webpackmodule });
   } else {
     return {
       proxy: [],
@@ -23,8 +23,8 @@ function getUserConf() {
       webpack: {},
       move: {},
       babel: {},
-      prettier: "",
-      eslint: "",
+      prettier: {},
+      eslint: {},
     };
   }
 }
@@ -44,7 +44,7 @@ const {
   move = {},
   dll = [],
   babel = {},
-  prettier={},
+  prettier = {},
   eslint = {},
 } = userConf;
 

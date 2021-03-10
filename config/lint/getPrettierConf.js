@@ -1,7 +1,6 @@
 const { prettier } = require("../getUserConf");
 
 const defaultPrettierConf = {
-  tabWidth: 4,
   bracketSpacing: true,
   singleQuote: true,
   jsxBracketSameLine: true,

@@ -1,4 +1,3 @@
-// const fs = require("fs"); 
 const deepAssign = require("deep-assign");
 const { eslint } = require("../getUserConf");
 /**
@@ -39,6 +38,7 @@ const defaultEslintConf = {
     'no-empty-function': 'warn',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-function': ['warn'],
+    "@typescript-eslint/no-use-before-define": ['error'],
     'no-var': 'error',
     indent: [
       'warn',
@@ -103,7 +103,7 @@ const defaultEslintConf = {
       },
     ],
     'no-use-before-define': [
-      'warn',
+      'off',
       {
         functions: true,
         classes: true,
