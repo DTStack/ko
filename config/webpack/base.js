@@ -1,5 +1,5 @@
 const { mergeWithCustomize, unique } = require('webpack-merge');
-const rules = require('./loaders');
+const loaders = require('./loaders');
 const plugins = require('./plugins');
 const {
   appDirectory: context,
@@ -8,8 +8,7 @@ const {
 } = require('../defaultPaths');
 
 const { getFileRealPath } = require('../../util/file');
-const { opts } = require('../../util/program');
-const { webpack = {} } = require('../../util/userConfig');
+const { webpack } = require('../../util/userConfig');
 const { PROD, DEV } = require('../../constants/env');
 
 const pluginsUnique = pluginsName =>
@@ -20,7 +19,7 @@ const pluginsUnique = pluginsName =>
   );
 
 function getWebpackBaseConf() {
-  const { hash, ts } = opts;
+  const { hash, ts } = process.env;
   const entry = {
     index: getFileRealPath(`src/index.${ts ? 'tsx' : 'js'}`),
   };
@@ -36,7 +35,7 @@ function getWebpackBaseConf() {
     entry,
     output,
     module: {
-      rules,
+      rules: loaders,
     },
     plugins,
     resolve: {
@@ -54,7 +53,7 @@ function getWebpackBaseConf() {
         '.html',
       ],
       alias: {
-        vue$: 'vue/dist/vue.esm.js', //TODO: check this
+        vue$: 'vue/dist/vue.esm.js', //TODO: check this with vue framework
       },
     },
     performance: {

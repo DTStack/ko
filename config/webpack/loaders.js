@@ -9,132 +9,129 @@ const FILE_LOADER = require.resolve('file-loader');
 const autoprefixer = require('autoprefixer');
 
 const { babel } = require('../../util/userConfig');
-const { opts } = require('../../util/program');
 const { PROD } = require('../../constants/env');
 
-module.exports = () => {
-  let styleLoader;
-  if (process.env.NODE_ENV === PROD) {
-    const MiniCssExtractPluginLoader = require('mini-css-extract-plugin')
-      .loader;
-    styleLoader = {
-      loader: MiniCssExtractPluginLoader,
-    };
-  } else {
-    const STYLE_LOADER = require.resolve('style-loader');
-    styleLoader = {
-      loader: STYLE_LOADER,
-    };
-  }
-
-  const postcssLoader = {
-    loader: POSTCSS_LOADER,
-    options: {
-      sourceMap: true,
-      plugins: [autoprefixer()],
-    },
+let styleLoader;
+if (process.env.NODE_ENV === PROD) {
+  const MiniCssExtractPluginLoader = require('mini-css-extract-plugin').loader;
+  styleLoader = {
+    loader: MiniCssExtractPluginLoader,
   };
+} else {
+  const STYLE_LOADER = require.resolve('style-loader');
+  styleLoader = {
+    loader: STYLE_LOADER,
+  };
+}
 
-  const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
+const postcssLoader = {
+  loader: POSTCSS_LOADER,
+  options: {
+    sourceMap: true,
+    plugins: [autoprefixer()],
+  },
+};
 
-  let loaders = [
-    {
-      test: /\.css$/,
-      use: [
-        styleLoader,
-        {
-          loader: CSS_LOADER,
-          options: {
-            sourceMap: true,
-          },
+const babelConf = require('ko-babel-app')(babel.plugins, babel.targets);
+
+let loaders = [
+  {
+    test: /\.css$/,
+    use: [
+      styleLoader,
+      {
+        loader: CSS_LOADER,
+        options: {
+          sourceMap: true,
         },
-        postcssLoader,
-      ],
-    },
-    {
-      test: /\.scss$/,
-      use: [
-        styleLoader,
-        {
-          loader: CSS_LOADER,
-          options: {
-            sourceMap: true,
-          },
-        },
-        postcssLoader,
-        {
-          loader: SASS_LOADER,
-          options: {
-            sourceMap: true,
-          },
-        },
-      ],
-    },
-    {
-      test: /\.less$/,
-      use: [
-        loaderType,
-        {
-          loader: CSS_LOADER,
-          options: {
-            sourceMap: true,
-          },
-        },
-        postcssLoader,
-        {
-          loader: LESS_LOADER,
-          options: {
-            lessOptions: {
-              javascriptEnabled: true,
-            },
-            sourceMap: true,
-          },
-        },
-      ],
-    },
-    {
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      use: [
-        THREAD_LOADER,
-        {
-          loader: BABEL_LOADER,
-          options: Object.assign({}, babelConf, {
-            cacheDirectory: true,
-          }),
-        },
-      ],
-    },
-    {
-      test: /\.(woff|woff2|svg|ttf|eot)$/,
-      loader: FILE_LOADER,
-      options: {
-        name: 'fonts/[hash].[ext]',
       },
+      postcssLoader,
+    ],
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      styleLoader,
+      {
+        loader: CSS_LOADER,
+        options: {
+          sourceMap: true,
+        },
+      },
+      postcssLoader,
+      {
+        loader: SASS_LOADER,
+        options: {
+          sourceMap: true,
+        },
+      },
+    ],
+  },
+  {
+    test: /\.less$/,
+    use: [
+      styleLoader,
+      {
+        loader: CSS_LOADER,
+        options: {
+          sourceMap: true,
+        },
+      },
+      postcssLoader,
+      {
+        loader: LESS_LOADER,
+        options: {
+          lessOptions: {
+            javascriptEnabled: true,
+          },
+          sourceMap: true,
+        },
+      },
+    ],
+  },
+  {
+    test: /\.jsx?$/,
+    exclude: /node_modules/,
+    use: [
+      THREAD_LOADER,
+      {
+        loader: BABEL_LOADER,
+        options: Object.assign({}, babelConf, {
+          cacheDirectory: true,
+        }),
+      },
+    ],
+  },
+  {
+    test: /\.(woff|woff2|svg|ttf|eot)$/,
+    loader: FILE_LOADER,
+    options: {
+      name: 'fonts/[hash].[ext]',
     },
+  },
+  {
+    test: /\.(png|jpg|jpeg|gif)$/i,
+    loader: FILE_LOADER,
+    options: {
+      name: 'imgs/[hash].[ext]',
+    },
+  },
+];
+// support typescript
+if (process.env.ts) {
+  const TS_LOADER = require.resolve('ts-loader');
+  const typescriptLoaders = [
     {
-      test: /\.(png|jpg|jpeg|gif)$/i,
-      loader: FILE_LOADER,
+      test: /\.tsx?$/,
+      exclude: /node_modules/,
+      loader: TS_LOADER,
       options: {
-        name: 'imgs/[hash].[ext]',
+        transpileOnly: true,
+        happyPackMode: true,
       },
     },
   ];
-  // support typescript
-  if (opts.ts) {
-    const TS_LOADER = require.resolve('ts-loader');
-    const typescriptLoaders = [
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: TS_LOADER,
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-        },
-      },
-    ];
-    loaders = loaders.concat(typescriptLoaders);
-  }
-  return loaders;
-};
+  loaders = loaders.concat(typescriptLoaders);
+}
+
+module.exports = loaders;

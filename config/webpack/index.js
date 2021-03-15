@@ -2,9 +2,8 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const webpackBaseConf = require('./base');
 const webpackDevServerConf = require('./devServer');
-const { opts } = require('../../util/program');
 
-const { analyzer } = opts;
+const { analyzer } = process.env;
 
 function getWebpackDev() {
   const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -44,7 +43,6 @@ function getWebpackPro() {
           name: 'lodash',
           test: /[\\/]node_modules[\\/]lodash[\\/]/,
           chunks: 'initial',
-          // 默认组的优先级为负数，以允许任何自定义缓存组具有更高的优先级（默认值为0）
           priority: -10,
         },
         default: {

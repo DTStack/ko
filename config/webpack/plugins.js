@@ -8,65 +8,60 @@ const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const VueLoaderPlugin = require('vue-loader/lib/plugin'); //TODO: support vue loader when it adapted webpack 5
 const { appHtml, appTsConfig } = require('../defaultPaths');
 const userConf = require('../../util/userConfig');
-const { opts } = require('../../util/program');
 const { PROD } = require('../../constants/env');
 
-const { env, ts } = opts;
+const { env, ts } = process.env;
 
 //TODO: redefined plugins order
-module.exports = () => {
-  const userDefinedWebpackConf = userConf.webpack || {};
-  const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
-  let plugins = [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:6].css',
-      chunkFilename: 'css/[id].[hash:6].css',
-    }),
-    new FilterWarningsPlugin({
-      exclude: /Conflicting order between:/,
-    }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new SimpleProgressPlugin(),
-    new CaseSensitivePathsPlugin(),
-    new webpack.ProvidePlugin({
-      _: 'lodash',
-    }),
-    new HtmlWebpackPlugin({
-      template: appHtml,
-      filename: 'index.html',
-      minify: true,
-      title: '',
-      assets: {
-        config,
+const userDefinedWebpackConf = userConf.webpack || {};
+const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
+let plugins = [
+  new MiniCssExtractPlugin({
+    filename: 'css/[name].[hash:6].css',
+    chunkFilename: 'css/[id].[hash:6].css',
+  }),
+  new FilterWarningsPlugin({
+    exclude: /Conflicting order between:/,
+  }),
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  new SimpleProgressPlugin(),
+  new CaseSensitivePathsPlugin(),
+  new webpack.ProvidePlugin({
+    _: 'lodash',
+  }),
+  new HtmlWebpackPlugin({
+    template: appHtml,
+    filename: 'index.html',
+    minify: true,
+    title: '',
+    chunksSortMode: 'none',
+  }),
+  new HtmlWebpackTagsPlugin({
+    tags: [`config/conf.${env}.js`],
+    append: false,
+  }),
+];
+if (ts) {
+  const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+  const typescriptPlugins = [
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+      typescript: {
+        configFile: appTsConfig,
       },
-      chunksSortMode: 'none',
-    }),
-    new HtmlWebpackTagsPlugin({
-      tags: [`config/conf.${env}.js`],
-      append: false,
     }),
   ];
-  if (ts) {
-    const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-    const typescriptPlugins = [
-      new ForkTsCheckerWebpackPlugin({
-        async: false,
-        typescript: {
-          configFile: appTsConfig,
-        },
-      }),
-    ];
-    plugins = plugins.concat(typescriptPlugins);
-  }
-  plugins = plugins.concat(userDefinedPlugins);
-  if (process.env.NODE_ENV === PROD) {
-    const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-    plugins.push(
-      new CleanWebpackPlugin({
-        verbose: false,
-        dry: false,
-      })
-    );
-  }
-  return plugins;
-};
+  plugins = plugins.concat(typescriptPlugins);
+}
+plugins = plugins.concat(userDefinedPlugins);
+if (process.env.NODE_ENV === PROD) {
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+  plugins.push(
+    new CleanWebpackPlugin({
+      verbose: false,
+      dry: false,
+    })
+  );
+}
+
+module.exports = plugins;

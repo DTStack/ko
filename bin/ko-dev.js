@@ -2,9 +2,8 @@
 'use strict';
 
 const colors = require('colors');
-const { program } = require('../util/program');
+const { program, attachOptionsToProcessEnv } = require('../util/program');
 const { inProcess } = require('../util/stdout');
-const attachToEnv = require('../util/attachToEnv');
 const dev = require('../script/dev');
 
 program
@@ -13,7 +12,8 @@ program
   .option('-t, --ts', 'typescript support')
   .option('-a,--analyzer', 'support building analyzer')
   .parse(process.argv);
-attachToEnv(program);
+
+attachOptionsToProcessEnv(program);
 
 try {
   const inProcessConf = {
