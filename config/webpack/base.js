@@ -1,12 +1,9 @@
 const { mergeWithCustomize, unique } = require('webpack-merge');
-const loaders = require('./loaders');
-const plugins = require('./plugins');
 const {
   appDirectory: context,
   appModules,
   appDist,
 } = require('../defaultPaths');
-
 const { getFileRealPath } = require('../../util/file');
 const { webpack } = require('../../util/userConfig');
 const { PROD, DEV } = require('../../constants/env');
@@ -19,7 +16,12 @@ const pluginsUnique = pluginsName =>
   );
 
 function getWebpackBaseConf() {
-  const { hash, ts } = process.env;
+  const { opts } = require('../../util/program');
+  const getLoaders = require('./loaders');
+  const getPlugins = require('./plugins');
+  const loaders = getLoaders();
+  const plugins = getPlugins();
+  const { hash, ts } = opts;
   const entry = {
     index: getFileRealPath(`src/index.${ts ? 'tsx' : 'js'}`),
   };

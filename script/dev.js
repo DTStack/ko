@@ -4,8 +4,8 @@ const detect = require('detect-port');
 const inquirer = require('inquirer');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const { DEV } = require('../constants/env');
-const { webpackDevServerConf, webpackDevConf } = require('../config/webpack');
 const { logWithColor } = require('../util/stdout');
+const { getWebpackDev, getDevServerConfig } = require('../config/webpack');
 
 async function checkPort(port) {
   let newPort = await detect(port);
@@ -40,6 +40,8 @@ function getUrlHost(host) {
 
 module.exports = async function () {
   process.env.NODE_ENV = DEV;
+  const webpackDevServerConf = getDevServerConfig();
+  const webpackDevConf = getWebpackDev();
   const { port, host } = webpackDevServerConf;
   const newPort = await checkPort(parseInt(webpackDevServerConf.port));
   if (!newPort) return;

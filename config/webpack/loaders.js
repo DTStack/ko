@@ -134,4 +134,24 @@ if (process.env.ts) {
   loaders = loaders.concat(typescriptLoaders);
 }
 
-module.exports = loaders;
+function getLoaders() {
+  const { opts } = require('../../util/program');
+  if (opts.ts) {
+    const TS_LOADER = require.resolve('ts-loader');
+    const typescriptLoaders = [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: TS_LOADER,
+        options: {
+          transpileOnly: true,
+          happyPackMode: true,
+        },
+      },
+    ];
+    loaders = loaders.concat(typescriptLoaders);
+  }
+  return loaders;
+}
+
+module.exports = getLoaders;

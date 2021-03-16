@@ -1,14 +1,13 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const webpackBaseConf = require('./base');
-const webpackDevServerConf = require('./devServer');
-
-const { analyzer } = process.env;
+const getDevServerConfig = require('./devServer');
 
 function getWebpackDev() {
   const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+  const { opts } = require('../../util/program');
+  const webpackBaseConf = require('./base');
   const plugins = [new webpack.HotModuleReplacementPlugin()];
-  analyzer && plugins.push(new BundleAnalyzerPlugin());
+  opts.analyzer && plugins.push(new BundleAnalyzerPlugin());
   return merge(webpackBaseConf, {
     devtool: 'cheap-module-source-map',
     plugins,
@@ -17,6 +16,7 @@ function getWebpackDev() {
 
 function getWebpackPro() {
   const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+  const webpackBaseConf = require('./base');
   const willMergeConfig = {
     plugins: [],
   };
@@ -57,7 +57,7 @@ function getWebpackPro() {
 }
 
 module.exports = {
-  webpackDevConf: getWebpackDev(),
-  webpackDevServerConf,
-  webpackProConf: getWebpackPro(),
+  getWebpackDev,
+  getDevServerConfig,
+  getWebpackPro,
 };
