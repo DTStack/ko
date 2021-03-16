@@ -1,11 +1,10 @@
-const fs = require('fs');
-const deepAssign = require('deep-assign');
-const { getCurFilePath } = require('../../util');
-const { eslint } = require('../getUserConf');
+const deepAssign = require("deep-assign");
+const { eslint } = require("../getUserConf");
 /**
  * eslint default config, user defined config file can override this
  * @ref: https://eslint.org/docs/rules/
  */
+
 const defaultEslintConf = {
   root: true,
   env: {
@@ -39,6 +38,7 @@ const defaultEslintConf = {
     'no-empty-function': 'warn',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-function': ['warn'],
+    "@typescript-eslint/no-use-before-define": ['error'],
     'no-var': 'error',
     indent: [
       'warn',
@@ -76,7 +76,7 @@ const defaultEslintConf = {
       },
     ],
     'key-spacing': [
-      'error',
+      'warn',
       {
         mode: 'strict',
         beforeColon: true,
@@ -103,7 +103,7 @@ const defaultEslintConf = {
       },
     ],
     'no-use-before-define': [
-      'error',
+      'off',
       {
         functions: true,
         classes: true,
@@ -167,15 +167,9 @@ const defaultEslintConf = {
       {
         allowIndentationTabs: false,
       },
-    ],
+    ]
   },
 };
 
-const userConfFile = eslint ? getCurFilePath(eslint) : '';
-const userConf = userConfFile
-  ? JSON.parse(fs.readFileSync(userConfFile, 'utf8'))
-  : {};
-
-const config = deepAssign({}, defaultEslintConf, userConf);
-
-module.exports = config;
+const config = deepAssign({},defaultEslintConf,eslint)
+module.exports = config

@@ -13,6 +13,7 @@ module.exports = function lint() {
       console.log(colors.red(error));
       process.exit(1);
     } else {
+      console.log(colors.green("Code style check succeeded"));
       process.exit(0);
     }
   });
