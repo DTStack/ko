@@ -3,6 +3,7 @@ const {
   appDirectory: context,
   appModules,
   appDist,
+  appTsConfig,
 } = require('../defaultPaths');
 const { getFileRealPath } = require('../../util/file');
 const { webpack } = require('../../util/userConfig');
@@ -63,6 +64,14 @@ function getWebpackBaseConf() {
     },
     node: false,
   };
+  if (ts) {
+    const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+    webpackConfig.resolve.plugins = [
+      new TsconfigPathsPlugin({
+        configFile: appTsConfig,
+      }),
+    ];
+  }
   return mergeWithCustomize({
     customizeArray: pluginsUnique(['HtmlWebpackPlugin']),
   })(webpackConfig, webpack);
