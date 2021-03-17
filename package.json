@@ -111,9 +111,6 @@
     "webpack-merge": "^5.7.3",
     "webpack-simple-progress-plugin": "^0.0.4"
   },
-  "engines": {
-    "node": ">=10 <=12"
-  },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
