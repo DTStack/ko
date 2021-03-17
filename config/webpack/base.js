@@ -9,11 +9,11 @@ const { getFileRealPath } = require('../../util/file');
 const { webpack } = require('../../util/userConfig');
 const { PROD, DEV } = require('../../constants/env');
 
-const pluginsUnique = pluginsName =>
+const pluginsUnique = (pluginsName) =>
   unique(
     'plugins',
     pluginsName,
-    plugin => plugin.constructor && plugin.constructor.name
+    (plugin) => plugin.constructor && plugin.constructor.name
   );
 
 function getWebpackBaseConf() {
@@ -56,7 +56,7 @@ function getWebpackBaseConf() {
         '.html',
       ],
       alias: {
-        vue$: 'vue/dist/vue.esm.js', //TODO: check this with vue framework
+        vue$: 'vue/dist/vue.esm.js', // TODO: check this with vue framework
       },
     },
     performance: {

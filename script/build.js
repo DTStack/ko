@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const getWebpackPro = require('../config/webpackPro');
 
-module.exports = program => {
+module.exports = (program) => {
   process.env.NODE_ENV = 'production';
   const webpackConfig = getWebpackPro(program);
   webpack(webpackConfig, (error, stats) => {

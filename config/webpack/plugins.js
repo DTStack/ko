@@ -13,7 +13,7 @@ const { PROD } = require('../../constants/env');
 function getPlugins() {
   const { opts } = require('../../util/program');
   const { env, ts } = opts;
-  //TODO: redefined plugins order
+  // TODO: redefined plugins order
   const userDefinedWebpackConf = userConf.webpack || {};
   const userDefinedPlugins = userDefinedWebpackConf.plugins || [];
   let plugins = [

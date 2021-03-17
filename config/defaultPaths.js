@@ -1,11 +1,6 @@
 const { resolve } = require('path');
 const userHome = require('user-home');
-const parseUrl = require('url');
 const { getFileRealPath } = require('../util/file');
-
-function parsePath(urlApi) {
-  return parseUrl.parse(urlApi);
-}
 
 module.exports = {
   appBuild: getFileRealPath('build'),
@@ -22,6 +17,5 @@ module.exports = {
   appGhPage: getFileRealPath('gh-pages'),
   userCacheRepoDir: resolve(userHome, '.ko-scaffold'),
   appDirectory: process.cwd(),
-  parsePath, //TODO: move this function to utils
   scaffoldConfUrl: 'https://dtux-kangaroo.github.io/ko-config/ko-script.json',
 };

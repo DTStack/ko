@@ -1,4 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+npx prettier --write .
+npx eslint . --ext .js,.jsx,.ts,.tsx --fix
 npx commitlint -c ./commitlint.config.js --edit $1

@@ -10,7 +10,7 @@
  */
 'use strict';
 const program = require('commander');
-const log=console.log;
+const log = console.log;
 const colors = require('colors');
 const preview = require('../script/preview');
 
@@ -19,11 +19,9 @@ program
   .option('-i, --ip <address>', '指定ip')
   .option('-d, --dist <dist>', '预览文件目录[相对路径 如./]')
   .parse(process.argv);
-  
-  try{
-    preview(program);
-    
-  }catch(err){
-    log(colors.red('启动失败，请检查端口是否被占用'+err));
-  }
- 
+
+try {
+  preview(program);
+} catch (err) {
+  log(colors.red('启动失败，请检查端口是否被占用' + err));
+}

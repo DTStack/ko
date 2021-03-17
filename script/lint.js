@@ -1,20 +1,22 @@
-const path = require('path');
-const exec = require('child_process').exec;
-const colors = require('colors');
-const lintStaged = path.resolve(__dirname, '../node_modules/.bin/lint-staged');
-const lintStagedConfPath = path.resolve(
-  __dirname,
-  '../config/lint/getLintStagedConf.js'
-);
+const { exec } = require('child_process');
+const { logWithColor } = require('../util/stdout');
+const { prettierCmd, eslintCmd } = require('../config/lint');
 
 module.exports = function lint() {
-  exec(`${lintStaged} -c ${lintStagedConfPath}`, error => {
+  exec(prettierCmd, (error) => {
     if (error) {
-      console.log(colors.red(error));
+      logWithColor('red', 'prettier failed:' + error);
       process.exit(1);
     } else {
-      console.log(colors.green("Code style check succeeded"));
-      process.exit(0);
+      exec(eslintCmd, (ex) => {
+        if (ex) {
+          logWithColor('red', 'eslint failed:' + error);
+          process.exit(1);
+        } else {
+          logWithColor('green', 'code has been linted successfully!');
+          process.exit(0);
+        }
+      });
     }
   });
 };
