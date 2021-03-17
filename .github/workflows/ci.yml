@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: eslint
-        run: yarn lint
+        run: yarn eslint
       - name: prettier
         run: yarn prettier
 
