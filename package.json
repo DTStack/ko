@@ -1,7 +1,7 @@
 {
   "name": "ko",
   "author": "DTStack",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "building tools based on webpack",
   "main": "index.js",
   "scripts": {
