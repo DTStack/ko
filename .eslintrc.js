@@ -42,6 +42,7 @@ module.exports = {
     'no-param-reassign': 0,
     camelcase: 'off',
     'space-before-function-paren': 0,
+    'no-use-before-define': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {

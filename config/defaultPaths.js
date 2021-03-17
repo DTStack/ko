@@ -15,7 +15,12 @@ module.exports = {
   appTsConfig: getFileRealPath('tsconfig.json'),
   appModules: getFileRealPath('node_modules'),
   appGhPage: getFileRealPath('gh-pages'),
-  userCacheRepoDir: resolve(userHome, '.ko-scaffold'),
+  userCacheRepoDir: resolve(userHome, '.ko-scaffold'), // TODO: refactor this
+  prettierignore:
+    getFileRealPath('.prettierignore') ||
+    resolve(__dirname, '../.prettierignore'),
+  eslintignore:
+    getFileRealPath('.eslintignore') || resolve(__dirname, '../.eslintignore'),
   appDirectory: process.cwd(),
   scaffoldConfUrl: 'https://dtux-kangaroo.github.io/ko-config/ko-script.json',
 };
