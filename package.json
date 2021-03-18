@@ -7,7 +7,8 @@
   "scripts": {
     "prepare": "husky install",
     "prettier": "prettier --write .",
-    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "test": "echo 'unit test is running...'"
   },
   "license": "MIT",
   "publishConfig": {
