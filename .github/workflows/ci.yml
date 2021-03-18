@@ -2,10 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, release, dev]
-  pull_request:
-    branches: [master, release, dev]
-
+    branches: [hotfix_githubActions]
 jobs:
   # install dependencies
   setup:
@@ -36,6 +33,10 @@ jobs:
     needs: [setup]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: eslint
         run: yarn eslint
       - name: prettier
@@ -48,5 +49,9 @@ jobs:
     needs: [setup, static-check]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: unit-test
         run: yarn test
