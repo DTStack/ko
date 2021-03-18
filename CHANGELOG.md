@@ -5,6 +5,28 @@
 
 ---
 
+## 5.0.4
+- repository structure:
+  - config directory: webpack config files has been move to webpack subdirectory
+  - util directory: remove useless and duplicated utility functions
+
+- lint:
+  - add prettier & eslint dependencies 
+  - eslint support default & user defined config, and eslintignore config
+  - prettier support default & user defined config, and prettierignore config
+
+- plugins have be removed in this release:
+  - `webpack.BannerPlugin`'s banner now has static banner content, maybe it's will be readded in the future with user defined banner content
+  - `webpack.DllPlugin` has been removed from CRA & vue-cli because [Webpack 4 should provide good enough perf and the cost of maintaining DLL mode inside Vue CLI is no longer justified](https://github.com/vuejs/vue-cli/issues/1205) & webpack 5 use [HardSourceWebpackPlugin](https://www.cnblogs.com/skychx/p/webpack-dllplugin.html) to optimize
+  - `happypack`'s maintainer sugguest users to use [thread-loader](https://github.com/webpack-contrib/thread-loader) instead
+  - `copy-webpack-plugin` has been used when dll is support, it will be removed when release new verison
+
+- dependencies will be removed in next release:
+
+  - `camelcase` removed because attachToEnv function has been removed
+
+  - `decamelize` removed because attachToEnv function has been removed
+
 ## 5.0.0 
 
 本次版本升级了webpack至5.x版本，并对相关的plugins和loaders进行了对应的升级或替换，删除了一些不必要的依赖以减小包的体积，具体内容如下
