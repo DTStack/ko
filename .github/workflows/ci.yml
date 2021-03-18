@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [hotfix_githubActions]
+    branches: [master, release, dev]
+  pull_request:
+    branches: [master, release, dev]
 jobs:
   # install dependencies
   setup:
