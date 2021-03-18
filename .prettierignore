@@ -2,3 +2,4 @@
 *.md
 *.json
 /template/
+/.github/

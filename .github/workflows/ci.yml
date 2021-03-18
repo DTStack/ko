@@ -33,12 +33,16 @@ jobs:
     needs: [setup]
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: eslint
-        run: yarn eslint
+        run: node -v && yarn eslint
       - name: prettier
         run: yarn prettier
 
@@ -49,9 +53,13 @@ jobs:
     needs: [setup, static-check]
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: unit-test
-        run: yarn test
+        run: node -v && yarn test
