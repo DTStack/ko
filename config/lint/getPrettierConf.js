@@ -1,15 +1,14 @@
-const { prettier } = require("../getUserConf");
+const mergeOptions = require('merge-options');
+const { prettier } = require('../../util/userConfig');
+const defaultPrettierConf = require('../../prettier.config');
 
-const defaultPrettierConf = {
-  bracketSpacing: true,
-  singleQuote: true,
-  jsxBracketSameLine: true,
-  trailingComma: "es5",
-  arrowParens: "always",
-  printWidth: 80,
-  parser: "babel",
-};
+function getLintConf() {
+  if (typeof prettier === 'string') {
+    return prettier ? require(prettier) : {};
+  } else {
+    return prettier;
+  }
+}
 
-const config = Object.assign({}, defaultPrettierConf, prettier);
-
+const config = mergeOptions({}, defaultPrettierConf, getLintConf());
 module.exports = config;

@@ -8,7 +8,7 @@ const { logWithColor } = require('../util/stdout');
 const { getWebpackDev, getDevServerConfig } = require('../config/webpack');
 
 async function checkPort(port) {
-  let newPort = await detect(port);
+  const newPort = await detect(port);
   if (newPort === port) {
     return newPort;
   }
@@ -25,7 +25,7 @@ async function changePort(newPort, port) {
     message: `port: ${port} has been used，use new port ${newPort} instead?`,
     default: true,
   };
-  let answer = await inquirer.prompt(question);
+  const answer = await inquirer.prompt(question);
   if (answer.changePort) {
     return newPort;
   } else {
@@ -49,7 +49,7 @@ module.exports = async function () {
   const devServer = new WebpackDevServer(compiler, webpackDevServerConf);
   let isFirstCompile = true;
 
-  compiler.hooks.done.tap('done', stats => {
+  compiler.hooks.done.tap('done', (stats) => {
     if (isFirstCompile) {
       isFirstCompile = false;
       logWithColor('cyan', 'development server has been started');
@@ -70,10 +70,10 @@ module.exports = async function () {
     }
     if (messages.errors.length) {
       logWithColor('red', 'failed to compiled with errors:\n');
-      messages.errors.forEach(msg => console.log(msg + '\n'));
+      messages.errors.forEach((msg) => console.log(msg + '\n'));
     } else if (messages.warnings.length) {
       logWithColor('yellow', 'compiled with warnings:\n');
-      messages.warnings.forEach(msg => console.log(msg + '\n'));
+      messages.warnings.forEach((msg) => console.log(msg + '\n'));
     }
   });
 
@@ -81,7 +81,7 @@ module.exports = async function () {
     console.log('Compiling...');
   });
 
-  devServer.listen(port, host, err => {
+  devServer.listen(port, host, (err) => {
     if (err) {
       console.error(err);
       process.exit(500);

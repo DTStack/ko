@@ -1,22 +1,18 @@
 #! /usr/bin/env node
-
 'use strict';
-const program = require('commander');
-const attachToEnv = require('../util/attachToEnv');
-const lint = require('../script/lint');
-const colors = require('colors');
-const ora = require('ora');
-program.parse(process.argv);
-attachToEnv(program);
 
+const colors = require('colors');
+const { inProcess } = require('../util/stdout');
+const lint = require('../script/lint');
+
+// TODO: support user defined eslint & prettier config with cli options
 try {
-  const spinner = ora('Linting').start();
-  setTimeout(() => {
-    spinner.color = 'yellow';
-    spinner.text = 'lint...';
-  }, 100);
-  lint(program);
-  spinner.stop();
+  const inProcessConf = {
+    initStr: 'ko lint start!',
+    spinStr: 'compiling...',
+    process: lint,
+  };
+  inProcess(inProcessConf);
 } catch (err) {
-  console.log(colors.red)('服务启动失败，请检查package中dependencies依赖包');
+  console.log(colors.red('process init failed:'), err);
 }

@@ -1,0 +1,5 @@
+/.vscode/
+*.md
+*.json
+/template/
+/.github/

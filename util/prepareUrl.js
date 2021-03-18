@@ -26,7 +26,8 @@ module.exports = function prepareUrls(protocol, host, port, pathname = '/') {
       pathname,
     });
 
-  const isUnspecifiedHost = host==='127.0.0.1'|| host=== '0.0.0.0' || host === '::';
+  const isUnspecifiedHost =
+    host === '127.0.0.1' || host === '0.0.0.0' || host === '::';
   let prettyHost;
   let lanUrlForConfig;
   let lanUrlForTerminal;
