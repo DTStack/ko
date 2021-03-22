@@ -5,6 +5,10 @@
 
 ---
 
+## 5.0.5
+
+- remove prettier parse config to fixed prettier format bug
+- support react lint for eslint
 ## 5.0.4
 - repository structure:
   - config directory: webpack config files has been move to webpack subdirectory
