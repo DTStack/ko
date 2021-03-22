@@ -8,8 +8,14 @@ module.exports = {
     ecmaVersion: 8,
     sourceType: 'module',
   },
-  extends: ['standard', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['import', '@typescript-eslint'],
+  extends: [
+    'standard',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'prettier',
+  ],
+  plugins: ['import', 'react'],
   env: {
     browser: true,
     node: true,
@@ -67,5 +73,24 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/camelcase': 0,
+    'react/display-name': [0],
+    'react/sort-comp': 0,
+    'react/jsx-uses-react': 1,
+    'react/prefer-stateless-function': 0,
+    'react/jsx-closing-bracket-location': 0,
+    'react/prop-types': [
+      0,
+      {
+        ignore: ['children'],
+      },
+    ],
+    'react/jsx-no-target-blank': 2,
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.tsx', '.js', '.jsx'],
+      },
+    ],
+    'react/react-in-jsx-scope': 0,
   },
 };

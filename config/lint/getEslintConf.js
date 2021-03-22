@@ -14,5 +14,10 @@ function getLintConf() {
   }
 }
 
-const config = mergeOptions({}, defaultEslintConf, getLintConf());
+const config = mergeOptions.call(
+  { concatArrays: true },
+  {},
+  defaultEslintConf,
+  getLintConf()
+);
 module.exports = config;
