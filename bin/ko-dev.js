@@ -19,7 +19,6 @@ try {
   const inProcessConf = {
     initStr: 'ko dev server start!',
     spinStr: 'compiling...',
-    spinColor: 'yellow',
     process: dev,
   };
   inProcess(inProcessConf);
