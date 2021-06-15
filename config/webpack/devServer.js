@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const { webpack } = require('../../util/userConfig');
-const { appDist } = require('../../util/file');
+const { appDist } = require('../../config/defaultPaths');
 const { PORT, HOST } = require('../../constants/default');
 
 function getDevServerConfig() {
@@ -21,11 +21,11 @@ function getDevServerConfig() {
     hot: true,
     inline: true,
     publicPath: '/',
-    quiet: true,
     watchOptions: {
       ignored: /node_modules/,
       aggregateTimeout: 600,
     },
+    open: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',

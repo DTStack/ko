@@ -106,35 +106,20 @@ let loaders = [
   },
   {
     test: /\.(woff|woff2|svg|ttf|eot)$/,
-    loader: FILE_LOADER,
-    options: {
-      name: 'fonts/[hash].[ext]',
-    },
+    type: 'asset/resource',
+    generator: {
+      filename: 'fonts/[hash][ext][query]'
+    }
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/i,
-    loader: FILE_LOADER,
-    options: {
-      name: 'imgs/[hash].[ext]',
-    },
+    type: 'asset/resource',
+    generator: {
+      filename: 'imgs/[hash][ext][query]'
+    }
+
   },
 ];
-// support typescript
-if (process.env.ts) {
-  const TS_LOADER = require.resolve('ts-loader');
-  const typescriptLoaders = [
-    {
-      test: /\.tsx?$/,
-      exclude: /node_modules/,
-      loader: TS_LOADER,
-      options: {
-        transpileOnly: true,
-        happyPackMode: true,
-      },
-    },
-  ];
-  loaders = loaders.concat(typescriptLoaders);
-}
 
 function getLoaders() {
   const { opts } = require('../../util/program');

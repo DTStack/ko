@@ -1,6 +1,10 @@
 #! /usr/bin/env node
 'use strict';
 
+// set NODE_ENV to development
+const { DEV } = require('../constants/env');
+process.env.NODE_ENV = DEV;
+
 const colors = require('colors');
 const { program, attachOptions } = require('../util/program');
 const { inProcess } = require('../util/stdout');

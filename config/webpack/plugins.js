@@ -6,9 +6,11 @@ const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 // const VueLoaderPlugin = require('vue-loader/lib/plugin'); //TODO: support vue loader when it adapted webpack 5
-const { appHtml, appTsConfig } = require('../defaultPaths');
+const { appHtml, appTsConfig, appPkg } = require('../defaultPaths');
 const userConf = require('../../util/userConfig');
-const { PROD } = require('../../constants/env');
+const { PROD, DEV } = require('../../constants/env');
+
+const { name: appPkgName } = require(appPkg);
 
 function getPlugins() {
   const { opts } = require('../../util/program');
@@ -33,12 +35,10 @@ function getPlugins() {
     new HtmlWebpackPlugin({
       template: appHtml,
       filename: 'index.html',
-      minify: true,
-      title: '',
-      chunksSortMode: 'none',
+      title: appPkgName || 'Ko App',
     }),
     new HtmlWebpackTagsPlugin({
-      tags: [`config/conf.${env}.js`],
+      tags: [`config/conf.${process.env.NODE_ENV === DEV ? 'dev' : env}.js`],
       append: false,
     }),
   ];
