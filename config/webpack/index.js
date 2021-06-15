@@ -21,7 +21,7 @@ function getWebpackPro() {
     plugins: [],
   };
   willMergeConfig.optimization = {
-    moduleIds: 'hashed',
+    moduleIds: 'deterministic',
     minimizer: [new CssMinimizerPlugin()],
   };
   willMergeConfig.plugins.push(

@@ -5926,10 +5926,10 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
-ko-babel-app@^8.0.16:
-  version "8.0.16"
-  resolved "https://registry.yarnpkg.com/ko-babel-app/-/ko-babel-app-8.0.16.tgz#0c6e694102915fb6afc667731800232fa5d4f7e2"
-  integrity sha512-HKV/H04cLWs3H1FyBRzpxEIEg6mIBaoLrJdKmOmHq6b8t9lh2zW9n9qOk5AW/MqeKMM420wksZ/XkyWYYPRvIA==
+ko-babel-app@^8.0.17:
+  version "8.0.17"
+  resolved "https://registry.yarnpkg.com/ko-babel-app/-/ko-babel-app-8.0.17.tgz#cdbbe26d7dc6f6d8c2817ccca8c2ed7dcef80365"
+  integrity sha512-olJaCSNK1IYd7Zt7vn3O3jVPap0tX635rMjJjkpRXR/KfEaz2p6B+IlrraeLhoKOz3rXbewd5512tWS1S4nQgA==
   dependencies:
     "@babel/core" "^7.14.6"
     "@babel/plugin-proposal-class-properties" "7.14.5"
