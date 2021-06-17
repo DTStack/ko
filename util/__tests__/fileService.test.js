@@ -51,13 +51,13 @@ describe('file service:', () => {
   });
 
   it('exists sync:', () => {
-    const notExit = existsSync(completePath);
-    expect(notExit).toBe(false);
+    const notExist = existsSync(completePath);
+    expect(notExist).toBe(false);
     fs.writeFileSync(completePath, mockContent);
     if (!fs.existsSync(completePath))
       throw errorFileNotPrepared;
-    const exit = existsSync(completePath);
-    expect(exit).toBe(true);
+    const exist = existsSync(completePath);
+    expect(exist).toBe(true);
   });
 
   it('mkdir', () => {
