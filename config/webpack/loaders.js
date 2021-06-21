@@ -4,7 +4,6 @@ const LESS_LOADER = require.resolve('less-loader');
 const SASS_LOADER = require.resolve('sass-loader');
 const POSTCSS_LOADER = require.resolve('postcss-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
-const FILE_LOADER = require.resolve('file-loader');
 // const VUE_LOADER = require.resolve('vue-loader'); //TODO: added in the future
 const autoprefixer = require('autoprefixer');
 
