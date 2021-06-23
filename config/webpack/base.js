@@ -1,9 +1,5 @@
 const { mergeWithCustomize, unique } = require('webpack-merge');
-const {
-  appDirectory,
-  appDist,
-  appTsConfig,
-} = require('../defaultPaths');
+const { appDirectory, appDist, appTsConfig } = require('../defaultPaths');
 const { getFileRealPath } = require('../../util/file');
 const { webpack } = require('../../util/userConfig');
 const { PROD, DEV } = require('../../constants/env');
@@ -69,7 +65,7 @@ function getWebpackBaseConf() {
     webpackConfig.resolve.plugins = [
       new TsconfigPathsPlugin({
         configFile: appTsConfig,
-        extensions
+        extensions,
       }),
     ];
   }

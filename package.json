@@ -1,7 +1,7 @@
 {
   "name": "ko",
   "author": "DTStack",
-  "version": "5.0.5",
+  "version": "5.2.0",
   "description": "building tools based on webpack",
   "scripts": {
     "prepare": "husky install",

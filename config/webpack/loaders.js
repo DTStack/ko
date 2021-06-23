@@ -107,16 +107,15 @@ let loaders = [
     test: /\.(woff|woff2|svg|ttf|eot)$/,
     type: 'asset/resource',
     generator: {
-      filename: 'fonts/[hash][ext][query]'
-    }
+      filename: 'fonts/[hash][ext][query]',
+    },
   },
   {
     test: /\.(png|jpg|jpeg|gif)$/i,
     type: 'asset/resource',
     generator: {
-      filename: 'imgs/[hash][ext][query]'
-    }
-
+      filename: 'imgs/[hash][ext][query]',
+    },
   },
 ];
 

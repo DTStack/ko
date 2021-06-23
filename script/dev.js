@@ -45,7 +45,10 @@ module.exports = async function () {
   const { port, host } = webpackDevServerConf;
   const newPort = await checkPort(parseInt(webpackDevServerConf.port));
   if (!newPort) return;
-  WebpackDevServer.addDevServerEntrypoints(webpackDevConf, webpackDevServerConf);
+  WebpackDevServer.addDevServerEntrypoints(
+    webpackDevConf,
+    webpackDevServerConf
+  );
   const compiler = webpack(webpackDevConf);
   const devServer = new WebpackDevServer(compiler, webpackDevServerConf);
   let isFirstCompile = true;
@@ -57,7 +60,7 @@ module.exports = async function () {
       logWithColor('yellow', `server starts at:${getUrlHost(host)}:${port}`);
     }
     /**
-     * fixed react-dev-utils bug. 
+     * fixed react-dev-utils bug.
      * ref: https://github.com/facebook/create-react-app/issues/9880
      */
     const rawMessages = stats.toJson({ moduleTrace: false }, true);
@@ -69,11 +72,6 @@ module.exports = async function () {
     if (isSuccessful) {
       if (stats.stats) {
         logWithColor('green', 'compiled successfully');
-      } else {
-        logWithColor(
-          'green',
-          `Compiled successfully in ${(json.time / 1000).toFixed(1)}s!`
-        );
       }
     }
     if (messages.errors.length) {
