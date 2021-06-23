@@ -40,7 +40,7 @@ module.exports = () => {
     },
   };
 };
-`
+`;
 
 describe('get user config:', () => {
   it('whithout ko.config.js:', () => {
@@ -60,25 +60,24 @@ describe('get user config:', () => {
       webpack: {
         entry: ['./src/app.tsx'],
         output: {
-          publicPath: '/publicService/'
+          publicPath: '/publicService/',
         },
         plugins: [],
         externals: {
-          APP_CONF: 'APP_CONF'
-        }
+          APP_CONF: 'APP_CONF',
+        },
       },
       babel: {},
       prettier: '',
-      eslint: ''
-    })
+      eslint: '',
+    });
   });
 
-  beforeEach(()=>{
-    jest.resetModules()
-  })
+  beforeEach(() => {
+    jest.resetModules();
+  });
 
   afterEach(() => {
-    if(fs.existsSync(complatePath))
-      fs.unlinkSync(complatePath);
-  })
-})
+    if (fs.existsSync(complatePath)) fs.unlinkSync(complatePath);
+  });
+});

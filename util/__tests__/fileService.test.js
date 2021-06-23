@@ -5,7 +5,7 @@ const {
   existsSync,
   mkdir,
   getCurFilePath,
-  isAbsolute
+  isAbsolute,
 } = require('../fileService');
 
 const fs = require('fs');
@@ -26,10 +26,9 @@ describe('file service:', () => {
     expect(content).toBe(mockContent);
   });
 
-  it('create write stream:', done => {
+  it('create write stream:', (done) => {
     fs.writeFileSync(completePath, mockContent);
-    if (!fs.existsSync(completePath))
-      throw errorFileNotPrepared;
+    if (!fs.existsSync(completePath)) throw errorFileNotPrepared;
     const writeStream = createWriteStream(completePath);
     const newLabel = 'hello, this is new label test...';
     writeStream.write(newLabel, 'utf8');
@@ -38,13 +37,12 @@ describe('file service:', () => {
       const content = fs.readFileSync(completePath).toString();
       expect(content).toBe(newLabel);
       done();
-    })
+    });
   });
 
   it('read file sync:', () => {
     fs.writeFileSync(completePath, mockContent);
-    if (!fs.existsSync(completePath))
-      throw errorFileNotPrepared;
+    if (!fs.existsSync(completePath)) throw errorFileNotPrepared;
     const result = readFileSync(completePath);
     const content = fs.readFileSync(completePath).toString();
     expect(result).toBe(content);
@@ -54,8 +52,7 @@ describe('file service:', () => {
     const notExist = existsSync(completePath);
     expect(notExist).toBe(false);
     fs.writeFileSync(completePath, mockContent);
-    if (!fs.existsSync(completePath))
-      throw errorFileNotPrepared;
+    if (!fs.existsSync(completePath)) throw errorFileNotPrepared;
     const exist = existsSync(completePath);
     expect(exist).toBe(true);
   });
@@ -66,7 +63,7 @@ describe('file service:', () => {
     expect(result).toBe(true);
     try {
       mkdir(completeDirPath);
-    } catch(error) {
+    } catch (error) {
       expect(error.message).toMatch(/EEXIST: file already exists/);
     }
   });
@@ -80,9 +77,7 @@ describe('file service:', () => {
     const dirname = 'mock';
     const result = getCurFilePath(dirname);
     const workspace = process.cwd();
-    expect(result).toBe(
-      path.resolve(workspace, dirname)
-    );
+    expect(result).toBe(path.resolve(workspace, dirname));
   });
 
   it('get absolute path:', () => {
@@ -91,20 +86,16 @@ describe('file service:', () => {
     const relationResult = isAbsolute(relationPath);
     const absoluteResult = isAbsolute(absolutePath);
     const workspace = process.cwd();
-    expect(relationResult).toBe(
-      path.resolve(workspace, relationPath)
-    );
+    expect(relationResult).toBe(path.resolve(workspace, relationPath));
     expect(absoluteResult).toBe(absoluteResult);
-  })
+  });
 
-
-  afterEach (() => {
+  afterEach(() => {
     if (fs.existsSync(completePath)) {
       fs.unlinkSync(completePath);
     }
     if (fs.existsSync(completeDirPath)) {
       fs.rmdirSync(completeDirPath);
     }
-  })
-})
-
+  });
+});

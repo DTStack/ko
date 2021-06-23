@@ -10,9 +10,13 @@ describe('prepare urls:', () => {
     const urls = prepareUrls(protocol, host, port, path);
     const hostIp = address.ip();
     expect(urls.lanUrlForConfig).toBe(hostIp);
-    expect(urls.lanUrlForTerminal).toBe(`http://${hostIp}:\u001b[1m8080\u001b[22m/`);
+    expect(urls.lanUrlForTerminal).toBe(
+      `http://${hostIp}:\u001b[1m8080\u001b[22m/`
+    );
     expect(urls.lanUrlForBrowser).toBe(`http://${hostIp}:8080/`);
-    expect(urls.localUrlForTerminal).toBe(`http://localhost:\u001b[1m8080\u001b[22m/`)
+    expect(urls.localUrlForTerminal).toBe(
+      `http://localhost:\u001b[1m8080\u001b[22m/`
+    );
     expect(urls.localUrlForBrowser).toBe(`http://localhost:8080/`);
   });
 
@@ -25,7 +29,9 @@ describe('prepare urls:', () => {
     expect(urls.lanUrlForConfig).toBe(undefined);
     expect(urls.lanUrlForTerminal).toBe(undefined);
     expect(urls.lanUrlForBrowser).toBe(undefined);
-    expect(urls.localUrlForTerminal).toBe(`http://${host}:\u001b[1m8080\u001b[22m/`)
+    expect(urls.localUrlForTerminal).toBe(
+      `http://${host}:\u001b[1m8080\u001b[22m/`
+    );
     expect(urls.localUrlForBrowser).toBe(`http://${host}:8080/`);
   });
-})
+});

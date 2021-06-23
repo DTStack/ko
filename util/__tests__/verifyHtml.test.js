@@ -23,7 +23,9 @@ const txt = `<!DOCTYPE html>
 const workspace = process.cwd();
 const filename = 'index.html';
 const completePath = path.resolve(appPublic, filename);
-const errorTestingFileNotPrepared = new Error('testing file is not prepared...');
+const errorTestingFileNotPrepared = new Error(
+  'testing file is not prepared...'
+);
 const regConfig = /<%= htmlWebpackPlugin.options.assets.config %>/g;
 const regScripts = /<%= htmlWebpackPlugin.options.assets.scripts %>/g;
 
@@ -34,61 +36,46 @@ describe('verify html:', () => {
     expect(fs.existsSync(appPublic)).toBe(true);
     expect(fs.existsSync(completePath)).toBe(true);
     const content = fs.readFileSync(completePath).toString();
-    expect(
-      content.replace(/\s/g, '')
-    ).toBe(
-      txt.replace(/\s/g, '')
-    );
+    expect(content.replace(/\s/g, '')).toBe(txt.replace(/\s/g, ''));
   });
 
   it('with directory:', () => {
     expect(appPublic).toBe(path.resolve(workspace, 'public'));
-    fs.mkdirSync(
-      path.resolve(workspace, 'public')
-    );
-    if(!fs.existsSync(appPublic))
-      throw errorTestingFileNotPrepared;
+    fs.mkdirSync(path.resolve(workspace, 'public'));
+    if (!fs.existsSync(appPublic)) throw errorTestingFileNotPrepared;
     verifyHtml(completePath);
     expect(fs.existsSync(appPublic)).toBe(true);
     expect(fs.existsSync(completePath)).toBe(true);
     const content = fs.readFileSync(completePath).toString();
-    expect(
-      content.replace(/\s/g, '')
-    ).toBe(
-      txt.replace(/\s/g, '')
-    );
+    expect(content.replace(/\s/g, '')).toBe(txt.replace(/\s/g, ''));
   });
 
   it('without scripts:', () => {
-    const filterText = txt
-      .replace(regScripts, '');
+    const filterText = txt.replace(regScripts, '');
     expect(filterText).not.toMatch(regScripts);
     fs.mkdirSync(appPublic);
     fs.writeFileSync(completePath, filterText);
-    if(!fs.existsSync(completePath))
-      throw errorTestingFileNotPrepared;
+    if (!fs.existsSync(completePath)) throw errorTestingFileNotPrepared;
     verifyHtml(completePath);
     const content = fs.readFileSync(completePath).toString();
     expect(content).toMatch(regConfig);
   });
 
   it('without config:', () => {
-    const filterText = txt
-      .replace(regConfig, '');
+    const filterText = txt.replace(regConfig, '');
     expect(filterText).not.toMatch(regConfig);
     fs.mkdirSync(appPublic);
     fs.writeFileSync(completePath, filterText);
-    if(!fs.existsSync(completePath))
-      throw errorTestingFileNotPrepared;
+    if (!fs.existsSync(completePath)) throw errorTestingFileNotPrepared;
     verifyHtml(completePath);
     const content = fs.readFileSync(completePath).toString();
     expect(content).toMatch(regScripts);
   });
 
   afterEach(() => {
-    if(fs.existsSync(completePath))
+    if (fs.existsSync(completePath))
       fs.rmdirSync(appPublic, {
-        recursive: true
+        recursive: true,
       });
   });
-})
+});
