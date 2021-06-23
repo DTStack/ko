@@ -39,7 +39,8 @@ module.exports = {
     return fs.existsSync(filePath);
   },
   mkdir: function (path) {
-    fs.mkdirSync(path, 0777);
+    // 严格模式下不支持使用0开头声明八进制数
+    fs.mkdirSync(path, 0o777);
   },
   getCurFilePath: function (relativePath) {
     const curDirPath = process.cwd();

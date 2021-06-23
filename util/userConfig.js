@@ -14,10 +14,12 @@ const emptyString = '';
  *  eslint: eslint user-defined configs
  * }
  */
+
 function getUserConf() {
   const userConfFile = resolve(process.cwd(), userConfFileName);
   if (existsSync(userConfFile)) {
-    const userConf = require(userConfFile)({ webpack }) || {};
+    const userConf =
+      require(userConfFile)({ webpack, env: process.env.NODE_ENV }) || {};
     return {
       webpack: userConf.webpack || emptyObject,
       babel: userConf.babel || emptyObject,
