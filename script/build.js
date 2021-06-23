@@ -1,14 +1,12 @@
 const webpack = require('webpack');
-const getWebpackPro = require('../config/webpackPro');
+const { getWebpackPro } = require('../config/webpack');
 
-module.exports = (program) => {
-  process.env.NODE_ENV = 'production';
-  const webpackConfig = getWebpackPro(program);
-  webpack(webpackConfig, (error, stats) => {
-    if (error) {
-      throw error;
-    } else {
-      console.log(
+function buildWebpackPro() {
+  const webpackProConf = getWebpackPro();
+  webpack(webpackProConf, (error, stats) => {
+    if (error || stats.hasErrors()) {
+      throw (
+        error ||
         stats.toString({
           colors: true,
           chunks: false,
@@ -17,10 +15,9 @@ module.exports = (program) => {
           chunkModules: false,
         })
       );
-      if (stats.hasErrors()) {
-        throw new Error('webpack compiled failed.');
-      }
     }
     console.log('ko build completed!');
   });
-};
+}
+
+module.exports = buildWebpackPro;

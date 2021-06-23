@@ -5,6 +5,11 @@
 
 ---
 
+## 5.2.0
+- upgrade dependencies except less because [Ant Design use 3.x version of less](https://github.com/vueComponent/ant-design-vue/issues/3665)
+- remove file-loader, change to [asset-modules](https://webpack.js.org/guides/asset-modules/)
+- fixed [react-dev-utils warning](https://github.com/facebook/create-react-app/issues/9880)
+- update `ko-babel-app` to version 8.0.17
 ## 5.0.5
 
 - remove prettier parse config to fixed prettier format bug

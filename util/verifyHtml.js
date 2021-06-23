@@ -40,6 +40,8 @@ module.exports = function (path) {
             </body>
             </html>
         `;
+  // TODO: else if 判断有bug
+  // 当config和scripts都没有的时候，只会匹配插入scripts，else if判断进不去
   if (!existsSync(path)) {
     createFileSync(path, txt);
   } else {

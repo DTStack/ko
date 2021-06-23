@@ -8,6 +8,7 @@ function inProcess(conf) {
     spinColor = 'yellow',
     process,
   } = conf;
+  if (!process) throw new TypeError('argument process must been defined!');
   const spinner = ora(initStr).start();
   setTimeout(() => {
     spinner.text = spinStr;
