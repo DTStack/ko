@@ -87,8 +87,14 @@ function downScaffold(gitRepo, tempRepo) {
   });
 }
 module.exports = async (program) => {
-  const ret = await getKoScriptConf();
-  const choices = (ret || []).map((item) => {
+  let ret = [];
+  try {
+    const res = await getKoScriptConf();
+    ret = res.data;
+  } catch(error) {
+    console.error(error);
+  }
+  const choices = ret.map((item) => {
     return {
       name: `${item.name} - ${item.description}`,
       value: `${item.name}|${item.url}#ko-script`,
