@@ -1,7 +1,7 @@
 {
   "name": "ko",
   "author": "DTStack",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "building tools based on webpack",
   "scripts": {
     "preinstall": "node preinstall.js",

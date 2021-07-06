@@ -4,6 +4,9 @@
 - 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## 5.2.1
+- fixed [Throw an error when running "ko init"](https://github.com/DTStack/ko/issues/27)
+- check node version when install because [webpack 5 requires at least Node.js 10.13.0 (LTS)](https://webpack.js.org/migrate/5/#preparations)
 
 ## 5.2.0
 - upgrade dependencies except less because [Ant Design use 3.x version of less](https://github.com/vueComponent/ant-design-vue/issues/3665)
