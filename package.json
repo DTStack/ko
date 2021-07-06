@@ -4,9 +4,11 @@
   "version": "5.2.0",
   "description": "building tools based on webpack",
   "scripts": {
+    "preinstall": "node preinstall.js",
     "prepare": "husky install",
     "prettier": "prettier --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "yarn prettier && yarn eslint",
     "test": "jest"
   },
   "license": "MIT",

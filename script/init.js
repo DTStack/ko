@@ -91,7 +91,7 @@ module.exports = async (program) => {
   try {
     const res = await getKoScriptConf();
     ret = res.data;
-  } catch(error) {
+  } catch (error) {
     console.error(error);
   }
   const choices = ret.map((item) => {
