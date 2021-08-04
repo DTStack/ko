@@ -11,6 +11,13 @@
   "bugs": {
     "url": "https://github.com/DTStack/ko/issues"
   },
+  "keywords": [
+    "ko",
+    "ko-script",
+    "babel",
+    "babel-presets",
+    "ko-app"
+  ],
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.14.8",
