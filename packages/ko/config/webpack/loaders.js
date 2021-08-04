@@ -4,6 +4,7 @@ const LESS_LOADER = require.resolve('less-loader');
 const SASS_LOADER = require.resolve('sass-loader');
 const POSTCSS_LOADER = require.resolve('postcss-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
+const { appSrc } = require('../defaultPaths');
 // const VUE_LOADER = require.resolve('vue-loader'); //TODO: added in the future
 const autoprefixer = require('autoprefixer');
 
@@ -92,7 +93,7 @@ let loaders = [
   },
   {
     test: /\.jsx?$/,
-    exclude: /node_modules/,
+    include: appSrc,
     use: [
       THREAD_LOADER,
       {
@@ -126,12 +127,17 @@ function getLoaders() {
     const typescriptLoaders = [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: TS_LOADER,
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-        },
+        include: appSrc,
+        use: [
+          THREAD_LOADER,
+          {
+            loader: TS_LOADER,
+            options: {
+              transpileOnly: true,
+              happyPackMode: true,
+            },
+          },
+        ],
       },
     ];
     loaders = loaders.concat(typescriptLoaders);
