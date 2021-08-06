@@ -9,3 +9,4 @@ idea/
 compiler_ts/*
 .history/
 true?{\"compact\":false}/
+lib/*
