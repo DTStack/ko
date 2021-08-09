@@ -1,14 +1,39 @@
-const prettier = require('prettier');
-const { join } = require('fs');
-const { findRealPath } = require('./utils');
+import { promises } from 'fs';
+import { format, check } from 'prettier';
+import { findRealPath } from './utils';
 
-function formatFilesWithPrettier(files, configPath?) {
+export async function formatFilesWithPrettier(files: string[], isCheck: boolean, configPath?: string) {
   const prettierConfig = configPath
     ? require(findRealPath(configPath))
     : require('ko-config/prettier');
-  console.log(prettierConfig);
-  const ret = prettier.getFileInfo.sync(files);
-  console.log(ret);
+  console.log('prettier process starting...');
+  const formatFilesPromises = files.map(async file => {
+    try {
+      const source = await promises.readFile(file, 'utf-8');
+      if (isCheck) {
+        return check(source, prettierConfig);
+      } else {
+        const formatContent = format(source, prettierConfig);
+        return promises.writeFile(file, formatContent, 'utf-8');
+      }
+    } catch (ex) {
+      throw ex;
+    }
+  });
+  try {
+    let stdout = '';
+    const result = await Promise.all(formatFilesPromises);
+    if (isCheck) {
+      if (result.includes(false)) {
+        stdout = 'All matched files are formatted';
+      } else {
+        stdout = 'Not all matched files are formatted';
+      }
+    } else {
+      stdout = 'All matched files are rewrited successfully!';
+    }
+    console.log(stdout);
+  } catch (ex) {
+    console.error('prettier failed:', ex);
+  }
 }
-
-formatFilesWithPrettier(join(__dirname, './foo/index.js'));

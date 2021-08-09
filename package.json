@@ -13,6 +13,7 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@tsconfig/node10": "^1.0.8",
+    "@types/node": "^16.4.13",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^6.0.0",

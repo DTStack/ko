@@ -27,6 +27,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "commander": "^8.1.0"
+    "@types/prettier": "^2.3.2",
+    "commander": "^8.1.0",
+    "fast-glob": "^3.2.7"
   }
 }
