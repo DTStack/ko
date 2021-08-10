@@ -9,4 +9,6 @@ idea/
 compiler_ts/*
 .history/
 true?{\"compact\":false}/
-lib/*
+lib
+.yalc
+yalc.lock

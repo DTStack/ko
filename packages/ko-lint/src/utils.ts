@@ -18,22 +18,34 @@ export function findRealPath(configPath: string): string {
 /**
  * @link Pattern syntax: https://github.com/mrmlnc/fast-glob#pattern-syntax
  */
-export function getTargetFiles(patterns: Pattern, ignoreFile?: string): Array<string> {
+export function getTargetFiles(
+  patterns: Pattern,
+  ignoreFile?: string
+): Array<string> {
   if (!ignoreFile) {
     ignoreFile = join(process.cwd(), defaultIgnoreFile);
   }
   return sync(patterns, {
-    ignore: getIgnorePatterns(ignoreFile)
-  })
+    ignore: getIgnorePatterns(ignoreFile),
+  });
 }
 
 function getIgnorePatterns(ignoreFile: string): Array<string> {
-  const gitIgnorePatterns = readFileSync(ignoreFile, 'utf-8').split('\n');
-  const ignorePatterns = readFileSync(ignoreFile, 'utf-8').split('\n');
+  const gitIgnorePath = join(process.cwd(), '.gitignore');
+  const gitIgnorePatterns = getFilePatterns(gitIgnorePath);
+  const ignorePatterns = getFilePatterns(ignoreFile);
   return ignorePatterns.reduce((accumlator, currentValue) => {
     if (!accumlator.includes(currentValue)) {
-      accumlator.push(currentValue)
+      accumlator.push(currentValue);
     }
     return accumlator;
-  }, gitIgnorePatterns)
+  }, gitIgnorePatterns);
+}
+
+function getFilePatterns(filePath: string): Array<string> {
+  let patterns: Array<string> = [];
+  if (existsSync(filePath)) {
+    patterns = readFileSync(filePath, 'utf-8').split('\n');
+  }
+  return patterns;
 }

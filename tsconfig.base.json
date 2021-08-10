@@ -2,10 +2,8 @@
   "extends": "@tsconfig/node10/tsconfig.json",
   "include": ["src/**/*.ts"],
   "compilerOptions": {
-    "outDir": "./lib",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "sourceMap": true
   },
 }

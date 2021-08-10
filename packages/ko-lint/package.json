@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "lint tools used by ko",
   "bin": {
-    "ko-lint": "./cli.js"
+    "ko-lint": "./lib/cli.js"
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc -w"
+    "debug": "tsc --sourcemap -w"
   },
   "repository": {
     "type": "git",
