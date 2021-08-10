@@ -5,6 +5,7 @@
   "bin": {
     "ko-lint": "./lib/cli.js"
   },
+  "files": ["lib/*"],
   "scripts": {
     "build": "tsc",
     "debug": "tsc --sourcemap -w"
