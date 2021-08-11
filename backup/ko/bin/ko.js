@@ -5,14 +5,12 @@ const { program } = require('../util/program');
 const pkg = require('../package.json');
 
 program
-  .description('building tools based on webpack')
+  .description('build & lint library')
   .version(pkg.version, '-v, --version')
   .usage('<command> [options]')
-  .command('init', 'init scaffold')
   .command('create', 'create web component')
   .command('build', 'build project')
   .command('dev', 'start server')
-  .command('dll', 'build dll')
   .command('preview', 'browser app')
   .command('install', 'install component')
   .command('move', 'move to gh-pages')

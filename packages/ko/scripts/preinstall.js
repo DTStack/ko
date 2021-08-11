@@ -12,7 +12,11 @@ if (LOCK_NODE_VERSION) {
   const majorAndMinorNodeVersion = Number(
     /(\d+).(\d+)/.exec(process.versions.node)[0]
   );
-  const webpack5SupportLeastVersion = 10.13; // @link https://webpack.js.org/migrate/5/#preparations
+  /**
+   *  webpack minor support version
+   *  @link https://webpack.js.org/migrate/5/#preparations
+   */
+  const webpack5SupportLeastVersion = 10.13; 
 
   if (majorAndMinorNodeVersion < webpack5SupportLeastVersion) {
     console.error(
@@ -45,7 +49,4 @@ if (FORCE_YARN_INSTALL) {
   }
 }
 
-if (err) {
-  console.error('');
-  process.exit(1);
-}
+err && process.exit(1);
