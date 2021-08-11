@@ -16,7 +16,7 @@ function getWebpackBaseConf() {
   const getLoaders = require('./loaders');
   const getPlugins = require('./plugins');
   const loaders = getLoaders();
-  const plugins = getPlugins();
+  const plugins = getPlugins();``
   const { hash, ts } = opts;
   const entry = {
     index: getFileRealPath(`src/index.${ts ? 'tsx' : 'js'}`),

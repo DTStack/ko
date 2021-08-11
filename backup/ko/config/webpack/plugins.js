@@ -5,7 +5,6 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-// const VueLoaderPlugin = require('vue-loader/lib/plugin'); //TODO: support vue loader when it adapted webpack 5
 const { appHtml, appTsConfig, appPkg } = require('../defaultPaths');
 const userConf = require('../../util/userConfig');
 const { PROD, DEV } = require('../../constants/env');
