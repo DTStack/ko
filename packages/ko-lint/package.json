@@ -2,10 +2,12 @@
   "name": "ko-lint",
   "version": "1.0.0",
   "description": "lint tools used by ko",
+  "main": "./lib/index.js",
+  "typings": "./index.d.ts",
   "bin": {
     "ko-lint": "./lib/cli.js"
   },
-  "files": ["lib/*"],
+  "files": ["lib/*", "index.d.ts"],
   "scripts": {
     "build": "tsc",
     "debug": "tsc --sourcemap -w"
