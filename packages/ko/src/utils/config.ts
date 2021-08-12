@@ -10,16 +10,16 @@ class Config {
     this.cwd = process.cwd();
   }
 
-  private getFileRealPath(path: string): string {
-    const realPath = realpathSync(path) ? path : resolve(this.cwd, path);
-    return existsSync(realPath) ? realPath : '';
-  }
-
   public static getInstance(): Config {
     if (!Config.instance) {
       Config.instance = new Config();
     }
     return Config.instance;
+  }
+
+  public getFileRealPath(path: string): string {
+    const realPath = realpathSync(path) ? path : resolve(this.cwd, path);
+    return existsSync(realPath) ? realPath : '';
   }
 
   //TODO: define userConf

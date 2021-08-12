@@ -14,9 +14,10 @@ function getPlugins(opts: Options) {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
+    //TODO: check if mini-css-extract-plugin should use base name if enable HMR
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash:6].css',
-      chunkFilename: 'css/[id].[hash:6].css',
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[id].[contenthash].css',
     }),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
@@ -43,12 +44,13 @@ function getPlugins(opts: Options) {
   plugins = plugins.concat(userConf.plugins);
   if (config.isProductionEnv) {
     const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-    plugins.push(
+    const prodPlugins = [
       new CleanWebpackPlugin({
         verbose: false,
         dry: false,
       })
-    );
+    ];
+    plugins.concat(prodPlugins);
   }
   return plugins;
 }
