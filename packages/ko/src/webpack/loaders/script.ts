@@ -1,6 +1,5 @@
 import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier';
 import config from 'utils/config';
-import { Options } from 'interfaces';
 
 const THREAD_LOADER = require.resolve('thread-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
