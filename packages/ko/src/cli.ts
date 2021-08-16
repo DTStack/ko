@@ -3,7 +3,7 @@
 
 import { Command } from 'commander';
 import lint from 'ko-lint';
-import { Options } from 'interfaces';
+import { Options } from './interfaces';
 import build from './actions/build';
 import dev from './actions/dev';
 

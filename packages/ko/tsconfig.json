@@ -3,10 +3,8 @@
   "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "lib",
-    "baseUrl": ".",
-    "paths": {
-      "utils/*": ["src/utils/*"],
-      "interfaces": ["src/interfaces"]
-    }
+    "plugins":[
+      { "transform": "typescript-transform-paths" },
+    ],
   }
 }

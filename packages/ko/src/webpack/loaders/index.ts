@@ -1,4 +1,4 @@
-import { Options } from 'interfaces';
+import { Options } from '../../interfaces';
 import style from './style';
 import asset from './asset';
 import getScriptLoaders from './script'

@@ -1,6 +1,6 @@
 import { Configuration } from 'webpack';
-import config from 'utils/config';
-import { Options } from 'interfaces';
+import config from '../utils/config';
+import { Options } from '../interfaces';
 import getLoaders from './loaders';
 import getPlugins from './plugins';
 

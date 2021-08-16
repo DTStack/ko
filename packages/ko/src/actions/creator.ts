@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import { mergeWithCustomize, unique, merge } from 'webpack-merge';
 import getWebpackBaseConf from '../webpack';
-import config from 'utils/config';
+import config from '../utils/config';
 import { Configuration } from 'webpack';
-import { Options } from 'interfaces';
+import { Options } from '../interfaces';
 
 abstract class Creator {
   protected abstract action(opts: Options): void;

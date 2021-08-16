@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { Options } from 'interfaces';
+import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');

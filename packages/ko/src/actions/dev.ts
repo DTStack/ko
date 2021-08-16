@@ -2,8 +2,8 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
-import config from 'utils/config';
-import { Options } from 'interfaces';
+import config from '../utils/config';
+import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
