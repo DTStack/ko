@@ -3,6 +3,9 @@
 
 import { Command } from 'commander';
 import lint from 'ko-lint';
+import { Options } from 'interfaces';
+import build from './actions/build';
+import dev from './actions/dev';
 
 const program = new Command();
 const pkg = require('../package.json');
@@ -18,7 +21,10 @@ program
   .option('--hash', 'output file name with hash')
   .option('-t,--ts,--typescript', 'support typescript')
   .option('-e, --env [env]', 'user defined building environment')
-  .action(opts => { });
+  .action((opts: Options) => {
+    const buildInstance = new build(opts);
+    buildInstance.action();
+  });
 
 program
   .command('dev')
@@ -27,7 +33,10 @@ program
   .option('--host <host>', 'specify a host to use')
   .option('-t, --ts', 'support typescript')
   .option('-a,--analyzer', 'support building analyzer')
-  .action(opts => { });
+  .action((opts: Options) => {
+    const devInstance = new dev(opts);
+    devInstance.action();
+  });
 
 //attach lint features to program
 lint(program);
