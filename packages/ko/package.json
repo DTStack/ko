@@ -5,23 +5,16 @@
   "keywords": [
     "ko",
     "react",
-    "vue",
     "typescript",
     "babel",
     "sass",
     "scss",
-    "antd",
-    "swagger",
     "webpack",
     "webpack v5",
-    "template",
     "server",
-    "kangaroo",
     "dtstack",
     "cli",
-    "init",
     "build",
-    "preview",
     "script"
   ],
   "bugs": {
@@ -42,7 +35,10 @@
     "lib/*"
   ],
   "scripts": {
-    "preinstall": "node scripts/preinstall.js"
+    "prepublishOnly": "tsc",
+    "preinstall": "node scripts/preinstall.js",
+    "build": "tsc",
+    "debug": "tsc -w"
   },
   "dependencies": {
     "autoprefixer": "^10.2.6",

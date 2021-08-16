@@ -9,6 +9,7 @@
   },
   "files": ["lib/*", "index.d.ts"],
   "scripts": {
+    "prepublishOnly": "tsc",
     "build": "tsc",
     "debug": "tsc --sourcemap -w"
   },
