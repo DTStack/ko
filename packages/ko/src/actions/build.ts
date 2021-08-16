@@ -1,10 +1,10 @@
-import webpack, { Stats } from 'webpack';
+import webpack from 'webpack';
 import { Options } from 'interfaces';
 import { WebpackCreator } from './creator';
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-class BuildAction extends WebpackCreator {
+class Build extends WebpackCreator {
   constructor(opts: Options) {
     super(opts);
   }
@@ -46,7 +46,7 @@ class BuildAction extends WebpackCreator {
         })
       ]
     }
-    return this.mergeConfig(conf);
+    return this.mergeConfig([this.baseConfig, conf]);
   }
 
   public action() {
@@ -69,4 +69,4 @@ class BuildAction extends WebpackCreator {
   }
 }
 
-export default BuildAction;
+export default Build;

@@ -34,12 +34,16 @@ export abstract class WebpackCreator extends Creator {
     })(this.baseConfig, config.userConf);
   }
 
-  public mergeConfig(conf: Configuration): Configuration {
-    return merge(this.baseConfig, conf);
+  public mergeConfig(conf: Configuration[]): Configuration {
+    return merge(conf);
   }
 
-  public successStdout(log:string) {
+  public successStdout(log: string) {
     console.log(chalk.green(log))
+  }
+
+  public linkStdout(link: string) {
+    console.log(chalk.underline(link));
   }
 
   public errorStdout(log: string) {

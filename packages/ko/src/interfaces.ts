@@ -6,7 +6,3 @@ export type Options = {
   host?: string;
   analyzer?: boolean;
 }
-
-interface IConfig {
-  
-}
