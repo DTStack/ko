@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { mergeWithCustomize, unique, merge } from 'webpack-merge';
 import getWebpackBaseConf from '../webpack';
 import config from 'utils/config';
@@ -18,6 +19,14 @@ export abstract class WebpackCreator extends Creator {
   }
   protected abstract config(opts: Options): any;
 
+  private pluginsUnique(pluginNames: Array<string>) {
+    return unique(
+      'plugins',
+      pluginNames,
+      (plugin) => plugin.constructor && plugin.constructor.name
+    );
+  }
+
   public initConfig(opts: Options): Configuration {
     this.baseConfig = getWebpackBaseConf(opts);
     return mergeWithCustomize({
@@ -29,14 +38,13 @@ export abstract class WebpackCreator extends Creator {
     return merge(this.baseConfig, conf);
   }
 
-  private pluginsUnique(pluginNames: Array<string>) {
-    return unique(
-      'plugins',
-      pluginNames,
-      (plugin) => plugin.constructor && plugin.constructor.name
-    );
+  public successStdout(log:string) {
+    console.log(chalk.green(log))
   }
 
+  public errorStdout(log: string) {
+    console.log(chalk.red(log))
+  }
 }
 
 export default Creator;

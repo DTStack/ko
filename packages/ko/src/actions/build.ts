@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import webpack, { Stats } from 'webpack';
 import { Options } from 'interfaces';
 import { WebpackCreator } from './creator';
 
@@ -50,7 +50,22 @@ class BuildAction extends WebpackCreator {
   }
 
   public action() {
-
+    //TODO: redefine stats
+    webpack(this.config(), (error, stats: any) => {
+      if (error || stats.hasErrors()) {
+        throw (
+          error ||
+          stats.toString({
+            colors: true,
+            chunks: false,
+            children: false,
+            modules: false,
+            chunkModules: false,
+          })
+        );
+      }
+      this.successStdout('ko build completed!');
+    })
   }
 }
 
