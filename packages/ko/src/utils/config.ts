@@ -1,5 +1,4 @@
-import { resolve } from 'path';
-import { realpathSync, existsSync } from 'fs';
+import { resolve, isAbsolute } from 'path';
 
 class Config {
   cwd: string;
@@ -18,8 +17,7 @@ class Config {
   }
 
   public getFileRealPath(path: string): string {
-    const realPath = realpathSync(path) ? path : resolve(this.cwd, path);
-    return existsSync(realPath) ? realPath : '';
+    return isAbsolute(path) ? path : resolve(this.cwd, path);
   }
 
   //TODO: define userConf
