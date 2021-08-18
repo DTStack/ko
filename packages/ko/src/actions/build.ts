@@ -53,16 +53,10 @@ class Build extends WebpackCreator {
     //TODO: redefine stats
     webpack(this.config(), (error, stats: any) => {
       if (error || stats.hasErrors()) {
-        throw (
-          error ||
-          stats.toString({
-            colors: true,
-            chunks: false,
-            children: false,
-            modules: false,
-            chunkModules: false,
-          })
-        );
+        throw stats.toString({
+          logging: 'warn',
+          colors: true
+        });
       }
       this.successStdout('ko build completed!');
     })
