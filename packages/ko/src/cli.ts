@@ -34,7 +34,8 @@ program
   .option('-t, --ts', 'support typescript')
   .option('-a,--analyzer', 'support building analyzer')
   .action((opts: Options) => {
-    const devInstance = new dev(opts);
+    process.env.NODE_ENV = 'development';
+    const devInstance = new dev({ ...opts, env: 'dev' });
     devInstance.action();
   });
 
