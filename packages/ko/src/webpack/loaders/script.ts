@@ -40,7 +40,6 @@ function getScriptLoaders(supportTypescript: boolean) {
     const TS_LOADER = require.resolve('ts-loader');
     const typescriptLoader = {
       test: /\.tsx?$/,
-      include: config.defaultPaths.src,
       use: [
         THREAD_LOADER,
         {
@@ -48,6 +47,7 @@ function getScriptLoaders(supportTypescript: boolean) {
           options: {
             transpileOnly: true,
             happyPackMode: true,
+            allowTsInNodeModules: true
           },
         },
       ],
