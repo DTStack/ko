@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import { IgnorePlugin, ProgressPlugin } from 'webpack';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -10,10 +10,11 @@ function getPlugins(opts: Options) {
   const { ts, env } = opts;
   const { userConf, defaultPaths } = config;
   let plugins = [
-    new webpack.IgnorePlugin({
+    new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
+    new ProgressPlugin(),
     //TODO: check if mini-css-extract-plugin should use base name if enable HMR
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
@@ -41,7 +42,7 @@ function getPlugins(opts: Options) {
     ];
     plugins = plugins.concat(typescriptPlugins);
   }
-  plugins = plugins.concat(userConf.plugins);
+  plugins = plugins.concat(userConf.plugins || []);
   if (config.isProductionEnv) {
     const { CleanWebpackPlugin } = require('clean-webpack-plugin');
     const prodPlugins = [
