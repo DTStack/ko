@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-ko-app",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Babel preset used by ko",
   "keywords": [
     "ko",
