@@ -2,15 +2,6 @@
   "name": "ko-config",
   "version": "1.0.0",
   "description": "configs used by ko",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DTStack/ko",
-    "directory": "packages/ko-config"
-  },
-  "bugs": {
-    "url": "https://github.com/DTStack/ko/issues"
-  },
   "keywords": [
     "ko",
     "ko-script",
@@ -18,7 +9,16 @@
     "prettier",
     "lint"
   ],
+  "bugs": {
+    "url": "https://github.com/DTStack/ko/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DTStack/ko",
+    "directory": "packages/ko-config"
+  },
   "license": "MIT",
+  "main": "index.js",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",

@@ -2,25 +2,6 @@
   "name": "ko-lint",
   "version": "1.0.0",
   "description": "lint tools used by ko",
-  "main": "./lib/index.js",
-  "typings": "./index.d.ts",
-  "bin": {
-    "ko-lint": "./lib/cli.js"
-  },
-  "files": ["lib/*", "index.d.ts"],
-  "scripts": {
-    "prepublishOnly": "tsc",
-    "build": "tsc",
-    "debug": "tsc --sourcemap -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DTStack/ko",
-    "directory": "packages/ko-lint"
-  },
-  "bugs": {
-    "url": "https://github.com/DTStack/ko/issues"
-  },
   "keywords": [
     "ko",
     "ko-script",
@@ -29,10 +10,33 @@
     "lint",
     "lint tools"
   ],
+  "bugs": {
+    "url": "https://github.com/DTStack/ko/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DTStack/ko",
+    "directory": "packages/ko-lint"
+  },
   "license": "MIT",
+  "main": "./lib/index.js",
+  "typings": "./index.d.ts",
+  "bin": {
+    "ko-lint": "./lib/cli.js"
+  },
+  "files": [
+    "lib/*",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "prepublishOnly": "tsc",
+    "build": "tsc",
+    "debug": "tsc --sourcemap -w"
+  },
   "dependencies": {
     "@types/prettier": "^2.3.2",
     "commander": "^8.1.0",
-    "fast-glob": "^3.2.7"
+    "fast-glob": "^3.2.7",
+    "ko-config": "^1.0.0-alpha.0"
   }
 }
