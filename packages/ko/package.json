@@ -55,7 +55,7 @@
     "html-webpack-plugin": "^5.3.1",
     "html-webpack-tags-plugin": "^3.0.1",
     "inquirer": "^8.1.2",
-    "ko-lint": "^1.0.0-alpha.0",
+    "ko-lints": "^1.0.0-alpha.0",
     "less": "^3.13.1",
     "less-loader": "^9.0.0",
     "mini-css-extract-plugin": "^1.6.0",

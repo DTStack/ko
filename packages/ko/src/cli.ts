@@ -2,7 +2,7 @@
 'use strict';
 
 import { Command } from 'commander';
-import lint from 'ko-lint';
+import lint from 'ko-lints';
 import { Options } from './interfaces';
 import build from './actions/build';
 import dev from './actions/dev';

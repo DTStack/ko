@@ -1,5 +1,5 @@
 {
-  "name": "ko-lint",
+  "name": "ko-lints",
   "version": "1.0.0",
   "description": "lint tools used by ko",
   "keywords": [
@@ -41,5 +41,6 @@
   },
   "devDependencies": {
     "typescript": "^4.3.5"
-  }
+  },
+  "gitHead": "0a44902daac5c38bedbbf8c8ced68095ff17e7b7"
 }
