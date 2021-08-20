@@ -45,6 +45,9 @@ function getWebpackBaseConf(opts: Options): Configuration {
     performance: {
       hints: <const>false,
     },
+    cache: {
+      type: <const>'filesystem',
+    }
   };
   return webpackBaseConf;
 }
