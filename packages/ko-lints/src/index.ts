@@ -2,6 +2,7 @@ import { Command } from 'commander';
 import { defaultPatterns } from './constants';
 import { getTargetFiles } from './utils';
 import { formatFilesWithPrettier } from './prettier';
+import { formatFilesWithEslint } from './eslint';
 
 type Option = {
   write?: boolean;
@@ -25,9 +26,13 @@ function initKoLintCli(program: Command) {
     .command('eslint [patterns]')
     .alias('es')
     .description('use eslint to format your codes')
-    .option('-c, --config <path>', 'set eslint config path')
-    .action((patterns: string = defaultPatterns, ops: Option) => {
+    .option('-w, --write', 'Edit files in-place. (Beware!)')
+    .option('-c, --config <configPath>', 'set eslint config path')
+    .action((patterns: string = defaultPatterns, opts: Option) => {
       //TODO
+      const { configPath, write } = opts
+      const targetFiles = getTargetFiles(patterns)
+      formatFilesWithEslint(targetFiles, !write, configPath)
     });
 }
 
