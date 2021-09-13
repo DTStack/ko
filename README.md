@@ -108,5 +108,6 @@ set ignore patterns for `eslint` and `prettier` like `.gitignore`
 
 ## Links
 
+* [Contributing](CONTRIBUTING.md)
 * [Change Log](CHANGELOG.md)
 * [RoadMap](https://github.com/dtux-kangaroo/ko-script/wiki/Roadmap)
