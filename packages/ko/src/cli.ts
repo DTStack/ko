@@ -11,7 +11,7 @@ const program = new Command();
 const pkg = require('../package.json');
 
 program
-  .description('build & lint library')
+  .description('Project toolkit base on webpack,babel,eslint and prettier.')
   .version(pkg.version, '-v, --version')
   .usage('<command> [options]');
 
