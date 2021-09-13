@@ -1,9 +1,14 @@
-#### 发布周期
-- 修订版本号：修订特定的问题而发布的修订版本。
-- 次版本号：带有新特性的向下兼容的版本。
-- 主版本号：含有破坏性更新和新特性，不在发布周期内。
+# Changelog
 
----
+## We use [Semantic Versioning](https://semver.org/) to manage package version
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+* MAJOR version when you make incompatible API changes,
+* MINOR version when you add functionality in a backwards compatible manner, and
+* PATCH version when you make backwards compatible bug fixes.
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
 ## 5.2.1
 - fixed [Throw an error when running "ko init"](https://github.com/DTStack/ko/issues/27)
 - check node version when install because [webpack 5 requires at least Node.js 10.13.0 (LTS)](https://webpack.js.org/migrate/5/#preparations)
