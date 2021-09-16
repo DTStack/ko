@@ -21,7 +21,7 @@ export function findRealPath(configPath: string): string {
 export function getTargetFiles(
   patterns: Pattern,
   ignoreFile?: string
-): Array<string> {
+): string[] {
   if (!ignoreFile) {
     ignoreFile = join(process.cwd(), defaultIgnoreFile);
   }
@@ -30,7 +30,7 @@ export function getTargetFiles(
   });
 }
 
-function getIgnorePatterns(ignoreFile: string): Array<string> {
+function getIgnorePatterns(ignoreFile: string): string[] {
   const gitIgnorePath = join(process.cwd(), '.gitignore');
   const gitIgnorePatterns = getFilePatterns(gitIgnorePath);
   const ignorePatterns = getFilePatterns(ignoreFile);
@@ -42,8 +42,8 @@ function getIgnorePatterns(ignoreFile: string): Array<string> {
   }, gitIgnorePatterns);
 }
 
-function getFilePatterns(filePath: string): Array<string> {
-  let patterns: Array<string> = [];
+function getFilePatterns(filePath: string): string[] {
+  let patterns: string[] = [];
   if (existsSync(filePath)) {
     patterns = readFileSync(filePath, 'utf-8').split('\n');
   }
