@@ -1,34 +1,37 @@
 import { findRealPath } from "./utils";
-import { ESLint } from 'eslint'
-import { promises } from "fs";
-const ESLINT_FILETYPE = ['ts', 'js', 'jsx', 'tsx', 'json', 'JSON'];
+import { ESLint } from 'eslint';
+import { Extensions } from './constants';
+import { EslintOptions } from './interfaces';
 
 export async function formatFilesWithEslint(
-  files: string[],
-  isCheck: boolean,
-  configPath?: string) {
-  const eslintConfig = configPath
-    ? require(findRealPath(configPath))
-    : require("ko-config/eslint")
-  console.log('eslint process starting....')
-  const eslint = new ESLint({ fix: !isCheck, overrideConfig: eslintConfig })
-  const eslintFilesPromises = files.map(async (file) => {
+  opts: EslintOptions & { targetFiles: string[] }) {
+  const { targetFiles, configPath, typescript, react, fix } = opts;
+  let config = {};
+  if (configPath) {
+    config = require(findRealPath(configPath));
+  } else {
+    // TODO: refactor: add react & typescript eslint configs in ko-config
+    if (react && !typescript) {
+      config = require('ko-config/eslint/eslint-config-react');
+    } else if (!react && typescript) {
+      config = require('ko-config/eslint/eslint-config-typescript');
+    } else if (react && typescript) {
+      config = require('ko-config/eslint/eslint-config-typescript-react');
+    }
+  }
+  const extensions = getExtensions(typescript, react);
+  const eslint = new ESLint({ fix, overrideConfig: config, useEslintrc: false, extensions });
+  const eslintFilesPromises = targetFiles.map(async (file) => {
     try {
-      let result;
-      let resultText;
-      const type = file.split('.').pop() || ''
-      if (ESLINT_FILETYPE.includes(type)) {
-        result = await eslint.lintFiles(file)
-        await ESLint.outputFixes(result);
-        const formatter = await eslint.loadFormatter("stylish");
-        resultText = formatter.format(result);
-        resultText && console.log(resultText);
-        const { errorCount, output } = result[0]
-        if (isCheck) {
-          return !errorCount
-        }
-        return output
+      const result = await eslint.lintFiles(file);
+      if (result[0].errorCount) {
+        const formatter = await eslint.loadFormatter();
+        //TODO: checkout formatter can init before mapping files
+        const resultText = formatter.format(result);
+        console.log(resultText);
+        return false;
       }
+      return true;
     } catch (ex) {
       throw ex
     }
@@ -36,17 +39,25 @@ export async function formatFilesWithEslint(
   try {
     let stdout = '';
     const result = await Promise.all(eslintFilesPromises)
-    if (isCheck) {
+    if (!fix) {
       if (result.includes(false)) {
-        stdout = 'Not all matched files are elinted';
+        stdout = 'Not all matched files are linted';
       } else {
-        stdout = 'All matched files are elinted';
+        stdout = 'All matched files are linted';
       }
     } else {
-      stdout = 'All matched files are rewrited successfully!';
+      stdout = 'All matched files has been fixed successfully!';
     }
     console.log(stdout);
   } catch (ex) {
     console.log('eslint failed: ', ex)
   }
+}
+
+function getExtensions(supportTypescript: EslintOptions['typescript'], supportReact: EslintOptions['react']): Extensions[] {
+  const extensions = [Extensions.JS];
+  supportReact && extensions.push(Extensions.JSX);
+  supportTypescript && extensions.push(Extensions.TS);
+  supportReact && supportTypescript && extensions.push(Extensions.TSX);
+  return extensions;
 }
