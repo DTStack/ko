@@ -12,10 +12,11 @@ function initKoLintCli(program: Command) {
     .alias('pr')
     .description('use prettier to format your codes')
     .option('-w, --write', 'Edit files in-place. (Beware!)')
-    .option('-c, --config <configPath>', 'set prettier config path')
+    .option('-c, --config <configPath>', 'specify prettier config path')
+    .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
     .action((patterns: Pattern = defaultPatterns, opts: PrettierOptions) => {
-      const { write, configPath } = opts;
-      const targetFiles = getTargetFiles(patterns);
+      const { write, configPath, ignorePath } = opts;
+      const targetFiles = getTargetFiles(patterns, ignorePath);
       formatFilesWithPrettier(targetFiles, !write, configPath);
     });
 
@@ -25,8 +26,6 @@ function initKoLintCli(program: Command) {
     .description('use eslint to format your codes')
     .option('-f, --fix', 'Automatically fix problems')
     .option('-c, --config <configPath>', 'set eslint config path')
-    .option('--react', 'support react lint')
-    .option('-t, --typescript', 'support typescript lint')
     .action((patterns: Pattern = defaultPatterns, opts: EslintOptions) => {
       const targetFiles = getTargetFiles(patterns)
       formatFilesWithEslint({ targetFiles, ...opts })

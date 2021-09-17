@@ -1,5 +1,6 @@
 type Options = {
   configPath?: string;
+  ignorePath?: string;
 };
 
 export type PrettierOptions = Options & {
@@ -8,6 +9,4 @@ export type PrettierOptions = Options & {
 
 export type EslintOptions = Options & {
   fix?: boolean,
-  typescript?: boolean,
-  react?: boolean
 }

@@ -45,7 +45,7 @@ function getIgnorePatterns(ignoreFile: string): string[] {
 function getFilePatterns(filePath: string): string[] {
   let patterns: string[] = [];
   if (existsSync(filePath)) {
-    patterns = readFileSync(filePath, 'utf-8').split('\n');
+    patterns = readFileSync(filePath, 'utf-8').split('\n').filter(Boolean);
   }
   return patterns;
 }

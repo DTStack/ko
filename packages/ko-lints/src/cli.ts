@@ -4,6 +4,8 @@
 import { Command } from 'commander';
 import initKoLintCli from './index';
 
+console.log(require('ko-config/eslint'));
+
 const pkg = require('../package.json');
 const program = new Command();
 

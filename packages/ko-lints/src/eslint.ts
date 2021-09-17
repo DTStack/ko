@@ -5,21 +5,9 @@ import { EslintOptions } from './interfaces';
 
 export async function formatFilesWithEslint(
   opts: EslintOptions & { targetFiles: string[] }) {
-  const { targetFiles, configPath, typescript, react, fix } = opts;
-  let config = {};
-  if (configPath) {
-    config = require(findRealPath(configPath));
-  } else {
-    // TODO: refactor: add react & typescript eslint configs in ko-config
-    if (react && !typescript) {
-      config = require('ko-config/eslint/eslint-config-react');
-    } else if (!react && typescript) {
-      config = require('ko-config/eslint/eslint-config-typescript');
-    } else if (react && typescript) {
-      config = require('ko-config/eslint/eslint-config-typescript-react');
-    }
-  }
-  const extensions = getExtensions(typescript, react);
+  const { targetFiles, configPath, fix } = opts;
+  const config = configPath ? require(findRealPath(configPath)) : require('ko-config/eslint');
+  const extensions = [Extensions.JS, Extensions.JSX, Extensions.TS, Extensions.TSX];
   const eslint = new ESLint({ fix, overrideConfig: config, useEslintrc: false, extensions });
   const eslintFilesPromises = targetFiles.map(async (file) => {
     try {
@@ -52,12 +40,4 @@ export async function formatFilesWithEslint(
   } catch (ex) {
     console.log('eslint failed: ', ex)
   }
-}
-
-function getExtensions(supportTypescript: EslintOptions['typescript'], supportReact: EslintOptions['react']): Extensions[] {
-  const extensions = [Extensions.JS];
-  supportReact && extensions.push(Extensions.JSX);
-  supportTypescript && extensions.push(Extensions.TS);
-  supportReact && supportTypescript && extensions.push(Extensions.TSX);
-  return extensions;
 }
