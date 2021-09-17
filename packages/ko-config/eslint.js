@@ -1,7 +1,33 @@
+const { join } = require('path');
+const { realpathSync } = require('fs');
+
+const eslintConfigAirbnbTypescript = require.resolve(
+  'eslint-config-airbnb-typescript'
+);
+const eslintConfigPrettier = require.resolve('eslint-config-prettier');
+const eslintConfigImportRecommended = require.resolve(
+  'eslint-plugin-import/config/recommended'
+);
+const tsConfigRealPath = join(process.cwd(), 'tsconfig.json');
+
+//TODO: tsconfig should be optional
+if (!realpathSync(tsConfigRealPath)) {
+  throw new Error('tsconfig file not find');
+}
+
+//TODO: redefine default ko eslint config
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['airbnb-typescript', 'prettier'],
+  extends: [
+    eslintConfigAirbnbTypescript,
+    eslintConfigImportRecommended,
+    'plugin:react/recommended',
+    eslintConfigPrettier,
+  ],
+  parserOptions: {
+    project: tsConfigRealPath,
+  },
   rules: {
     semi: 0,
     strict: 0,

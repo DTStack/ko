@@ -25,9 +25,10 @@ function initKoLintCli(program: Command) {
     .alias('es')
     .description('use eslint to format your codes')
     .option('-f, --fix', 'Automatically fix problems')
-    .option('-c, --config <configPath>', 'set eslint config path')
+    .option('-c, --config <configPath>', 'specify eslint config path')
+    .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
     .action((patterns: Pattern = defaultPatterns, opts: EslintOptions) => {
-      const targetFiles = getTargetFiles(patterns)
+      const targetFiles = getTargetFiles(patterns, opts.ignorePath);
       formatFilesWithEslint({ targetFiles, ...opts })
     });
 }

@@ -9,12 +9,11 @@ export async function formatFilesWithEslint(
   const config = configPath ? require(findRealPath(configPath)) : require('ko-config/eslint');
   const extensions = [Extensions.JS, Extensions.JSX, Extensions.TS, Extensions.TSX];
   const eslint = new ESLint({ fix, overrideConfig: config, useEslintrc: false, extensions });
+  const formatter = await eslint.loadFormatter();
   const eslintFilesPromises = targetFiles.map(async (file) => {
     try {
       const result = await eslint.lintFiles(file);
       if (result[0].errorCount) {
-        const formatter = await eslint.loadFormatter();
-        //TODO: checkout formatter can init before mapping files
         const resultText = formatter.format(result);
         console.log(resultText);
         return false;
