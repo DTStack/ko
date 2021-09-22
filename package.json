@@ -7,7 +7,8 @@
     "prepare": "husky install",
     "prettier": "prettier --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "lint": "yarn prettier && yarn eslint"
+    "stylelint": "stylelint .less,.scss,.css,.sass --fix",
+    "lint": "yarn prettier && yarn eslint && yarn stylelint"
   },
   "config": {
     "commitizen": {
