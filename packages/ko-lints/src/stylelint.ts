@@ -10,14 +10,7 @@ export async function formatFilesWithStylelint(opts: StylelintOptions & { target
     console.log('stylelint process starting...');
     try {
         let options: StylelintOptions = {};
-        if (config.hasOwnProperty('files')) {
-            options.files = targetFiles?.length ? targetFiles : (config.files || []);
-            delete config.files;
-        }
-        if (config.hasOwnProperty('code')) {
-            options.code = config.code || '';
-            delete config.code;
-        }
+        options.files = targetFiles?.length ? targetFiles : (config.files || []);
         const result = await stylelint.lint({
             fix,
             config,
