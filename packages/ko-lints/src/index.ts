@@ -1,10 +1,11 @@
 import { Command } from 'commander';
-import { Pattern } from 'fast-glob'
-import { defaultPatterns } from './constants';
-import { getTargetFiles } from './utils';
+import { Pattern } from 'fast-glob';
+import { defaultPatterns, defaultMdPatterns } from './constants';
+import { getTargetFiles, getAllTargetFiles } from './utils';
 import { formatFilesWithPrettier } from './prettier';
 import { formatFilesWithEslint } from './eslint';
-import { PrettierOptions, EslintOptions } from './interfaces';
+import { formatFilesWithMdlint } from './mdlint';
+import { PrettierOptions, EslintOptions, MdlintOptions } from './interfaces';
 
 function initKoLintCli(program: Command) {
   program
@@ -29,7 +30,20 @@ function initKoLintCli(program: Command) {
     .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
     .action((patterns: Pattern = defaultPatterns, opts: EslintOptions) => {
       const targetFiles = getTargetFiles(patterns, opts.ignorePath);
-      formatFilesWithEslint({ targetFiles, ...opts })
+      console.log(targetFiles);
+      formatFilesWithEslint({ targetFiles, ...opts });
+    });
+
+  program
+    .command('mdlint [patterns]')
+    .alias('md')
+    .description('use mdlint to format your codes')
+    .option('-f, --fix', 'Automatically fix problems')
+    .option('-c, --config <configPath>', 'specify mdlint config path')
+    .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
+    .action((patterns: Pattern = defaultMdPatterns, opts: MdlintOptions) => {
+      const targetFiles = getAllTargetFiles(patterns, opts.ignorePath);
+      formatFilesWithMdlint({ targetFiles, ...opts });
     });
 }
 

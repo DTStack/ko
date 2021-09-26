@@ -30,6 +30,19 @@ export function getTargetFiles(
   });
 }
 
+export function getAllTargetFiles(
+  patterns: Pattern,
+  ignoreFile?: string
+): string[] {
+  if (!ignoreFile) {
+    ignoreFile = join(process.cwd(), defaultIgnoreFile);
+  }
+  return sync(patterns, {
+    baseNameMatch: true,
+    ignore: getIgnorePatterns(ignoreFile),
+  });
+}
+
 function getIgnorePatterns(ignoreFile: string): string[] {
   const gitIgnorePath = join(process.cwd(), '.gitignore');
   const gitIgnorePatterns = getFilePatterns(gitIgnorePath);
