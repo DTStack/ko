@@ -41,7 +41,7 @@ class Dev extends WebpackCreator {
       devtool: 'cheap-module-source-map',
       plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        this.opts && new BundleAnalyzerPlugin()
+        this.opts.analyzer && new BundleAnalyzerPlugin()
       ].filter(Boolean),
     }
     return this.mergeConfig([this.baseConfig, conf]);

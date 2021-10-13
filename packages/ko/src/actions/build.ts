@@ -52,11 +52,14 @@ class Build extends WebpackCreator {
   public action() {
     //TODO: redefine stats
     webpack(this.config(), (error, stats: any) => {
-      if (error || stats.hasErrors()) {
+      if (stats && stats.hasErrors()) {
         throw stats.toString({
           logging: 'warn',
           colors: true
         });
+      }
+      if (error) {
+        throw error;
       }
       this.successStdout('ko build completed!');
     })
