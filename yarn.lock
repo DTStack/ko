@@ -6242,15 +6242,6 @@ html-webpack-plugin@^5.3.1:
     pretty-error "^3.0.4"
     tapable "^2.0.0"
 
-html-webpack-tags-plugin@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/html-webpack-tags-plugin/-/html-webpack-tags-plugin-3.0.1.tgz#52baf2feec879a4108e6955b4e81376581a334dc"
-  integrity sha512-P/cfYDqXtgXoGFUv8zi/er8XFU5ztQmqp+VwmnhZEH8L35Q2YRKIb9P+dRiykLIDZF0NMt+l/uj+jmttKwmLvg==
-  dependencies:
-    glob "^7.1.6"
-    minimatch "^3.0.4"
-    slash "^3.0.0"
-
 htmlparser2@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-6.1.0.tgz#c4d762b6c3371a05dbe65e94ae43a9f845fb8fb7"
