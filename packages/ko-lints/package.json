@@ -37,7 +37,7 @@
     "@types/prettier": "^2.3.2",
     "commander": "^8.1.0",
     "fast-glob": "^3.2.7",
-    "ko-config": "^1.0.0-alpha.1"
+    "ko-config": "^1.0.0-alpha.2"
   },
   "devDependencies": {
     "typescript": "^4.3.5"
