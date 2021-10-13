@@ -7,7 +7,7 @@ import config from '../utils/config';
 import { Options } from '../interfaces';
 
 function getPlugins(opts: Options) {
-  const { ts, env } = opts;
+  const { ts } = opts;
   const { userConf, defaultPaths } = config;
   let plugins = [
     new IgnorePlugin({
@@ -24,9 +24,10 @@ function getPlugins(opts: Options) {
     new HtmlWebpackPlugin({
       template: defaultPaths.html,
       title: 'Ko App',
+      scriptLoading: 'blocking'
     }),
     new HtmlWebpackTagsPlugin({
-      tags: [`config/conf.${env}.js`],
+      tags: [`config/config.js`],
       append: false,
     }),
   ];

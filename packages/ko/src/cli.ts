@@ -20,7 +20,6 @@ program
   .description('build project')
   .option('--hash', 'output file name with hash')
   .option('-t,--ts,--typescript', 'support typescript')
-  .option('-e, --env [env]', 'user defined building environment')
   .action((opts: Options) => {
     const buildInstance = new build(opts);
     buildInstance.action();
@@ -35,7 +34,7 @@ program
   .option('-a,--analyzer', 'support building analyzer')
   .action((opts: Options) => {
     process.env.NODE_ENV = 'development';
-    const devInstance = new dev({ ...opts, env: 'dev' });
+    const devInstance = new dev(opts);
     devInstance.action();
   });
 
