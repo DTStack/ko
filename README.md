@@ -33,7 +33,7 @@ use webpack to bundle files. The supported options are:
 
 * `--hash`: output filename with hash
 * `-t,--ts,--typescript`: support typescript
-* `-e, --env [env]`: user defined building environment
+* `-e,--esbuild`: enable esbuild(now only esbuild minification is supported)
 
 ### ko dev
 
