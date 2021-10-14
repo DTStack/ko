@@ -20,6 +20,7 @@ program
   .description('build project')
   .option('--hash', 'output file name with hash')
   .option('-t,--ts,--typescript', 'support typescript')
+  .option('-e,--esbuild', 'enable esbuild')
   .action((opts: Options) => {
     const buildInstance = new build(opts);
     buildInstance.action();

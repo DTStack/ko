@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
@@ -10,11 +11,16 @@ class Build extends WebpackCreator {
   }
 
   public config() {
+    const { esbuild } = this.opts;
     const conf = {
       optimization: {
         minimizer: [
-          new CssMinimizerPlugin()
-        ]
+          !esbuild && new CssMinimizerPlugin(),
+          esbuild && new ESBuildMinifyPlugin({
+            target: 'es2015',
+            css: true
+          })
+        ].filter(Boolean)
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({

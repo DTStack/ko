@@ -4,4 +4,5 @@ export type Options = {
   port?: string;
   host?: string;
   analyzer?: boolean;
+  esbuild?: boolean;
 }
