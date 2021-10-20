@@ -1,10 +1,10 @@
-import { realpathSync, existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync } from 'fs';
+import { join, isAbsolute } from 'path';
 import { sync, Pattern } from 'fast-glob';
 import { defaultIgnoreFile } from './constants';
 
 export function findRealPath(configPath: string): string {
-  if (!realpathSync(configPath)) {
+  if (!isAbsolute(configPath)) {
     configPath = join(process.cwd(), configPath);
   }
   if (existsSync(configPath)) {
