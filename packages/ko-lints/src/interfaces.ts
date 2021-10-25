@@ -10,3 +10,9 @@ export type PrettierOptions = Options & {
 export type EslintOptions = Options & {
   fix?: boolean,
 }
+
+export type StylelintOptions = Options & {
+  fix?: boolean,
+  files?: string[],
+  code?: string
+}

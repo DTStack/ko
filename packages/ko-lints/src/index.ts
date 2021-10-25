@@ -4,7 +4,8 @@ import { defaultPatterns } from './constants';
 import { getTargetFiles } from './utils';
 import { formatFilesWithPrettier } from './prettier';
 import { formatFilesWithEslint } from './eslint';
-import { PrettierOptions, EslintOptions } from './interfaces';
+import { formatFilesWithStylelint } from './stylelint';
+import { PrettierOptions, EslintOptions, StylelintOptions } from './interfaces';
 
 function initKoLintCli(program: Command) {
   program
@@ -30,6 +31,16 @@ function initKoLintCli(program: Command) {
     .action((patterns: Pattern = defaultPatterns, opts: EslintOptions) => {
       const targetFiles = getTargetFiles(patterns, opts.ignorePath);
       formatFilesWithEslint({ targetFiles, ...opts })
+    });
+  program
+    .command('stylelint [patterns]')
+    .description('use stylelint to format your codes')
+    .option('-f, --fix', 'Automatically fix problems')
+    .option('-c, --config <configPath>', 'specify eslint config path')
+    .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
+    .action((patterns: Pattern = defaultPatterns, opts: StylelintOptions) => {
+      const targetFiles = getTargetFiles(patterns, opts.ignorePath);
+      formatFilesWithStylelint({ targetFiles, ...opts })
     });
 }
 
