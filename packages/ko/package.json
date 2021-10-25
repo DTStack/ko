@@ -1,6 +1,6 @@
 {
   "name": "ko",
-  "version": "5.2.2-alpha.3",
+  "version": "5.2.2",
   "description": "build & lint library",
   "keywords": [
     "ko",
@@ -56,7 +56,7 @@
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "html-webpack-plugin": "^5.3.1",
     "inquirer": "^8.1.2",
-    "ko-lints": "^1.0.0-alpha.2",
+    "ko-lints": "^1.0.0",
     "less": "^3.13.1",
     "less-loader": "^9.0.0",
     "mini-css-extract-plugin": "^1.6.0",
