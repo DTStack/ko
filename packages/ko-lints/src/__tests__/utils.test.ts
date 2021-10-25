@@ -1,4 +1,4 @@
-import { findRealPath } from '../utils';
+import { findRealPath, getTargetFiles } from '../utils';
 import { join } from 'path';
 
 describe('utils test--findRealPath', () => {
@@ -15,5 +15,20 @@ describe('utils test--findRealPath', () => {
     expect(() => { findRealPath(errorAbsolutePath) }).toThrow();
     const errorRelativePath = process.cwd() + "packages/ko-config/eslint1.js";
     expect(() => { findRealPath(errorRelativePath) }).toThrow();
+  })
+})
+
+describe('utils test--getTargetFiles', () => {
+  it('get target md files', () => {
+    const expectResult = ["CHANGELOG.md", "CONTRIBUTING.md", "README.md"]
+    expect(getTargetFiles('*.md')).toEqual(expectResult)
+  })
+  it('get target json files', () => {
+    const expectResult = ["lerna.json", "package.json", "tsconfig.base.json"]
+    expect(getTargetFiles('*.json')).toEqual(expectResult)
+  })
+  it('get tsx json files', () => {
+    const expectResult: any[] = []
+    expect(getTargetFiles('*.tsx')).toEqual(expectResult)
   })
 })
