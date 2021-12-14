@@ -4,6 +4,8 @@ Project toolkit base on webpack,babel,eslint and prettier.
 
 <a href="https://www.npmjs.com/package/lerna"><img alt="NPM Status" src="https://img.shields.io/npm/v/ko.svg?style=flat"></a>
 
+EngLish | [中文文档](./README-zh.md)
+
 ## Getting Started
 
 global install:
@@ -49,13 +51,24 @@ use `webpack-dev-server` to start `devServer`. The supported options are:
 use `prettier` to format your codes. The supported options are:
 
 * `-w, --write`: Edit files in-place. (Beware!)
-* `-c, --config <configPath>`: set prettier config path
+* `-c, --config <configPath>`: Specify prettier config path
+* `--ignore-path <ignorePath>`: specify prettier ignore path
 
-### ko eslint [[patterns]](https://github.com/mrmlnc/fast-glob)
+### ko eslint (ko el) [[patterns]](https://github.com/mrmlnc/fast-glob)
 
 use `eslint` to format your codes.The supported options are:
 
-* `-c, --config <path>`: set eslint config path
+* `-f, --fix`: Automatically fix problems
+* `-c, --config <path>`: Specify eslint config path
+* `--ignore-path <ignorePath>`: Specify eslint ignore path
+
+### ko stylelint (ko sl) [[patterns]](https://github.com/mrmlnc/fast-glob)
+
+use `stylelint` to format your codes.The supported options are:
+
+* `-f, --fix`: Automatically fix problems
+* `-c, --config <path>`: Specify stylelint config path
+* `--ignore-path <ignorePath>`: Specify stylelint ignore path
 
 ## Configuration
 
