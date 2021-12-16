@@ -36,8 +36,11 @@
   "dependencies": {
     "@types/prettier": "^2.3.2",
     "commander": "^8.1.0",
+    "eslint": "^8.4.1",
     "fast-glob": "^3.2.7",
-    "ko-config": "^1.0.0"
+    "ko-config": "^1.0.0",
+    "prettier": "^2.5.1",
+    "stylelint": "^14.1.0"
   },
   "devDependencies": {
     "typescript": "^4.3.5"

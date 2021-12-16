@@ -37,8 +37,8 @@ class Config {
       dist: this.getFileRealPath('dist'),
       public: this.getFileRealPath('public'),
       html: this.getFileRealPath('public/index.html'),
-      tsconfig: this.getFileRealPath('tsconfig.json')
-    }
+      tsconfig: this.getFileRealPath('tsconfig.json'),
+    };
   }
 
   public get isProductionEnv(): boolean {

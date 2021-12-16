@@ -1,19 +1,25 @@
-# name: CI
-
-# on:
-#   push:
-#     branches: [master, release, dev]
-#   pull_request:
-#     branches: [master, release, dev]
+name: CI
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: yarn
+    - name: prettier
+      run: yarn prettier
+    - name: eslint
+      run: yarn eslint
+# on: push
 # jobs:
 #   # install dependencies
 #   setup:
 #     name: setup
 #     runs-on: ubuntu-latest
-
 #     steps:
 #         - uses: actions/checkout@v2
-#         - name: Use Node.js
+#         - name: eslint
 #           uses: actions/setup-node@v1
 #           with:
 #             node-version: '12.x'

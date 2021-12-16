@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { Pattern } from 'fast-glob'
+import { Pattern } from 'fast-glob';
 import { defaultPatterns } from './constants';
 import { getTargetFiles } from './utils';
 import { formatFilesWithPrettier } from './prettier';
@@ -30,7 +30,7 @@ function initKoLintCli(program: Command) {
     .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
     .action((patterns: Pattern = defaultPatterns, opts: EslintOptions) => {
       const targetFiles = getTargetFiles(patterns, opts.ignorePath);
-      formatFilesWithEslint({ targetFiles, ...opts })
+      formatFilesWithEslint({ targetFiles, ...opts });
     });
   program
     .command('stylelint [patterns]')
@@ -40,7 +40,7 @@ function initKoLintCli(program: Command) {
     .option('--ignore-path <ignorePath>', 'specify prettier ignore path')
     .action((patterns: Pattern = defaultPatterns, opts: StylelintOptions) => {
       const targetFiles = getTargetFiles(patterns, opts.ignorePath);
-      formatFilesWithStylelint({ targetFiles, ...opts })
+      formatFilesWithStylelint({ targetFiles, ...opts });
     });
 }
 

@@ -39,7 +39,7 @@ export abstract class WebpackCreator extends Creator {
   }
 
   public successStdout(log: string) {
-    console.log(chalk.green(log))
+    console.log(chalk.green(log));
   }
 
   public linkStdout(link: string) {
@@ -47,7 +47,7 @@ export abstract class WebpackCreator extends Creator {
   }
 
   public errorStdout(log: string) {
-    console.log(chalk.red(log))
+    console.log(chalk.red(log));
   }
 }
 
