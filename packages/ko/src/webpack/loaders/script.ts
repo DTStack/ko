@@ -5,7 +5,7 @@ const THREAD_LOADER = require.resolve('thread-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
 
 function getScriptLoaders(supportTypescript: boolean) {
-  let scriptLoader: any = [
+  const scriptLoader: any = [
     {
       test: /\.jsx?$/,
       include: config.defaultPaths.src,
@@ -47,12 +47,12 @@ function getScriptLoaders(supportTypescript: boolean) {
           options: {
             transpileOnly: true,
             happyPackMode: true,
-            allowTsInNodeModules: true
+            allowTsInNodeModules: true,
           },
         },
       ],
     };
-    scriptLoader.push(typescriptLoader)
+    scriptLoader.push(typescriptLoader);
   }
   return scriptLoader;
 }

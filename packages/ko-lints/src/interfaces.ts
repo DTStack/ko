@@ -5,14 +5,14 @@ type Options = {
 
 export type PrettierOptions = Options & {
   write?: boolean;
-}
+};
 
 export type EslintOptions = Options & {
-  fix?: boolean,
-}
+  fix?: boolean;
+};
 
 export type StylelintOptions = Options & {
-  fix?: boolean,
-  files?: string[],
-  code?: string
-}
+  fix?: boolean;
+  files?: string[];
+  code?: string;
+};

@@ -16,11 +16,12 @@ class Build extends WebpackCreator {
       optimization: {
         minimizer: [
           !esbuild && new CssMinimizerPlugin(),
-          esbuild && new ESBuildMinifyPlugin({
-            target: 'es2015',
-            css: true
-          })
-        ].filter(Boolean)
+          esbuild &&
+            new ESBuildMinifyPlugin({
+              target: 'es2015',
+              css: true,
+            }),
+        ].filter(Boolean),
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({
@@ -49,9 +50,9 @@ class Build extends WebpackCreator {
               reuseExistingChunk: true,
             },
           },
-        })
-      ]
-    }
+        }),
+      ],
+    };
     return this.mergeConfig([this.baseConfig, conf]);
   }
 
@@ -61,14 +62,14 @@ class Build extends WebpackCreator {
       if (stats && stats.hasErrors()) {
         throw stats.toString({
           logging: 'warn',
-          colors: true
+          colors: true,
         });
       }
       if (error) {
         throw error;
       }
       this.successStdout('ko build completed!');
-    })
+    });
   }
 }
 

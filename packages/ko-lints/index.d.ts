@@ -1,3 +1,3 @@
 import { Command } from 'commander';
 
-export default function initKoLintCli(p: Command): void
+export default function initKoLintCli(p: Command): void;

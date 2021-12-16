@@ -13,6 +13,6 @@ const assetModules = [
       filename: 'images/[hash][ext][query]',
     },
   },
-]
+];
 
 export default assetModules;

@@ -6,5 +6,5 @@ export enum Extensions {
   JS = 'js',
   TS = 'ts',
   JSX = 'jsx',
-  TSX = 'tsx'
+  TSX = 'tsx',
 }
