@@ -16,7 +16,7 @@ if (LOCK_NODE_VERSION) {
    *  webpack minor support version
    *  @link https://webpack.js.org/migrate/5/#preparations
    */
-  const webpack5SupportLeastVersion = 10.13; 
+  const webpack5SupportLeastVersion = 10.13;
 
   if (majorAndMinorNodeVersion < webpack5SupportLeastVersion) {
     console.error(

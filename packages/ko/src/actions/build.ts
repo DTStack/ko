@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
@@ -10,11 +11,17 @@ class Build extends WebpackCreator {
   }
 
   public config() {
+    const { esbuild } = this.opts;
     const conf = {
       optimization: {
         minimizer: [
-          new CssMinimizerPlugin()
-        ]
+          !esbuild && new CssMinimizerPlugin(),
+          esbuild &&
+            new ESBuildMinifyPlugin({
+              target: 'es2015',
+              css: true,
+            }),
+        ].filter(Boolean),
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({
@@ -43,23 +50,26 @@ class Build extends WebpackCreator {
               reuseExistingChunk: true,
             },
           },
-        })
-      ]
-    }
+        }),
+      ],
+    };
     return this.mergeConfig([this.baseConfig, conf]);
   }
 
   public action() {
     //TODO: redefine stats
     webpack(this.config(), (error, stats: any) => {
-      if (error || stats.hasErrors()) {
+      if (stats && stats.hasErrors()) {
         throw stats.toString({
           logging: 'warn',
-          colors: true
+          colors: true,
         });
       }
+      if (error) {
+        throw error;
+      }
       this.successStdout('ko build completed!');
-    })
+    });
   }
 }
 

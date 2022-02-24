@@ -27,3 +27,9 @@ export type MdError = {
   level: string;
   type: string;
 }
+
+export type StylelintOptions = Options & {
+  fix?: boolean;
+  files?: string[];
+  code?: string;
+};

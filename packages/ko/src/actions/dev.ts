@@ -31,7 +31,7 @@ class Dev extends WebpackCreator {
         ignored: /node_modules/,
         aggregateTimeout: 600,
       },
-      open: true
+      open: true,
     };
     return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
@@ -41,9 +41,9 @@ class Dev extends WebpackCreator {
       devtool: 'cheap-module-source-map',
       plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        this.opts && new BundleAnalyzerPlugin()
+        this.opts.analyzer && new BundleAnalyzerPlugin(),
       ].filter(Boolean),
-    }
+    };
     return this.mergeConfig([this.baseConfig, conf]);
   }
 
@@ -82,9 +82,7 @@ class Dev extends WebpackCreator {
     const { port, host } = this.devSerConf();
     const newPort = await this.checkPort(parseInt(port));
     if (!newPort) return;
-    WebpackDevServer.addDevServerEntrypoints(
-      this.config(), this.devSerConf()
-    )
+    WebpackDevServer.addDevServerEntrypoints(this.config(), this.devSerConf());
     const compiler = webpack(this.config());
     const devServer = new WebpackDevServer(compiler, this.devSerConf());
     let isFirstCompile = true;
@@ -93,12 +91,18 @@ class Dev extends WebpackCreator {
       if (isFirstCompile) {
         isFirstCompile = false;
         this.successStdout('development server has been started');
-        console.log(`server starts at: ${this.linkStdout(this.getUrlHost(host) + ':' + port)}`);
+        console.log(
+          `server starts at: ${this.linkStdout(
+            this.getUrlHost(host) + ':' + port
+          )}`
+        );
       }
       if (stats.hasErrors()) {
-        console.log(stats.toString({
-          colors: true
-        }))
+        console.log(
+          stats.toString({
+            colors: true,
+          })
+        );
       }
     });
 

@@ -1,6 +1,6 @@
 {
   "name": "ko-lints",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0",
   "description": "lint tools used by ko",
   "keywords": [
     "ko",
@@ -37,8 +37,11 @@
     "@types/prettier": "^2.3.2",
     "chalk": "^4.1.2",
     "commander": "^8.1.0",
+    "eslint": "^8.4.1",
     "fast-glob": "^3.2.7",
-    "ko-config": "^1.0.0-alpha.1"
+    "ko-config": "^1.0.0",
+    "prettier": "^2.5.1",
+    "stylelint": "^14.1.0"
   },
   "devDependencies": {
     "typescript": "^4.3.5"

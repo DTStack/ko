@@ -37,20 +37,20 @@ function getWebpackBaseConf(opts: Options): Configuration {
     resolve: {
       extensions,
       plugins: [
-        ts && new TsconfigPathsPlugin({
-          configFile: config.defaultPaths.tsconfig
-        })
-      ].filter(Boolean) as any
+        ts &&
+          new TsconfigPathsPlugin({
+            configFile: config.defaultPaths.tsconfig,
+          }),
+      ].filter(Boolean) as any,
     },
     performance: {
       hints: <const>false,
     },
     cache: {
       type: <const>'filesystem',
-    }
+    },
   };
   return webpackBaseConf;
 }
 
 export default getWebpackBaseConf;
-

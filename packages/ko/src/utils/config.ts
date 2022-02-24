@@ -1,4 +1,5 @@
 import { resolve, isAbsolute } from 'path';
+import { existsSync } from 'fs';
 
 class Config {
   cwd: string;
@@ -23,7 +24,11 @@ class Config {
   //TODO: define userConf
   public get userConf() {
     const userConfPath = this.getFileRealPath('ko.config.js');
-    return userConfPath ? require(userConfPath as string) : {};
+    if (existsSync(userConfPath)) {
+      return userConfPath ? require(userConfPath as string) : {};
+    } else {
+      throw new Error('user config file not exist, please check it!');
+    }
   }
 
   public get defaultPaths() {
@@ -32,8 +37,8 @@ class Config {
       dist: this.getFileRealPath('dist'),
       public: this.getFileRealPath('public'),
       html: this.getFileRealPath('public/index.html'),
-      tsconfig: this.getFileRealPath('tsconfig.json')
-    }
+      tsconfig: this.getFileRealPath('tsconfig.json'),
+    };
   }
 
   public get isProductionEnv(): boolean {

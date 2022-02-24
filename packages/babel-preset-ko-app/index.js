@@ -34,10 +34,7 @@ module.exports = function (api, opts = {}) {
     plugins: [
       //support proposal decorators
       //NOTE: https://babeljs.io/docs/en/babel-plugin-proposal-decorators#note-compatibility-with-babelplugin-proposal-class-properties
-      [
-        require('@babel/plugin-proposal-decorators').default,
-        { legacy: true },
-      ],
+      [require('@babel/plugin-proposal-decorators').default, { legacy: true }],
       [
         require('@babel/plugin-transform-runtime').default,
         {

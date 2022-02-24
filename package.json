@@ -5,9 +5,11 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "prettier": "prettier --write .",
+    "prettier": "prettier --config packages/ko-config/prettier.js --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "lint": "yarn prettier && yarn eslint"
+    "stylelint": "stylelint .less,.scss,.css,.sass --fix",
+    "lint": "yarn prettier && yarn eslint && yarn stylelint",
+    "test": "lerna run test"
   },
   "config": {
     "commitizen": {
@@ -22,8 +24,6 @@
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^6.0.0",
-    "jest": "^27.0.4",
-    "lerna": "^4.0.0",
-    "typescript": "^4.3.5"
+    "lerna": "^4.0.0"
   }
 }
