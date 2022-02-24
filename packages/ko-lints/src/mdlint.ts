@@ -13,12 +13,11 @@ export async function formatFilesWithMdlint(
     return !fix ? runMdLinted({ file, rules }) : runMdFixed({ file, rules });
   };
   const mdlintFilesPromises = targetFiles.map(async (file) => {
-    try {
       const result = await handleMdLint(file, config);
       if (result?.path && result?.errors?.length) {
         console.log(result.path);
         result?.errors.map((err: MdError) => {
-          const { start, end, text, level, type} = err;
+          const { start, text, level, type} = err;
           console.log(
             chalk.gray(`${start.line}:${start.column}  `),
             chalk.red(level),
@@ -29,9 +28,6 @@ export async function formatFilesWithMdlint(
         return false;
       }
       return true;
-    } catch (ex) {
-      throw ex;
-    }
   });
 
   try {
