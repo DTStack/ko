@@ -1,4 +1,4 @@
-const { lint, fix, getDescription } = require('@lint-md/core');
+const { lint, fix } = require('@lint-md/core');
 const { readFileSync, writeFileSync } = require('fs');
 
 const defaultRules = {};
