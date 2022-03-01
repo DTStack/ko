@@ -1,6 +1,6 @@
 {
   "name": "ko",
-  "version": "5.2.2",
+  "version": "5.3.0",
   "description": "build & lint library",
   "keywords": [
     "ko",
@@ -46,7 +46,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
-    "babel-preset-ko-app": "workspace:^1.0.0-alpha.1",
+    "babel-preset-ko-app": "workspace:^1.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "chalk": "^4.1.2",
     "clean-webpack-plugin": "4.0.0",
