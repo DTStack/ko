@@ -6,11 +6,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-      run: yarn
+      run: pnpm install
     - name: prettier
-      run: yarn prettier
+      run: pnpm prettier
     - name: eslint
-      run: yarn eslint
+      run: pnpm eslint
 # on: push
 # jobs:
 #   # install dependencies
