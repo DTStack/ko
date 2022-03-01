@@ -5,8 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2.2.1
+    - name: pnpm install
+      run: pnpm install
     - name: prettier
       run: yarn prettier
     - name: eslint
