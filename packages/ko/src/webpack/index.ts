@@ -2,7 +2,7 @@ import { Configuration } from 'webpack';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import config from '../utils/config';
 import { Options } from '../interfaces';
-import getLoaders from './loaders';
+import loaders from './loaders';
 import getPlugins from './plugins';
 
 const extensions = [
@@ -19,7 +19,7 @@ const extensions = [
 ];
 
 function getWebpackBaseConf(opts: Options): Configuration {
-  const { ts, hash } = opts;
+  const { ts = true, hash } = opts;
   const webpackBaseConf = {
     mode: config.isProductionEnv ? <const>'production' : <const>'development',
     target: 'web',
@@ -31,9 +31,9 @@ function getWebpackBaseConf(opts: Options): Configuration {
       publicPath: '/',
     },
     module: {
-      rules: getLoaders(opts),
+      rules: loaders,
     },
-    plugins: getPlugins(opts),
+    plugins: getPlugins(),
     resolve: {
       extensions,
       plugins: [

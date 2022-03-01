@@ -30,6 +30,7 @@ module.exports = function (api, opts = {}) {
           development: !isProd,
         },
       ],
+      [require('@babel/preset-typescript').default],
     ],
     plugins: [
       //support proposal decorators

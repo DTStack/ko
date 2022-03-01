@@ -29,6 +29,7 @@ importers:
       '@babel/plugin-transform-runtime': ^7.17.0
       '@babel/preset-env': ^7.16.11
       '@babel/preset-react': ^7.16.7
+      '@babel/preset-typescript': ^7.16.7
       '@babel/runtime': ^7.17.2
     dependencies:
       '@babel/core': registry.npmjs.org/@babel/core/7.17.5
@@ -36,6 +37,7 @@ importers:
       '@babel/plugin-transform-runtime': registry.npmjs.org/@babel/plugin-transform-runtime/7.17.0_@babel+core@7.17.5
       '@babel/preset-env': registry.npmjs.org/@babel/preset-env/7.16.11_@babel+core@7.17.5
       '@babel/preset-react': registry.npmjs.org/@babel/preset-react/7.16.7_@babel+core@7.17.5
+      '@babel/preset-typescript': registry.npmjs.org/@babel/preset-typescript/7.16.7_@babel+core@7.17.5
       '@babel/runtime': registry.npmjs.org/@babel/runtime/7.17.2
 
   packages/ko:
@@ -58,7 +60,6 @@ importers:
       css-minimizer-webpack-plugin: ^3.4.1
       detect-port: ^1.3.0
       esbuild-loader: ^2.18.0
-      fork-ts-checker-webpack-plugin: ^7.2.1
       html-webpack-plugin: ^5.5.0
       inquirer: ^8.2.0
       jest: ^27.5.1
@@ -74,7 +75,6 @@ importers:
       sass-loader: ^12.6.0
       thread-loader: ^3.0.4
       ts-jest: ^27.1.3
-      ts-loader: ^9.2.6
       tsconfig-paths-webpack-plugin: ^3.5.2
       typescript: ^4.6.2
       webpack: ^5.69.1
@@ -95,7 +95,6 @@ importers:
       css-minimizer-webpack-plugin: registry.npmjs.org/css-minimizer-webpack-plugin/3.4.1_webpack@5.69.1
       detect-port: registry.npmjs.org/detect-port/1.3.0
       esbuild-loader: registry.npmjs.org/esbuild-loader/2.18.0_webpack@5.69.1
-      fork-ts-checker-webpack-plugin: registry.npmjs.org/fork-ts-checker-webpack-plugin/7.2.1_typescript@4.6.2+webpack@5.69.1
       html-webpack-plugin: registry.npmjs.org/html-webpack-plugin/5.5.0_webpack@5.69.1
       inquirer: registry.npmjs.org/inquirer/8.2.0
       ko-lints: link:../ko-lints
@@ -109,7 +108,6 @@ importers:
       sass: registry.npmjs.org/sass/1.49.9
       sass-loader: registry.npmjs.org/sass-loader/12.6.0_sass@1.49.9+webpack@5.69.1
       thread-loader: registry.npmjs.org/thread-loader/3.0.4_webpack@5.69.1
-      ts-loader: registry.npmjs.org/ts-loader/9.2.6_typescript@4.6.2+webpack@5.69.1
       tsconfig-paths-webpack-plugin: registry.npmjs.org/tsconfig-paths-webpack-plugin/3.5.2
       webpack: registry.npmjs.org/webpack/5.69.1
       webpack-bundle-analyzer: registry.npmjs.org/webpack-bundle-analyzer/4.5.0
@@ -1031,7 +1029,6 @@ packages:
     dependencies:
       '@babel/core': registry.npmjs.org/@babel/core/7.17.5
       '@babel/helper-plugin-utils': registry.npmjs.org/@babel/helper-plugin-utils/7.16.7
-    dev: true
 
   registry.npmjs.org/@babel/plugin-transform-arrow-functions/7.16.7_@babel+core@7.17.5:
     resolution: {integrity: sha512-9ffkFFMbvzTvv+7dTp/66xvZAWASuPD5Tl9LK3Z9vhOmANo6j94rik+5YMBt4CwHVMWLWpMsriIc2zsa3WW3xQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@babel/plugin-transform-arrow-functions/-/plugin-transform-arrow-functions-7.16.7.tgz}
@@ -1539,6 +1536,23 @@ packages:
       '@babel/helper-plugin-utils': registry.npmjs.org/@babel/helper-plugin-utils/7.16.7
     dev: false
 
+  registry.npmjs.org/@babel/plugin-transform-typescript/7.16.8_@babel+core@7.17.5:
+    resolution: {integrity: sha512-bHdQ9k7YpBDO2d0NVfkj51DpQcvwIzIusJ7mEUaMlbZq3Kt/U47j24inXZHQ5MDiYpCs+oZiwnXyKedE8+q7AQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.16.8.tgz}
+    id: registry.npmjs.org/@babel/plugin-transform-typescript/7.16.8
+    name: '@babel/plugin-transform-typescript'
+    version: 7.16.8
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': registry.npmjs.org/@babel/core/7.17.5
+      '@babel/helper-create-class-features-plugin': registry.npmjs.org/@babel/helper-create-class-features-plugin/7.17.6_@babel+core@7.17.5
+      '@babel/helper-plugin-utils': registry.npmjs.org/@babel/helper-plugin-utils/7.16.7
+      '@babel/plugin-syntax-typescript': registry.npmjs.org/@babel/plugin-syntax-typescript/7.16.7_@babel+core@7.17.5
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   registry.npmjs.org/@babel/plugin-transform-unicode-escapes/7.16.7_@babel+core@7.17.5:
     resolution: {integrity: sha512-TAV5IGahIz3yZ9/Hfv35TV2xEm+kaBDaZQCn2S/hG9/CZ0DktxJv9eKfPc7yYCvOYR4JGx1h8C+jcSOvgaaI/Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@babel/plugin-transform-unicode-escapes/-/plugin-transform-unicode-escapes-7.16.7.tgz}
     id: registry.npmjs.org/@babel/plugin-transform-unicode-escapes/7.16.7
@@ -1686,6 +1700,23 @@ packages:
       '@babel/plugin-transform-react-jsx': registry.npmjs.org/@babel/plugin-transform-react-jsx/7.17.3_@babel+core@7.17.5
       '@babel/plugin-transform-react-jsx-development': registry.npmjs.org/@babel/plugin-transform-react-jsx-development/7.16.7_@babel+core@7.17.5
       '@babel/plugin-transform-react-pure-annotations': registry.npmjs.org/@babel/plugin-transform-react-pure-annotations/7.16.7_@babel+core@7.17.5
+    dev: false
+
+  registry.npmjs.org/@babel/preset-typescript/7.16.7_@babel+core@7.17.5:
+    resolution: {integrity: sha512-WbVEmgXdIyvzB77AQjGBEyYPZx+8tTsO50XtfozQrkW8QB2rLJpH2lgx0TRw5EJrBxOZQ+wCcyPVQvS8tjEHpQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.16.7.tgz}
+    id: registry.npmjs.org/@babel/preset-typescript/7.16.7
+    name: '@babel/preset-typescript'
+    version: 7.16.7
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': registry.npmjs.org/@babel/core/7.17.5
+      '@babel/helper-plugin-utils': registry.npmjs.org/@babel/helper-plugin-utils/7.16.7
+      '@babel/helper-validator-option': registry.npmjs.org/@babel/helper-validator-option/7.16.7
+      '@babel/plugin-transform-typescript': registry.npmjs.org/@babel/plugin-transform-typescript/7.16.8_@babel+core@7.17.5
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   registry.npmjs.org/@babel/runtime-corejs3/7.17.2:
@@ -6822,35 +6853,6 @@ packages:
       webpack: registry.npmjs.org/webpack/5.69.1
     dev: false
 
-  registry.npmjs.org/fork-ts-checker-webpack-plugin/7.2.1_typescript@4.6.2+webpack@5.69.1:
-    resolution: {integrity: sha512-uOfQdg/iQ8iokQ64qcbu8iZb114rOmaKLQFu7hU14/eJaKgsP91cQ7ts7v2iiDld6TzDe84Meksha8/MkWiCyw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-7.2.1.tgz}
-    id: registry.npmjs.org/fork-ts-checker-webpack-plugin/7.2.1
-    name: fork-ts-checker-webpack-plugin
-    version: 7.2.1
-    engines: {node: '>=12.13.0', yarn: '>=1.0.0'}
-    peerDependencies:
-      typescript: '>3.6.0'
-      vue-template-compiler: '*'
-      webpack: ^5.11.0
-    peerDependenciesMeta:
-      vue-template-compiler:
-        optional: true
-    dependencies:
-      '@babel/code-frame': registry.npmjs.org/@babel/code-frame/7.16.7
-      chalk: registry.npmjs.org/chalk/4.1.2
-      chokidar: registry.npmjs.org/chokidar/3.5.3
-      cosmiconfig: registry.npmjs.org/cosmiconfig/7.0.1
-      deepmerge: registry.npmjs.org/deepmerge/4.2.2
-      fs-extra: registry.npmjs.org/fs-extra/10.0.1
-      memfs: registry.npmjs.org/memfs/3.4.1
-      minimatch: registry.npmjs.org/minimatch/3.1.2
-      schema-utils: registry.npmjs.org/schema-utils/4.0.0
-      semver: registry.npmjs.org/semver/7.3.5
-      tapable: registry.npmjs.org/tapable/2.2.1
-      typescript: registry.npmjs.org/typescript/4.6.2
-      webpack: registry.npmjs.org/webpack/5.69.1
-    dev: false
-
   registry.npmjs.org/form-data/3.0.1:
     resolution: {integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/form-data/-/form-data-3.0.1.tgz}
     name: form-data
@@ -6891,6 +6893,7 @@ packages:
       graceful-fs: registry.npmjs.org/graceful-fs/4.2.9
       jsonfile: registry.npmjs.org/jsonfile/6.1.0
       universalify: registry.npmjs.org/universalify/2.0.0
+    dev: true
 
   registry.npmjs.org/fs-extra/7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fs-extra/-/fs-extra-7.0.1.tgz}
@@ -12359,24 +12362,6 @@ packages:
       typescript: registry.npmjs.org/typescript/4.6.2
       yargs-parser: registry.npmjs.org/yargs-parser/20.2.9
     dev: true
-
-  registry.npmjs.org/ts-loader/9.2.6_typescript@4.6.2+webpack@5.69.1:
-    resolution: {integrity: sha512-QMTC4UFzHmu9wU2VHZEmWWE9cUajjfcdcws+Gh7FhiO+Dy0RnR1bNz0YCHqhI0yRowCE9arVnNxYHqELOy9Hjw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/ts-loader/-/ts-loader-9.2.6.tgz}
-    id: registry.npmjs.org/ts-loader/9.2.6
-    name: ts-loader
-    version: 9.2.6
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      typescript: '*'
-      webpack: ^5.0.0
-    dependencies:
-      chalk: registry.npmjs.org/chalk/4.1.2
-      enhanced-resolve: registry.npmjs.org/enhanced-resolve/5.9.1
-      micromatch: registry.npmjs.org/micromatch/4.0.4
-      semver: registry.npmjs.org/semver/7.3.5
-      typescript: registry.npmjs.org/typescript/4.6.2
-      webpack: registry.npmjs.org/webpack/5.69.1
-    dev: false
 
   registry.npmjs.org/ts-node/10.5.0_e79e62fe450383fd2d418267dc75e645:
     resolution: {integrity: sha512-6kEJKwVxAJ35W4akuiysfKwKmjkbYxwQMTBaAxo9KKAx/Yd26mPUyhGz3ji+EsJoAgrLqVsYHNuuYwQe22lbtw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/ts-node/-/ts-node-10.5.0.tgz}
