@@ -38,7 +38,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-webpack-plugin": "^3.0.1"
+    "typescript": "^4.5.5"
   },
   "gitHead": "0a44902daac5c38bedbbf8c8ced68095ff17e7b7"
 }
