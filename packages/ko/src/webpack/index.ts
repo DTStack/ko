@@ -50,7 +50,7 @@ function getWebpackBaseConf(opts: Options): Configuration {
       type: <const>'filesystem',
     },
   };
-  return webpackBaseConf;
+  return webpackBaseConf as Configuration;
 }
 
 export default getWebpackBaseConf;

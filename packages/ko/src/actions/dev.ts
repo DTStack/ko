@@ -19,18 +19,14 @@ class Dev extends WebpackCreator {
     const defaultDevServerConfig = {
       port,
       host,
-      contentBase: config.defaultPaths.dist,
       historyApiFallback: true,
-      disableHostCheck: true,
-      compress: true,
-      clientLogLevel: 'none',
+      allowedHosts: "all",
       hot: true,
-      inline: true,
-      publicPath: '/',
-      watchOptions: {
-        ignored: /node_modules/,
-        aggregateTimeout: 600,
-      },
+      static: {
+        directory: config.defaultPaths.dist,
+        publicPath: '/',
+        watch: true,
+      },   
       open: true,
     };
     return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
@@ -82,12 +78,11 @@ class Dev extends WebpackCreator {
     const { port, host } = this.devSerConf();
     const newPort = await this.checkPort(parseInt(port));
     if (!newPort) return;
-    WebpackDevServer.addDevServerEntrypoints(this.config(), this.devSerConf());
     const compiler = webpack(this.config());
-    const devServer = new WebpackDevServer(compiler, this.devSerConf());
+    const devServer = new WebpackDevServer(this.devSerConf(), compiler);
     let isFirstCompile = true;
 
-    compiler.hooks.done.tap('done', (stats) => {
+    compiler.hooks.done.tap('done', stats => {
       if (isFirstCompile) {
         isFirstCompile = false;
         this.successStdout('development server has been started');
@@ -110,12 +105,7 @@ class Dev extends WebpackCreator {
       console.log('Compiling...');
     });
 
-    devServer.listen(port, host, (err) => {
-      if (err) {
-        console.error(err);
-        process.exit(500);
-      }
-    });
+    devServer.start();
   }
 }
 
