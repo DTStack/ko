@@ -51,7 +51,7 @@ importers:
       '@types/react-dev-utils': ^9.0.10
       autoprefixer: ^10.4.2
       babel-loader: ^8.2.3
-      babel-preset-ko-app: workspace:^1.0.0-alpha.1
+      babel-preset-ko-app: workspace:^1.0.0
       case-sensitive-paths-webpack-plugin: ^2.4.0
       chalk: ^4.1.2
       clean-webpack-plugin: 4.0.0

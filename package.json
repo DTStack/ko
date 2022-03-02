@@ -9,7 +9,9 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "stylelint": "stylelint .less,.scss,.css,.sass --fix",
     "lint": "yarn prettier && yarn eslint && yarn stylelint",
-    "test": "pnpm run test"
+    "test": "pnpm run test",
+    "docs:serve": "pnpm start --filter ./website",
+    "docs:build": "pnpm build --filter ./website"
   },
   "config": {
     "commitizen": {
