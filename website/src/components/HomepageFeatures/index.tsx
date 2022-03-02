@@ -20,16 +20,15 @@ const FeatureList: FeatureItem[] = [
     title: 'Flexible',
     description: (
       <>
-        You can use ko to build your own applications with default configuration, or customize it to fit your needs 
+        You can use ko to build your own applications with default
+        configuration, or customize it to fit your needs
       </>
     ),
   },
   {
     title: 'Faster',
     description: (
-      <>
-        ko is built on top of Webpack v5 and esbuild, so it is blazing fast
-      </>
+      <>ko is built on top of Webpack v5 and esbuild, so it is blazing fast</>
     ),
   },
 ];

@@ -3,3 +3,4 @@
 *.json
 /template/
 /.github/
+pnpm-lock.yaml
