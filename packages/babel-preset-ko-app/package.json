@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-ko-app",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "Babel preset used by ko",
   "keywords": [
     "ko",
@@ -20,11 +20,12 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/plugin-proposal-decorators": "^7.14.5",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.9",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/runtime": "^7.14.8"
+    "@babel/core": "^7.17.5",
+    "@babel/plugin-proposal-decorators": "^7.17.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/runtime": "^7.17.2"
   }
 }

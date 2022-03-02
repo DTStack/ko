@@ -3,10 +3,8 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import config from '../utils/config';
-import { Options } from '../interfaces';
 
-function getPlugins(opts: Options) {
-  const { ts } = opts;
+function getPlugins() {
   const { userConf, defaultPaths } = config;
   const publicPath =
     userConf.output && userConf.output.publicPath
@@ -33,18 +31,6 @@ function getPlugins(opts: Options) {
       inject: 'body',
     }),
   ];
-  if (ts) {
-    const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-    const typescriptPlugins = [
-      new ForkTsCheckerWebpackPlugin({
-        async: false,
-        typescript: {
-          configFile: defaultPaths.tsconfig,
-        },
-      }),
-    ];
-    plugins = plugins.concat(typescriptPlugins);
-  }
   plugins = plugins.concat(userConf.plugins || []);
   if (config.isProductionEnv) {
     const { CleanWebpackPlugin } = require('clean-webpack-plugin');
