@@ -10,6 +10,7 @@ title: Introduction
 * Support building applications on top of **webpack v5** and **esbuild**
 * Customize ko to work exactly the way you need it for your applications 
 * Built-in popular linting tools to lint your source code
+* Built-in support typescript
 
 ## Installation
 
@@ -24,6 +25,7 @@ pnpm add ko --save-dev
 
 ## Contributing
 
+We'd love to have your helping hand on `ko`! See [CONTRIBUTING](./contributing.md) for more information on how to get started.
 
 ## License
 
