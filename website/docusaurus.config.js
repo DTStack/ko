@@ -3,19 +3,19 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const internalWebpackPluginsAndLoaders = require('./internalWebpackPluginsAndLoaders');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'ko',
   tagline: 'Project toolkit for React Applications',
-  url: 'https://dtstack.github.io/ko/',
+  url: 'https://dtstack.github.io',
   baseUrl: '/ko/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'DTStack', // Usually your GitHub org/user name.
   projectName: 'ko', // Usually your repo name.
-
   presets: [
     [
       'classic',
@@ -94,6 +94,9 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      customFields: {
+        internalWebpackPluginsAndLoaders,
       },
     }),
 };
