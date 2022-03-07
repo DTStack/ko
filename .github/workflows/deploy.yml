@@ -2,8 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]
-   paths: [website/**]
+    branches: [master, feat_github_workflow]
+    # paths: [website/**]
 
 jobs:
   deploy:

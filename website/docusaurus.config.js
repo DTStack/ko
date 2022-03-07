@@ -3,7 +3,6 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const internalWebpackPluginsAndLoaders = require('./internalWebpackPluginsAndLoaders');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -94,10 +93,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-      },
-      customFields: {
-        internalWebpackPluginsAndLoaders,
-      },
+      }
     }),
 };
 
