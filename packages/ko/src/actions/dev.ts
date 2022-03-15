@@ -36,7 +36,7 @@ class Dev extends WebpackCreator {
     const conf = {
       devtool: 'cheap-module-source-map',
       plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
         this.opts.analyzer && new BundleAnalyzerPlugin(),
       ].filter(Boolean),
     };
