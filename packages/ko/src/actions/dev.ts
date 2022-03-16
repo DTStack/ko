@@ -20,13 +20,13 @@ class Dev extends WebpackCreator {
       port,
       host,
       historyApiFallback: true,
-      allowedHosts: "all",
+      allowedHosts: 'all',
       hot: true,
       static: {
         directory: config.defaultPaths.dist,
         publicPath: '/',
         watch: true,
-      },   
+      },
       open: true,
     };
     return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
@@ -82,7 +82,7 @@ class Dev extends WebpackCreator {
     const devServer = new WebpackDevServer(this.devSerConf(), compiler);
     let isFirstCompile = true;
 
-    compiler.hooks.done.tap('done', stats => {
+    compiler.hooks.done.tap('done', (stats) => {
       if (isFirstCompile) {
         isFirstCompile = false;
         this.successStdout('development server has been started');

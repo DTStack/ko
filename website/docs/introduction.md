@@ -1,8 +1,9 @@
-# ko
+---
+sidebar_position: 1
+title: Introduction
+---
 
-## Simple, yet powerful, tool for managing your react applications. 
-
-<a href="https://www.npmjs.com/package/ko"><img alt="NPM Status" src="https://img.shields.io/npm/v/ko.svg?style=flat"></a>
+**ko** is a simple, yet powerful, tool for managing your react applications. 
 
 ## Features
 
@@ -21,11 +22,6 @@ yarn add ko --dev
 # or 
 pnpm add ko --save-dev
 ```
-
-## Documents
-* [Introduction](https://dtstack.github.io/ko/docs/introduction)
-* [Getting Started](https://dtstack.github.io/ko/docs/getting-started)
-* [FAQ](https://dtstack.github.io/ko/docs/FAQ)
 
 ## Contributing
 
