@@ -12,7 +12,7 @@ jobs:
         cache: 'pnpm'
     - uses: pnpm/action-setup@v2.0.1
       with:
-        version: 6.20.3
+        version: 6.32.3
     - name: Install modules
       run: pnpm install
     - name: prettier
