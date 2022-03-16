@@ -45,6 +45,7 @@ module.exports = function (api, opts = {}) {
           absoluteRuntime: absoluteRuntimePath,
         },
       ],
+      ...(opts.customizePlugins || []),
     ],
   };
 };

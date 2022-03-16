@@ -39,7 +39,4 @@ program
     devInstance.action();
   });
 
-//attach lint features to program
-lint(program);
-
 program.parse();

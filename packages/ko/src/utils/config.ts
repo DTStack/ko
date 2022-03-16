@@ -6,13 +6,20 @@ class Config {
 
   private static instance: Config;
 
+  public babelPlugins: [
+    string,
+    {
+      [key: string]: any;
+    }
+  ][] = [];
+
   private constructor() {
     this.cwd = process.cwd();
   }
 
   public static getInstance(): Config {
     if (!Config.instance) {
-      Config.instance = new Config();
+      Config.instance = Object.freeze(new Config());
     }
     return Config.instance;
   }
@@ -21,11 +28,13 @@ class Config {
     return isAbsolute(path) ? path : resolve(this.cwd, path);
   }
 
-  //TODO: define userConf
   public get userConf() {
     const userConfPath = this.getFileRealPath('ko.config.js');
     if (existsSync(userConfPath)) {
-      return userConfPath ? require(userConfPath as string) : {};
+      const userConf = require(userConfPath);
+      this.babelPlugins = userConf.babelPlugins || [];
+      delete userConf.babelPlugins;
+      return userConf;
     } else {
       throw new Error('user config file not exist, please check it!');
     }

@@ -21,6 +21,7 @@ const scriptLoader = [
               require.resolve('babel-preset-ko-app'),
               {
                 useAbsoluteRuntime: true,
+                customizePlugins: config.babelPlugins,
               },
             ],
           ],
