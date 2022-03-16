@@ -9,12 +9,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-        cache: 'pnpm'
+        
     - uses: pnpm/action-setup@v2.0.1
       with:
-        version: 6.32.3
+        version: 6.20.3
     - name: Install modules
-      run: pnpm install
+      run: pnpm install --no-frozen-lockfile
     - name: prettier
       run: pnpm prettier
     - name: eslint
