@@ -3,6 +3,10 @@ sidebar_position: 4
 title: ko prettier
 ---
 
+:::tip
+`ko prettier` has been moved into package `ko-lints`, so if you want use this feature, please run `pnpm add ko-lints -D` in your terminal
+:::
+
 Alias `ko pr`
 
 **Please note that `ko prettier` is experimental**

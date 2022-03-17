@@ -3,6 +3,10 @@ sidebar_position: 3
 title: ko eslint
 ---
 
+:::tip
+`ko eslint` has been moved into package `ko-lints`, so if you want use this feature, please run `pnpm add ko-lints -D` in your terminal
+:::
+
 Alias `ko el`
 
 **Please note that `ko eslint` is experimental**
