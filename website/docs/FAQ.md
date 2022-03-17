@@ -63,3 +63,7 @@ And you should update your project **tsconfig.json** into these configs:
   "moduleResolution": "Node"   
 } 
 ```
+
+## Why my devSever config not working
+
+ko use **webpack-dev-server** v4 internally. So if you find out that your old **devServer** configs not working,please refer to [webpack-dev-server migration v4](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) and update your **devServer** configs.
