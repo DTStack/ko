@@ -25,7 +25,7 @@ const scriptLoader = [
               },
             ],
           ],
-          plugins: [require.resolve('react-refresh/babel')],
+          plugins: !config.isProductionEnv ? [require.resolve('react-refresh/babel')] : [],
           babelrc: false,
           configFile: false,
           cacheIdentifier: getCacheIdentifier(
