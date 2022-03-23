@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
 import config from '../utils/config';
@@ -36,7 +37,7 @@ class Dev extends WebpackCreator {
     const conf = {
       devtool: 'cheap-module-source-map',
       plugins: [
-        // new webpack.HotModuleReplacementPlugin(),
+        new ReactRefreshPlugin(),
         this.opts.analyzer && new BundleAnalyzerPlugin(),
       ].filter(Boolean),
     };

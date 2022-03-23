@@ -2,7 +2,6 @@ import { IgnorePlugin, ProgressPlugin } from 'webpack';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import config from '../utils/config';
 
 function getPlugins() {
@@ -23,6 +22,7 @@ function getPlugins() {
       chunkFilename: 'css/[id].[contenthash].css',
     }),
     new CaseSensitivePathsPlugin(),
+
     new HtmlWebpackPlugin({
       template: defaultPaths.html,
       title: 'Ko App',
@@ -31,7 +31,6 @@ function getPlugins() {
       },
       inject: 'body',
     }),
-    new ReactRefreshPlugin(),
   ];
   plugins = plugins.concat(userConf.plugins || []);
   if (config.isProductionEnv) {
