@@ -11,6 +11,7 @@ Additional labels for pre-release and build metadata are available as extensions
 
 # 5.3.1
 - support work-loader internally
+- update webpack-dev-server default config to disable full-screen overloy in the browser
 - optimize docs
 
 # 5.3.0
