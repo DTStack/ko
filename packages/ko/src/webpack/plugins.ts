@@ -1,8 +1,9 @@
-import { IgnorePlugin, ProgressPlugin } from 'webpack';
+import { IgnorePlugin } from 'webpack';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import WebpackBar from 'webpackbar';
 import config from '../utils/config';
 
 function getPlugins() {
@@ -16,7 +17,6 @@ function getPlugins() {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
-    new ProgressPlugin(),
     //TODO: check if mini-css-extract-plugin should use base name if enable HMR
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
@@ -32,6 +32,7 @@ function getPlugins() {
       inject: 'body',
     }),
     new ReactRefreshPlugin(),
+    new WebpackBar(),
   ];
   plugins = plugins.concat(userConf.plugins || []);
   if (config.isProductionEnv) {

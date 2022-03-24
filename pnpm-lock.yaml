@@ -84,6 +84,8 @@ importers:
       webpack-bundle-analyzer: ^4.5.0
       webpack-dev-server: ^4.7.4
       webpack-merge: ^5.8.0
+      webpackbar: ^5.0.2
+      worker-loader: ^3.0.8
     dependencies:
       '@babel/core': registry.npmjs.org/@babel/core/7.17.5
       '@pmmmwh/react-refresh-webpack-plugin': registry.npmjs.org/@pmmmwh/react-refresh-webpack-plugin/0.5.4_c9d7d4a77b192c76978c5e4fda4d054f
@@ -115,6 +117,8 @@ importers:
       webpack-bundle-analyzer: registry.npmjs.org/webpack-bundle-analyzer/4.5.0
       webpack-dev-server: registry.npmjs.org/webpack-dev-server/4.7.4_webpack@5.69.1
       webpack-merge: registry.npmjs.org/webpack-merge/5.8.0
+      webpackbar: registry.npmjs.org/webpackbar/5.0.2_webpack@5.69.1
+      worker-loader: registry.npmjs.org/worker-loader/3.0.8_webpack@5.69.1
     devDependencies:
       '@types/case-sensitive-paths-webpack-plugin': registry.npmjs.org/@types/case-sensitive-paths-webpack-plugin/2.1.6
       '@types/detect-port': registry.npmjs.org/@types/detect-port/1.3.2
@@ -17281,6 +17285,20 @@ packages:
     name: word-wrap
     version: 1.2.3
     engines: {node: '>=0.10.0'}
+
+  registry.npmjs.org/worker-loader/3.0.8_webpack@5.69.1:
+    resolution: {integrity: sha512-XQyQkIFeRVC7f7uRhFdNMe/iJOdO6zxAaR3EWbDp45v3mDhrTi+++oswKNxShUNjPC/1xUp5DB29YKLhFo129g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/worker-loader/-/worker-loader-3.0.8.tgz}
+    id: registry.npmjs.org/worker-loader/3.0.8
+    name: worker-loader
+    version: 3.0.8
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: registry.npmjs.org/loader-utils/2.0.2
+      schema-utils: registry.npmjs.org/schema-utils/3.1.1
+      webpack: registry.npmjs.org/webpack/5.69.1
+    dev: false
 
   registry.npmjs.org/wrap-ansi/6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-6.2.0.tgz}
