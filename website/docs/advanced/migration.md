@@ -12,13 +12,14 @@ ko use webpack v5 internally, so if you use webpack v4 or earlier webpack versio
 ## remove duplicated loaders & plugins
 There are some built-in webpack loaders & plugins in ko as shown below:
 ### loaders
-* babel-loader
+* babel-loader and babel dependencies
 * css-loader
 * esbuild-loader
-* less-loader
+* less-loader and it's dependencies
 * postcss-loader
-* sass-loader
+* sass-loader and it's dependencies
 * thread-loader
+* worker-loader
 
 ### plugins
 * @pmmmwh/react-refresh-webpack-plugin

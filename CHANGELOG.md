@@ -9,10 +9,14 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 * PATCH version when you make backwards compatible bug fixes.
 Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
+# 5.3.1
+- support work-loader internally
+- optimize docs
+
 # 5.3.0
 - change ts-loader to babel-loader because babel-loader is faster than ts-loader when build [#76](https://github.com/DTStack/ko/issues/76)
 - support React Fast Refresh [#77](https://github.com/DTStack/ko/issues/77)
-- migrate webapck-dev-server from v3 to v4 [#78](https://github.com/DTStack/ko/issues/78)
+- migrate webapack-dev-server from v3 to v4 [#78](https://github.com/DTStack/ko/issues/78)
 
 ## 5.2.1
 - fixed [Throw an error when running "ko init"](https://github.com/DTStack/ko/issues/27)

@@ -29,7 +29,7 @@ Webpack 5 no longer polyfills Node.js core modules automatically which means if 
 
 ### Install browserify packages:
 ```bash
-pnpm add os-browserify crypto-browserify stream-browserify
+pnpm add os-browserify crypto-browserify stream-browserify buffer string_decoder -D
 ```
 
 ### Add configs into **ko.config.js**:
@@ -45,12 +45,18 @@ module.exports = {
       os: require.resolve('os-browserify/browser'),
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
+      buffer: require.resolve('buffer/'),
+      string_decoder: require.resolve('string_decoder/'),
     },
   }
 };
 ```
 
 ## How to use web workers
+
+:::caution
+For compatible reason we use `work-loader` internally. So you can migrate into ko without considering update your import Worker code.But using worker like below examples is recommended.
+:::
 
 You can use [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) without [worker-loader](https://github.com/webpack-contrib/worker-loader) in ko, just like this:
 ```js
