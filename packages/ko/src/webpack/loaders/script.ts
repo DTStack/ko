@@ -6,6 +6,13 @@ const BABEL_LOADER = require.resolve('babel-loader');
 
 const scriptLoader = [
   {
+    test: /\.worker.[jt]s$/,
+    loader: 'worker-loader',
+    options: {
+      inline: 'fallback',
+    },
+  },
+  {
     test: /\.(t|j)sx?$/,
     exclude: {
       and: [/node_modules/],
