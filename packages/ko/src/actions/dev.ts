@@ -27,6 +27,10 @@ class Dev extends WebpackCreator {
         publicPath: '/',
         watch: true,
       },
+      client: {
+        overlay: false,
+      },
+      setupExitSignals: true,
       open: true,
     };
     return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
