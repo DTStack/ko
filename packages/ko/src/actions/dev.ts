@@ -35,10 +35,9 @@ class Dev extends WebpackCreator {
   public config() {
     const conf = {
       devtool: 'cheap-module-source-map',
-      plugins: [
-        // new webpack.HotModuleReplacementPlugin(),
-        this.opts.analyzer && new BundleAnalyzerPlugin(),
-      ].filter(Boolean),
+      plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
+        Boolean
+      ),
     };
     return this.mergeConfig([this.baseConfig, conf]);
   }
@@ -80,32 +79,8 @@ class Dev extends WebpackCreator {
     if (!newPort) return;
     const compiler = webpack(this.config());
     const devServer = new WebpackDevServer(this.devSerConf(), compiler);
-    let isFirstCompile = true;
-
-    compiler.hooks.done.tap('done', (stats) => {
-      if (isFirstCompile) {
-        isFirstCompile = false;
-        this.successStdout('development server has been started');
-        console.log(
-          `server starts at: ${this.linkStdout(
-            this.getUrlHost(host) + ':' + port
-          )}`
-        );
-      }
-      if (stats.hasErrors()) {
-        console.log(
-          stats.toString({
-            colors: true,
-          })
-        );
-      }
-    });
-
-    compiler.hooks.invalid.tap('invalid', () => {
-      console.log('Compiling...');
-    });
-
-    devServer.start();
+    console.log(`dev server start at ${this.getUrlHost(host)}:${newPort}`);
+    await devServer.start();
   }
 }
 
