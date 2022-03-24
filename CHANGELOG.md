@@ -9,6 +9,11 @@ Given a version number MAJOR.MINOR.PATCH, increment the:
 * PATCH version when you make backwards compatible bug fixes.
 Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
+# 5.3.0
+- change ts-loader to babel-loader because babel-loader is faster than ts-loader when build [#76](https://github.com/DTStack/ko/issues/76)
+- support React Fast Refresh [#77](https://github.com/DTStack/ko/issues/77)
+- migrate webapck-dev-server from v3 to v4 [#78](https://github.com/DTStack/ko/issues/78)
+
 ## 5.2.1
 - fixed [Throw an error when running "ko init"](https://github.com/DTStack/ko/issues/27)
 - check node version when install because [webpack 5 requires at least Node.js 10.13.0 (LTS)](https://webpack.js.org/migrate/5/#preparations)
@@ -46,9 +51,9 @@ Additional labels for pre-release and build metadata are available as extensions
 
 ## 5.0.0 
 
-本次版本升级了webpack至5.x版本，并对相关的plugins和loaders进行了对应的升级或替换，删除了一些不必要的依赖以减小包的体积，具体内容如下
+Migrate webpack to v5, and remove or update webpack plugins & loaders.
 
-### 升级
+### Upgrade
 
  assets-webpack-plugin                 ^3.9.10  →    ^7.0.0     
  autoprefixer                           ^9.7.3  →   ^10.1.0     
@@ -89,32 +94,23 @@ Additional labels for pre-release and build metadata are available as extensions
  webpack-dev-server                    ^3.10.1  →   ^3.11.0     
  webpack-merge                          ^4.2.2  →    ^5.7.0   
 
-### 删除
+### Remove
 
-| 包名称  | 删除原因  |
+| PackageName  | Reason  |
 |---|---|
-| awesome-typescript-loader  |  无引用 |
-|  babel-plugin-import | 无引用  |
-|  friendly-errors-webpack-plugin |  无引用 |
-| moment  | deprecated,只有一处用到,改为Date方式实现  |
-|  request |  deprecated,改为其他方式实现 |
-| request-progress  | deprecated,改为其他方式实现  |
-|  request-promise | deprecated,改为其他方式实现  |
+| awesome-typescript-loader  | Not Use |
+|  babel-plugin-import | Not Use  |
+|  friendly-errors-webpack-plugin |  Not Use |
+| moment  | deprecated |
+|  request |  deprecated |
+| request-progress  | deprecated |
+|  request-promise | deprecated |
 
-### 替换
+### Replace
 
-| 包名称  | 替换  | 替换原因 |
+| PackageName  | Replace To  |
 |---|---|---|
-|  optimize-css-assets-webpack-plugin |  css-minimizer-webpack-plugin | 官方建议 |
-|  node-sass  | sass  | 官方建议 |
+|  optimize-css-assets-webpack-plugin |  css-minimizer-webpack-plugin |
+|  node-sass  | sass  |
 
-### 新增功能
-
-### dll相关配置修改，现在在dev和build阶段dll为默认不引入， 增添了--enable-dll相关可选项，可以通过该选项开启dll支持
-
-### html-webpack-plugin现在只支持生成单一html，后续考虑添加多出口文件
-
-#### lint支持，支持eslint和prettier结合来进行相应的代码格式化,
-
-#### microfrontends相关配置支持，可以通过-m, --micro相关可选项开启支持
 
