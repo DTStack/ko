@@ -32,8 +32,6 @@ class Config {
     const userConfPath = this.getFileRealPath('ko.config.js');
     if (existsSync(userConfPath)) {
       const userConf = require(userConfPath);
-      this.babelPlugins = userConf.babelPlugins || [];
-      delete userConf.babelPlugins;
       return userConf;
     } else {
       throw new Error('user config file not exist, please check it!');
