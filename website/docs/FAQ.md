@@ -73,3 +73,10 @@ And you should update your project **tsconfig.json** into these configs:
 ## Why my devSever config not working
 
 ko use **webpack-dev-server** v4 internally. So if you find out that your old **devServer** configs not working,please refer to [webpack-dev-server migration v4](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) and update your **devServer** configs.
+
+## Why my plugin not working
+some of your plugins may be too old to suit latest version of webpack(v5), so you should update your plugins to the latest version.Some of plugins are normally been used in your projects, like: 
+* [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin#patterns)
+* [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+
+And make sure you have the right configs of your plugins when you migrate into ko.
