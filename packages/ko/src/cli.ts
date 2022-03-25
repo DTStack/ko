@@ -21,6 +21,7 @@ program
   .option('-t,--ts,--typescript', 'support typescript')
   .option('-e,--esbuild', 'enable esbuild')
   .action((opts: Options) => {
+    process.env.NODE_ENV = 'production';
     const buildInstance = new build(opts);
     buildInstance.action();
   });

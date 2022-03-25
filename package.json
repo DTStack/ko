@@ -8,8 +8,9 @@
     "prettier": "prettier --config packages/ko-config/prettier.js --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "stylelint": "stylelint .less,.scss,.css,.sass --fix",
-    "lint": "yarn prettier && yarn eslint && yarn stylelint",
-    "test": "pnpm run test",
+    "lint": "pnpm prettier && pnpm eslint",
+    "test": "pnpm test",
+    "debug:ko": "pnpm debug --filter ./packages/ko",
     "docs:start": "cd website && pnpm start"
   },
   "config": {
