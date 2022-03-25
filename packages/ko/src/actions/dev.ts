@@ -31,7 +31,6 @@ class Dev extends WebpackCreator {
         overlay: false,
       },
       setupExitSignals: true,
-      open: true,
     };
     return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
@@ -72,19 +71,21 @@ class Dev extends WebpackCreator {
     }
   }
 
-  private getUrlHost(host: string): string {
-    const regex = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*$/i;
-    return regex.test(host) ? host : `http://${host}`;
-  }
-
   public async action() {
-    const { port, host } = this.devSerConf();
+    const devSerConf = this.devSerConf();
+    const { port } = devSerConf;
     const newPort = await this.checkPort(parseInt(port));
-    if (!newPort) return;
+    if (!newPort) {
+      process.exit(0);
+    }
+    devSerConf.port = newPort;
     const compiler = webpack(this.config());
-    const devServer = new WebpackDevServer(this.devSerConf(), compiler);
-    console.log(`dev server start at ${this.getUrlHost(host)}:${newPort}`);
+    const devServer = new WebpackDevServer(devSerConf, compiler);
     await devServer.start();
+    process.stdin.on('end', () => {
+      devServer.stop();
+      process.exit(0);
+    });
   }
 }
 

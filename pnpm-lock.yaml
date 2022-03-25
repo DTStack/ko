@@ -64,7 +64,6 @@ importers:
       css-minimizer-webpack-plugin: ^3.4.1
       detect-port: ^1.3.0
       esbuild-loader: ^2.18.0
-      html-webpack-plugin: ^5.5.0
       inquirer: ^8.2.0
       jest: ^27.5.1
       less: ^3.13.1
@@ -100,7 +99,6 @@ importers:
       css-minimizer-webpack-plugin: registry.npmjs.org/css-minimizer-webpack-plugin/3.4.1_webpack@5.69.1
       detect-port: registry.npmjs.org/detect-port/1.3.0
       esbuild-loader: registry.npmjs.org/esbuild-loader/2.18.0_webpack@5.69.1
-      html-webpack-plugin: registry.npmjs.org/html-webpack-plugin/5.5.0_webpack@5.69.1
       inquirer: registry.npmjs.org/inquirer/8.2.0
       less: registry.npmjs.org/less/3.13.1
       less-loader: registry.npmjs.org/less-loader/9.1.0_less@3.13.1+webpack@5.69.1
@@ -206,8 +204,8 @@ importers:
       typescript: ^4.5.2
     dependencies:
       '@algolia/client-search': registry.npmjs.org/@algolia/client-search/4.12.1
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/preset-classic': registry.npmjs.org/@docusaurus/preset-classic/2.0.0-beta.16_26dd6d6aa7aac5c57352d5ebc9ceed23
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/preset-classic': registry.npmjs.org/@docusaurus/preset-classic/2.0.0-beta.16_fac2ab0d4cf7ccc537379d187e5d1783
       '@mdx-js/react': registry.npmjs.org/@mdx-js/react/1.6.22_react@17.0.2
       clsx: registry.npmjs.org/clsx/1.1.1
       prism-react-renderer: registry.npmjs.org/prism-react-renderer/1.3.1_react@17.0.2
@@ -2510,7 +2508,7 @@ packages:
       - '@algolia/client-search'
     dev: false
 
-  registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-0AbNSpTKapz+tctg7PHvuGQRtW7nd3Tm3axNqnFowO3SV2VvFCaBji2s1H3XCGXVRGveQ04g20vl2ZqG5GheUA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/core/-/core-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/core/2.0.0-beta.16
     name: '@docusaurus/core'
@@ -2573,7 +2571,7 @@ packages:
       postcss-loader: registry.npmjs.org/postcss-loader/6.2.1_postcss@8.4.7+webpack@5.69.1
       prompts: registry.npmjs.org/prompts/2.4.2
       react: registry.npmjs.org/react/17.0.2
-      react-dev-utils: registry.npmjs.org/react-dev-utils/12.0.0_typescript@4.6.2+webpack@5.69.1
+      react-dev-utils: registry.npmjs.org/react-dev-utils/12.0.0_8d7757d2d6edcd7abf684c1b02a11394
       react-dom: registry.npmjs.org/react-dom/17.0.2_react@17.0.2
       react-helmet-async: registry.npmjs.org/react-helmet-async/1.2.3_react-dom@17.0.2+react@17.0.2
       react-loadable: registry.npmjs.org/@docusaurus/react-loadable/5.5.2_react@17.0.2
@@ -2690,7 +2688,7 @@ packages:
       - uglify-js
       - webpack-cli
 
-  registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-JSRzNKpuMPAndIDIZKbA4G2rA0sC3jPHO+TOmBliO8SBUkw1DL58MZTp98y+5EeUg+KjNIYoz7wRMj3YhFIhJA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-content-blog/-/plugin-content-blog-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16
     name: '@docusaurus/plugin-content-blog'
@@ -2700,7 +2698,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/logger': registry.npmjs.org/@docusaurus/logger/2.0.0-beta.16
       '@docusaurus/mdx-loader': registry.npmjs.org/@docusaurus/mdx-loader/2.0.0-beta.16_react-dom@17.0.2+react@17.0.2
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
@@ -2733,7 +2731,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-IiNEud1WYj9a0rkNHjX1JNLfim8f6pyB5w17arRDK6HiY3w51zCQsZJo0popRp1KQQf/g66I+5Y3qP5rHGeU6Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-content-docs/-/plugin-content-docs-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16
     name: '@docusaurus/plugin-content-docs'
@@ -2743,7 +2741,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/logger': registry.npmjs.org/@docusaurus/logger/2.0.0-beta.16
       '@docusaurus/mdx-loader': registry.npmjs.org/@docusaurus/mdx-loader/2.0.0-beta.16_react-dom@17.0.2+react@17.0.2
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
@@ -2775,7 +2773,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-XH/dNfDhnad7qA+RUdyJW94Yf8LzALz0bJRwp8GbtjXeAmfP/DWGvVPT/egd9Pz99uO5UgiO9vR1i7UlktQSwA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-content-pages/-/plugin-content-pages-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16
     name: '@docusaurus/plugin-content-pages'
@@ -2785,7 +2783,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/mdx-loader': registry.npmjs.org/@docusaurus/mdx-loader/2.0.0-beta.16_react-dom@17.0.2+react@17.0.2
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
       '@docusaurus/utils-validation': registry.npmjs.org/@docusaurus/utils-validation/2.0.0-beta.16
@@ -2811,7 +2809,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-debug/2.0.0-beta.16_bc7d21a0df28462a9ab9ba30599580b4:
+  registry.npmjs.org/@docusaurus/plugin-debug/2.0.0-beta.16_8573a4c1fb6c9e8b7cbc8fadc4b4382e:
     resolution: {integrity: sha512-uzp4hrL/PozgDNEWF/Y+DH+nH0GoC+dOyNLqsyFqQLlzykFHTJYLMK1tfwKHUJ3WqhQFbRwLTR4rzFC89Kaf7g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-debug/-/plugin-debug-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-debug/2.0.0-beta.16
     name: '@docusaurus/plugin-debug'
@@ -2821,7 +2819,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
       fs-extra: registry.npmjs.org/fs-extra/10.0.1
       react: registry.npmjs.org/react/17.0.2
@@ -2846,7 +2844,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-google-analytics/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-google-analytics/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-UKd1RWYHeSm/RLjJ2ZflLTT6hbiWQWFAxVzYRBiyOnDbBP+un8qmP692QZCIP+rrm+KkxsV1FGte0NtrcsFUEw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-google-analytics/-/plugin-google-analytics-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-google-analytics/2.0.0-beta.16
     name: '@docusaurus/plugin-google-analytics'
@@ -2856,7 +2854,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/utils-validation': registry.npmjs.org/@docusaurus/utils-validation/2.0.0-beta.16
       react: registry.npmjs.org/react/17.0.2
       react-dom: registry.npmjs.org/react-dom/17.0.2_react@17.0.2
@@ -2877,7 +2875,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-google-gtag/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-google-gtag/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-WUD1Kh5y/9VaV/ubg8c6a43gE2+N+yeLUL/qfrUZuLHheaBaozGjioHRbndmfN6W7l2EhuxO1QRN3SlBqc7kjA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-google-gtag/-/plugin-google-gtag-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-google-gtag/2.0.0-beta.16
     name: '@docusaurus/plugin-google-gtag'
@@ -2887,7 +2885,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/utils-validation': registry.npmjs.org/@docusaurus/utils-validation/2.0.0-beta.16
       react: registry.npmjs.org/react/17.0.2
       react-dom: registry.npmjs.org/react-dom/17.0.2_react@17.0.2
@@ -2908,7 +2906,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/plugin-sitemap/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/plugin-sitemap/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-B8fa2qvScNSiuCos6vZjPERikRTbbebzy33s5zV+VTZsqLtrjs4//Y0HlJ0tuz5qHWCzavb6nFX/mgFAJoyqFQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/plugin-sitemap/-/plugin-sitemap-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/plugin-sitemap/2.0.0-beta.16
     name: '@docusaurus/plugin-sitemap'
@@ -2918,7 +2916,7 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
       '@docusaurus/utils-common': registry.npmjs.org/@docusaurus/utils-common/2.0.0-beta.16
       '@docusaurus/utils-validation': registry.npmjs.org/@docusaurus/utils-validation/2.0.0-beta.16
@@ -2943,7 +2941,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/preset-classic/2.0.0-beta.16_26dd6d6aa7aac5c57352d5ebc9ceed23:
+  registry.npmjs.org/@docusaurus/preset-classic/2.0.0-beta.16_fac2ab0d4cf7ccc537379d187e5d1783:
     resolution: {integrity: sha512-HLY2dC412Lexe2ZupUEUJpY44yz6uqtvibKTXvXH392hFB43Thp7MKr5zACRTwacjbddIoqPVbdzRWtvugSU2g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/preset-classic/-/preset-classic-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/preset-classic/2.0.0-beta.16
     name: '@docusaurus/preset-classic'
@@ -2953,17 +2951,17 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-debug': registry.npmjs.org/@docusaurus/plugin-debug/2.0.0-beta.16_bc7d21a0df28462a9ab9ba30599580b4
-      '@docusaurus/plugin-google-analytics': registry.npmjs.org/@docusaurus/plugin-google-analytics/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-google-gtag': registry.npmjs.org/@docusaurus/plugin-google-gtag/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-sitemap': registry.npmjs.org/@docusaurus/plugin-sitemap/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/theme-classic': registry.npmjs.org/@docusaurus/theme-classic/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/theme-search-algolia': registry.npmjs.org/@docusaurus/theme-search-algolia/2.0.0-beta.16_26dd6d6aa7aac5c57352d5ebc9ceed23
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-debug': registry.npmjs.org/@docusaurus/plugin-debug/2.0.0-beta.16_8573a4c1fb6c9e8b7cbc8fadc4b4382e
+      '@docusaurus/plugin-google-analytics': registry.npmjs.org/@docusaurus/plugin-google-analytics/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-google-gtag': registry.npmjs.org/@docusaurus/plugin-google-gtag/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-sitemap': registry.npmjs.org/@docusaurus/plugin-sitemap/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/theme-classic': registry.npmjs.org/@docusaurus/theme-classic/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/theme-search-algolia': registry.npmjs.org/@docusaurus/theme-search-algolia/2.0.0-beta.16_fac2ab0d4cf7ccc537379d187e5d1783
       react: registry.npmjs.org/react/17.0.2
       react-dom: registry.npmjs.org/react-dom/17.0.2_react@17.0.2
     transitivePeerDependencies:
@@ -2998,7 +2996,7 @@ packages:
       react: registry.npmjs.org/react/17.0.2
     dev: false
 
-  registry.npmjs.org/@docusaurus/theme-classic/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/theme-classic/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-7cylhb2hwAUSM+ZD2ClQwS/Ag8tnt5gTDrma9WzWA+sB7Zd/b5Dc9WHFowzUjieC++UZ+KxYktCfKE/1RWF77w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/theme-classic/-/theme-classic-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/theme-classic/2.0.0-beta.16
     name: '@docusaurus/theme-classic'
@@ -3008,11 +3006,11 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/theme-translations': registry.npmjs.org/@docusaurus/theme-translations/2.0.0-beta.16
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
       '@docusaurus/utils-common': registry.npmjs.org/@docusaurus/utils-common/2.0.0-beta.16
@@ -3045,7 +3043,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790:
+  registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6:
     resolution: {integrity: sha512-7jP+lVrNMlEXH9bUvjnRxyF1MQpIC0Z+FpBmahTwi1lNAVe1kbs3r7SVsXnBHwI4F+tIWaRMkpEfZfNhH1MjNA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/theme-common/-/theme-common-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16
     name: '@docusaurus/theme-common'
@@ -3056,9 +3054,9 @@ packages:
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
       '@docusaurus/module-type-aliases': registry.npmjs.org/@docusaurus/module-type-aliases/2.0.0-beta.16_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
-      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/plugin-content-blog': registry.npmjs.org/@docusaurus/plugin-content-blog/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-docs': registry.npmjs.org/@docusaurus/plugin-content-docs/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
+      '@docusaurus/plugin-content-pages': registry.npmjs.org/@docusaurus/plugin-content-pages/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       clsx: registry.npmjs.org/clsx/1.1.1
       parse-numeric-range: registry.npmjs.org/parse-numeric-range/1.3.0
       prism-react-renderer: registry.npmjs.org/prism-react-renderer/1.3.1_react@17.0.2
@@ -3082,7 +3080,7 @@ packages:
       - webpack-cli
     dev: false
 
-  registry.npmjs.org/@docusaurus/theme-search-algolia/2.0.0-beta.16_26dd6d6aa7aac5c57352d5ebc9ceed23:
+  registry.npmjs.org/@docusaurus/theme-search-algolia/2.0.0-beta.16_fac2ab0d4cf7ccc537379d187e5d1783:
     resolution: {integrity: sha512-yNQ7nWWAzT+abQiiSgnPT3FDE07KDIt4UZgxEwo2WvynDD4O7G+6uUkBryAZXYvgc2GEMw7u0E/8+2EPbJ5yyg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@docusaurus/theme-search-algolia/-/theme-search-algolia-2.0.0-beta.16.tgz}
     id: registry.npmjs.org/@docusaurus/theme-search-algolia/2.0.0-beta.16
     name: '@docusaurus/theme-search-algolia'
@@ -3093,9 +3091,9 @@ packages:
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
       '@docsearch/react': registry.npmjs.org/@docsearch/react/3.0.0_d85258bd3c0b79ff110511b71a550096
-      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/core': registry.npmjs.org/@docusaurus/core/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/logger': registry.npmjs.org/@docusaurus/logger/2.0.0-beta.16
-      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_aeaba09eb00f7665e5acdd7c57ed6790
+      '@docusaurus/theme-common': registry.npmjs.org/@docusaurus/theme-common/2.0.0-beta.16_56ffc67857808b91cf4ce450bd1b66d6
       '@docusaurus/theme-translations': registry.npmjs.org/@docusaurus/theme-translations/2.0.0-beta.16
       '@docusaurus/utils': registry.npmjs.org/@docusaurus/utils/2.0.0-beta.16
       '@docusaurus/utils-validation': registry.npmjs.org/@docusaurus/utils-validation/2.0.0-beta.16
@@ -8960,40 +8958,6 @@ packages:
       webpack: registry.npmjs.org/webpack/5.69.1
     dev: false
 
-  registry.npmjs.org/fork-ts-checker-webpack-plugin/6.5.0_typescript@4.6.2+webpack@5.69.1:
-    resolution: {integrity: sha512-cS178Y+xxtIjEUorcHddKS7yCMlrDPV31mt47blKKRfMd70Kxu5xruAFE2o9sDY6wVC5deuob/u/alD04YYHnw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-6.5.0.tgz}
-    id: registry.npmjs.org/fork-ts-checker-webpack-plugin/6.5.0
-    name: fork-ts-checker-webpack-plugin
-    version: 6.5.0
-    engines: {node: '>=10', yarn: '>=1.0.0'}
-    peerDependencies:
-      eslint: '>= 6'
-      typescript: '>= 2.7'
-      vue-template-compiler: '*'
-      webpack: '>= 4'
-    peerDependenciesMeta:
-      eslint:
-        optional: true
-      vue-template-compiler:
-        optional: true
-    dependencies:
-      '@babel/code-frame': registry.npmjs.org/@babel/code-frame/7.16.7
-      '@types/json-schema': registry.npmjs.org/@types/json-schema/7.0.9
-      chalk: registry.npmjs.org/chalk/4.1.2
-      chokidar: registry.npmjs.org/chokidar/3.5.3
-      cosmiconfig: registry.npmjs.org/cosmiconfig/6.0.0
-      deepmerge: registry.npmjs.org/deepmerge/4.2.2
-      fs-extra: registry.npmjs.org/fs-extra/9.1.0
-      glob: registry.npmjs.org/glob/7.2.0
-      memfs: registry.npmjs.org/memfs/3.4.1
-      minimatch: registry.npmjs.org/minimatch/3.1.2
-      schema-utils: registry.npmjs.org/schema-utils/2.7.0
-      semver: registry.npmjs.org/semver/7.3.5
-      tapable: registry.npmjs.org/tapable/1.1.3
-      typescript: registry.npmjs.org/typescript/4.6.2
-      webpack: registry.npmjs.org/webpack/5.69.1
-    dev: false
-
   registry.npmjs.org/form-data/3.0.1:
     resolution: {integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/form-data/-/form-data-3.0.1.tgz}
     name: form-data
@@ -14197,44 +14161,6 @@ packages:
       filesize: registry.npmjs.org/filesize/8.0.7
       find-up: registry.npmjs.org/find-up/5.0.0
       fork-ts-checker-webpack-plugin: registry.npmjs.org/fork-ts-checker-webpack-plugin/6.5.0_8d7757d2d6edcd7abf684c1b02a11394
-      global-modules: registry.npmjs.org/global-modules/2.0.0
-      globby: registry.npmjs.org/globby/11.1.0
-      gzip-size: registry.npmjs.org/gzip-size/6.0.0
-      immer: registry.npmjs.org/immer/9.0.12
-      is-root: registry.npmjs.org/is-root/2.1.0
-      loader-utils: registry.npmjs.org/loader-utils/3.2.0
-      open: registry.npmjs.org/open/8.4.0
-      pkg-up: registry.npmjs.org/pkg-up/3.1.0
-      prompts: registry.npmjs.org/prompts/2.4.2
-      react-error-overlay: registry.npmjs.org/react-error-overlay/6.0.10
-      recursive-readdir: registry.npmjs.org/recursive-readdir/2.2.2
-      shell-quote: registry.npmjs.org/shell-quote/1.7.3
-      strip-ansi: registry.npmjs.org/strip-ansi/6.0.1
-      text-table: registry.npmjs.org/text-table/0.2.0
-    transitivePeerDependencies:
-      - eslint
-      - typescript
-      - vue-template-compiler
-      - webpack
-    dev: false
-
-  registry.npmjs.org/react-dev-utils/12.0.0_typescript@4.6.2+webpack@5.69.1:
-    resolution: {integrity: sha512-xBQkitdxozPxt1YZ9O1097EJiVpwHr9FoAuEVURCKV0Av8NBERovJauzP7bo1ThvuhZ4shsQ1AJiu4vQpoT1AQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.0.tgz}
-    id: registry.npmjs.org/react-dev-utils/12.0.0
-    name: react-dev-utils
-    version: 12.0.0
-    engines: {node: '>=14'}
-    dependencies:
-      '@babel/code-frame': registry.npmjs.org/@babel/code-frame/7.16.7
-      address: registry.npmjs.org/address/1.1.2
-      browserslist: registry.npmjs.org/browserslist/4.19.3
-      chalk: registry.npmjs.org/chalk/4.1.2
-      cross-spawn: registry.npmjs.org/cross-spawn/7.0.3
-      detect-port-alt: registry.npmjs.org/detect-port-alt/1.1.6
-      escape-string-regexp: registry.npmjs.org/escape-string-regexp/4.0.0
-      filesize: registry.npmjs.org/filesize/8.0.7
-      find-up: registry.npmjs.org/find-up/5.0.0
-      fork-ts-checker-webpack-plugin: registry.npmjs.org/fork-ts-checker-webpack-plugin/6.5.0_typescript@4.6.2+webpack@5.69.1
       global-modules: registry.npmjs.org/global-modules/2.0.0
       globby: registry.npmjs.org/globby/11.1.0
       gzip-size: registry.npmjs.org/gzip-size/6.0.0
