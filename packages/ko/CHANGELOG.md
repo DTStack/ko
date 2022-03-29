@@ -1,5 +1,12 @@
 # ko
 
+## 5.3.3
+
+### Patch Changes
+
+- 1e760adc: Fix Bug (#87)(https://github.com/DTStack/ko/issues/87), change cache to "memory" when environment is development
+- e268fcb1: bugs fixed
+
 ## 5.3.2
 
 ### Patch Changes
