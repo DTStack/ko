@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
+import Webpack from 'webpack';
+import WebpackDevServer, { Configuration } from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
 import config from '../utils/config';
@@ -9,30 +9,28 @@ import { WebpackCreator } from './creator';
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 class Dev extends WebpackCreator {
+  private devServerConf: Configuration;
   constructor(opts: Options) {
     super(opts);
-  }
-
-  public devSerConf() {
-    const userDefinedDevServerConfig = config.userConf.devServer || {};
     const { port, host } = this.opts;
-    const defaultDevServerConfig = {
+    const userDefinedDevServerConfig = config.userConf.devServer || {};
+    this.devServerConf = {
       port,
       host,
       historyApiFallback: true,
       allowedHosts: 'all',
-      hot: true,
       static: {
-        directory: config.defaultPaths.dist,
         publicPath: '/',
-        watch: true,
       },
       client: {
-        overlay: false,
+        overlay: {
+          errors: true,
+          warnings: false,
+        },
       },
       setupExitSignals: true,
+      ...userDefinedDevServerConfig,
     };
-    return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
 
   public config() {
@@ -41,6 +39,7 @@ class Dev extends WebpackCreator {
       plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
         Boolean
       ),
+      devServer: this.devServerConf,
     };
     return this.mergeConfig([this.baseConfig, conf]);
   }
@@ -72,20 +71,21 @@ class Dev extends WebpackCreator {
   }
 
   public async action() {
-    const devSerConf = this.devSerConf();
-    const { port } = devSerConf;
-    const newPort = await this.checkPort(parseInt(port));
+    const { port } = this.devServerConf;
+    const newPort = await this.checkPort(parseInt(port as string));
     if (!newPort) {
       process.exit(0);
     }
-    devSerConf.port = newPort;
-    const compiler = webpack(this.config());
-    const devServer = new WebpackDevServer(devSerConf, compiler);
+    this.devServerConf.port = newPort;
+    const config = this.config();
+    const compiler = Webpack(config);
+    const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();
     process.stdin.on('end', () => {
       devServer.stop();
       process.exit(0);
     });
+    process.stdin.resume();
   }
 }
 
