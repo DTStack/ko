@@ -19,7 +19,13 @@ const scriptLoader = [
       not: [/dt-common/],
     },
     use: [
-      THREAD_LOADER,
+      {
+        loader: THREAD_LOADER,
+        options: {
+          workerNodeArgs: ['--max-old-space-size=4096'],
+          name: 'ko-js-pool',
+        },
+      },
       {
         loader: BABEL_LOADER,
         options: {

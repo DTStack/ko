@@ -70,6 +70,11 @@ class Dev extends WebpackCreator {
     }
   }
 
+  private threadLoaderWarmUp() {
+    const threadLoader = require('thread-loader');
+    threadLoader.warmup({}, [require.resolve('babel-loader')]);
+  }
+
   public async action() {
     const { port } = this.devServerConf;
     const newPort = await this.checkPort(parseInt(port as string));
@@ -78,6 +83,7 @@ class Dev extends WebpackCreator {
     }
     this.devServerConf.port = newPort;
     const config = this.config();
+    this.threadLoaderWarmUp();
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();
