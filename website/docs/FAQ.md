@@ -26,6 +26,9 @@ module.exports = {
 ## How to polyfill Node.js core modules:
 
 Webpack 5 no longer polyfills Node.js core modules automatically which means if you use them in your code running in browsers or alike, you will have to install compatible modules from npm and include them yourself. And if your target environment is browser, just install some packages and add **resolve.fallback** into **ko.config.js**.
+:::tip
+From v5.3.4, ko polyfill these core modules internally, so you don't have to install below packages and add configs.
+:::
 
 ### Install browserify packages:
 ```bash
@@ -71,6 +74,9 @@ And you should update your project **tsconfig.json** into these configs:
 ```
 
 ## Why my devSever config not working
+:::caution
+**webpack-dev-server** has some troubles in ko, we downgrade **webpack-dev-server** temporarily to v3 in ko v5.3.4
+:::
 
 ko use **webpack-dev-server** v4 internally. So if you find out that your old **devServer** configs not working,please refer to [webpack-dev-server migration v4](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) and update your **devServer** configs.
 
