@@ -69,7 +69,7 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "webpack": "^5.69.1",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-dev-server": "^4.7.4",
+    "webpack-dev-server": "3.11.3",
     "webpack-merge": "^5.8.0",
     "webpackbar": "^5.0.2",
     "worker-loader": "^3.0.8"

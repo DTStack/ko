@@ -1,4 +1,4 @@
-import Webpack from 'webpack';
+import Webpack, { Compiler } from 'webpack';
 import WebpackDevServer, { Configuration } from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
@@ -17,18 +17,18 @@ class Dev extends WebpackCreator {
     this.devServerConf = {
       port,
       host,
+      contentBase: config.defaultPaths.dist,
       historyApiFallback: true,
-      allowedHosts: 'all',
-      static: {
-        publicPath: '/',
+      disableHostCheck: true,
+      compress: true,
+      clientLogLevel: 'none',
+      hot: true,
+      inline: true,
+      publicPath: '/',
+      watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 600,
       },
-      client: {
-        overlay: {
-          errors: true,
-          warnings: false,
-        },
-      },
-      setupExitSignals: true,
       ...userDefinedDevServerConfig,
     };
   }
@@ -39,7 +39,6 @@ class Dev extends WebpackCreator {
       plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
         Boolean
       ),
-      devServer: this.devServerConf,
     };
     return this.mergeConfig([this.baseConfig, conf]);
   }
@@ -77,21 +76,42 @@ class Dev extends WebpackCreator {
 
   public async action() {
     const { port } = this.devServerConf;
-    const newPort = await this.checkPort(parseInt(port as string));
+    const newPort = await this.checkPort(port!);
     if (!newPort) {
       process.exit(0);
     }
     this.devServerConf.port = newPort;
-    const config = this.config();
-    this.threadLoaderWarmUp();
-    const compiler = Webpack(config);
-    const devServer = new WebpackDevServer(config.devServer, compiler);
-    await devServer.start();
-    process.stdin.on('end', () => {
-      devServer.stop();
-      process.exit(0);
+    WebpackDevServer.addDevServerEntrypoints(
+      this.config() as Configuration,
+      this.devServerConf
+    );
+    const compiler = Webpack(this.config());
+    const devServer = new WebpackDevServer(compiler as any, this.devServerConf);
+    let isFirstCompile = true;
+    compiler.hooks.done.tap('done', stats => {
+      if (isFirstCompile) {
+        isFirstCompile = false;
+        this.successStdout('development server has been started');
+      }
+      if (stats.hasErrors()) {
+        console.log(
+          stats.toString({
+            colors: true,
+          })
+        );
+      }
     });
-    process.stdin.resume();
+
+    compiler.hooks.invalid.tap('invalid', () => {
+      console.log('Compiling...');
+    });
+
+    devServer.listen(this.devServerConf.port, this.devServerConf.host!, err => {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    });
   }
 }
 
