@@ -49,6 +49,9 @@ function getWebpackBaseConf(opts: Options): Configuration {
     cache: {
       type: config.isProductionEnv ? <const>'filesystem' : <const>'memory',
     },
+    stats: {
+      cachedModules: false,
+    },
   };
   return webpackBaseConf as Configuration;
 }
