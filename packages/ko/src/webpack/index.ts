@@ -42,6 +42,16 @@ function getWebpackBaseConf(opts: Options): Configuration {
             configFile: config.defaultPaths.tsconfig,
           }),
       ].filter(Boolean) as any,
+      fallback: {
+        fs: false,
+        path: false,
+        events: false,
+        os: require.resolve('os-browserify/browser'),
+        crypto: require.resolve('crypto-browserify'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer/'),
+        string_decoder: require.resolve('string_decoder/'),
+      },
     },
     performance: {
       hints: <const>false,

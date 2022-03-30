@@ -1,4 +1,4 @@
-import Webpack, { Compiler } from 'webpack';
+import Webpack from 'webpack';
 import WebpackDevServer, { Configuration } from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
