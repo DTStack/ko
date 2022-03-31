@@ -1,15 +1,14 @@
-import Webpack from 'webpack';
-import WebpackDevServer, { Configuration } from 'webpack-dev-server';
+import Webpack, { Configuration }  from 'webpack';
+import WebpackDevServer, { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
 import config from '../utils/config';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
-
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 class Dev extends WebpackCreator {
-  private devServerConf: Configuration;
+  private devServerConf: DevServerConfiguration;
   constructor(opts: Options) {
     super(opts);
     const { port, host } = this.opts;
@@ -34,11 +33,16 @@ class Dev extends WebpackCreator {
   }
 
   public config() {
-    const conf = {
+    const conf: Configuration & DevServerConfiguration  =  {
       devtool: 'cheap-module-source-map',
       plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
         Boolean
       ),
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+        },
+      },
     };
     return this.mergeConfig([this.baseConfig, conf]);
   }
@@ -82,9 +86,10 @@ class Dev extends WebpackCreator {
     }
     this.devServerConf.port = newPort;
     WebpackDevServer.addDevServerEntrypoints(
-      this.config() as Configuration,
+      this.config() as any,
       this.devServerConf
     );
+    this.threadLoaderWarmUp();
     const compiler = Webpack(this.config());
     const devServer = new WebpackDevServer(compiler as any, this.devServerConf);
     let isFirstCompile = true;
@@ -100,10 +105,6 @@ class Dev extends WebpackCreator {
           })
         );
       }
-    });
-
-    compiler.hooks.invalid.tap('invalid', () => {
-      console.log('Compiling...');
     });
 
     devServer.listen(this.devServerConf.port, this.devServerConf.host!, err => {
