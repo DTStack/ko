@@ -14,9 +14,14 @@ const scriptLoader = [
   },
   {
     test: /\.(t|j)sx?$/,
-    exclude: {
-      and: [/node_modules/],
-      not: [/dt-common/],
+    include: (input: string) => {
+      if (input.includes('node_modules/dt-common/src/')) {
+        return true;
+      } else if (input.includes('node_modules')) {
+        return false;
+      } else {
+        return true;
+      }
     },
     use: [
       {
