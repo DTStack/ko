@@ -27,7 +27,7 @@ function getWebpackBaseConf(opts: Options): Configuration {
     entry: `src/index.${ts ? 'tsx' : 'js'}`,
     output: {
       path: config.defaultPaths.dist,
-      filename: hash ? 'js/[name].[contenthash].js' : 'js/[name].js',
+      filename: hash ? '[name].[contenthash].js' : '[name].js',
       publicPath: '/',
     },
     module: {

@@ -32,6 +32,7 @@ program
   .option('-p, --port <port>', 'server start on which port', parseInt)
   .option('--host <host>', 'specify a host to use')
   .option('-t, --ts', 'support typescript')
+  .option('-h, --hash', 'output file name with hash')
   .option('-a,--analyzer', 'support building analyzer')
   .action((opts: Options) => {
     process.env.NODE_ENV = 'development';
