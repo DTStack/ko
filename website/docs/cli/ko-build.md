@@ -7,6 +7,6 @@ Use internal webpack instance to bundle files, compiled files will be write to *
 
 Optional arguments:
 
-* `--hash`: output filename with it's hash
+* `--hash`: output filename with it's contenthash
 * `-t,--ts,--typescript`: support typescript or not, ko support typescript by default
 * `-e,--esbuild`: enable esbuild (now only esbuild minification is supported)
