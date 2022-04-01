@@ -54,7 +54,15 @@ module.exports = {
   }
 };
 ```
+### Inject version-webpack-plugin for production environment
 
+```js
+ plugins: [
+    new CopyWebpackPlugin(yourOwnCopyConfig),
+    process.env.NODE_ENV === 'production' ? new VersionPlugin() : null
+  ].filter(Boolean)
+
+```
 ## How to use web workers
 
 :::caution
