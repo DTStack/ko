@@ -11,7 +11,10 @@
     "lint": "pnpm prettier && pnpm eslint",
     "test": "pnpm test",
     "debug:ko": "pnpm debug --filter ./packages/ko",
-    "docs:start": "cd website && pnpm start"
+    "docs:start": "cd website && pnpm start",
+    "changeset": "pnpm exec changeset",
+    "ver": "pnpm exec changeset version",
+    "publish": "pnpm exec changeset publish"
   },
   "config": {
     "commitizen": {
