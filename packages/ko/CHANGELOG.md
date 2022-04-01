@@ -1,5 +1,13 @@
 # ko
 
+## 5.3.5
+
+### Patch Changes
+
+- 1ed9e367: Optimization:
+  - support hash parameter for fix potential conflict filename
+  - update devServer default config to prevent GC
+
 ## 5.3.4
 
 ### Patch Changes
@@ -84,43 +92,43 @@ Migrate webpack to v5, and remove or update webpack plugins & loaders.
 
 ### Upgrade
 
-    assets-webpack-plugin ^3.9.10 → ^7.0.0  
-    autoprefixer ^9.7.3 → ^10.1.0  
-    babel-loader ^8.0.6 → ^8.2.2  
-    camelcase ^5.3.1 → ^6.2.0  
-    case-sensitive-paths-webpack-plugin ^2.2.0 → ^2.3.0  
-    clean-webpack-plugin 1.0.0 → 3.0.0  
-    commander ^4.1.0 → ^6.2.1  
-    compressing ^1.5.0 → ^1.5.1  
-    copy-webpack-plugin ^5.1.1 → ^7.0.0  
-    css-loader ^3.4.1 → ^5.0.1  
-    decamelize ^3.2.0 → ^4.0.0  
-    file-loader ^5.0.2 → ^6.2.0  
-    fork-ts-checker-webpack-plugin ^3.1.1 → ^6.0.7  
-    html-webpack-plugin ^3.2.0 → ^4.5.0  
-    inquirer ^7.0.3 → ^7.3.3  
-    less ^3.10.3 → ^3.13.0  
-    less-loader ^5.0.0 → ^7.1.0  
-    lodash ^4.17.15 → ^4.17.20  
-    mini-css-extract-plugin ^0.9.0 → ^1.3.3  
-    mustache ^3.2.1 → ^4.1.0  
-    ora ^4.0.3 → ^5.1.0  
-    postcss-loader ^3.0.0 → ^4.1.0  
-    react-dev-utils ^9.0.3 → ^11.0.1  
-    sass-loader ^8.0.0 → ^10.1.0  
-    shelljs ^0.8.3 → ^0.8.4  
-    style-loader ^1.1.2 → ^2.0.0  
-    ts-loader ^6.2.1 → ^8.0.12  
-    tsconfig-paths-webpack-plugin ^3.2.0 → ^3.3.0  
-    typescript ^3.7.4 → ^4.1.3  
-    url-loader ^3.0.0 → ^4.1.1  
-    urllib ^2.34.2 → ^2.36.1  
-    vue-loader ^15.8.3 → ^15.9.5  
-    vue-template-compiler ^2.6.11 → ^2.6.12  
-    webpack ^4.41.5 → ^4.44.2  
-    webpack-bundle-analyzer ^3.6.0 → ^4.2.0  
-    webpack-cli ^3.3.10 → ^4.2.0  
-    webpack-dev-server ^3.10.1 → ^3.11.0  
+    assets-webpack-plugin ^3.9.10 → ^7.0.0
+    autoprefixer ^9.7.3 → ^10.1.0
+    babel-loader ^8.0.6 → ^8.2.2
+    camelcase ^5.3.1 → ^6.2.0
+    case-sensitive-paths-webpack-plugin ^2.2.0 → ^2.3.0
+    clean-webpack-plugin 1.0.0 → 3.0.0
+    commander ^4.1.0 → ^6.2.1
+    compressing ^1.5.0 → ^1.5.1
+    copy-webpack-plugin ^5.1.1 → ^7.0.0
+    css-loader ^3.4.1 → ^5.0.1
+    decamelize ^3.2.0 → ^4.0.0
+    file-loader ^5.0.2 → ^6.2.0
+    fork-ts-checker-webpack-plugin ^3.1.1 → ^6.0.7
+    html-webpack-plugin ^3.2.0 → ^4.5.0
+    inquirer ^7.0.3 → ^7.3.3
+    less ^3.10.3 → ^3.13.0
+    less-loader ^5.0.0 → ^7.1.0
+    lodash ^4.17.15 → ^4.17.20
+    mini-css-extract-plugin ^0.9.0 → ^1.3.3
+    mustache ^3.2.1 → ^4.1.0
+    ora ^4.0.3 → ^5.1.0
+    postcss-loader ^3.0.0 → ^4.1.0
+    react-dev-utils ^9.0.3 → ^11.0.1
+    sass-loader ^8.0.0 → ^10.1.0
+    shelljs ^0.8.3 → ^0.8.4
+    style-loader ^1.1.2 → ^2.0.0
+    ts-loader ^6.2.1 → ^8.0.12
+    tsconfig-paths-webpack-plugin ^3.2.0 → ^3.3.0
+    typescript ^3.7.4 → ^4.1.3
+    url-loader ^3.0.0 → ^4.1.1
+    urllib ^2.34.2 → ^2.36.1
+    vue-loader ^15.8.3 → ^15.9.5
+    vue-template-compiler ^2.6.11 → ^2.6.12
+    webpack ^4.41.5 → ^4.44.2
+    webpack-bundle-analyzer ^3.6.0 → ^4.2.0
+    webpack-cli ^3.3.10 → ^4.2.0
+    webpack-dev-server ^3.10.1 → ^3.11.0
     webpack-merge ^4.2.2 → ^5.7.0
 
 ### Remove
