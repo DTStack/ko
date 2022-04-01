@@ -13,8 +13,8 @@
     "debug:ko": "pnpm debug --filter ./packages/ko",
     "docs:start": "cd website && pnpm start",
     "changeset": "pnpm exec changeset",
-    "ver": "pnpm exec changeset version",
-    "publish": "pnpm exec changeset publish"
+    "prerelease": "changeset version",
+    "release": "changeset publish"
   },
   "config": {
     "commitizen": {
