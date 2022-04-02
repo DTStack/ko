@@ -1,3 +1,4 @@
+-->
 ---
 sidebar_position: 2
 title: Migration
@@ -30,10 +31,6 @@ There are some built-in webpack loaders & plugins in ko as shown below:
 * tsconfig-paths-webpack-plugin
 
 You should remove them from your **package.json** if you have used them.
-### Environment variables process.env.node_env 
-
-* To custom plugins in your ko.config.js between development and production builds you may use environment variables.
-* ko dev vs build inject process.env.node_env as developement and production
 
 ## Create **ko.config.js**
 **ko.config.js** let you customize your own configs, and all your customized configs will be merged into internal webpack instance.we recommend you override [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin),[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) if needed. you can get more details in [FAQ](/docs/FAQ)

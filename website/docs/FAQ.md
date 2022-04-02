@@ -54,7 +54,10 @@ module.exports = {
   }
 };
 ```
-### Inject version-webpack-plugin for production environment
+### Environment variables process.env.node_env 
+
+* To custom plugins in your ko.config.js between development and production builds you may use environment variables.
+* ko dev vs build inject process.env.node_env as developement and production
 
 ```js
  plugins: [
