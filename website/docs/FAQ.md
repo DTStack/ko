@@ -54,7 +54,18 @@ module.exports = {
   }
 };
 ```
+### Environment variables process.env.node_env 
 
+* To custom plugins in your ko.config.js between development and production builds you may use environment variables.
+* ko dev vs build inject process.env.node_env as developement and production
+
+```js
+ plugins: [
+    new CopyWebpackPlugin(yourOwnCopyConfig),
+    process.env.NODE_ENV === 'production' ? new VersionPlugin() : null
+  ].filter(Boolean)
+
+```
 ## How to use web workers
 
 :::caution
