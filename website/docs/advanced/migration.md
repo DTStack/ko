@@ -25,9 +25,7 @@ There are some built-in webpack loaders & plugins in ko as shown below:
 ### plugins
 * @pmmmwh/react-refresh-webpack-plugin
 * case-sensitive-paths-webpack-plugin
-* clean-webpack-plugin
 * css-minimizer-webpack-plugin
-* html-webpack-plugin
 * tsconfig-paths-webpack-plugin
 
 You should remove them from your **package.json** if you have used them.
