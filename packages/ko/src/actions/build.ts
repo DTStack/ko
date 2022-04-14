@@ -25,7 +25,7 @@ class Build extends WebpackCreator {
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({
-          chunks: 'async',
+          chunks: 'all',
           minSize: 30000,
           maxSize: 600000,
           minChunks: 1,
@@ -33,6 +33,10 @@ class Build extends WebpackCreator {
           maxInitialRequests: 3,
           automaticNameDelimiter: '_',
           cacheGroups: {
+            baseCommon: {
+              test: new RegExp(`[\\\/]node_modules[\\\/](${['react', 'react-router', 'react-dom', 'react-redux', 'redux', 'react-router-redux', 'lodash'].join('|')})`),
+              priority: 1
+            },     
             antd: {
               name: 'antd',
               test: /[\\/]node_modules[\\/]antd[\\/]/,
@@ -43,7 +47,7 @@ class Build extends WebpackCreator {
               test: /[\\/]node_modules[\\/]lodash[\\/]/,
               chunks: 'initial',
               priority: -10,
-            },
+            },       
             default: {
               minChunks: 2,
               priority: -20,
