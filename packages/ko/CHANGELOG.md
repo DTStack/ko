@@ -1,5 +1,14 @@
 # ko
 
+## 5.3.6
+
+### Patch Changes
+
+- ## 4f4516bb: Optimization:
+  - fix: chunks can be shared even between async and no-async chunks
+  - fix: fix dt-common path scope bug
+  - docs: update FAQ.md
+
 ## 5.3.5
 
 ### Patch Changes
