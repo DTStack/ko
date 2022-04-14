@@ -34,7 +34,7 @@ class Build extends WebpackCreator {
           automaticNameDelimiter: '_',
           cacheGroups: {
             baseCommon: {
-              test: new RegExp(`[\\\/]node_modules[\\\/](${['react', 'react-router', 'react-dom', 'react-redux', 'redux', 'react-router-redux', 'lodash'].join('|')})`),
+              test: new RegExp(`[\\/]node_modules[\\/](${['react', 'react-router', 'react-dom', 'react-redux', 'redux', 'react-router-redux', 'lodash'].join('|')})`),
               priority: 1
             },     
             antd: {
