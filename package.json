@@ -12,8 +12,8 @@
     "test": "pnpm test",
     "debug:ko": "pnpm debug --filter ./packages/ko",
     "docs:start": "cd website && pnpm start",
-    "changeset": "pnpm exec changeset",
-    "prerelease": "changeset version",
+    "changeset": "changeset",
+    "bump": "changeset version",
     "release": "changeset publish"
   },
   "config": {

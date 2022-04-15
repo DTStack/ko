@@ -29,7 +29,7 @@ pnpm add ko --save-dev
 
 ## Contributing
 
-We'd love to have your helping hand on `ko`! See [CONTRIBUTING](./contributing.md) for more information on how to get started.
+We'd love to have your helping hand on `ko`! See [CONTRIBUTING](https://dtstack.github.io/ko/docs/contributing/) for more information on how to get started.
 
 ## License
 
