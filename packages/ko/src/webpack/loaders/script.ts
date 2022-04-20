@@ -3,11 +3,12 @@ import config from '../../utils/config';
 
 const THREAD_LOADER = require.resolve('thread-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
+const WORKER_LOADER = require.resolve('worker-loader');
 
 const scriptLoader = [
   {
     test: /\.worker.[jt]s$/,
-    loader: 'worker-loader',
+    loader: WORKER_LOADER,
     options: {
       inline: 'fallback',
     },
@@ -15,6 +16,7 @@ const scriptLoader = [
   {
     test: /\.(t|j)sx?$/,
     include: (input: string) => {
+      // internal modules dt-common compatible
       if (input.includes('node_modules/dt-common/src/')) {
         return true;
       } else if (input.includes('node_modules')) {
