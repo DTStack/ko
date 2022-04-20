@@ -2,24 +2,41 @@ import { resolve, isAbsolute } from 'path';
 import { existsSync } from 'fs';
 
 class Config {
-  cwd: string;
-
   private static instance: Config;
-
-  public babelPlugins: [
-    string,
-    {
-      [key: string]: any;
-    }
-  ][] = [];
+  cwd: string;
+  default: {
+    [key: string]: string;
+  };
+  isProductionEnv: boolean;
 
   private constructor() {
     this.cwd = process.cwd();
+    this.default = {
+      dist: this.getFileRealPath('dist'),
+      host: '0.0.0.0',
+      port: '8080',
+    };
+    this.isProductionEnv = process.env.NODE_ENV === 'production';
+  }
+
+  private memoize<T extends (...args: any) => any>(fn: T): any {
+    let ret: undefined;
+    let cached = false;
+    return () => {
+      if (cached) {
+        return ret;
+      }
+      ret = fn();
+      cached = true;
+      //@ts-ignore
+      fn = undefined;
+      return ret;
+    };
   }
 
   public static getInstance(): Config {
     if (!Config.instance) {
-      Config.instance = Object.freeze(new Config());
+      Config.instance = new Config();
     }
     return Config.instance;
   }
@@ -28,29 +45,20 @@ class Config {
     return isAbsolute(path) ? path : resolve(this.cwd, path);
   }
 
-  public get userConf() {
-    const userConfPath = this.getFileRealPath('ko.config.js');
-    if (existsSync(userConfPath)) {
-      const userConf = require(userConfPath);
-      return userConf;
-    } else {
-      throw new Error('user config file not exist, please check it!');
-    }
-  }
-
-  public get defaultPaths() {
-    return {
-      src: this.getFileRealPath('src'),
-      dist: this.getFileRealPath('dist'),
-      public: this.getFileRealPath('public'),
-      html: this.getFileRealPath('public/index.html'),
-      tsconfig: this.getFileRealPath('tsconfig.json'),
+  private getUserConfig() {
+    const fn = () => {
+      const userConfPath = this.getFileRealPath('ko.config.js');
+      if (existsSync(userConfPath)) {
+        return require(userConfPath);
+      } else {
+        throw new Error('user config file not exist, please check if it exist');
+      }
     };
+    return this.memoize(fn);
   }
 
-  public get isProductionEnv(): boolean {
-    const PROD = 'production';
-    return process.env.NODE_ENV === PROD;
+  public get userConf() {
+    return this.getUserConfig();
   }
 }
 

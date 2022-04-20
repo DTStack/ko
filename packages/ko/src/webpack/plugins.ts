@@ -12,7 +12,6 @@ function getPlugins() {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
-    //TODO: check if mini-css-extract-plugin should use base name if enable HMR
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css',

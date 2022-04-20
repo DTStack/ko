@@ -23,11 +23,11 @@ export abstract class WebpackCreator extends Creator {
     return unique(
       'plugins',
       pluginNames,
-      (plugin) => plugin.constructor && plugin.constructor.name
+      plugin => plugin.constructor && plugin.constructor.name
     );
   }
 
-  public initConfig(opts: Options): Configuration {
+  private initConfig(opts: Options): Configuration {
     this.baseConfig = getWebpackBaseConf(opts);
     return mergeWithCustomize({
       customizeArray: this.pluginsUnique(['HtmlWebpackPlugin']),

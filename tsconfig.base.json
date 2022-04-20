@@ -5,6 +5,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "strictPropertyInitialization": true
+    "strict": true
   },
 }
