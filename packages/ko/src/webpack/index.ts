@@ -1,5 +1,4 @@
 import { Configuration } from 'webpack';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import config from '../utils/config';
 import { Options } from '../interfaces';
 import loaders from './loaders';
@@ -19,14 +18,14 @@ const extensions = [
 ];
 
 function getWebpackBaseConf(opts: Options): Configuration {
-  const { ts = true, hash } = opts;
+  const { hash } = opts;
   const webpackBaseConf = {
     mode: config.isProductionEnv ? <const>'production' : <const>'development',
     target: 'web',
     context: config.cwd,
-    entry: `src/index.${ts ? 'tsx' : 'js'}`,
+    entry: 'src/index',
     output: {
-      path: config.defaultPaths.dist,
+      path: config.default.dist,
       filename: hash ? '[name].[contenthash].js' : '[name].js',
       publicPath: '/',
     },
@@ -36,12 +35,6 @@ function getWebpackBaseConf(opts: Options): Configuration {
     plugins: getPlugins(),
     resolve: {
       extensions,
-      plugins: [
-        ts &&
-          new TsconfigPathsPlugin({
-            configFile: config.defaultPaths.tsconfig,
-          }),
-      ].filter(Boolean) as any,
       fallback: {
         fs: false,
         path: false,
