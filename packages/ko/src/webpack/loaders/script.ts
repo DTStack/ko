@@ -1,4 +1,4 @@
-import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier';
+import getCacheIdentifier from '../../utils/getCacheIdentifier';
 import config from '../../utils/config';
 
 const THREAD_LOADER = require.resolve('thread-loader');
