@@ -1,5 +1,4 @@
 import webpack from 'webpack';
-import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
@@ -11,17 +10,10 @@ class Build extends WebpackCreator {
   }
 
   public config() {
-    const { esbuild } = this.opts;
     const conf = {
       optimization: {
-        minimizer: [
-          !esbuild && new CssMinimizerPlugin(),
-          esbuild &&
-            new ESBuildMinifyPlugin({
-              target: 'es2015',
-              css: true,
-            }),
-        ].filter(Boolean),
+        minimize: true,
+        minimizer: ['...', CssMinimizerPlugin.parcelCssMinify],
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({
@@ -34,9 +26,19 @@ class Build extends WebpackCreator {
           automaticNameDelimiter: '_',
           cacheGroups: {
             baseCommon: {
-              test: new RegExp(`[\\/]node_modules[\\/](${['react', 'react-router', 'react-dom', 'react-redux', 'redux', 'react-router-redux', 'lodash'].join('|')})`),
-              priority: 1
-            },     
+              test: new RegExp(
+                `[\\/]node_modules[\\/](${[
+                  'react',
+                  'react-router',
+                  'react-dom',
+                  'react-redux',
+                  'redux',
+                  'react-router-redux',
+                  'lodash',
+                ].join('|')})`
+              ),
+              priority: 1,
+            },
             antd: {
               name: 'antd',
               test: /[\\/]node_modules[\\/]antd[\\/]/,
@@ -47,7 +49,7 @@ class Build extends WebpackCreator {
               test: /[\\/]node_modules[\\/]lodash[\\/]/,
               chunks: 'initial',
               priority: -10,
-            },       
+            },
             default: {
               minChunks: 2,
               priority: -20,
