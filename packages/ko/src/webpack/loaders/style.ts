@@ -4,6 +4,7 @@ import autoprefixer from 'autoprefixer';
 const CSS_LOADER = require.resolve('css-loader');
 const LESS_LOADER = require.resolve('less-loader');
 const SASS_LOADER = require.resolve('sass-loader');
+const RESOLVE_URL_LOADER = require.resolve('resolve-url-loader');
 const POSTCSS_LOADER = require.resolve('postcss-loader');
 
 const styleLoader = {
@@ -17,7 +18,6 @@ const cssLoader = {
   },
 };
 
-//TODO: check postcss-loader should use sourceMap option
 const postcssLoader = {
   loader: POSTCSS_LOADER,
   options: {
@@ -39,6 +39,9 @@ const styleLoaders = [
       styleLoader,
       cssLoader,
       postcssLoader,
+      {
+        loader: RESOLVE_URL_LOADER,
+      },
       {
         loader: SASS_LOADER,
         options: {
