@@ -43,6 +43,7 @@
   "dependencies": {
     "@babel/core": "^7.17.9",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+    "@swc/core": "^1.2.169",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.5",
     "babel-preset-ko-app": "workspace:^1.0.0",

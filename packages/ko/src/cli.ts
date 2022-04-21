@@ -10,7 +10,7 @@ const program = new Command();
 const pkg = require('../package.json');
 
 program
-  .description('Project toolkit base on webpack,babel,eslint and prettier.')
+  .description('Project toolkit base on webpack')
   .version(pkg.version, '-v, --version')
   .usage('<command> [options]');
 

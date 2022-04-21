@@ -7,6 +7,9 @@ class Config {
   default: {
     [key: string]: string;
   };
+  lab: {
+    [key: string]: any;
+  };
   isProductionEnv: boolean;
 
   private constructor() {
@@ -17,6 +20,7 @@ class Config {
       port: '8080',
     };
     this.isProductionEnv = process.env.NODE_ENV === 'production';
+    this.lab = {};
   }
 
   private memoize<T extends (...args: any) => any>(fn: T): any {
@@ -49,7 +53,12 @@ class Config {
     const fn = () => {
       const userConfPath = this.getFileRealPath('ko.config.js');
       if (existsSync(userConfPath)) {
-        return require(userConfPath);
+        const userConfig = require(userConfPath);
+        if (userConfig.lab) {
+          this.lab = userConfig.lab;
+          delete userConfig.lab;
+        }
+        return userConfig;
       } else {
         throw new Error('user config file not exist, please check if it exist');
       }
