@@ -12,6 +12,7 @@ class Script {
   constructor(isProduction: boolean) {
     this.rules = [];
     this.isProduction = isProduction;
+    this.init();
   }
   init() {
     this.isProduction ? this.production() : this.development();

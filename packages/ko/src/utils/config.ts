@@ -67,7 +67,7 @@ class Config {
   }
 
   public get userConf() {
-    return this.getUserConfig();
+    return this.getUserConfig()();
   }
 }
 

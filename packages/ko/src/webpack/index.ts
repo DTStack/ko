@@ -23,14 +23,14 @@ function getWebpackBaseConf(opts: Options): Configuration {
     mode: config.isProductionEnv ? <const>'production' : <const>'development',
     target: 'web',
     context: config.cwd,
-    entry: 'src/index',
+    entry: './src/index',
     output: {
       path: config.default.dist,
       filename: hash ? '[name].[contenthash].js' : '[name].js',
       publicPath: '/',
     },
     module: {
-      rules: loaders,
+      rules: loaders(config),
     },
     plugins: getPlugins(),
     resolve: {
