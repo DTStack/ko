@@ -1,5 +1,13 @@
 # ko
 
+## 5.3.7
+
+### Patch Changes
+
+- fd136e36: Optimizations
+  - feat: update build action optimization
+  - fix: update work-loader's path to resolve path
+
 ## 5.3.6
 
 ### Patch Changes

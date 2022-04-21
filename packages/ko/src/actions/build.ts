@@ -21,8 +21,6 @@ class Build extends WebpackCreator {
           minSize: 30000,
           maxSize: 600000,
           minChunks: 1,
-          maxAsyncRequests: 5,
-          maxInitialRequests: 3,
           automaticNameDelimiter: '_',
           cacheGroups: {
             baseCommon: {
@@ -34,7 +32,6 @@ class Build extends WebpackCreator {
                   'react-redux',
                   'redux',
                   'react-router-redux',
-                  'lodash',
                 ].join('|')})`
               ),
               priority: 1,
