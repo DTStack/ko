@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
+    "ajv": "^8.11.0",
     "chalk": "^4.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
