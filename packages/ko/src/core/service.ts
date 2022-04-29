@@ -1,51 +1,62 @@
 import { Command } from 'commander';
-import Plugins from './plugins';
+import Traits from './traits';
 import Config from './config';
 import { IOptions, STATE } from './types';
-
-type CommandOptions = {
-  name: string;
-  desc: string;
-  options: [string, string][];
-  fn: Function;
-};
 
 class Service {
   private state: STATE;
   private program: Command;
   private commands: Record<string, Function>;
-  private plugins: Plugins;
+  private traits: Traits;
   private opts: IOptions;
   private cwd: IOptions['cwd'];
   private env: IOptions['env'];
-  private userConfig: Record<string, any>;
+  private configs: Record<string, any>;
 
   constructor(opts: IOptions) {
     this.opts = opts;
     this.cwd = opts.cwd;
     this.env = opts.env;
     this.program = new Command();
-    this.plugins = new Plugins(this);
-  }
-
-  registerCommand(opts: CommandOptions): void {
-    this.commands[opts.name] = () => {
-      const cmd = this.program.command(opts.name).description(opts.desc);
-      opts.options.forEach(o => {
-        cmd.option(o[0], o[1]);
-      });
-      cmd.action(params => {
-        opts.fn.call(this, params);
-      });
-    };
+    this.traits = new Traits();
   }
 
   run(name: string) {
-    this.state = STATE.ENVIRONMENT;
-    const config = new Config({
+    this.state = STATE.INIT;
+    this.configs = new Config({
       cwd: this.cwd,
-      path: this.
-    })
+    }).get();
+    this.state = STATE.LOAD;
+    const plugins = this.configs.plugins;
+    this.initPlugins(plugins);
+  }
+
+  initPlugins(plugins: any[]) {
+    plugins.forEach(p => {
+      const api = Service.createApi({
+        service: this,
+        serviceScope: ['state', 'opts', 'cwd', 'configs'],
+        traits: this.traits,
+      });
+    });
+  }
+
+  static createApi(opts: {
+    service: Service;
+    serviceScope: string[];
+    traits: Traits;
+  }) {
+    return new Proxy(opts.traits, {
+      get(traits, key: string) {
+        if (opts.serviceScope.includes(key)) {
+          //@ts-ignore
+          const scope = opts.service[key];
+          return scope;
+        }
+        //@ts-ignore
+        return traits[key];
+      },
+    });
   }
 }
 

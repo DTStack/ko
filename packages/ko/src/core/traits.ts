@@ -1,7 +1,6 @@
 import { isAbsolute } from 'path';
 import Ajv, { Schema } from 'ajv';
 import { AsyncSeriesWaterfallHook } from 'tapable';
-import Service from './service';
 import assert from 'assert';
 
 type ISchema = Schema | string;
@@ -13,11 +12,11 @@ type HookItem = {
   stage?: number;
   before?: string | string[];
 };
-type EventItem = {
-  key: string;
+type CommandOptions = {
   name: string;
+  desc: string;
+  options: [string, string][];
   fn: Function;
-  stage?: number;
 };
 
 enum ACTION {
@@ -25,25 +24,22 @@ enum ACTION {
   UPDATE = 'update',
 }
 
-class Plugins {
+class Traits {
   private hooks: Record<string, HookItem[]>;
-  private events: Record<string, EventItem[]>;
-  private service: Service;
-  constructor(service: Service) {
+  private commands: Record<string, CommandOptions>;
+  private schema: Record<string, any>;
+
+  constructor() {
     this.hooks = {};
-    this.events = {};
-    this.service = service;
+    this.commands = {};
   }
+
   register(opts: HookItem) {
     const { key } = opts;
     this.hooks[key] ||= [];
-    opts.fn = (data: any) => {
-      const { schema } = opts;
-      if (schema) {
-        this.schemaValidate(schema, data);
-      }
-      return opts.fn;
-    };
+    if (opts.schema) {
+      this.registerSchema({ name: opts.name, schema: opts.schema });
+    }
     this.hooks[key].push(opts);
   }
 
@@ -86,21 +82,21 @@ class Plugins {
     }
   }
 
-  registerEvent(opts: EventItem) {
-    const { key } = opts;
-    this.events[key] ||= [];
-    this.events[key].push(opts);
+  registerCommand(opts: CommandOptions): void {
+    assert(
+      this.commands[opts.name],
+      `command ${opts.name} has been registered before`
+    );
+    this.commands[opts.name] = opts;
   }
 
-  applyEvent(opts: { key: string; args?: any }) {
-    const events = this.events[opts.key];
-    events
-      .sort((a, b) => {
-        return (a.stage || 0) - (b.stage || 0);
-      })
-      .forEach(event => {
-        event.fn(opts.args);
-      });
+  registerSchema(opts: { name: string; schema: ISchema }) {
+    assert(
+      this.schema[opts.name],
+      `command ${opts.name} has been registered before`
+    );
+    this.schema[opts.name] =
+      typeof opts.schema === 'string' ? require(opts.schema) : opts.schema;
   }
 
   private schemaValidate(schema: ISchema, data: any) {
@@ -117,4 +113,4 @@ class Plugins {
   }
 }
 
-export default Plugins;
+export default Traits;

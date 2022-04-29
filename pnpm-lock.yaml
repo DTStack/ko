@@ -51,6 +51,7 @@ importers:
       '@swc/core': ^1.2.169
       '@types/case-sensitive-paths-webpack-plugin': ^2.1.6
       '@types/jest': ^27.4.1
+      '@types/lodash': ^4.14.182
       ajv: ^8.11.0
       autoprefixer: ^10.4.4
       babel-loader: ^8.2.5
@@ -66,6 +67,7 @@ importers:
       jest: ^27.5.1
       less: ^4.1.2
       less-loader: ^10.2.0
+      lodash: ^4.17.21
       mini-css-extract-plugin: ^2.6.0
       os-browserify: ^0.3.0
       postcss: ^8.4.12
@@ -89,6 +91,7 @@ importers:
       '@babel/core': 7.17.9
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.5_0e66e04607a9ff824bb732e14e5e1479
       '@swc/core': 1.2.169
+      '@types/lodash': 4.14.182
       ajv: 8.11.0
       autoprefixer: 10.4.4_postcss@8.4.12
       babel-loader: 8.2.5_acba72ea4bf9d339cdfcd8f55cdb7006
@@ -103,6 +106,7 @@ importers:
       css-minimizer-webpack-plugin: 3.4.1_webpack@5.72.0
       less: 4.1.2
       less-loader: 10.2.0_less@4.1.2+webpack@5.72.0
+      lodash: 4.17.21
       mini-css-extract-plugin: 2.6.0_webpack@5.72.0
       os-browserify: 0.3.0
       postcss: 8.4.12
@@ -190,18 +194,22 @@ importers:
 
   packages/ko/playground/react:
     specifiers:
+      '@types/lodash': ^4.14.182
       '@types/react': ^18.0.5
       '@types/react-dom': ^18.0.1
       ajv: ^8.11.0
       chalk: ^4.1.2
       html-webpack-plugin: ^5.5.0
+      lodash: ^4.17.21
       react: ^18.0.0
       react-dom: ^18.0.0
     dependencies:
+      '@types/lodash': 4.14.182
       '@types/react': 18.0.5
       '@types/react-dom': 18.0.1
       ajv: 8.11.0
       chalk: 4.1.2
+      lodash: 4.17.21
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
     devDependencies:
@@ -3891,6 +3899,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
+    dev: false
+
+  /@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
     dev: false
 
   /@types/mdast/3.0.10:
@@ -9863,7 +9875,7 @@ packages:
     dev: false
 
   /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz}
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   /longest/2.0.1:
     resolution: {integrity: sha1-eB4YMpaqlPbU2RbcM10NF676I/g=, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/longest/-/longest-2.0.1.tgz}

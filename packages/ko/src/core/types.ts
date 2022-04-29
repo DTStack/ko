@@ -9,13 +9,14 @@ type ICopy = {
 export type IOptions = {
   //common configs
   env?: 'development' | 'production';
-  cwd?: string;
+  cwd: string;
   alias?: Record<string, string>;
   copy?: ICopy[];
   publicPath?: string;
   hash?: boolean;
   externals?: Record<string, string>;
   outputPath?: string;
+  plugins?: any[];
   // dev, or serve configs
   serve?: {
     proxy: ProxyConfigArray;
@@ -23,13 +24,12 @@ export type IOptions = {
     port: number;
   };
   // override configs
-  webpack?: Configuration;
+  webpackConfig?: Configuration;
 };
 
 export enum STATE {
-  ENVIRONMENT,
   INIT,
-  BEFORE_START,
+  LOAD,
   START,
   RUN,
 }

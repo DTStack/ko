@@ -1,10 +1,12 @@
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { merge } from 'lodash';
 import assert from 'assert';
+import { IOptions } from './types';
 
 type IOpts = {
   cwd: string;
-  path: string;
+  path?: string;
 };
 
 class Config {
@@ -39,12 +41,22 @@ class Config {
     };
   }
 
-  public getUserConfig() {
+  public get() {
+    return merge(this.defaultConfig, this.getUserConfig());
+  }
+
+  private getUserConfig() {
     const fn = () => {
       const config = require(this.configPath);
       return config;
     };
     return this.memoize(fn);
+  }
+
+  get defaultConfig(): IOptions {
+    return {
+      cwd: process.cwd(),
+    };
   }
 }
 
