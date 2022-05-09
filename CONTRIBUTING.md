@@ -20,6 +20,7 @@ as a **monorepo**, ko now maintain 4 packages in packages directory:
 * **ko**: main package
 * **ko-lints**: code format cli, include **eslint**, **prettier** and **stylelint**, can be integrated in ko or use individually
 * **ko-config**: default config used by **ko-lints**
+* **ko-lint-config**: code format configs, include **eslint**, **prettier** and **stylelint**
 * **babel-preset-ko-app**: babel preset used by ko
 
 ## Commands
