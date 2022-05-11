@@ -1,3 +1,4 @@
+import path from 'path';
 import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
 
@@ -49,6 +50,7 @@ const styleLoaders = [
   },
   {
     test: /\.less$/,
+    exclude: [path.join(process.cwd(), 'node_modules/antd-v4')],
     use: [
       styleLoader,
       cssLoader,

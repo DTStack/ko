@@ -1,5 +1,11 @@
 # ko
 
+## 5.3.8
+
+### Patch Changes
+- update less exclude config
+- exclude test files when build
+
 ## 5.3.7
 
 ### Patch Changes
