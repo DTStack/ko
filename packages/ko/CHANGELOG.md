@@ -1,8 +1,15 @@
 # ko
 
+## 5.3.9
+
+### Patch Changes
+
+- 35faeb91: fix less-loader config issue when in symlink
+
 ## 5.3.8
 
 ### Patch Changes
+
 - update less exclude config
 - exclude test files when build
 
