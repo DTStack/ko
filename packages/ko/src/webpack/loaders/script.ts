@@ -3,16 +3,36 @@ import config from '../../utils/config';
 
 const THREAD_LOADER = require.resolve('thread-loader');
 const BABEL_LOADER = require.resolve('babel-loader');
+const WORKER_LOADER = require.resolve('worker-loader');
 
 const scriptLoader = [
   {
+    test: /\.worker.[jt]s$/,
+    loader: WORKER_LOADER,
+    options: {
+      inline: 'fallback',
+    },
+  },
+  {
     test: /\.(t|j)sx?$/,
-    exclude: {
-      and: [/node_modules/],
-      not: [/dt-common/],
+    include: (input: string) => {
+      // internal modules dt-common compatible
+      if (input.includes('node_modules/dt-common/src/')) {
+        return true;
+      } else if (input.includes('node_modules')) {
+        return false;
+      } else {
+        return true;
+      }
     },
     use: [
-      THREAD_LOADER,
+      {
+        loader: THREAD_LOADER,
+        options: {
+          workerNodeArgs: ['--max-old-space-size=4096'],
+          name: 'ko-js-pool',
+        },
+      },
       {
         loader: BABEL_LOADER,
         options: {
@@ -21,11 +41,12 @@ const scriptLoader = [
               require.resolve('babel-preset-ko-app'),
               {
                 useAbsoluteRuntime: true,
-                customizePlugins: config.babelPlugins,
               },
             ],
           ],
-          plugins: !config.isProductionEnv ? [require.resolve('react-refresh/babel')] : [],
+          plugins: config.isProductionEnv
+            ? [require.resolve('react-refresh/babel')]
+            : [],
           babelrc: false,
           configFile: false,
           cacheIdentifier: getCacheIdentifier(

@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import { ESBuildMinifyPlugin } from 'esbuild-loader';
+// import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
 
@@ -11,28 +11,33 @@ class Build extends WebpackCreator {
   }
 
   public config() {
-    const { esbuild } = this.opts;
+    // const { esbuild } = this.opts;
     const conf = {
       optimization: {
-        minimizer: [
-          !esbuild && new CssMinimizerPlugin(),
-          esbuild &&
-            new ESBuildMinifyPlugin({
-              target: 'es2015',
-              css: true,
-            }),
-        ].filter(Boolean),
+        minimize: true,
+        minimizer: ['...', new CssMinimizerPlugin()],
       },
       plugins: [
         new webpack.optimize.SplitChunksPlugin({
-          chunks: 'async',
+          chunks: 'all',
           minSize: 30000,
           maxSize: 600000,
           minChunks: 1,
-          maxAsyncRequests: 5,
-          maxInitialRequests: 3,
           automaticNameDelimiter: '_',
           cacheGroups: {
+            baseCommon: {
+              test: new RegExp(
+                `[\\/]node_modules[\\/](${[
+                  'react',
+                  'react-router',
+                  'react-dom',
+                  'react-redux',
+                  'redux',
+                  'react-router-redux',
+                ].join('|')})`
+              ),
+              priority: 1,
+            },
             antd: {
               name: 'antd',
               test: /[\\/]node_modules[\\/]antd[\\/]/,

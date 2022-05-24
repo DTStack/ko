@@ -1,36 +1,25 @@
-import { IgnorePlugin, ProgressPlugin } from 'webpack';
+import { IgnorePlugin } from 'webpack';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import WebpackBar from 'webpackbar';
 import config from '../utils/config';
 
 function getPlugins() {
-  const { userConf, defaultPaths } = config;
-  const publicPath =
-    userConf.output && userConf.output.publicPath
-      ? userConf.output.publicPath
-      : '/';
+  const { userConf } = config;
   let plugins = [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/,
     }),
-    new ProgressPlugin(),
     //TODO: check if mini-css-extract-plugin should use base name if enable HMR
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css',
     }),
     new CaseSensitivePathsPlugin(),
-
-    new HtmlWebpackPlugin({
-      template: defaultPaths.html,
-      title: 'Ko App',
-      templateParameters: {
-        configPath: `${publicPath}config/config.js`,
-      },
-      inject: 'body',
-    }),
+    new ReactRefreshPlugin(),
+    new WebpackBar(),
   ];
   plugins = plugins.concat(userConf.plugins || []);
   if (config.isProductionEnv) {

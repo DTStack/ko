@@ -27,7 +27,7 @@ function getWebpackBaseConf(opts: Options): Configuration {
     entry: `src/index.${ts ? 'tsx' : 'js'}`,
     output: {
       path: config.defaultPaths.dist,
-      filename: hash ? 'js/[name].[contenthash].js' : 'js/[name].js',
+      filename: hash ? '[name].[contenthash].js' : '[name].js',
       publicPath: '/',
     },
     module: {
@@ -42,12 +42,25 @@ function getWebpackBaseConf(opts: Options): Configuration {
             configFile: config.defaultPaths.tsconfig,
           }),
       ].filter(Boolean) as any,
+      fallback: {
+        fs: false,
+        path: false,
+        events: false,
+        os: require.resolve('os-browserify/browser'),
+        crypto: require.resolve('crypto-browserify'),
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer/'),
+        string_decoder: require.resolve('string_decoder/'),
+      },
     },
     performance: {
       hints: <const>false,
     },
     cache: {
-      type: <const>'filesystem',
+      type: config.isProductionEnv ? <const>'filesystem' : <const>'memory',
+    },
+    stats: {
+      cachedModules: false,
     },
   };
   return webpackBaseConf as Configuration;

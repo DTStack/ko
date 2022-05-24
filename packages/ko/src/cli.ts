@@ -2,7 +2,6 @@
 'use strict';
 
 import { Command } from 'commander';
-import lint from 'ko-lints';
 import { Options } from './interfaces';
 import build from './actions/build';
 import dev from './actions/dev';
@@ -22,6 +21,7 @@ program
   .option('-t,--ts,--typescript', 'support typescript')
   .option('-e,--esbuild', 'enable esbuild')
   .action((opts: Options) => {
+    process.env.NODE_ENV = 'production';
     const buildInstance = new build(opts);
     buildInstance.action();
   });
@@ -32,6 +32,7 @@ program
   .option('-p, --port <port>', 'server start on which port', parseInt)
   .option('--host <host>', 'specify a host to use')
   .option('-t, --ts', 'support typescript')
+  .option('-h, --hash', 'output file name with hash')
   .option('-a,--analyzer', 'support building analyzer')
   .action((opts: Options) => {
     process.env.NODE_ENV = 'development';

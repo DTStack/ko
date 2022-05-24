@@ -3,6 +3,10 @@ sidebar_position: 5
 title: ko stylelint
 ---
 
+:::tip
+`ko stylelint` has been moved into package `ko-lints`, so if you want use this feature, please run `pnpm add ko-lints -D` in your terminal
+:::
+
 Alias `ko sl`
 
 **Please note that `ko stylelint` is experimental**

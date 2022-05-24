@@ -1,45 +1,48 @@
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import Webpack, { Configuration }  from 'webpack';
+import WebpackDevServer, { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import detect from 'detect-port';
 import { prompt } from 'inquirer';
 import config from '../utils/config';
 import { Options } from '../interfaces';
 import { WebpackCreator } from './creator';
-
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 class Dev extends WebpackCreator {
+  private devServerConf: DevServerConfiguration;
   constructor(opts: Options) {
     super(opts);
-  }
-
-  public devSerConf() {
-    const userDefinedDevServerConfig = config.userConf.devServer || {};
     const { port, host } = this.opts;
-    const defaultDevServerConfig = {
+    const userDefinedDevServerConfig = config.userConf.devServer || {};
+    this.devServerConf = {
       port,
       host,
+      contentBase: config.defaultPaths.dist,
       historyApiFallback: true,
-      allowedHosts: 'all',
+      disableHostCheck: true,
+      compress: true,
+      clientLogLevel: 'none',
       hot: true,
-      static: {
-        directory: config.defaultPaths.dist,
-        publicPath: '/',
-        watch: true,
+      inline: true,
+      publicPath: '/',
+      watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 600,
       },
-      open: true,
+      ...userDefinedDevServerConfig,
     };
-    return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
 
   public config() {
-    const conf = {
+    const conf: Configuration & DevServerConfiguration  =  {
       devtool: 'cheap-module-source-map',
-      plugins: [
-        new ReactRefreshPlugin(),
-        this.opts.analyzer && new BundleAnalyzerPlugin(),
-      ].filter(Boolean),
+      plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
+        Boolean
+      ),
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+        },
+      },
     };
     return this.mergeConfig([this.baseConfig, conf]);
   }
@@ -70,28 +73,30 @@ class Dev extends WebpackCreator {
     }
   }
 
-  private getUrlHost(host: string): string {
-    const regex = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*$/i;
-    return regex.test(host) ? host : `http://${host}`;
+  private threadLoaderWarmUp() {
+    const threadLoader = require('thread-loader');
+    threadLoader.warmup({}, [require.resolve('babel-loader')]);
   }
 
   public async action() {
-    const { port, host } = this.devSerConf();
-    const newPort = await this.checkPort(parseInt(port));
-    if (!newPort) return;
-    const compiler = webpack(this.config());
-    const devServer = new WebpackDevServer(this.devSerConf(), compiler);
+    const { port } = this.devServerConf;
+    const newPort = await this.checkPort(port!);
+    if (!newPort) {
+      process.exit(0);
+    }
+    this.devServerConf.port = newPort;
+    WebpackDevServer.addDevServerEntrypoints(
+      this.config() as any,
+      this.devServerConf
+    );
+    this.threadLoaderWarmUp();
+    const compiler = Webpack(this.config());
+    const devServer = new WebpackDevServer(compiler as any, this.devServerConf);
     let isFirstCompile = true;
-
-    compiler.hooks.done.tap('done', (stats) => {
+    compiler.hooks.done.tap('done', stats => {
       if (isFirstCompile) {
         isFirstCompile = false;
         this.successStdout('development server has been started');
-        console.log(
-          `server starts at: ${this.linkStdout(
-            this.getUrlHost(host) + ':' + port
-          )}`
-        );
       }
       if (stats.hasErrors()) {
         console.log(
@@ -102,11 +107,12 @@ class Dev extends WebpackCreator {
       }
     });
 
-    compiler.hooks.invalid.tap('invalid', () => {
-      console.log('Compiling...');
+    devServer.listen(this.devServerConf.port, this.devServerConf.host!, err => {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
     });
-
-    devServer.start();
   }
 }
 
