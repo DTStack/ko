@@ -1,13 +1,20 @@
 #!/usr/bin/env node
 'use strict';
+import Service from './core/service';
+const service = new Service();
 
-import { Command } from 'commander';
-import { Options } from './interfaces';
+service.registerCommand({
+  name: 'build',
+  description: 'build project',
+});
+
+service.registerCommand({
+  name: 'dev',
+  description: 'start dev server',
+});
+
 import build from './actions/build';
 import dev from './actions/dev';
-
-const program = new Command();
-const pkg = require('../package.json');
 
 program
   .description('Project toolkit base on webpack')

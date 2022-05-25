@@ -1,47 +1,22 @@
-import getCacheIdentifier from '../../utils/getCacheIdentifier';
-import { RuleSetRule } from 'webpack';
-
-const THREAD_LOADER = require.resolve('thread-loader');
-const BABEL_LOADER = require.resolve('babel-loader');
-const WORKER_LOADER = require.resolve('worker-loader');
-const SWC_LOADER = require.resolve('../../loaders/swc-loader');
-
+import BabelLoader from './babel';
+import { ILoaderOptions } from '../../core/types';
 class Script {
-  rules: RuleSetRule[];
-  isProduction: boolean;
-  constructor(isProduction: boolean) {
-    this.rules = [];
-    this.isProduction = isProduction;
-    this.init();
+  private THREAD_LOADER: string;
+  private WORKER_LOADER: string;
+  private opts: ILoaderOptions;
+  private babelLoader: BabelLoader;
+  constructor(opts: ILoaderOptions) {
+    this.THREAD_LOADER = require.resolve('thread-loader');
+    this.WORKER_LOADER = require.resolve('worker-loader');
+    this.opts = opts;
+    this.babelLoader = new BabelLoader(opts);
   }
-  init() {
-    this.isProduction ? this.production() : this.development();
-  }
-  development() {
-    this.rules = [
-      {
-        test: /\.(t|j)sx?$/,
-        include: (input: string) => {
-          // internal modules dt-common compatible
-          if (input.includes('node_modules/dt-common/src/')) {
-            return true;
-          } else if (input.includes('node_modules')) {
-            return false;
-          } else {
-            return true;
-          }
-        },
-        use: {
-          loader: SWC_LOADER,
-        },
-      },
-    ];
-  }
-  production() {
-    this.rules = [
+
+  get config() {
+    const scriptLoader = [
       {
         test: /\.worker.[jt]s$/,
-        loader: WORKER_LOADER,
+        loader: this.WORKER_LOADER,
         options: {
           inline: 'fallback',
         },
@@ -60,41 +35,17 @@ class Script {
         },
         use: [
           {
-            loader: THREAD_LOADER,
+            loader: this.THREAD_LOADER,
             options: {
               workerNodeArgs: ['--max-old-space-size=4096'],
               name: 'ko-js-pool',
             },
           },
-          {
-            loader: BABEL_LOADER,
-            options: {
-              presets: [
-                [
-                  require.resolve('babel-preset-ko-app'),
-                  {
-                    useAbsoluteRuntime: true,
-                  },
-                ],
-              ],
-              babelrc: false,
-              configFile: false,
-              cacheIdentifier: getCacheIdentifier('production', [
-                'babel-preset-ko-app',
-                'react-dev-utils',
-                'ko',
-              ]),
-              cacheDirectory: true,
-              cacheCompression: false,
-              compact: this.isProduction,
-            },
-          },
+          this.babelLoader.config,
         ],
       },
     ];
-  }
-  get loaders() {
-    return this.rules;
+    return scriptLoader;
   }
 }
 

@@ -51,14 +51,15 @@ importers:
       '@types/case-sensitive-paths-webpack-plugin': ^2.1.6
       '@types/jest': ^27.5.1
       '@types/lodash': ^4.14.182
-      ajv: ^8.11.0
       autoprefixer: ^10.4.7
       babel-loader: ^8.2.5
+      babel-plugin-treasure: ^0.9.0
       babel-preset-ko-app: workspace:^1.0.0
       buffer: ^6.0.3
       case-sensitive-paths-webpack-plugin: ^2.4.0
       chalk: ^5.0.1
       clean-webpack-plugin: ^4.0.0
+      commander: ^9.2.0
       crypto-browserify: ^3.12.0
       css-loader: ^6.7.1
       css-minimizer-webpack-plugin: ^4.0.0
@@ -88,14 +89,15 @@ importers:
     dependencies:
       '@babel/core': 7.18.0
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_19e7ae8a9c7bb6ea356758a79b20e36f
-      ajv: 8.11.0
       autoprefixer: 10.4.7_postcss@8.4.14
       babel-loader: 8.2.5_8400c5f16911ce7dfc777f00e248d10e
+      babel-plugin-treasure: 0.9.0
       babel-preset-ko-app: link:../babel-preset-ko-app
       buffer: 6.0.3
       case-sensitive-paths-webpack-plugin: 2.4.0
       chalk: 5.0.1
       clean-webpack-plugin: 4.0.0_webpack@5.72.1
+      commander: 9.2.0
       crypto-browserify: 3.12.0
       css-loader: 6.7.1_webpack@5.72.1
       css-minimizer-webpack-plugin: 4.0.0_webpack@5.72.1
@@ -4407,6 +4409,13 @@ packages:
       '@babel/helper-define-polyfill-provider': 0.3.1_@babel+core@7.18.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /babel-plugin-treasure/0.9.0:
+    resolution: {integrity: sha512-AmenmBKmKU0N5O0C26sMth0rdSeXk5jFs5sVeN0Gu3GRIS5Nt2EXNBvG76B2v/3tGEmB1ENEkb1jp0lrSn33/Q==}
+    dependencies:
+      '@babel/helper-module-imports': 7.16.7
+      '@babel/runtime': 7.18.0
     dev: false
 
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.18.0:

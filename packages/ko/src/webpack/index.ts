@@ -1,62 +1,74 @@
 import { Configuration } from 'webpack';
-import config from '../utils/config';
-import { Options } from '../interfaces';
 import loaders from './loaders';
 import getPlugins from './plugins';
+import { IOptions } from '../core/types';
 
-const extensions = [
-  '.js',
-  '.jsx',
-  '.ts',
-  '.tsx',
-  '.css',
-  '.scss',
-  '.sass',
-  '.less',
-  '.json',
-  '.html',
-];
+class WebpackConfig {
+  private extensions = [
+    '.ts',
+    '.tsx',
+    '.js',
+    '.jsx',
+    '.css',
+    '.scss',
+    '.sass',
+    '.less',
+    '.json',
+    '.html',
+  ];
+  private opts: IOptions;
+  constructor(opts: IOptions) {
+    this.opts = opts;
+  }
 
-function getWebpackBaseConf(opts: Options): Configuration {
-  const { hash } = opts;
-  const webpackBaseConf = {
-    mode: config.isProductionEnv ? <const>'production' : <const>'development',
-    target: 'web',
-    context: config.cwd,
-    entry: './src/index',
-    output: {
-      path: config.default.dist,
-      filename: hash ? '[name].[contenthash].js' : '[name].js',
-      publicPath: '/',
-    },
-    module: {
-      rules: loaders(config),
-    },
-    plugins: getPlugins(),
-    resolve: {
-      extensions,
-      fallback: {
-        fs: false,
-        path: false,
-        events: false,
-        os: require.resolve('os-browserify/browser'),
-        crypto: require.resolve('crypto-browserify'),
-        stream: require.resolve('stream-browserify'),
-        buffer: require.resolve('buffer/'),
-        string_decoder: require.resolve('string_decoder/'),
+  get base() {
+    const { env, cwd, publicPath, entry, outputPath } = this.opts;
+    const webpackBaseConf = {
+      mode: env,
+      target: 'web',
+      context: cwd,
+      entry,
+      output: {
+        path: outputPath,
+        filename: 'js/[name].[contenthash].js',
+        publicPath,
       },
-    },
-    performance: {
-      hints: <const>false,
-    },
-    cache: {
-      type: config.isProductionEnv ? <const>'filesystem' : <const>'memory',
-    },
-    stats: {
-      cachedModules: false,
-    },
-  };
-  return webpackBaseConf as Configuration;
+      module: {
+        rules: loaders({
+          isProd: this.isProd,
+          ...this.opts,
+        }),
+      },
+      plugins: getPlugins(),
+      resolve: {
+        extensions: this.extensions,
+        fallback: {
+          fs: false,
+          path: false,
+          events: false,
+          os: require.resolve('os-browserify/browser'),
+          crypto: require.resolve('crypto-browserify'),
+          stream: require.resolve('stream-browserify'),
+          buffer: require.resolve('buffer/'),
+          string_decoder: require.resolve('string_decoder/'),
+        },
+      },
+      performance: {
+        hints: false,
+      },
+      cache: {
+        type: this.isProd ? 'filesystem' : 'memory',
+      },
+      stats: {
+        cachedModules: false,
+      },
+    };
+    return webpackBaseConf as Configuration;
+  }
+
+  get isProd() {
+    return this.opts.env === 'production';
+  }
 }
 
-export default getWebpackBaseConf;
+export default WebpackConfig;

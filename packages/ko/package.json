@@ -43,14 +43,15 @@
   "dependencies": {
     "@babel/core": "^7.18.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
-    "ajv": "^8.11.0",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
+    "babel-plugin-treasure": "^0.9.0",
     "babel-preset-ko-app": "workspace:^1.0.0",
     "buffer": "^6.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "chalk": "^5.0.1",
     "clean-webpack-plugin": "^4.0.0",
+    "commander": "^9.2.0",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
@@ -77,8 +78,8 @@
   },
   "devDependencies": {
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.6",
-    "@types/lodash": "^4.14.182",
     "@types/jest": "^27.5.1",
+    "@types/lodash": "^4.14.182",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.3",
     "typescript": "^4.6.4"

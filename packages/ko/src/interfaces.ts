@@ -1,4 +1,4 @@
-export type Options = {
+export type CliOptions = {
   hash?: boolean;
   analyzer?: boolean;
 };

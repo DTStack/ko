@@ -3,7 +3,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import config from '../utils/config';
 import { Options } from '../interfaces';
-import { WebpackCreator } from './creator';
+import { WebpackCreator } from './factory';
 
 class Dev extends WebpackCreator {
   constructor(opts: Options) {

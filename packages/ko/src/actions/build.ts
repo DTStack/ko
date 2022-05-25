@@ -1,10 +1,10 @@
 import webpack from 'webpack';
 import { Options } from '../interfaces';
-import { WebpackCreator } from './creator';
+import { ActionFactory } from './factory';
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-class Build extends WebpackCreator {
+class Build extends ActionFactory {
   constructor(opts: Options) {
     super(opts);
   }

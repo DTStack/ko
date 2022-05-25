@@ -12,10 +12,11 @@ export type IOptions = {
   cwd: string;
   alias?: Record<string, string>;
   copy?: ICopy[];
+  entry?: string;
+  outputPath?: string;
   publicPath?: string;
   hash?: boolean;
   externals?: Record<string, string>;
-  outputPath?: string;
   plugins?: any[];
   // dev, or serve configs
   serve?: {
@@ -25,6 +26,15 @@ export type IOptions = {
   };
   // override configs
   webpackConfig?: Configuration;
+  // experimental features
+  experiment?: {
+    speedUp?: boolean;
+    minimizer?: boolean;
+  };
+};
+
+export type ILoaderOptions = IOptions & {
+  isProd: boolean;
 };
 
 export enum STATE {
@@ -33,3 +43,21 @@ export enum STATE {
   START,
   RUN,
 }
+
+export type HookItem = {
+  name: string;
+  fn: Function;
+  stage?: number;
+  before?: string | string[];
+};
+
+export enum ACTION {
+  ADD = 'add',
+  UPDATE = 'update',
+}
+
+export type HookOptions = {
+  key: string;
+  action: ACTION;
+  opts: HookItem;
+};
