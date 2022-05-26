@@ -1,24 +1,21 @@
 import { join } from 'path';
 import { existsSync } from 'fs';
-import { merge } from 'lodash';
-import assert from 'assert';
+import { merge, cloneDeep } from 'lodash';
+import { assert } from './utils';
 import { IOptions } from './types';
-
-type IOpts = {
-  cwd: string;
-  path?: string;
-};
 
 class Config {
   private cwd: string;
-  private configPath: string;
-  constructor(opts: IOpts) {
-    this.cwd = opts.cwd;
-    this.configPath = this.getConfigPath(opts.path || 'ko.config.js');
+  private origin: Record<string, any>;
+  private current: Record<string, any>;
+  private path: string;
+  constructor() {
+    this.cwd = process.cwd();
+    this.path = this.getConfigPath('ko.config.js');
   }
 
   private getConfigPath(path: string) {
-    const absolutePath = join(this.cwd, path);
+    const absolutePath = join(process.cwd(), path);
     assert(
       existsSync(absolutePath),
       'config file not exist, please check if it exist'
@@ -26,36 +23,21 @@ class Config {
     return absolutePath;
   }
 
-  private memoize<T extends (...args: any) => any>(fn: T): any {
-    let ret: undefined;
-    let cached = false;
-    return () => {
-      if (cached) {
-        return ret;
-      }
-      ret = fn();
-      cached = true;
-      //@ts-ignore
-      fn = undefined;
-      return ret;
-    };
+  public generate(): IOptions {
+    this.origin = require(this.path);
+    this.current = merge(this.default, cloneDeep(this.origin));
+    return Object.freeze(this.current) as IOptions;
   }
 
-  public get() {
-    return merge(this.defaultConfig, this.getUserConfig());
-  }
-
-  private getUserConfig() {
-    const fn = () => {
-      const config = require(this.configPath);
-      return config;
-    };
-    return this.memoize(fn);
-  }
-
-  get defaultConfig(): IOptions {
+  get default(): Partial<IOptions> {
     return {
-      cwd: process.cwd(),
+      cwd: this.cwd,
+      env: 'none',
+      serve: {
+        host: '127.0.0.1',
+        port: 8080,
+      },
+      publicPath: '/',
     };
   }
 }

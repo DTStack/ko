@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
 import loaders from './loaders';
 import getPlugins from './plugins';
 import { IOptions } from '../core/types';
@@ -21,6 +22,10 @@ class WebpackConfig {
     this.opts = opts;
   }
 
+  public merge(opts: Configuration): Configuration {
+    return merge(this.base, opts);
+  }
+
   get base() {
     const { env, cwd, publicPath, entry, outputPath } = this.opts;
     const webpackBaseConf = {
@@ -39,7 +44,10 @@ class WebpackConfig {
           ...this.opts,
         }),
       },
-      plugins: getPlugins(),
+      plugins: getPlugins({
+        isProd: this.isProd,
+        outputPath: outputPath!,
+      }),
       resolve: {
         extensions: this.extensions,
         fallback: {

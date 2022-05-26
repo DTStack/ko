@@ -1,34 +1,33 @@
 import Webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
+import WebpackDevServer, {
+  Configuration as DevServerConfiguration,
+} from 'webpack-dev-server';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import config from '../utils/config';
-import { Options } from '../interfaces';
-import { WebpackCreator } from './factory';
+import Service from '../core/service';
+import WebpackConfig from '../webpack';
+import ActionFactory from './factory';
 
-class Dev extends WebpackCreator {
-  constructor(opts: Options) {
-    super(opts);
+class Dev extends ActionFactory {
+  constructor(service: Service) {
+    super(service);
   }
 
-  public devSerConf() {
-    const userDefinedDevServerConfig = config.userConf.devServer || {};
-    const defaultDevServerConfig = {
-      port: config.default.port,
-      host: config.default.host,
-      historyApiFallback: true,
-      allowedHosts: 'all',
+  private get devServerConfig(): DevServerConfiguration {
+    const { serve, publicPath } = this.service.config;
+    const { host, port, proxy } = serve;
+    return {
+      port,
+      host,
       hot: true,
+      historyApiFallback: true,
       static: {
-        directory: config.default.dist,
-        publicPath: '/',
         watch: true,
+        publicPath,
       },
-      open: true,
     };
-    return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
 
-  public config() {
+  public generateConfig(opts: any) {
     const conf = {
       devtool: 'cheap-module-source-map',
       plugins: [new ReactRefreshPlugin()].filter(Boolean),
@@ -36,7 +35,7 @@ class Dev extends WebpackCreator {
     return this.mergeConfig([this.baseConfig, conf]);
   }
 
-  public async action() {
+  public async bindAction() {
     const config = this.config();
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(config.devServer, compiler);

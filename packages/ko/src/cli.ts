@@ -1,25 +1,18 @@
 #!/usr/bin/env node
 'use strict';
 import Service from './core/service';
-const service = new Service();
+import Dev from './actions/dev';
+import Build from './actions/build';
 
-service.registerCommand({
-  name: 'build',
-  description: 'build project',
-});
+function exec() {
+  const service = new Service();
+  const dev = new Dev(service);
+  const build = new Build(service);
+  const opts = service.commander.opts();
+  service.run('dev');
+}
 
-service.registerCommand({
-  name: 'dev',
-  description: 'start dev server',
-});
-
-import build from './actions/build';
-import dev from './actions/dev';
-
-program
-  .description('Project toolkit base on webpack')
-  .version(pkg.version, '-v, --version')
-  .usage('<command> [options]');
+exec();
 
 program
   .command('build')
@@ -41,5 +34,3 @@ program
     const devInstance = new dev(opts);
     devInstance.action();
   });
-
-program.parse();

@@ -8,7 +8,7 @@ type ICopy = {
 
 export type IOptions = {
   //common configs
-  env?: 'development' | 'production';
+  env?: 'development' | 'production' | 'none';
   cwd: string;
   alias?: Record<string, string>;
   copy?: ICopy[];
@@ -18,9 +18,12 @@ export type IOptions = {
   hash?: boolean;
   externals?: Record<string, string>;
   plugins?: any[];
+  // style configs
+  extraPostCSSPlugins?: any[];
+  lessOptions?: any;
   // dev, or serve configs
-  serve?: {
-    proxy: ProxyConfigArray;
+  serve: {
+    proxy?: ProxyConfigArray;
     host: string;
     port: number;
   };
@@ -41,7 +44,7 @@ export enum STATE {
   INIT,
   LOAD,
   START,
-  RUN,
+  STOP,
 }
 
 export type HookItem = {
