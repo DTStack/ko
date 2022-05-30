@@ -33,10 +33,41 @@ class BabelLoader {
     };
   }
 
+  get treasurePluginConfig() {
+    const babelPluginTreasurePath = getResolvePath('babel-plugin-treasure');
+    return [
+      [
+        babelPluginTreasurePath,
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'lib',
+          style: 'css',
+        },
+        'antd',
+      ],
+      [
+        babelPluginTreasurePath,
+        {
+          libraryName: 'dt-react-component',
+          libraryDirectory: 'lib',
+        },
+        'drc',
+      ],
+      [
+        babelPluginTreasurePath,
+        {
+          libraryName: 'lodash',
+          libraryDirectory: 'lib',
+        },
+        'lodash',
+      ],
+    ];
+  }
+
   get plugins() {
     const { speedUp } = this.opts.experiment || {};
     return [
-      getResolvePath('babel-plugin-treasure'),
+      this.treasurePluginConfig,
       speedUp ? join(__dirname, './babel-plugin-module-federation') : null,
     ].filter(Boolean);
   }
@@ -46,7 +77,6 @@ class BabelLoader {
       'ko',
       'babel-preset-ko-app',
       'babel-plugin-treasure',
-      'react-dev-utils',
     ]);
   }
 }

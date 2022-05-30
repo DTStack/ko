@@ -10,7 +10,6 @@ class Dev extends ActionFactory {
   private webpackConfig: WebpackConfig;
   constructor(service: Service) {
     super(service);
-    this.webpackConfig = new WebpackConfig(service.config);
   }
 
   private get devServerConfig(): DevServerConfiguration {
@@ -56,6 +55,7 @@ class Dev extends ActionFactory {
         },
       ],
     });
+    this.webpackConfig = new WebpackConfig(this.service.config);
     this.service.commander.bindAction(cmdName, this.action.bind(this));
   }
 

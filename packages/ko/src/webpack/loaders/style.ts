@@ -57,8 +57,7 @@ class Style {
   //TODO: remove when upgrade to antd v4
   get realAntdV4Path() {
     const antdV4Path = join(this.opts.cwd, 'node_modules/antd-v4');
-    const antdV4RealPath = realpathSync(antdV4Path);
-    return antdV4RealPath;
+    return antdV4Path;
   }
 
   get styleLoader() {

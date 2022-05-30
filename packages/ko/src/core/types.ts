@@ -1,23 +1,20 @@
 import { Configuration } from 'webpack';
 import { ProxyConfigArray } from 'webpack-dev-server';
-
-type ICopy = {
-  from: string;
-  to: string;
-};
+import { Pattern } from 'copy-webpack-plugin';
 
 export type IOptions = {
   //common configs
   env?: 'development' | 'production' | 'none';
   cwd: string;
   alias?: Record<string, string>;
-  copy?: ICopy[];
+  copy?: Pattern[];
   entry?: string;
   outputPath?: string;
   publicPath?: string;
   hash?: boolean;
   externals?: Record<string, string>;
   plugins?: any[];
+  htmlTemplate?: string;
   // style configs
   extraPostCSSPlugins?: any[];
   lessOptions?: any;
@@ -42,7 +39,7 @@ export type ILoaderOptions = IOptions & {
 
 export enum STATE {
   INIT,
-  LOAD,
+  PARSE,
   START,
   STOP,
 }
@@ -51,7 +48,7 @@ export type HookItem = {
   name: string;
   fn: Function;
   stage?: number;
-  before?: string | string[];
+  before?: string;
 };
 
 export enum ACTION {

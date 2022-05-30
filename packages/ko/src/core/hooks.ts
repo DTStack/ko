@@ -21,7 +21,7 @@ class Hooks {
     hooks[ACTION.ADD].forEach(hook => {
       tapInstance.tapPromise(
         { name: hook.name, stage: hook.stage, before: hook.before },
-        async ctx => {
+        async (ctx: any) => {
           const result = await hook.fn(opts.args);
           return ctx.concat(result);
         }
@@ -36,7 +36,7 @@ class Hooks {
         }
       );
     });
-    return tapInstance.promise();
+    return tapInstance.promise(true);
   }
 }
 

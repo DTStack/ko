@@ -13,13 +13,12 @@ class Service {
     this.state = STATE.INIT;
     this.commander = new Commander();
     this.hooks = new Hooks();
+    this.config = new Config().generate();
   }
 
-  run(name: string) {
-    this.state = STATE.INIT;
+  run() {
+    this.state = STATE.PARSE;
     this.commander.parse();
-    this.state = STATE.LOAD;
-    this.config = new Config().generate();
   }
 
   registerPlugin(opts: HookOptions) {

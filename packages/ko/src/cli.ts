@@ -7,9 +7,10 @@ import Build from './actions/build';
 function exec() {
   const service = new Service();
   const dev = new Dev(service);
+  dev.registerCommand();
   const build = new Build(service);
-  const opts = service.commander.opts();
-  service.run('dev');
+  build.registerCommand();
+  service.run();
 }
 
 exec();
