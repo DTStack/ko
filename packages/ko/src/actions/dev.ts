@@ -2,14 +2,15 @@ import Webpack from 'webpack';
 import WebpackDevServer, {
   Configuration as DevServerConfiguration,
 } from 'webpack-dev-server';
-import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import ActionFactory from './factory';
 
 class Dev extends ActionFactory {
+  private webpackConfig: WebpackConfig;
   constructor(service: Service) {
     super(service);
+    this.webpackConfig = new WebpackConfig(service.config);
   }
 
   private get devServerConfig(): DevServerConfiguration {
@@ -20,6 +21,7 @@ class Dev extends ActionFactory {
       host,
       hot: true,
       historyApiFallback: true,
+      proxy,
       static: {
         watch: true,
         publicPath,
@@ -27,16 +29,38 @@ class Dev extends ActionFactory {
     };
   }
 
-  public generateConfig(opts: any) {
-    const conf = {
+  protected generateConfig() {
+    const extraConfig = {
       devtool: 'cheap-module-source-map',
-      plugins: [new ReactRefreshPlugin()].filter(Boolean),
     };
-    return this.mergeConfig([this.baseConfig, conf]);
+    return this.webpackConfig.merge(extraConfig, {
+      devServer: this.devServerConfig,
+    });
   }
 
-  public async bindAction() {
-    const config = this.config();
+  public registerCommand(): void {
+    const cmdName = 'dev';
+    this.service.commander.registerCommand({
+      name: cmdName,
+      description: 'start devServer',
+      options: [
+        {
+          flags: '--hash',
+          description: 'output file name with hash',
+          defaultValue: true,
+        },
+        {
+          flags: '--analyzer',
+          description: 'support building analyzer',
+          defaultValue: false,
+        },
+      ],
+    });
+    this.service.commander.bindAction(cmdName, this.action.bind(this));
+  }
+
+  protected async action() {
+    const config = this.generateConfig();
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();

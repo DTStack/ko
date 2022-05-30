@@ -1,5 +1,5 @@
 import { Configuration } from 'webpack';
-import { merge } from 'webpack-merge';
+import { merge } from 'lodash';
 import loaders from './loaders';
 import getPlugins from './plugins';
 import { IOptions } from '../core/types';
@@ -22,8 +22,8 @@ class WebpackConfig {
     this.opts = opts;
   }
 
-  public merge(opts: Configuration): Configuration {
-    return merge(this.base, opts);
+  public merge(...opts: Configuration[]): Configuration {
+    return merge(this.base, ...opts);
   }
 
   get base() {

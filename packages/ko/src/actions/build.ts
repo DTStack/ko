@@ -1,16 +1,19 @@
 import webpack from 'webpack';
-import { Options } from '../interfaces';
+import Service from '../core/service';
+import WebpackConfig from '../webpack';
 import { ActionFactory } from './factory';
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 class Build extends ActionFactory {
-  constructor(opts: Options) {
-    super(opts);
+  private webpackConfig: WebpackConfig;
+  constructor(service: Service) {
+    super(service);
+    this.webpackConfig = new WebpackConfig(service.config);
   }
 
-  public config() {
-    const conf = {
+  protected generateConfig() {
+    const extraConfig = {
       optimization: {
         minimize: true,
         minimizer: ['...', CssMinimizerPlugin.parcelCssMinify],
@@ -56,12 +59,27 @@ class Build extends ActionFactory {
         }),
       ],
     };
-    return this.mergeConfig([this.baseConfig, conf]);
+    return this.webpackConfig.merge(extraConfig);
   }
 
-  public action() {
-    //TODO: redefine stats
-    webpack(this.config(), (error, stats: any) => {
+  public registerCommand(): void {
+    const cmdName = 'build';
+    this.service.commander.registerCommand({
+      name: cmdName,
+      description: 'build project',
+      options: [
+        {
+          flags: '--hash',
+          description: 'output file name with hash',
+          defaultValue: true,
+        },
+      ],
+    });
+    this.service.commander.bindAction(cmdName, this.action.bind(this));
+  }
+
+  protected action() {
+    webpack(this.generateConfig(), (error, stats: any) => {
       if (stats && stats.hasErrors()) {
         throw stats.toString({
           logging: 'warn',

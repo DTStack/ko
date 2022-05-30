@@ -4,7 +4,7 @@ import { assert } from './utils';
 type RegisterOptions = {
   flags: string;
   description: string;
-  defaultValue?: string;
+  defaultValue?: string | boolean;
 };
 
 type CMDProperties = {
