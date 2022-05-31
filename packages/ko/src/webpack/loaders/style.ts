@@ -1,5 +1,5 @@
-import path from 'path';
-import { realpathSync } from 'fs';
+import { join } from 'path';
+import { realpathSync, existsSync } from 'fs';
 import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
 
@@ -7,8 +7,10 @@ const CSS_LOADER = require.resolve('css-loader');
 const LESS_LOADER = require.resolve('less-loader');
 const SASS_LOADER = require.resolve('sass-loader');
 const POSTCSS_LOADER = require.resolve('postcss-loader');
-const antdV4Path = path.join(process.cwd(), 'node_modules/antd-v4');
-const antdV4RealPath = realpathSync(antdV4Path);
+const antdV4Path = join(process.cwd(), 'node_modules/antd-v4');
+const antdV4RealPath = existsSync(antdV4Path)
+  ? realpathSync(antdV4Path)
+  : antdV4Path;
 
 const styleLoader = {
   loader: MiniCssExtractPluginLoader,
