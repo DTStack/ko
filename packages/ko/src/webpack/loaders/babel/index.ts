@@ -49,25 +49,28 @@ class BabelLoader {
         babelPluginTreasurePath,
         {
           libraryName: 'dt-react-component',
-          libraryDirectory: 'lib',
+          libraryDirectory: '/',
+          camel2DashComponentName: 'lower',
         },
         'drc',
       ],
-      [
-        babelPluginTreasurePath,
-        {
-          libraryName: 'lodash',
-          libraryDirectory: 'lib',
-        },
-        'lodash',
-      ],
+      //TODO: check lodash tree shaking in webpack 5
+      // [
+      //   babelPluginTreasurePath,
+      //   {
+      //     libraryName: 'lodash',
+      //     libraryDirectory: '/',
+      //     camel2DashComponentName: false,
+      //   },
+      //   'lodash',
+      // ],
     ];
   }
 
   get plugins() {
     const { speedUp } = this.opts.experiment || {};
     return [
-      this.treasurePluginConfig,
+      ...this.treasurePluginConfig,
       speedUp ? join(__dirname, './babel-plugin-module-federation') : null,
     ].filter(Boolean);
   }

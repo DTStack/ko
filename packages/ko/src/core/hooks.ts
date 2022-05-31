@@ -1,13 +1,18 @@
 import { AsyncSeriesWaterfallHook } from 'tapable';
 import { HookItem, ACTION, HookOptions } from './types';
 
+enum HOOK_KEY_SET {
+  WEBPACK_PLUGIN = 'WebpackPlugin',
+}
+
 class Hooks {
   private hooks: Record<string, Record<ACTION, HookItem[]>>;
+  public hookKeySet = HOOK_KEY_SET;
   constructor() {
     this.hooks = {};
   }
 
-  register({ key, action, opts }: HookOptions) {
+  public register({ key, action, opts }: HookOptions) {
     this.hooks[key] ||= {
       [ACTION.ADD]: [],
       [ACTION.UPDATE]: [],
@@ -15,14 +20,14 @@ class Hooks {
     this.hooks[key][action].push(opts);
   }
 
-  apply(opts: { key: string; args?: any }) {
+  public apply(opts: { key: string; context?: any }) {
     const hooks = this.hooks[opts.key];
     const tapInstance = new AsyncSeriesWaterfallHook(['ctx']);
     hooks[ACTION.ADD].forEach(hook => {
       tapInstance.tapPromise(
         { name: hook.name, stage: hook.stage, before: hook.before },
         async (ctx: any) => {
-          const result = await hook.fn(opts.args);
+          const result = await hook.fn(ctx);
           return ctx.concat(result);
         }
       );
@@ -31,12 +36,12 @@ class Hooks {
       tapInstance.tapPromise(
         { name: hook.name, stage: hook.stage, before: hook.before },
         async ctx => {
-          const result = await hook.fn(ctx, opts.args);
+          const result = await hook.fn(ctx);
           return result;
         }
       );
     });
-    return tapInstance.promise(true);
+    return tapInstance.promise(opts.context);
   }
 }
 

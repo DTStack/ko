@@ -1,4 +1,4 @@
-import Webpack from 'webpack';
+import Webpack, { Configuration } from 'webpack';
 import WebpackDevServer, {
   Configuration as DevServerConfiguration,
 } from 'webpack-dev-server';
@@ -14,7 +14,7 @@ class Dev extends ActionFactory {
 
   private get devServerConfig(): DevServerConfiguration {
     const { serve, publicPath } = this.service.config;
-    const { host, port, proxy } = serve;
+    const { host, port, proxy, staticPath } = serve;
     return {
       port,
       host,
@@ -22,19 +22,28 @@ class Dev extends ActionFactory {
       historyApiFallback: true,
       proxy,
       static: {
+        directory: staticPath,
         watch: true,
         publicPath,
       },
     };
   }
 
-  protected generateConfig() {
+  protected async generateConfig() {
+    this.webpackConfig = new WebpackConfig(this.service.config);
     const extraConfig = {
       devtool: 'cheap-module-source-map',
+      mode: <const>'development',
     };
-    return this.webpackConfig.merge(extraConfig, {
+    const ret = this.webpackConfig.merge(extraConfig, {
       devServer: this.devServerConfig,
     });
+    const plugins: any = await this.service.apply({
+      key: this.service.hookKeySet.WEBPACK_PLUGIN,
+      context: ret.plugins,
+    });
+    ret.plugins = plugins;
+    return ret;
   }
 
   public registerCommand(): void {
@@ -55,12 +64,12 @@ class Dev extends ActionFactory {
         },
       ],
     });
-    this.webpackConfig = new WebpackConfig(this.service.config);
     this.service.commander.bindAction(cmdName, this.action.bind(this));
   }
 
   protected async action() {
-    const config = this.generateConfig();
+    process.env.NODE_ENV = 'development';
+    const config = await this.generateConfig();
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();

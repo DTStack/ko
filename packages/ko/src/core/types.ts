@@ -4,7 +4,6 @@ import { Pattern } from 'copy-webpack-plugin';
 
 export type IOptions = {
   //common configs
-  env?: 'development' | 'production' | 'none';
   cwd: string;
   alias?: Record<string, string>;
   copy?: Pattern[];
@@ -18,11 +17,13 @@ export type IOptions = {
   // style configs
   extraPostCSSPlugins?: any[];
   lessOptions?: any;
+  antdV4LessOptions?: any;
   // dev, or serve configs
   serve: {
     proxy?: ProxyConfigArray;
     host: string;
     port: number;
+    staticPath?: string;
   };
   // override configs
   webpackConfig?: Configuration;

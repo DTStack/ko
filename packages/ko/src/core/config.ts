@@ -32,10 +32,12 @@ class Config {
   get default(): Partial<IOptions> {
     return {
       cwd: this.cwd,
-      env: 'none',
       serve: {
         host: '127.0.0.1',
         port: 8080,
+      },
+      lessOptions: {
+        javascriptEnabled: true,
       },
       publicPath: '/',
     };

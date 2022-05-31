@@ -1,14 +1,14 @@
 import { join } from 'path';
-import { realpathSync } from 'fs';
+import { realpathSync, existsSync } from 'fs';
 import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
 import { getResolvePath } from '../../utils';
 import { ILoaderOptions } from '../../core/types';
 
 class Style {
-  private STYLE_LOADER = getResolvePath('style-loader');
   private CSS_LOADER = getResolvePath('css-loader');
   private SASS_LOADER = getResolvePath('sass-loader');
+  private RESOLVE_URL_LOADER = getResolvePath('resolve-url-loader');
   private LESS_LOADER = getResolvePath('less-loader');
   private POSTCSS_LOADER = getResolvePath('postcss-loader');
   private opts: ILoaderOptions;
@@ -27,7 +27,8 @@ class Style {
         use: [
           this.styleLoader,
           this.cssLoader,
-          this.postCSSLoader,
+          // this.postCSSLoader,
+          this.resolveUrlLoader,
           this.sassLoader,
         ],
       },
@@ -48,7 +49,7 @@ class Style {
           this.styleLoader,
           this.cssLoader,
           this.postCSSLoader,
-          this.lessLoader,
+          this.antdV4LessLoader,
         ],
       },
     ];
@@ -57,19 +58,11 @@ class Style {
   //TODO: remove when upgrade to antd v4
   get realAntdV4Path() {
     const antdV4Path = join(this.opts.cwd, 'node_modules/antd-v4');
-    return antdV4Path;
+    const ret = existsSync(antdV4Path) ? realpathSync(antdV4Path) : antdV4Path;
+    return ret;
   }
 
   get styleLoader() {
-    return {
-      loader: this.STYLE_LOADER,
-      options: {
-        sourceMap: true,
-      },
-    };
-  }
-
-  get cssExtractLoader() {
     return {
       loader: MiniCssExtractPluginLoader,
     };
@@ -80,7 +73,6 @@ class Style {
       loader: this.CSS_LOADER,
       options: {
         sourceMap: true,
-        importLoaders: 1,
       },
     };
   }
@@ -94,7 +86,29 @@ class Style {
     };
   }
 
+  get resolveUrlLoader() {
+    return {
+      loader: this.RESOLVE_URL_LOADER,
+      options: {
+        sourceMap: true,
+        debug: true,
+        root: this.opts.cwd,
+      },
+    };
+  }
+
   get lessLoader() {
+    const { lessOptions = {} } = this.opts;
+    return {
+      loader: this.LESS_LOADER,
+      options: {
+        sourceMap: true,
+        lessOptions,
+      },
+    };
+  }
+
+  get antdV4LessLoader() {
     const { lessOptions = {} } = this.opts;
     return {
       loader: this.LESS_LOADER,

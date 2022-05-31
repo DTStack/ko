@@ -18,8 +18,11 @@ class WebpackConfig {
     '.html',
   ];
   private opts: IOptions;
+  private env: 'production' | 'development';
   constructor(opts: IOptions) {
     this.opts = opts;
+    this.env =
+      process.env.NODE_ENV === 'production' ? 'production' : 'development';
   }
 
   public merge(...opts: Configuration[]): Configuration {
@@ -27,9 +30,9 @@ class WebpackConfig {
   }
 
   get base() {
-    const { env, cwd, publicPath, entry, outputPath } = this.opts;
+    const { cwd, publicPath, entry, outputPath, alias } = this.opts;
     const webpackBaseConf = {
-      mode: env,
+      mode: this.env,
       target: 'web',
       context: cwd,
       entry,
@@ -50,6 +53,7 @@ class WebpackConfig {
       }),
       resolve: {
         extensions: this.extensions,
+        alias,
         fallback: {
           fs: false,
           path: false,
@@ -75,7 +79,7 @@ class WebpackConfig {
   }
 
   get isProd() {
-    return this.opts.env === 'production';
+    return this.env === 'production';
   }
 }
 
