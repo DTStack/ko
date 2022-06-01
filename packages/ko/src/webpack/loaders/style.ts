@@ -2,13 +2,14 @@ import { join } from 'path';
 import { realpathSync, existsSync } from 'fs';
 import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
+const postCssUrl = require('postcss-url');
 import { getResolvePath } from '../../utils';
 import { ILoaderOptions } from '../../core/types';
+import assert from 'assert';
 
 class Style {
   private CSS_LOADER = getResolvePath('css-loader');
   private SASS_LOADER = getResolvePath('sass-loader');
-  private RESOLVE_URL_LOADER = getResolvePath('resolve-url-loader');
   private LESS_LOADER = getResolvePath('less-loader');
   private POSTCSS_LOADER = getResolvePath('postcss-loader');
   private opts: ILoaderOptions;
@@ -27,8 +28,7 @@ class Style {
         use: [
           this.styleLoader,
           this.cssLoader,
-          // this.postCSSLoader,
-          this.resolveUrlLoader,
+          this.postCSSLoader,
           this.sassLoader,
         ],
       },
@@ -86,17 +86,6 @@ class Style {
     };
   }
 
-  get resolveUrlLoader() {
-    return {
-      loader: this.RESOLVE_URL_LOADER,
-      options: {
-        sourceMap: true,
-        debug: true,
-        root: this.opts.cwd,
-      },
-    };
-  }
-
   get lessLoader() {
     const { lessOptions = {} } = this.opts;
     return {
@@ -120,16 +109,45 @@ class Style {
   }
 
   get postCSSLoader() {
-    const extraPostCSSPlugins = this.opts.extraPostCSSPlugins || [];
     return {
       loader: this.POSTCSS_LOADER,
       options: {
         sourceMap: true,
         postcssOptions: {
-          plugins: [autoprefixer(), ...extraPostCSSPlugins].filter(Boolean),
+          plugins: this.postCSSPlugins,
         },
       },
     };
+  }
+
+  get postCSSPlugins() {
+    const extraPostCSSPlugins = this.opts.extraPostCSSPlugins || [];
+    return [
+      autoprefixer(),
+      postCssUrl([
+        {
+          filter: '**/src/public/img/**/*',
+          url: (args: any) => {
+            const originUrl = args?.originUrl;
+            return originUrl
+              ? join(this.opts.cwd, originUrl)
+              : args.absolutePath;
+          },
+          basePath: '/',
+        },
+        {
+          filter: '**/src/public/font/**/*',
+          url: (args: any) => {
+            const originUrl = args?.originUrl;
+            return originUrl
+              ? join(this.opts.cwd, originUrl)
+              : args.absolutePath;
+          },
+          basePath: '/',
+        },
+      ]),
+      ...extraPostCSSPlugins,
+    ].filter(Boolean);
   }
 }
 
