@@ -26,6 +26,12 @@ importers:
       husky: 8.0.1
       prettier: 2.6.2
 
+  packages/babel-plugin-module-federation:
+    specifiers:
+      pkg-up: ^3.1.0
+    dependencies:
+      pkg-up: 3.1.0
+
   packages/babel-preset-ko-app:
     specifiers:
       '@babel/core': ^7.18.0
@@ -53,6 +59,7 @@ importers:
       '@types/lodash': ^4.14.182
       autoprefixer: ^10.4.7
       babel-loader: ^8.2.5
+      babel-plugin-module-federation: workspace:^1.0.0
       babel-plugin-treasure: ^0.9.0
       babel-preset-ko-app: workspace:^1.0.0
       buffer: ^6.0.3
@@ -94,6 +101,7 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.7_19e7ae8a9c7bb6ea356758a79b20e36f
       autoprefixer: 10.4.7_postcss@8.4.14
       babel-loader: 8.2.5_8400c5f16911ce7dfc777f00e248d10e
+      babel-plugin-module-federation: link:../babel-plugin-module-federation
       babel-plugin-treasure: 0.9.0
       babel-preset-ko-app: link:../babel-preset-ko-app
       buffer: 6.0.3
@@ -9799,7 +9807,7 @@ packages:
     dev: false
 
   /path-exists/3.0.0:
-    resolution: {integrity: sha1-zg6+ql94yxiSXqfYENe1mwEP1RU=}
+    resolution: {integrity: sha512-bpC7GYwiDYQ4wYLe+FA8lhRjhQCMcQGuSgGGqDkg/QerRWw9CmGRT0iSOVRSZJ29NMLZgIzqaljJ63oaL4NIJQ==}
     engines: {node: '>=4'}
     dev: false
 

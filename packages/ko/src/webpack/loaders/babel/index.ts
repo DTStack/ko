@@ -5,9 +5,11 @@ import { ILoaderOptions } from '../../../core/types';
 class BabelLoader {
   private BABEL_LOADER: string;
   private opts: ILoaderOptions;
+  private speedUp: boolean;
   constructor(opts: ILoaderOptions) {
     this.BABEL_LOADER = getResolvePath('babel-loader');
     this.opts = opts;
+    this.speedUp = this.opts?.experiment?.speedUp || true;
   }
 
   get config() {
@@ -26,7 +28,7 @@ class BabelLoader {
         babelrc: false,
         configFile: false,
         cacheIdentifier: this.cacheIdentifier,
-        cacheDirectory: true,
+        cacheDirectory: !this.speedUp,
         cacheCompression: false,
         compact: this.opts.isProd,
       },
@@ -68,10 +70,20 @@ class BabelLoader {
   }
 
   get plugins() {
-    const { speedUp } = this.opts.experiment || {};
+    debugger;
     return [
       ...this.treasurePluginConfig,
-      speedUp ? join(__dirname, './babel-plugin-module-federation') : null,
+      this.speedUp
+        ? [
+            getResolvePath('babel-plugin-module-federation'),
+            // Babel Options Can Only Passed Plain Object
+            {
+              remoteName: 'ko',
+              externals: this.opts.externals,
+              alias: this.opts.alias,
+            },
+          ]
+        : null,
     ].filter(Boolean);
   }
 

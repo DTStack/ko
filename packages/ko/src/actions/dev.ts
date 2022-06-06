@@ -1,4 +1,4 @@
-import Webpack, { Configuration } from 'webpack';
+import Webpack from 'webpack';
 import WebpackDevServer, {
   Configuration as DevServerConfiguration,
 } from 'webpack-dev-server';
