@@ -30,7 +30,7 @@ class Dev extends ActionFactory {
   }
 
   protected async generateConfig() {
-    this.webpackConfig = new WebpackConfig(this.service.config);
+    this.webpackConfig = new WebpackConfig(this.service);
     const extraConfig = {
       devtool: 'cheap-module-source-map',
       mode: <const>'development',

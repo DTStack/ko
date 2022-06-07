@@ -1,15 +1,14 @@
 import BabelLoader from './babel';
-import { ILoaderOptions } from '../../core/types';
+import { IWebpackOptions } from '../../core/types';
+import ModuleGraph from '../plugins/moduleGraph';
 class Script {
   private THREAD_LOADER: string;
   private WORKER_LOADER: string;
-  private opts: ILoaderOptions;
   private babelLoader: BabelLoader;
-  constructor(opts: ILoaderOptions) {
+  constructor(opts: IWebpackOptions, moduleGraph?: ModuleGraph) {
     this.THREAD_LOADER = require.resolve('thread-loader');
     this.WORKER_LOADER = require.resolve('worker-loader');
-    this.opts = opts;
-    this.babelLoader = new BabelLoader(opts);
+    this.babelLoader = new BabelLoader(opts, moduleGraph);
   }
 
   get config() {

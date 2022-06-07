@@ -4,7 +4,7 @@ import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
 const postCssUrl = require('postcss-url');
 import { getResolvePath } from '../../utils';
-import { ILoaderOptions } from '../../core/types';
+import { IWebpackOptions } from '../../core/types';
 import assert from 'assert';
 
 class Style {
@@ -12,8 +12,8 @@ class Style {
   private SASS_LOADER = getResolvePath('sass-loader');
   private LESS_LOADER = getResolvePath('less-loader');
   private POSTCSS_LOADER = getResolvePath('postcss-loader');
-  private opts: ILoaderOptions;
-  constructor(opts: ILoaderOptions) {
+  private opts: IWebpackOptions;
+  constructor(opts: IWebpackOptions) {
     this.opts = opts;
   }
 

@@ -34,7 +34,7 @@ export type IOptions = {
   };
 };
 
-export type ILoaderOptions = IOptions & {
+export type IWebpackOptions = IOptions & {
   isProd: boolean;
 };
 

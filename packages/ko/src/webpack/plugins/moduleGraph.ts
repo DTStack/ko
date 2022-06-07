@@ -1,17 +1,33 @@
-import { join } from 'path';
+import { join, isAbsolute } from 'path';
 import { writeFileSync } from 'fs';
 import { debounce } from 'lodash';
 import pkgUp from 'pkg-up';
+import { IWebpackOptions } from '../../core/types';
+
+const NODE_MODULE_REGEX = /node_modules/;
+const STYLE_REGEX = /\.(css|s(a|c)ss|less)$/;
 
 class ModuleGraph {
-  private cwd: string;
+  private opts: IWebpackOptions;
+  private externals: { [key: string]: string } = {};
+  private alias: { [key: string]: string } = {};
   private isCollecting: true;
   private graphOutputPath: string;
   private graph: Record<string, string> = {};
   private version: Record<string, string> = {};
-  constructor() {
-    this.cwd = process.cwd();
-    this.graphOutputPath = join(this.cwd, 'ko.moduleGraph.json');
+  constructor(opts: IWebpackOptions) {
+    this.opts = opts;
+    this.graphOutputPath = join(this.opts.cwd, 'ko.moduleGraph.json');
+  }
+
+  checkIfMatch(path: string, includeRegex: RegExp) {
+    if (!includeRegex.test(path)) return false;
+    if (path.startsWith('.')) return false;
+    if (STYLE_REGEX.test(path)) return false;
+    if (this.externals[path]) return false;
+    if (isAbsolute(path)) return NODE_MODULE_REGEX.test(path);
+    if (this.alias[path]) return NODE_MODULE_REGEX.test(this.alias[path]);
+    return true;
   }
 
   onMatch(pkg: string) {
@@ -22,7 +38,6 @@ class ModuleGraph {
       }
       this.graph[pkg] = meta.path;
       this.version[pkg] = meta.version;
-      debugger;
       console.log(this.graph);
     }
   }
@@ -52,16 +67,4 @@ class ModuleGraph {
   }
 }
 
-//TODO: refactor this
-let instance: ModuleGraph;
-
-function getModuleGraph(): ModuleGraph {
-  if (instance) {
-    return instance;
-  } else {
-    instance = new ModuleGraph();
-    return instance;
-  }
-}
-
-export default getModuleGraph;
+export default ModuleGraph;

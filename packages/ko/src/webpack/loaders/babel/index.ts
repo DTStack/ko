@@ -1,15 +1,19 @@
-import { join } from 'path';
 import { getCacheIdentifier, getResolvePath } from '../../../utils';
-import { ILoaderOptions } from '../../../core/types';
+import ModuleGraph from '../../plugins/moduleGraph';
+import { IWebpackOptions } from '../../../core/types';
 
 class BabelLoader {
   private BABEL_LOADER: string;
-  private opts: ILoaderOptions;
+  private opts: IWebpackOptions;
   private speedUp: boolean;
-  constructor(opts: ILoaderOptions) {
+  private moduleGraph: ModuleGraph;
+  constructor(opts: IWebpackOptions, moduleGraph?: ModuleGraph) {
     this.BABEL_LOADER = getResolvePath('babel-loader');
     this.opts = opts;
-    this.speedUp = this.opts?.experiment?.speedUp || true;
+    this.speedUp = !!moduleGraph;
+    if (this.speedUp) {
+      this.moduleGraph = moduleGraph!;
+    }
   }
 
   get config() {
@@ -70,20 +74,24 @@ class BabelLoader {
   }
 
   get plugins() {
-    debugger;
     return [
       ...this.treasurePluginConfig,
-      this.speedUp
-        ? [
-            getResolvePath('babel-plugin-module-federation'),
-            // Babel Options Can Only Passed Plain Object
-            {
-              remoteName: 'ko',
-              externals: this.opts.externals,
-              alias: this.opts.alias,
-            },
-          ]
-        : null,
+      // this.speedUp
+      //   ? [
+      //       getResolvePath('babel-plugin-module-federation'),
+      //       // Babel Options Can Only Passed Plain Object
+      //       {
+      //         args: {
+      //           remoteName: 'ko',
+      //           externals: this.opts.externals,
+      //           alias: this.opts.alias,
+      //           onMatch() {
+      //             console.log(111);
+      //           },
+      //         },
+      //       },
+      //     ]
+      //   : null,
     ].filter(Boolean);
   }
 

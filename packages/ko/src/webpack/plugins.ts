@@ -4,13 +4,10 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import ModuleGraphWebpackPlugin from './plugins/moduleGraphWebpackPlugin';
+import { IWebpackOptions } from '../core/types';
 
-type IPluginOpts = {
-  isProd: boolean;
-  outputPath: string;
-};
-
-function getPlugins(opts: IPluginOpts) {
+function getPlugins(opts: IWebpackOptions) {
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -26,6 +23,7 @@ function getPlugins(opts: IPluginOpts) {
       verbose: false,
       dry: false,
     }),
+    opts.experiment?.speedUp && new ModuleGraphWebpackPlugin(opts),
     new ReactRefreshPlugin(),
   ];
 }

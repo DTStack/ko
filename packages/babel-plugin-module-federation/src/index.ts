@@ -1,5 +1,4 @@
 import { NodePath } from '@babel/traverse';
-import getModuleGraph from './moduleGraph';
 import { checkIfMatch } from './utils';
 import Types from '@babel/types';
 
@@ -23,9 +22,14 @@ function importSpecifiersDetail(specifiers: any[], t: typeof Types) {
   );
 }
 
+type IOptions = {
+  remoteName: string;
+  externals: Record<string, string>;
+  alias: Record<string, string>;
+  onMatch: Function;
+};
+
 module.exports = function ({ types: t }: { types: typeof Types }) {
-  debugger;
-  const moduleGraphInstance = getModuleGraph();
   return {
     name: 'babel-plugin-module-federation',
     visitor: {
@@ -35,15 +39,10 @@ module.exports = function ({ types: t }: { types: typeof Types }) {
           {
             opts,
           }: {
-            opts: {
-              remoteName: string;
-              externals: Record<string, string>;
-              alias: Record<string, string>;
-            };
+            opts: IOptions;
           }
         ) {
-          const { remoteName, externals, alias } = opts;
-          debugger;
+          const { remoteName, externals, alias, onMatch } = opts;
           const begin: Types.Statement[] = [];
           let len = path.node.body.length - 1;
           while (len >= 0) {
@@ -54,7 +53,7 @@ module.exports = function ({ types: t }: { types: typeof Types }) {
                 alias,
               });
               if (isMatch) {
-                moduleGraphInstance.onMatch(node.source.value);
+                onMatch(node.source.value);
                 const { begin, defaultImportIdentifier } =
                   importSpecifiersDetail(node.specifiers, t);
                 const id = t.objectPattern(begin);

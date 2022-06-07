@@ -40,6 +40,9 @@ class Config {
         javascriptEnabled: true,
       },
       publicPath: '/',
+      experiment: {
+        speedUp: true,
+      },
     };
   }
 }

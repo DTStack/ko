@@ -2,6 +2,7 @@ import { Configuration } from 'webpack';
 import { merge } from 'lodash';
 import loaders from './loaders';
 import getPlugins from './plugins';
+import Service from '../core/service';
 import { IOptions } from '../core/types';
 
 class WebpackConfig {
@@ -17,10 +18,12 @@ class WebpackConfig {
     '.json',
     '.html',
   ];
+  private service: Service;
   private opts: IOptions;
   private env: 'production' | 'development';
-  constructor(opts: IOptions) {
-    this.opts = opts;
+  constructor(service: Service) {
+    this.service = service;
+    this.opts = service.config;
     this.env =
       process.env.NODE_ENV === 'production' ? 'production' : 'development';
   }
@@ -49,7 +52,7 @@ class WebpackConfig {
       },
       plugins: getPlugins({
         isProd: this.isProd,
-        outputPath: outputPath!,
+        ...this.opts,
       }),
       resolve: {
         extensions: this.extensions,

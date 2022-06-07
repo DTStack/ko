@@ -9,7 +9,7 @@ class Build extends ActionFactory {
   private webpackConfig: WebpackConfig;
   constructor(service: Service) {
     super(service);
-    this.webpackConfig = new WebpackConfig(service.config);
+    // this.webpackConfig = new WebpackConfig(service.config);
   }
 
   protected generateConfig() {
