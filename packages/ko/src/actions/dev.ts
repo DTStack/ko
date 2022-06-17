@@ -1,3 +1,4 @@
+import { execSync } from 'child_process';
 import Webpack from 'webpack';
 import WebpackDevServer, {
   Configuration as DevServerConfiguration,
@@ -19,12 +20,17 @@ class Dev extends ActionFactory {
       port,
       host,
       hot: true,
-      historyApiFallback: true,
       proxy,
       static: {
         directory: staticPath,
         watch: true,
         publicPath,
+      },
+      setupExitSignals: false,
+      allowedHosts: 'all',
+      client: {
+        overlay: false,
+        logging: 'none',
       },
     };
   }
@@ -43,6 +49,9 @@ class Dev extends ActionFactory {
       context: ret.plugins,
     });
     ret.plugins = plugins;
+    ret.experiments = {
+      lazyCompilation: true,
+    };
     return ret;
   }
 
@@ -71,13 +80,27 @@ class Dev extends ActionFactory {
     process.env.NODE_ENV = 'development';
     const config = await this.generateConfig();
     const compiler = Webpack(config);
+    const targetPid = process.pid;
     const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();
-    process.stdin.on('end', () => {
-      devServer.stop();
+    const exitProcess = (callback?: () => void) => {
+      callback && callback();
       process.exit(0);
+    };
+    process.stdin.on('end', () => {
+      devServer.stopCallback(() => {
+        exitProcess(() => console.log('webpack devServer process exit'));
+      });
+      process.stdin.resume();
     });
-    process.stdin.resume();
+    ['SIGINT', 'SIGTERM'].forEach((signal) => {
+      process.on(
+        signal,
+        exitProcess(() =>
+          console.log('stop webpack devServer process via command')
+        )
+      );
+    });
   }
 }
 

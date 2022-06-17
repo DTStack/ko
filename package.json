@@ -10,7 +10,7 @@
     "stylelint": "stylelint .less,.scss,.css,.sass --fix",
     "lint": "pnpm prettier && pnpm eslint",
     "test": "pnpm test",
-    "debug:ko": "pnpm debug --filter ./packages/ko & pnpm debug --filter ./packages/babel-plugin-module-federation",
+    "debug:ko": "pnpm debug --filter ./packages/ko",
     "docs:start": "cd website && pnpm start",
     "changeset": "changeset",
     "bump": "changeset version",

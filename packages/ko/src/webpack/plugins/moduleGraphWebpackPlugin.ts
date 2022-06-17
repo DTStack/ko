@@ -23,9 +23,9 @@ class ModuleGraphWebpackPlugin {
         pkgPathList.push('../'.repeat(dep) + 'package.json');
       }
       return pkgPathList
-        .map(path => this.readPkgFile(join(cwd, path)))
+        .map((path) => this.readPkgFile(join(cwd, path)))
         .reduce((prev, curr) => {
-          Object.keys(curr).forEach(key => {
+          Object.keys(curr).forEach((key) => {
             if (
               !/@types|@testing-library|dt-react-component|dt-common/.test(key)
             ) {
@@ -45,12 +45,12 @@ class ModuleGraphWebpackPlugin {
   }
 
   apply(compiler: Compiler) {
-    compiler.hooks.beforeRun.tap('ModuleGraphWebpackPlugin', compiler => {
+    compiler.hooks.beforeRun.tap('ModuleGraphWebpackPlugin', (compiler) => {
       compiler.options.plugins.push();
     });
   }
 
-  get moduleFederationConfig() {}
+  // get moduleFederationConfig() {}
 
   // apply(compiler: Compiler) {
   //   compiler.hooks.emit.tapAsync(

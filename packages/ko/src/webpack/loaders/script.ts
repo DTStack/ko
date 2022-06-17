@@ -2,12 +2,13 @@ import BabelLoader from './babel';
 import { IWebpackOptions } from '../../core/types';
 import ModuleGraph from '../plugins/moduleGraph';
 class Script {
-  private THREAD_LOADER: string;
-  private WORKER_LOADER: string;
+  private THREAD_LOADER = require.resolve('thread-loader');
+  private WORKER_LOADER = require.resolve('worker-loader');
+  private ESBUILD_LOADER = require.resolve('esbuild-loader');
   private babelLoader: BabelLoader;
+  private opts: IWebpackOptions;
   constructor(opts: IWebpackOptions, moduleGraph?: ModuleGraph) {
-    this.THREAD_LOADER = require.resolve('thread-loader');
-    this.WORKER_LOADER = require.resolve('worker-loader');
+    this.opts = opts;
     this.babelLoader = new BabelLoader(opts, moduleGraph);
   }
 
@@ -40,8 +41,15 @@ class Script {
               name: 'ko-js-pool',
             },
           },
-          this.babelLoader.config,
-        ],
+          this.opts.isProd && this.babelLoader.config,
+          !this.opts.isProd && {
+            loader: this.ESBUILD_LOADER,
+            options: {
+              loader: 'tsx',
+              target: 'es2020',
+            },
+          },
+        ].filter(Boolean),
       },
     ];
     return scriptLoader;

@@ -1,6 +1,6 @@
 import { Configuration } from 'webpack';
-import { ProxyConfigArray } from 'webpack-dev-server';
 import { Pattern } from 'copy-webpack-plugin';
+import { Plugin } from 'postcss';
 
 export type IOptions = {
   //common configs
@@ -15,12 +15,12 @@ export type IOptions = {
   plugins?: any[];
   htmlTemplate?: string;
   // style configs
-  extraPostCSSPlugins?: any[];
+  extraPostCSSPlugins?: Plugin[];
   lessOptions?: any;
   antdV4LessOptions?: any;
   // dev, or serve configs
   serve: {
-    proxy?: ProxyConfigArray;
+    proxy?: Record<string, any>;
     host: string;
     port: number;
     staticPath?: string;

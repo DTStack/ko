@@ -1,5 +1,5 @@
 import { NodePath } from '@babel/traverse';
-import { checkIfMatch } from './utils';
+// import { checkIfMatch } from './utils';
 import Types from '@babel/types';
 
 function importSpecifiersDetail(specifiers: any[], t: typeof Types) {
@@ -48,10 +48,11 @@ module.exports = function ({ types: t }: { types: typeof Types }) {
           while (len >= 0) {
             const node = path.node.body[len];
             if (t.isImportDeclaration(node)) {
-              const isMatch = checkIfMatch(node.source.value, {
-                externals,
-                alias,
-              });
+              // const isMatch = checkIfMatch(node.source.value, {
+              //   externals,
+              //   alias,
+              // });
+              const isMatch = true;
               if (isMatch) {
                 onMatch(node.source.value);
                 const { begin, defaultImportIdentifier } =
