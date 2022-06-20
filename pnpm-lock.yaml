@@ -51,6 +51,7 @@ importers:
       '@types/case-sensitive-paths-webpack-plugin': ^2.1.6
       '@types/jest': ^27.5.1
       '@types/lodash': ^4.14.182
+      '@types/webpack-bundle-analyzer': ^4.4.1
       autoprefixer: ^10.4.7
       babel-loader: ^8.2.5
       babel-plugin-treasure: ^0.9.0
@@ -133,6 +134,7 @@ importers:
       '@types/case-sensitive-paths-webpack-plugin': 2.1.6
       '@types/jest': 27.5.1
       '@types/lodash': 4.14.182
+      '@types/webpack-bundle-analyzer': 4.4.1
       jest: 28.1.0_@types+node@17.0.35
       ts-jest: 28.0.3_e2a5086c50c2305650ede3294f03e560
       typescript: 4.6.4
@@ -3681,6 +3683,19 @@ packages:
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: false
+
+  /@types/webpack-bundle-analyzer/4.4.1:
+    resolution: {integrity: sha512-yQAj3l7bIYL+QRRlNJt6gyP+zrXZOlgaR4wsX0WY4yzZIbv41ZibREfZvuYjxY0iVtvQQlbhx0AeokkCuqUAQg==}
+    dependencies:
+      '@types/node': 17.0.35
+      tapable: 2.2.1
+      webpack: 5.72.1
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
+    dev: true
 
   /@types/webpack-sources/3.2.0:
     resolution: {integrity: sha512-Ft7YH3lEVRQ6ls8k4Ff1oB4jN6oy/XmU6tQISKdhfh+1mR+viZFphS6WL0IrtDOzvefmJg5a0s7ZQoRXwqTEFg==}

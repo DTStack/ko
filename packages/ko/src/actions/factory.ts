@@ -3,9 +3,9 @@ import Service from '../core/service';
 
 export abstract class ActionFactory {
   protected service: Service;
-  protected abstract generateConfig(): any;
+  protected abstract generateConfig(opts: any): any;
   protected abstract registerCommand(): void;
-  protected abstract action(): void;
+  protected abstract action(...args: any[]): void;
 
   protected constructor(service: Service) {
     this.service = service;

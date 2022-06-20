@@ -1,5 +1,6 @@
 import { program, Command } from 'commander';
 import { assert } from './utils';
+import { ICliOptions } from '../types';
 
 type RegisterOptions = {
   flags: string;
@@ -23,7 +24,7 @@ enum STATE {
 
 class Commander {
   private STATE: STATE;
-  private program: Command;
+  public program: Command;
   private pkg: Record<string, string>;
   private cmdSet: Record<string, CMDProperties>;
   constructor() {
@@ -86,14 +87,6 @@ class Commander {
     });
     this.program.parse();
     this.STATE = STATE.DONE;
-  }
-
-  opts() {
-    assert(
-      this.STATE === STATE.DONE,
-      `get program options should be called after PARSE state`
-    );
-    return this.program.opts();
   }
 }
 

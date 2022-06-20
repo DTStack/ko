@@ -15,6 +15,7 @@ export type IOptions = {
   plugins?: any[];
   htmlTemplate?: string;
   // style configs
+  analyzer?: boolean;
   extraPostCSSPlugins?: Plugin[];
   lessOptions?: any;
   antdV4LessOptions?: any;
@@ -25,8 +26,6 @@ export type IOptions = {
     port: number;
     staticPath?: string;
   };
-  // override configs
-  webpackConfig?: Configuration;
   // experimental features
   experiment?: {
     speedUp?: boolean;
@@ -34,16 +33,14 @@ export type IOptions = {
   };
 };
 
-export type IWebpackOptions = IOptions & {
-  isProd: boolean;
+export type ICliOptions = {
+  hash?: boolean;
+  analyzer?: boolean;
 };
 
-export enum STATE {
-  INIT,
-  PARSE,
-  START,
-  STOP,
-}
+export type IWebpackOptions = IOptions & {
+  isProd: boolean;
+} & ICliOptions;
 
 export type HookItem = {
   name: string;

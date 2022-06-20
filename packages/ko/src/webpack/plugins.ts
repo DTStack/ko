@@ -6,10 +6,11 @@ import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
-  const { isProd, htmlTemplate, copy } = opts;
+  const { isProd, htmlTemplate, copy, analyzer } = opts;
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -74,6 +75,7 @@ function getPlugins(opts: IWebpackOptions) {
     new ReactRefreshPlugin({
       overlay: false,
     }),
+    analyzer && new BundleAnalyzerPlugin(),
   ].filter(Boolean);
 }
 

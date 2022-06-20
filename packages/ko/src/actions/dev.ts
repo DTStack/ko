@@ -5,6 +5,7 @@ import WebpackDevServer, {
 import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import ActionFactory from './factory';
+import { ICliOptions } from '../types';
 
 class Dev extends ActionFactory {
   private webpackConfig: WebpackConfig;
@@ -49,7 +50,7 @@ class Dev extends ActionFactory {
     });
     ret.plugins = plugins;
     ret.experiments = {
-      lazyCompilation: true,
+      lazyCompilation: this.service.config?.experiment?.speedUp,
     };
     return ret;
   }
@@ -75,8 +76,9 @@ class Dev extends ActionFactory {
     this.service.commander.bindAction(cmdName, this.action.bind(this));
   }
 
-  protected async action() {
+  protected async action(cliOpts: ICliOptions) {
     process.env.NODE_ENV = 'development';
+    this.service.freezeCliOptsWith(cliOpts);
     const config = await this.generateConfig();
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(config.devServer, compiler);
@@ -91,7 +93,7 @@ class Dev extends ActionFactory {
       });
       process.stdin.resume();
     });
-    ['SIGINT', 'SIGTERM'].forEach((signal) => {
+    ['SIGINT', 'SIGTERM'].forEach(signal => {
       process.on(
         signal,
         exitProcess(() =>

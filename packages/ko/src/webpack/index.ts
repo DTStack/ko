@@ -18,12 +18,10 @@ class WebpackConfig {
     '.json',
     '.html',
   ];
-  private service: Service;
   private opts: IOptions;
   private env: 'production' | 'development';
   constructor(service: Service) {
-    this.service = service;
-    this.opts = service.config;
+    this.opts = { ...service.config, ...service.cliOpts };
     this.env =
       process.env.NODE_ENV === 'production' ? 'production' : 'development';
   }
@@ -33,7 +31,8 @@ class WebpackConfig {
   }
 
   get base() {
-    const { cwd, publicPath, entry, outputPath, alias } = this.opts;
+    const { cwd, publicPath, entry, outputPath, alias, hash, analyzer } =
+      this.opts;
     const webpackBaseConf = {
       mode: this.env,
       target: 'web',
@@ -41,7 +40,7 @@ class WebpackConfig {
       entry,
       output: {
         path: outputPath,
-        filename: 'js/[name].[contenthash].js',
+        filename: `js/[name].${hash ? '[contenthash].' : ''}js`,
         publicPath,
       },
       module: {
@@ -52,6 +51,7 @@ class WebpackConfig {
       },
       plugins: getPlugins({
         isProd: this.isProd,
+        analyzer,
         ...this.opts,
       }),
       resolve: {
