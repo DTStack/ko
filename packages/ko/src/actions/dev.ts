@@ -1,4 +1,3 @@
-import { execSync } from 'child_process';
 import Webpack from 'webpack';
 import WebpackDevServer, {
   Configuration as DevServerConfiguration,
@@ -80,10 +79,9 @@ class Dev extends ActionFactory {
     process.env.NODE_ENV = 'development';
     const config = await this.generateConfig();
     const compiler = Webpack(config);
-    const targetPid = process.pid;
     const devServer = new WebpackDevServer(config.devServer, compiler);
     await devServer.start();
-    const exitProcess = (callback?: () => void) => {
+    const exitProcess = (callback?: () => void) => () => {
       callback && callback();
       process.exit(0);
     };
@@ -97,7 +95,10 @@ class Dev extends ActionFactory {
       process.on(
         signal,
         exitProcess(() =>
-          console.log('stop webpack devServer process via command')
+          console.log(
+            'stop webpack devServer process via command signal: ',
+            signal
+          )
         )
       );
     });

@@ -2,7 +2,7 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import { merge, cloneDeep } from 'lodash';
 import { assert } from './utils';
-import { IOptions } from './types';
+import { IOptions } from '../types';
 
 class Config {
   private cwd: string;

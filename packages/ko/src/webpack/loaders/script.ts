@@ -1,15 +1,14 @@
 import BabelLoader from './babel';
-import { IWebpackOptions } from '../../core/types';
-import ModuleGraph from '../plugins/moduleGraph';
+import { IWebpackOptions } from '../../types';
 class Script {
   private THREAD_LOADER = require.resolve('thread-loader');
   private WORKER_LOADER = require.resolve('worker-loader');
   private ESBUILD_LOADER = require.resolve('esbuild-loader');
-  private babelLoader: BabelLoader;
+  private BABEL_LOADER: BabelLoader;
   private opts: IWebpackOptions;
-  constructor(opts: IWebpackOptions, moduleGraph?: ModuleGraph) {
+  constructor(opts: IWebpackOptions) {
     this.opts = opts;
-    this.babelLoader = new BabelLoader(opts, moduleGraph);
+    this.BABEL_LOADER = new BabelLoader(opts);
   }
 
   get config() {
@@ -37,11 +36,10 @@ class Script {
           {
             loader: this.THREAD_LOADER,
             options: {
-              workerNodeArgs: ['--max-old-space-size=4096'],
               name: 'ko-js-pool',
             },
           },
-          this.opts.isProd && this.babelLoader.config,
+          this.opts.isProd && this.BABEL_LOADER.config,
           !this.opts.isProd && {
             loader: this.ESBUILD_LOADER,
             options: {

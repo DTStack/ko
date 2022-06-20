@@ -1,19 +1,13 @@
 import { getCacheIdentifier, getResolvePath } from '../../../utils';
-import ModuleGraph from '../../plugins/moduleGraph';
-import { IWebpackOptions } from '../../../core/types';
+import { IWebpackOptions } from '../../../types';
 
 class BabelLoader {
   private BABEL_LOADER: string;
   private opts: IWebpackOptions;
   private speedUp: boolean;
-  private moduleGraph: ModuleGraph;
-  constructor(opts: IWebpackOptions, moduleGraph?: ModuleGraph) {
+  constructor(opts: IWebpackOptions) {
     this.BABEL_LOADER = getResolvePath('babel-loader');
     this.opts = opts;
-    this.speedUp = !!moduleGraph;
-    if (this.speedUp) {
-      this.moduleGraph = moduleGraph!;
-    }
   }
 
   get config() {
@@ -74,25 +68,7 @@ class BabelLoader {
   }
 
   get plugins() {
-    return [
-      ...this.treasurePluginConfig,
-      // this.speedUp
-      //   ? [
-      //       getResolvePath('babel-plugin-module-federation'),
-      //       // Babel Options Can Only Passed Plain Object
-      //       {
-      //         args: {
-      //           remoteName: 'ko',
-      //           externals: this.opts.externals,
-      //           alias: this.opts.alias,
-      //           onMatch() {
-      //             console.log(111);
-      //           },
-      //         },
-      //       },
-      //     ]
-      //   : null,
-    ].filter(Boolean);
+    return [...this.treasurePluginConfig].filter(Boolean);
   }
 
   get cacheIdentifier() {

@@ -3,7 +3,7 @@ import { merge } from 'lodash';
 import loaders from './loaders';
 import getPlugins from './plugins';
 import Service from '../core/service';
-import { IOptions } from '../core/types';
+import { IOptions } from '../types';
 
 class WebpackConfig {
   private extensions = [

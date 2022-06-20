@@ -6,8 +6,7 @@ import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ModuleGraphWebpackPlugin from './plugins/moduleGraphWebpackPlugin';
-import { IWebpackOptions } from '../core/types';
+import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
   return [
@@ -34,7 +33,6 @@ function getPlugins(opts: IWebpackOptions) {
       verbose: false,
       dry: false,
     }),
-    // opts.experiment?.speedUp && new ModuleGraphWebpackPlugin(opts),
     new ReactRefreshPlugin({
       overlay: false,
     }),

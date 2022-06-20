@@ -1,7 +1,7 @@
 import Commander from './commander';
 import Hooks from './hooks';
 import Config from './config';
-import { STATE, IOptions } from './types';
+import { STATE, IOptions } from '../types';
 
 class Service extends Hooks {
   public state: STATE;
@@ -13,7 +13,7 @@ class Service extends Hooks {
     this.state = STATE.INIT;
     this.commander = new Commander();
     this.config = new Config().generate();
-    this.config.plugins && this.config.plugins.forEach(p => this.register(p));
+    this.config.plugins && this.config.plugins.forEach((p) => this.register(p));
   }
 
   run() {

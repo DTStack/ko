@@ -6,6 +6,7 @@ import Build from './actions/build';
 
 function exec() {
   const service = new Service();
+  // register commands
   const dev = new Dev(service);
   dev.registerCommand();
   const build = new Build(service);
