@@ -71,6 +71,9 @@ class WebpackConfig {
       performance: {
         hints: false,
       },
+      cache: {
+        type: this.isProd ? 'filesystem' : 'memory',
+      },
       stats: {
         cachedModules: false,
       },

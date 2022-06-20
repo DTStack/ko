@@ -1,65 +1,33 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import { ActionFactory } from './factory';
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import { ESBuildMinifyPlugin } from 'esbuild-loader';
 
 class Build extends ActionFactory {
   private webpackConfig: WebpackConfig;
   constructor(service: Service) {
     super(service);
-    // this.webpackConfig = new WebpackConfig(service.config);
   }
 
   protected generateConfig() {
+    this.webpackConfig = new WebpackConfig(this.service);
     const extraConfig = {
       optimization: {
         minimize: true,
-        minimizer: ['...', CssMinimizerPlugin.parcelCssMinify],
+        minimizer: this.service.config.experiment?.minimizer
+          ? [
+              new ESBuildMinifyPlugin({
+                target: 'es2015',
+                css: true,
+              }),
+            ]
+          : ['...', CssMinimizerPlugin.parcelCssMinify],
       },
-      plugins: [
-        new webpack.optimize.SplitChunksPlugin({
-          chunks: 'all',
-          minSize: 30000,
-          maxSize: 600000,
-          minChunks: 1,
-          automaticNameDelimiter: '_',
-          cacheGroups: {
-            baseCommon: {
-              test: new RegExp(
-                `[\\/]node_modules[\\/](${[
-                  'react',
-                  'react-router',
-                  'react-dom',
-                  'react-redux',
-                  'redux',
-                  'react-router-redux',
-                ].join('|')})`
-              ),
-              priority: 1,
-            },
-            antd: {
-              name: 'antd',
-              test: /[\\/]node_modules[\\/]antd[\\/]/,
-              chunks: 'initial',
-            },
-            lodash: {
-              name: 'lodash',
-              test: /[\\/]node_modules[\\/]lodash[\\/]/,
-              chunks: 'initial',
-              priority: -10,
-            },
-            default: {
-              minChunks: 2,
-              priority: -20,
-              reuseExistingChunk: true,
-            },
-          },
-        }),
-      ],
     };
-    return this.webpackConfig.merge(extraConfig);
+    return this.webpackConfig.merge(extraConfig as Configuration);
   }
 
   public registerCommand(): void {
@@ -79,10 +47,11 @@ class Build extends ActionFactory {
   }
 
   protected action() {
+    process.env.NODE_ENV = 'production';
     webpack(this.generateConfig(), (error, stats: any) => {
       if (stats && stats.hasErrors()) {
         throw stats.toString({
-          logging: 'warn',
+          logging: 'error',
           colors: true,
         });
       }

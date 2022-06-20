@@ -42,6 +42,7 @@ class Config {
       publicPath: '/',
       experiment: {
         speedUp: true,
+        minimizer: true,
       },
     };
   }
