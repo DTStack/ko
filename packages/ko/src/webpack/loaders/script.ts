@@ -39,14 +39,15 @@ class Script {
               name: 'ko-js-pool',
             },
           },
-          this.opts.isProd && this.BABEL_LOADER.config,
-          !this.opts.isProd && {
-            loader: this.ESBUILD_LOADER,
-            options: {
-              loader: 'tsx',
-              target: 'es2020',
-            },
-          },
+          this.opts.experiment?.speedUp
+            ? {
+                loader: this.ESBUILD_LOADER,
+                options: {
+                  loader: 'tsx',
+                  target: 'es2020',
+                },
+              }
+            : this.BABEL_LOADER.config,
         ].filter(Boolean),
       },
     ];

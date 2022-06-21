@@ -52,6 +52,7 @@ class Config {
         host: '127.0.0.1',
         port: 8080,
       },
+      hash: true,
       analyzer: false,
       lessOptions: {
         javascriptEnabled: true,

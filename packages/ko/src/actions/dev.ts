@@ -77,6 +77,7 @@ class Dev extends ActionFactory {
   }
 
   protected async action(cliOpts: ICliOptions) {
+    process.title = 'ko-dev';
     process.env.NODE_ENV = 'development';
     this.service.freezeCliOptsWith(cliOpts);
     const config = await this.generateConfig();

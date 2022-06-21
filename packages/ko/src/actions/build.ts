@@ -5,6 +5,7 @@ import { ActionFactory } from './factory';
 
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { ESBuildMinifyPlugin } from 'esbuild-loader';
+import { ICliOptions } from '../types';
 
 class Build extends ActionFactory {
   private webpackConfig: WebpackConfig;
@@ -12,7 +13,7 @@ class Build extends ActionFactory {
     super(service);
   }
 
-  protected generateConfig() {
+  protected async generateConfig() {
     this.webpackConfig = new WebpackConfig(this.service);
     const extraConfig = {
       optimization: {
@@ -26,8 +27,14 @@ class Build extends ActionFactory {
             ]
           : ['...', CssMinimizerPlugin.parcelCssMinify],
       },
-    };
-    return this.webpackConfig.merge(extraConfig as Configuration);
+    } as Configuration;
+    const ret = this.webpackConfig.merge(extraConfig);
+    const plugins: any = await this.service.apply({
+      key: this.service.hookKeySet.WEBPACK_PLUGIN,
+      context: ret.plugins,
+    });
+    ret.plugins = plugins;
+    return ret;
   }
 
   public registerCommand(): void {
@@ -46,9 +53,12 @@ class Build extends ActionFactory {
     this.service.commander.bindAction(cmdName, this.action.bind(this));
   }
 
-  protected action() {
+  protected async action(cliOpts: ICliOptions) {
+    process.title = 'ko-build';
     process.env.NODE_ENV = 'production';
-    webpack(this.generateConfig(), (error, stats: any) => {
+    this.service.freezeCliOptsWith(cliOpts);
+    const config = await this.generateConfig();
+    webpack(config, (error, stats: any) => {
       if (stats && stats.hasErrors()) {
         throw stats.toString({
           logging: 'error',

@@ -97,12 +97,12 @@ class Style {
   }
 
   get antdV4LessLoader() {
-    const { lessOptions = {} } = this.opts;
+    const { antdV4LessOptions = {} } = this.opts;
     return {
       loader: this.LESS_LOADER,
       options: {
         sourceMap: true,
-        lessOptions,
+        lessOptions: antdV4LessOptions,
       },
     };
   }
