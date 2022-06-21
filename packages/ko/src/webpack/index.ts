@@ -73,6 +73,7 @@ class WebpackConfig {
       },
       cache: {
         type: this.isProd ? 'filesystem' : 'memory',
+        maxGenerations: 1,
       },
       stats: {
         cachedModules: false,
