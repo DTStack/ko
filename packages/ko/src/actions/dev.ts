@@ -89,7 +89,9 @@ class Dev extends ActionFactory {
     };
     process.stdin.on('end', () => {
       devServer.stopCallback(() => {
-        exitProcess(() => console.log('webpack devServer process exit'));
+        exitProcess(() =>
+          this.successStdout('webpack devServer process exit successfully')
+        );
       });
       process.stdin.resume();
     });
@@ -97,7 +99,7 @@ class Dev extends ActionFactory {
       process.on(
         signal,
         exitProcess(() =>
-          console.log(
+          this.warningStdout(
             'stop webpack devServer process via command signal: ',
             signal
           )

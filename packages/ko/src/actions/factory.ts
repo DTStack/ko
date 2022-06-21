@@ -11,12 +11,16 @@ export abstract class ActionFactory {
     this.service = service;
   }
 
-  protected successStdout(log: string) {
-    console.log(chalk.green(log));
+  protected successStdout(...logs: string[]) {
+    console.log(...logs.map(log => chalk.green(log)));
   }
 
-  protected errorStdout(log: string) {
-    console.log(chalk.red(log));
+  protected warningStdout(...logs: string[]) {
+    console.log(...logs.map(log => chalk.green(log)));
+  }
+
+  protected errorStdout(...logs: string[]) {
+    console.log(...logs.map(log => chalk.green(log)));
   }
 }
 
