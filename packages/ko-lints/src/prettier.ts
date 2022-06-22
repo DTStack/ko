@@ -11,7 +11,7 @@ export async function formatFilesWithPrettier(
     ? require(findRealPath(configPath))
     : require('ko-config/prettier');
   console.log('prettier process starting...');
-  const formatFilesPromises = files.map(async (file) => {
+  const formatFilesPromises = files.map(async file => {
     const source = await promises.readFile(file, 'utf-8');
     const opts = { ...prettierConfig, filepath: file };
     if (isCheck) {

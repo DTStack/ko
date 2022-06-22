@@ -5,7 +5,7 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "prettier": "prettier --config packages/ko-config/prettier.js --write .",
+    "prettier": "prettier --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "stylelint": "stylelint .less,.scss,.css,.sass --fix",
     "lint": "pnpm prettier && pnpm eslint",

@@ -23,7 +23,7 @@ export async function formatFilesWithEslint(
     extensions,
   });
   const formatter = await eslint.loadFormatter();
-  const eslintFilesPromises = targetFiles.map(async (file) => {
+  const eslintFilesPromises = targetFiles.map(async file => {
     const result = await eslint.lintFiles(file);
     if (result[0].errorCount) {
       const resultText = formatter.format(result);
