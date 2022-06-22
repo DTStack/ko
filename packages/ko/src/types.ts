@@ -30,6 +30,7 @@ export type IOptions = {
   experiment?: {
     speedUp?: boolean;
     minimizer?: boolean;
+    enableCssModule?: boolean;
   };
 };
 

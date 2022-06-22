@@ -11,12 +11,14 @@ class Style {
   private SASS_LOADER = getResolvePath('sass-loader');
   private LESS_LOADER = getResolvePath('less-loader');
   private POSTCSS_LOADER = getResolvePath('postcss-loader');
+  private CSS_MODULE_FILE_SUFFIX_REGEX = /\.module.s[ac]ss$/;
   private opts: IWebpackOptions;
   constructor(opts: IWebpackOptions) {
     this.opts = opts;
   }
 
   get config() {
+    const enableCssModule = this.opts?.experiment?.enableCssModule;
     return [
       {
         test: /\.css$/,
@@ -24,6 +26,13 @@ class Style {
       },
       {
         test: /\.s[ac]ss$/,
+        exclude: (input: string) => {
+          if (enableCssModule) {
+            return this.CSS_MODULE_FILE_SUFFIX_REGEX.test(input);
+          } else {
+            return false;
+          }
+        },
         use: [
           this.styleLoader,
           this.cssLoader,
@@ -31,6 +40,7 @@ class Style {
           this.sassLoader,
         ],
       },
+      enableCssModule && this.sassCssModuleConfig,
       {
         test: /\.less$/,
         exclude: [this.realAntdV4Path],
@@ -52,6 +62,29 @@ class Style {
         ],
       },
     ];
+  }
+
+  get sassCssModuleConfig() {
+    return {
+      test: /\.module.s[ac]ss$/,
+      use: [
+        this.styleLoader,
+        {
+          loader: this.CSS_LOADER,
+          options: {
+            esModule: true,
+            modules: {
+              namedExport: true,
+              localIdentName: this.opts.isProd
+                ? '[path][name]__[local]'
+                : '[local]_[hash:base64]',
+            },
+          },
+        },
+        this.postCSSLoader,
+        this.sassLoader,
+      ],
+    };
   }
 
   //TODO: remove when upgrade to antd v4

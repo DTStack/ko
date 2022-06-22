@@ -61,6 +61,7 @@ class Config {
       experiment: {
         speedUp: true,
         minimizer: true,
+        enableCssModule: true,
       },
     };
   }
