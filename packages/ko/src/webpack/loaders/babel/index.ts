@@ -49,7 +49,7 @@ class BabelLoader {
         babelPluginTreasurePath,
         {
           libraryName: 'dt-react-component',
-          libraryDirectory: '/',
+          libraryDirectory: '/src/components/',
           camel2DashComponentName: 'lower',
         },
         'drc',
