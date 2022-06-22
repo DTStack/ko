@@ -33,6 +33,12 @@ class WebpackConfig {
   get base() {
     const { cwd, publicPath, entry, outputPath, alias, hash, analyzer } =
       this.opts;
+    const cache: Configuration['cache'] = {
+      type: this.isProd ? 'filesystem' : 'memory',
+    };
+    if (!this.isProd) {
+      (cache as any).maxGenerations = 1;
+    }
     const webpackBaseConf = {
       mode: this.env,
       target: 'web',
@@ -71,10 +77,7 @@ class WebpackConfig {
       performance: {
         hints: false,
       },
-      cache: {
-        type: this.isProd ? 'filesystem' : 'memory',
-        maxGenerations: 1,
-      },
+      cache: cache,
       stats: {
         cachedModules: false,
       },
