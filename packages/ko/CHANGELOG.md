@@ -1,5 +1,12 @@
 # ko
 
+## 5.3.10
+
+### Patch Changes
+
+- 70576b9c: Bug Fixed
+  - fix: antd v4 less loader path
+
 ## 5.3.9
 
 ### Patch Changes

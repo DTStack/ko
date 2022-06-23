@@ -1,65 +1,58 @@
-import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier';
-import config from '../../utils/config';
+import BabelLoader from './babel';
+import { IWebpackOptions } from '../../types';
+class Script {
+  private THREAD_LOADER = require.resolve('thread-loader');
+  private WORKER_LOADER = require.resolve('worker-loader');
+  private ESBUILD_LOADER = require.resolve('esbuild-loader');
+  private BABEL_LOADER: BabelLoader;
+  private opts: IWebpackOptions;
+  constructor(opts: IWebpackOptions) {
+    this.opts = opts;
+    this.BABEL_LOADER = new BabelLoader(opts);
+  }
 
-const THREAD_LOADER = require.resolve('thread-loader');
-const BABEL_LOADER = require.resolve('babel-loader');
-const WORKER_LOADER = require.resolve('worker-loader');
-
-const scriptLoader = [
-  {
-    test: /\.worker.[jt]s$/,
-    loader: WORKER_LOADER,
-    options: {
-      inline: 'fallback',
-    },
-  },
-  {
-    test: /\.(t|j)sx?$/,
-    include: (input: string) => {
-      // internal modules dt-common compatible
-      if (input.includes('node_modules/dt-common/src/')) {
-        return true;
-      } else if (input.includes('node_modules')) {
-        return false;
-      } else {
-        return true;
-      }
-    },
-    use: [
+  get config() {
+    const scriptLoader = [
       {
-        loader: THREAD_LOADER,
+        test: /\.worker.[jt]s$/,
+        loader: this.WORKER_LOADER,
         options: {
-          workerNodeArgs: ['--max-old-space-size=4096'],
-          name: 'ko-js-pool',
+          inline: 'fallback',
         },
       },
       {
-        loader: BABEL_LOADER,
-        options: {
-          presets: [
-            [
-              require.resolve('babel-preset-ko-app'),
-              {
-                useAbsoluteRuntime: true,
-              },
-            ],
-          ],
-          plugins: config.isProductionEnv
-            ? [require.resolve('react-refresh/babel')]
-            : [],
-          babelrc: false,
-          configFile: false,
-          cacheIdentifier: getCacheIdentifier(
-            config.isProductionEnv ? 'production' : '',
-            ['babel-preset-ko-app', 'react-dev-utils', 'ko']
-          ),
-          cacheDirectory: true,
-          cacheCompression: false,
-          compact: config.isProductionEnv,
+        test: /\.(t|j)sx?$/,
+        include: (input: string) => {
+          // internal modules dt-common compatible
+          if (input.includes('node_modules/dt-common/src/')) {
+            return true;
+          } else if (input.includes('node_modules')) {
+            return false;
+          } else {
+            return true;
+          }
         },
+        use: [
+          {
+            loader: this.THREAD_LOADER,
+            options: {
+              name: 'ko-js-pool',
+            },
+          },
+          this.opts.experiment?.speedUp
+            ? {
+                loader: this.ESBUILD_LOADER,
+                options: {
+                  loader: 'tsx',
+                  target: 'es2020',
+                },
+              }
+            : this.BABEL_LOADER.config,
+        ].filter(Boolean),
       },
-    ],
-  },
-];
+    ];
+    return scriptLoader;
+  }
+}
 
-export default scriptLoader;
+export default Script;

@@ -1,117 +1,111 @@
-import Webpack, { Configuration }  from 'webpack';
-import WebpackDevServer, { Configuration as DevServerConfiguration } from 'webpack-dev-server';
-import detect from 'detect-port';
-import { prompt } from 'inquirer';
-import config from '../utils/config';
-import { Options } from '../interfaces';
-import { WebpackCreator } from './creator';
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+import Webpack from 'webpack';
+import WebpackDevServer, {
+  Configuration as DevServerConfiguration,
+} from 'webpack-dev-server';
+import Service from '../core/service';
+import WebpackConfig from '../webpack';
+import ActionFactory from './factory';
+import { ICliOptions } from '../types';
 
-class Dev extends WebpackCreator {
-  private devServerConf: DevServerConfiguration;
-  constructor(opts: Options) {
-    super(opts);
-    const { port, host } = this.opts;
-    const userDefinedDevServerConfig = config.userConf.devServer || {};
-    this.devServerConf = {
+class Dev extends ActionFactory {
+  private webpackConfig: WebpackConfig;
+  constructor(service: Service) {
+    super(service);
+  }
+
+  private get devServerConfig(): DevServerConfiguration {
+    const { serve, publicPath } = this.service.config;
+    const { host, port, proxy, staticPath } = serve;
+    return {
       port,
       host,
-      contentBase: config.defaultPaths.dist,
-      historyApiFallback: true,
-      disableHostCheck: true,
-      compress: true,
-      clientLogLevel: 'none',
       hot: true,
-      inline: true,
-      publicPath: '/',
-      watchOptions: {
-        ignored: /node_modules/,
-        aggregateTimeout: 600,
+      proxy,
+      static: {
+        directory: staticPath,
+        watch: true,
+        publicPath,
       },
-      ...userDefinedDevServerConfig,
+      setupExitSignals: false,
+      allowedHosts: 'all',
+      client: {
+        overlay: false,
+        logging: 'none',
+      },
     };
   }
 
-  public config() {
-    const conf: Configuration & DevServerConfiguration  =  {
+  protected async generateConfig() {
+    this.webpackConfig = new WebpackConfig(this.service);
+    const extraConfig = {
       devtool: 'cheap-module-source-map',
-      plugins: [this.opts.analyzer && new BundleAnalyzerPlugin()].filter(
-        Boolean
-      ),
-      optimization: {
-        splitChunks: {
-          chunks: 'all',
-        },
-      },
+      mode: <const>'development',
     };
-    return this.mergeConfig([this.baseConfig, conf]);
-  }
-
-  private async changePort(newPort: number, port: number) {
-    const question = {
-      type: 'confirm',
-      name: 'changePort',
-      message: `port: ${port} has been used，use new port ${newPort} instead?`,
-      default: true,
-    };
-    const answer = await prompt([question]);
-    if (answer.changePort) {
-      return newPort;
-    } else {
-      return null;
-    }
-  }
-
-  private async checkPort(port: number) {
-    const newPort = await detect(port);
-    if (newPort === port) {
-      return newPort;
-    }
-    const isInteractive = process.stdout.isTTY;
-    if (isInteractive) {
-      return this.changePort(newPort, port);
-    }
-  }
-
-  private threadLoaderWarmUp() {
-    const threadLoader = require('thread-loader');
-    threadLoader.warmup({}, [require.resolve('babel-loader')]);
-  }
-
-  public async action() {
-    const { port } = this.devServerConf;
-    const newPort = await this.checkPort(port!);
-    if (!newPort) {
-      process.exit(0);
-    }
-    this.devServerConf.port = newPort;
-    WebpackDevServer.addDevServerEntrypoints(
-      this.config() as any,
-      this.devServerConf
-    );
-    this.threadLoaderWarmUp();
-    const compiler = Webpack(this.config());
-    const devServer = new WebpackDevServer(compiler as any, this.devServerConf);
-    let isFirstCompile = true;
-    compiler.hooks.done.tap('done', stats => {
-      if (isFirstCompile) {
-        isFirstCompile = false;
-        this.successStdout('development server has been started');
-      }
-      if (stats.hasErrors()) {
-        console.log(
-          stats.toString({
-            colors: true,
-          })
-        );
-      }
+    const ret = this.webpackConfig.merge(extraConfig, {
+      devServer: this.devServerConfig,
     });
+    const plugins: any = await this.service.apply({
+      key: this.service.hookKeySet.WEBPACK_PLUGIN,
+      context: ret.plugins,
+    });
+    ret.plugins = plugins;
+    ret.experiments = {
+      lazyCompilation: this.service.config?.experiment?.speedUp,
+    };
+    return ret;
+  }
 
-    devServer.listen(this.devServerConf.port, this.devServerConf.host!, err => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
+  public registerCommand(): void {
+    const cmdName = 'dev';
+    this.service.commander.registerCommand({
+      name: cmdName,
+      description: 'start devServer',
+      options: [
+        {
+          flags: '--hash',
+          description: 'output file name with hash',
+          defaultValue: true,
+        },
+        {
+          flags: '--analyzer',
+          description: 'support building analyzer',
+          defaultValue: false,
+        },
+      ],
+    });
+    this.service.commander.bindAction(cmdName, this.action.bind(this));
+  }
+
+  protected async action(cliOpts: ICliOptions) {
+    process.title = 'ko-dev';
+    process.env.NODE_ENV = 'development';
+    this.service.freezeCliOptsWith(cliOpts);
+    const config = await this.generateConfig();
+    const compiler = Webpack(config);
+    const devServer = new WebpackDevServer(config.devServer, compiler);
+    await devServer.start();
+    const exitProcess = (callback?: () => void) => () => {
+      callback && callback();
+      process.exit(0);
+    };
+    process.stdin.on('end', () => {
+      devServer.stopCallback(() => {
+        exitProcess(() =>
+          this.successStdout('webpack devServer process exit successfully')
+        );
+      });
+      process.stdin.resume();
+    });
+    ['SIGINT', 'SIGTERM'].forEach(signal => {
+      process.on(
+        signal,
+        exitProcess(() =>
+          this.warningStdout(
+            'stop webpack devServer process via command signal: ',
+            signal
+          )
+        )
+      );
     });
   }
 }
