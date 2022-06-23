@@ -1,6 +1,5 @@
 import { program, Command } from 'commander';
-import { assert } from './utils';
-import { ICliOptions } from '../types';
+import { assert } from '../utils';
 
 type RegisterOptions = {
   flags: string;

@@ -1,40 +1,57 @@
-import { promises } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 import { format, check } from 'prettier';
-import { findRealPath } from './utils';
+import LintRunnerFactory from './factory';
+import { IOpts } from './interfaces';
 
-export async function formatFilesWithPrettier(
-  files: string[],
-  isCheck: boolean,
-  configPath?: string
-) {
-  const prettierConfig = configPath
-    ? require(findRealPath(configPath))
-    : require('ko-config/prettier');
-  console.log('prettier process starting...');
-  const formatFilesPromises = files.map(async file => {
-    const source = await promises.readFile(file, 'utf-8');
-    const opts = { ...prettierConfig, filepath: file };
-    if (isCheck) {
-      return check(source, opts);
+class PrettierRunner extends LintRunnerFactory {
+  static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'json'];
+  static readonly IGNORE_FILES = ['.prettierignore'];
+  static defaultConfigPath = 'ko-lint-config/.prettierrc';
+  private opts: IOpts;
+  private config: Record<string, any>;
+  private stdout: string[] = [];
+  constructor(opts: IOpts) {
+    super();
+    this.opts = opts;
+    this.generateConfig();
+  }
+
+  public generateConfig() {
+    if (this.opts.configPath) {
+      this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      const formatContent = format(source, opts);
-      return promises.writeFile(file, formatContent, 'utf-8');
+      this.config = require(PrettierRunner.defaultConfigPath);
     }
-  });
-  try {
-    let stdout = '';
-    const result = await Promise.all(formatFilesPromises);
-    if (isCheck) {
+  }
+
+  public async start() {
+    const { write, patterns } = this.opts;
+    const entries = await this.getEntries(patterns, [
+      ...PrettierRunner.IGNORE_FILES,
+    ]);
+    try {
+      const formatFilesPromises = entries.map(async file => {
+        const source = await readFile(file, 'utf-8');
+        const opts = { ...this.config, filepath: file };
+        if (write) {
+          const formatContent = format(source, opts);
+          await writeFile(file, formatContent, 'utf-8');
+          return true;
+        } else {
+          return check(source, opts);
+        }
+      });
+      const result = await Promise.all(formatFilesPromises);
       if (result.includes(false)) {
-        stdout = 'Not all matched files are formatted';
+        return this.stdout;
       } else {
-        stdout = 'All matched files are formatted';
+        return true;
       }
-    } else {
-      stdout = 'All matched files are rewrited successfully!';
+    } catch (ex) {
+      console.error(ex);
+      process.exit(1);
     }
-    console.log(stdout);
-  } catch (ex) {
-    console.error('prettier failed:', ex);
   }
 }
+
+export default PrettierRunner;

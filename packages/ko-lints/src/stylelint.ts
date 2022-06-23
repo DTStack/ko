@@ -1,32 +1,50 @@
-import { findRealPath } from './utils';
-import * as stylelint from 'stylelint';
-import { StylelintOptions } from './interfaces';
+import { lint, formatters } from 'stylelint';
+import LintRunnerFactory from './factory';
+import { IOpts } from './interfaces';
 
-export async function formatFilesWithStylelint(
-  opts: StylelintOptions & { targetFiles: string[] }
-) {
-  const { configPath, fix, targetFiles } = opts;
-  const config = configPath
-    ? require(findRealPath(configPath))
-    : require('ko-config/stylelint');
-  console.log('stylelint process starting...');
-  try {
-    const options: StylelintOptions = {};
-    options.files = targetFiles?.length ? targetFiles : config.files || [];
-    const result = await stylelint.lint({
-      fix,
-      config,
-      ...options,
-    });
-    if (result.errored) {
-      const resultText = stylelint.formatters.string(result.results);
-      console.log('Not all matched style files are linted: ');
-      console.log(resultText);
+class StyleLintRunner extends LintRunnerFactory {
+  static readonly EXTENSIONS = ['css', 'less', 'sass', 'scss'];
+  static readonly IGNORE_FILES = ['.stylelintignore'];
+  static defaultConfigPath = 'ko-lint-config/.stylelintrc';
+  private opts: IOpts;
+  private config: Record<string, any>;
+  private stdout: string[] = [];
+  constructor(opts: IOpts) {
+    super();
+    this.opts = opts;
+    this.generateConfig();
+  }
+
+  public generateConfig() {
+    if (this.opts.configPath) {
+      this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      console.log('All matched style files has been fixed successfully!');
+      this.config = require(StyleLintRunner.defaultConfigPath);
     }
-    return true;
-  } catch (ex) {
-    console.log('stylelint failed: ', ex);
+  }
+
+  public async start() {
+    const { write, patterns } = this.opts;
+    const entries = await this.getEntries(patterns, [
+      ...StyleLintRunner.IGNORE_FILES,
+    ]);
+    try {
+      const result = await lint({
+        fix: write,
+        config: this.config,
+        files: entries,
+      });
+      if (result.errored) {
+        this.stdout = [formatters.string(result.results)];
+        return this.stdout;
+      } else {
+        return true;
+      }
+    } catch (ex) {
+      console.error(ex);
+      process.exit(1);
+    }
   }
 }
+
+export default StyleLintRunner;

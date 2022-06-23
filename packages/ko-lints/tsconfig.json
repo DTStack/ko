@@ -1,7 +1,13 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["src/**/*.ts"],
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "include": ["src/**/*.ts", "index.d.ts"],
+  "exclude": ["src/**/*.test.ts"],
   "compilerOptions": {
-    "outDir": "lib"
-  }
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "outDir": "lib",
+  },
 }

@@ -16,14 +16,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/DTStack/ko",
-    "directory": "packages/ko-lint"
+    "directory": "packages/ko-lints"
   },
   "license": "MIT",
-  "main": "./lib/index.js",
-  "typings": "./index.d.ts",
-  "bin": {
-    "ko-lints": "./lib/cli.js"
-  },
+  "typings": "index.d.ts",
   "files": [
     "lib/*",
     "index.d.ts"
@@ -35,10 +31,9 @@
   },
   "dependencies": {
     "@types/prettier": "^2.6.1",
-    "commander": "^9.2.0",
     "eslint": "^8.16.0",
     "fast-glob": "^3.2.11",
-    "ko-config": "workspace:^1.0.0",
+    "ko-lint-config": "workspace:*",
     "prettier": "^2.6.2",
     "stylelint": "^14.8.3"
   },

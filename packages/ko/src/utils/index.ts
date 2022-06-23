@@ -11,3 +11,5 @@ export function getResolvePath(name: string) {
   const resolvePath = require.resolve(name);
   return resolvePath;
 }
+
+export { default as assert } from 'assert';

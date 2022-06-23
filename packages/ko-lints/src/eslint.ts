@@ -1,47 +1,61 @@
-import { findRealPath } from './utils';
 import { ESLint } from 'eslint';
-import { Extensions } from './constants';
-import { EslintOptions } from './interfaces';
+import LintRunnerFactory from './factory';
+import { IOpts } from './interfaces';
 
-export async function formatFilesWithEslint(
-  opts: EslintOptions & { targetFiles: string[] }
-) {
-  const { targetFiles, configPath, fix } = opts;
-  const config = configPath
-    ? require(findRealPath(configPath))
-    : require('ko-config/eslint');
-  const extensions = [
-    Extensions.JS,
-    Extensions.JSX,
-    Extensions.TS,
-    Extensions.TSX,
-  ];
-  const eslint = new ESLint({
-    fix,
-    overrideConfig: config,
-    useEslintrc: false,
-    extensions,
-  });
-  const formatter = await eslint.loadFormatter();
-  const eslintFilesPromises = targetFiles.map(async file => {
-    const result = await eslint.lintFiles(file);
-    if (result[0].errorCount) {
-      const resultText = formatter.format(result);
-      console.log(resultText);
-      return false;
-    }
-    return true;
-  });
-  let stdout = '';
-  const result = await Promise.all(eslintFilesPromises);
-  if (!fix) {
-    if (result.includes(false)) {
-      stdout = 'Not all matched files are linted';
-    } else {
-      stdout = 'All matched files are linted';
-    }
-  } else {
-    stdout = 'All matched files has been fixed successfully!';
+class ESlintRunner extends LintRunnerFactory {
+  static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx'];
+  static readonly IGNORE_FILES = ['.eslintignore'];
+  static defaultConfigPath = 'ko-lint-config/.eslintrc';
+  private opts: IOpts;
+  private config: Record<string, any>;
+  private stdout: string[] = [];
+  constructor(opts: IOpts) {
+    super();
+    this.opts = opts;
+    this.generateConfig();
   }
-  console.log(stdout);
+
+  public generateConfig() {
+    if (this.opts.configPath) {
+      this.config = this.getConfigFromFile(this.opts.configPath);
+    } else {
+      this.config = require(ESlintRunner.defaultConfigPath);
+    }
+  }
+
+  public async start() {
+    const { write, patterns } = this.opts;
+    const entries = await this.getEntries(patterns, [
+      ...ESlintRunner.IGNORE_FILES,
+    ]);
+    const eslint = new ESLint({
+      fix: write,
+      overrideConfig: this.config,
+      useEslintrc: false,
+      extensions: ESlintRunner.EXTENSIONS,
+    });
+    try {
+      const formatter = await eslint.loadFormatter();
+      const eslintFilesPromises = entries.map(async file => {
+        const result = await eslint.lintFiles(file);
+        if (result[0].errorCount) {
+          const resultText = formatter.format(result) as string;
+          this.stdout.push(resultText);
+          return false;
+        }
+        return true;
+      });
+      const result = await Promise.all(eslintFilesPromises);
+      if (result.includes(false)) {
+        return this.stdout;
+      } else {
+        return true;
+      }
+    } catch (ex) {
+      console.error(ex);
+      process.exit(1);
+    }
+  }
 }
+
+export default ESlintRunner;
