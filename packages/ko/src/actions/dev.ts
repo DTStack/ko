@@ -99,12 +99,13 @@ class Dev extends ActionFactory {
     ['SIGINT', 'SIGTERM'].forEach(signal => {
       process.on(
         signal,
-        exitProcess(() =>
+        exitProcess(() => {
+          console.log('\n');
           this.warningStdout(
-            'stop webpack devServer process via command signal: ',
+            'stop webpack devServer process via command signal:',
             signal
-          )
-        )
+          );
+        })
       );
     });
   }
