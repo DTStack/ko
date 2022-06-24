@@ -10,7 +10,7 @@
     "stylelint": "stylelint .less,.scss,.css,.sass --fix",
     "lint": "pnpm prettier && pnpm eslint",
     "test": "pnpm test",
-    "debug:ko": "pnpm debug --filter ./packages/ko",
+    "debug:ko": "pnpm --filter ./packages/ko debug",
     "docs:start": "cd website && pnpm start",
     "changeset": "changeset",
     "bump": "changeset version",
