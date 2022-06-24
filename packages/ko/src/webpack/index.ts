@@ -1,7 +1,10 @@
-import { Configuration } from 'webpack';
+import { join } from 'path';
+import { existsSync } from 'fs';
+import { Configuration, FileCacheOptions } from 'webpack';
 import { merge } from 'lodash';
 import loaders from './loaders';
 import getPlugins from './plugins';
+import { assert } from '../utils';
 import Service from '../core/service';
 import { IOptions } from '../types';
 
@@ -30,27 +33,39 @@ class WebpackConfig {
     return merge(this.base, ...opts);
   }
 
-  get base() {
-    const {
-      cwd,
-      publicPath,
-      entry,
-      outputPath,
-      alias,
-      hash,
-      analyzer,
-      experiment,
-    } = this.opts;
-    const cache: Configuration['cache'] = {
-      type: experiment?.speedUp
-        ? 'filesystem'
-        : this.isProd
-        ? 'filesystem'
-        : 'memory',
+  get cache() {
+    const { experiment } = this.opts;
+    const type = experiment?.speedUp
+      ? 'filesystem'
+      : this.isProd
+      ? 'filesystem'
+      : 'memory';
+    const cache: Exclude<NonNullable<Configuration['cache']>, boolean> = {
+      type,
     };
-    if (!experiment?.speedUp && !this.isProd) {
-      (cache as any).maxGenerations = 1;
+    if (type === 'filesystem') {
+      (cache as FileCacheOptions).version = this.projectVersion;
+    } else {
+      (
+        cache as Exclude<
+          NonNullable<Configuration['cache']>,
+          boolean | FileCacheOptions
+        >
+      ).maxGenerations = 1;
     }
+    return cache;
+  }
+
+  get projectVersion(): string {
+    const pkgPath = join(this.opts.cwd, 'package.json');
+    assert(existsSync(pkgPath), 'project package.json file not found');
+    return require(pkgPath).version;
+  }
+
+  get base() {
+    const { cwd, publicPath, entry, outputPath, alias, hash, analyzer } =
+      this.opts;
+
     const webpackBaseConf = {
       mode: this.env,
       target: 'web',
@@ -89,7 +104,7 @@ class WebpackConfig {
       performance: {
         hints: false,
       },
-      cache,
+      cache: this.cache,
       stats: {
         cachedModules: false,
       },
