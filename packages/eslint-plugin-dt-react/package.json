@@ -1,0 +1,13 @@
+{
+    "name": "eslint-plugin-dt-react",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "eslint": "^8.16.0",
+        "object.hasown": "^1.1.1",
+        "semver": "^7.3.7"
+    }
+}

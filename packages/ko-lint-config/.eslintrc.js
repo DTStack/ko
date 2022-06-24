@@ -31,7 +31,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:@typescript-eslint/recommended',
     ],
-    plugins: ['import', 'react', 'jsx-a11y', 'react-hooks'],
+    plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
     globals: {
         expect: 'readonly',
         test: 'readonly',
@@ -113,14 +113,7 @@ module.exports = {
         'no-use-before-define': 0, // 使用尚未声明的变量
 
         // 控制是否可以使用没有在 package.json 内 dependencies, devDependencies, optionalDependencies, peerDependencies, bundledDependencies 中声明的扩展模块
-        'import/no-extraneous-dependencies': [
-            2,
-            {
-                devDependencies: false,
-                optionalDependencies: false,
-                peerDependencies: false,
-            },
-        ],
+        'import/no-extraneous-dependencies': 0,
 
         /**
          * 是否强制组件中的方法顺序，顺序如下：
@@ -140,8 +133,21 @@ module.exports = {
             { extensions: ['.tsx', '.js', '.jsx'] },
         ],
         'react/react-in-jsx-scope': 0,
+        'react/jsx-closing-tag-location': 0,
         'react-hooks/rules-of-hooks': 2,
         'react-hooks/exhaustive-deps': 0,
+
+        'jsx-quotes': 1,
+        'dt-react/jsx-closing-bracket-location': [1, 'line-aligned'],
+        'dt-react/jsx-tag-spacing': [
+            2,
+            {
+                closingSlash: 'never',
+                beforeSelfClosing: 'always',
+                // beforeSelfClosing: 'proportional-always',
+                beforeClosing: 'proportional-always',
+            },
+        ],
 
         'jsx-a11y/no-static-element-interactions': 0,
 
