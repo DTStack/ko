@@ -1,18 +1,9 @@
-type Options = {
-  configPath?: string;
-  ignorePath?: string;
+import { Pattern } from 'fast-glob';
+
+export type IOpts = {
+  write: boolean;
+  configPath: string;
+  patterns: Pattern[];
 };
 
-export type PrettierOptions = Options & {
-  write?: boolean;
-};
-
-export type EslintOptions = Options & {
-  fix?: boolean;
-};
-
-export type StylelintOptions = Options & {
-  fix?: boolean;
-  files?: string[];
-  code?: string;
-};
+export type IKeys = 'eslint' | 'prettier' | 'stylelint';

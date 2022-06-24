@@ -1,6 +1,6 @@
-import { Configuration } from 'webpack';
 import { Pattern } from 'copy-webpack-plugin';
 import { Plugin } from 'postcss';
+import { IKeys, IOpts } from 'ko-lints';
 
 export type IOptions = {
   //common configs
@@ -32,6 +32,7 @@ export type IOptions = {
     minimizer?: boolean;
     enableCssModule?: boolean;
   };
+  lints?: Record<IKeys, Pick<IOpts, 'configPath' | 'patterns'>>;
 };
 
 export type ICliOptions = {
