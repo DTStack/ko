@@ -1,69 +1,186 @@
+import { join } from 'path';
+import { realpathSync, existsSync } from 'fs';
 import { loader as MiniCssExtractPluginLoader } from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
+const postCssUrl = require('postcss-url');
+import { getResolvePath } from '../../utils';
+import { IWebpackOptions } from '../../types';
 
-const CSS_LOADER = require.resolve('css-loader');
-const LESS_LOADER = require.resolve('less-loader');
-const SASS_LOADER = require.resolve('sass-loader');
-const POSTCSS_LOADER = require.resolve('postcss-loader');
+class Style {
+  private CSS_LOADER = getResolvePath('css-loader');
+  private SASS_LOADER = getResolvePath('sass-loader');
+  private LESS_LOADER = getResolvePath('less-loader');
+  private POSTCSS_LOADER = getResolvePath('postcss-loader');
+  private CSS_MODULE_FILE_SUFFIX_REGEX = /\.module.s[ac]ss$/;
+  private opts: IWebpackOptions;
+  constructor(opts: IWebpackOptions) {
+    this.opts = opts;
+  }
 
-const styleLoader = {
-  loader: MiniCssExtractPluginLoader,
-};
-
-const cssLoader = {
-  loader: CSS_LOADER,
-  options: {
-    sourceMap: true,
-  },
-};
-
-//TODO: check postcss-loader should use sourceMap option
-const postcssLoader = {
-  loader: POSTCSS_LOADER,
-  options: {
-    sourceMap: true,
-    postcssOptions: {
-      plugins: [autoprefixer()],
-    },
-  },
-};
-
-const styleLoaders = [
-  {
-    test: /\.css$/,
-    use: [styleLoader, cssLoader, postcssLoader],
-  },
-  {
-    test: /\.s[ac]ss$/,
-    use: [
-      styleLoader,
-      cssLoader,
-      postcssLoader,
+  get config() {
+    const enableCssModule = this.opts?.experiment?.enableCssModule;
+    return [
       {
-        loader: SASS_LOADER,
-        options: {
-          sourceMap: true,
-        },
+        test: /\.css$/,
+        use: [this.styleLoader, this.cssLoader, this.postCSSLoader],
       },
-    ],
-  },
-  {
-    test: /\.less$/,
-    use: [
-      styleLoader,
-      cssLoader,
-      postcssLoader,
       {
-        loader: LESS_LOADER,
-        options: {
-          lessOptions: {
-            javascriptEnabled: true,
+        test: /\.s[ac]ss$/,
+        exclude: (input: string) => {
+          if (enableCssModule) {
+            return this.CSS_MODULE_FILE_SUFFIX_REGEX.test(input);
+          } else {
+            return false;
+          }
+        },
+        use: [
+          this.styleLoader,
+          this.cssLoader,
+          this.postCSSLoader,
+          this.sassLoader,
+        ],
+      },
+      enableCssModule && this.sassCssModuleConfig,
+      {
+        test: /\.less$/,
+        exclude: [this.realAntdV4Path],
+        use: [
+          this.styleLoader,
+          this.cssLoader,
+          this.postCSSLoader,
+          this.lessLoader,
+        ],
+      },
+      {
+        test: /\.less$/,
+        include: [this.realAntdV4Path],
+        use: [
+          this.styleLoader,
+          this.cssLoader,
+          this.postCSSLoader,
+          this.antdV4LessLoader,
+        ],
+      },
+    ];
+  }
+
+  get sassCssModuleConfig() {
+    return {
+      test: /\.module.s[ac]ss$/,
+      use: [
+        this.styleLoader,
+        {
+          loader: this.CSS_LOADER,
+          options: {
+            esModule: true,
+            modules: {
+              namedExport: true,
+              localIdentName: this.opts.isProd
+                ? '[path][name]__[local]'
+                : '[local]_[hash:base64]',
+            },
           },
-          sourceMap: true,
+        },
+        this.postCSSLoader,
+        this.sassLoader,
+      ],
+    };
+  }
+
+  //TODO: remove when upgrade to antd v4
+  get realAntdV4Path() {
+    const antdV4Path = join(this.opts.cwd, 'node_modules/antd-v4');
+    const ret = existsSync(antdV4Path) ? realpathSync(antdV4Path) : antdV4Path;
+    return ret;
+  }
+
+  get styleLoader() {
+    return {
+      loader: MiniCssExtractPluginLoader,
+    };
+  }
+
+  get cssLoader() {
+    return {
+      loader: this.CSS_LOADER,
+      options: {
+        sourceMap: true,
+      },
+    };
+  }
+
+  get sassLoader() {
+    return {
+      loader: this.SASS_LOADER,
+      options: {
+        sourceMap: true,
+      },
+    };
+  }
+
+  get lessLoader() {
+    const { lessOptions = {} } = this.opts;
+    return {
+      loader: this.LESS_LOADER,
+      options: {
+        sourceMap: true,
+        lessOptions,
+      },
+    };
+  }
+
+  get antdV4LessLoader() {
+    const { antdV4LessOptions = {} } = this.opts;
+    return {
+      loader: this.LESS_LOADER,
+      options: {
+        sourceMap: true,
+        lessOptions: antdV4LessOptions,
+      },
+    };
+  }
+
+  get postCSSLoader() {
+    return {
+      loader: this.POSTCSS_LOADER,
+      options: {
+        sourceMap: true,
+        postcssOptions: {
+          plugins: this.postCSSPlugins,
         },
       },
-    ],
-  },
-];
+    };
+  }
 
-export default styleLoaders;
+  get postCSSPlugins() {
+    const extraPostCSSPlugins = this.opts.extraPostCSSPlugins || [];
+    return [
+      autoprefixer(),
+      postCssUrl([
+        {
+          filter: '**/src/public/img/**/*',
+          url: (args: any) => {
+            const originUrl = args?.originUrl;
+            return originUrl
+              ? join(this.opts.cwd, originUrl)
+              : args.absolutePath;
+          },
+          basePath: '/',
+        },
+        {
+          filter: '**/src/public/font/**/*',
+          url: (args: any) => {
+            const originUrl = args?.originUrl;
+            return originUrl
+              ? join(this.opts.cwd, originUrl)
+              : args.absolutePath;
+          },
+          basePath: '/',
+        },
+      ]),
+      ...extraPostCSSPlugins,
+    ].filter(Boolean);
+  }
+}
+
+export default Style;

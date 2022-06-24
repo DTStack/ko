@@ -1,67 +1,67 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
+import Service from '../core/service';
+import WebpackConfig from '../webpack';
+import { ActionFactory } from './factory';
+
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { ESBuildMinifyPlugin } from 'esbuild-loader';
-import { Options } from '../interfaces';
-import { WebpackCreator } from './creator';
+import { ICliOptions } from '../types';
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
-class Build extends WebpackCreator {
-  constructor(opts: Options) {
-    super(opts);
+class Build extends ActionFactory {
+  private webpackConfig: WebpackConfig;
+  constructor(service: Service) {
+    super(service);
   }
 
-  public config() {
-    const { esbuild } = this.opts;
-    const conf = {
+  protected async generateConfig() {
+    this.webpackConfig = new WebpackConfig(this.service);
+    const extraConfig = {
       optimization: {
-        minimizer: [
-          !esbuild && new CssMinimizerPlugin(),
-          esbuild &&
-            new ESBuildMinifyPlugin({
-              target: 'es2015',
-              css: true,
-            }),
-        ].filter(Boolean),
+        minimize: true,
+        minimizer: this.service.config.experiment?.minimizer
+          ? [
+              new ESBuildMinifyPlugin({
+                target: 'es2015',
+                css: true,
+              }),
+            ]
+          : ['...', CssMinimizerPlugin.parcelCssMinify],
       },
-      plugins: [
-        new webpack.optimize.SplitChunksPlugin({
-          chunks: 'async',
-          minSize: 30000,
-          maxSize: 600000,
-          minChunks: 1,
-          maxAsyncRequests: 5,
-          maxInitialRequests: 3,
-          automaticNameDelimiter: '_',
-          cacheGroups: {
-            antd: {
-              name: 'antd',
-              test: /[\\/]node_modules[\\/]antd[\\/]/,
-              chunks: 'initial',
-            },
-            lodash: {
-              name: 'lodash',
-              test: /[\\/]node_modules[\\/]lodash[\\/]/,
-              chunks: 'initial',
-              priority: -10,
-            },
-            default: {
-              minChunks: 2,
-              priority: -20,
-              reuseExistingChunk: true,
-            },
-          },
-        }),
-      ],
-    };
-    return this.mergeConfig([this.baseConfig, conf]);
+    } as Configuration;
+    const ret = this.webpackConfig.merge(extraConfig);
+    const plugins: any = await this.service.apply({
+      key: this.service.hookKeySet.WEBPACK_PLUGIN,
+      context: ret.plugins,
+    });
+    ret.plugins = plugins;
+    return ret;
   }
 
-  public action() {
-    //TODO: redefine stats
-    webpack(this.config(), (error, stats: any) => {
+  public registerCommand(): void {
+    const cmdName = 'build';
+    this.service.commander.registerCommand({
+      name: cmdName,
+      description: 'build project',
+      options: [
+        {
+          flags: '--hash',
+          description: 'output file name with hash',
+          defaultValue: true,
+        },
+      ],
+    });
+    this.service.commander.bindAction(cmdName, this.action.bind(this));
+  }
+
+  protected async action(cliOpts: ICliOptions) {
+    process.title = 'ko-build';
+    process.env.NODE_ENV = 'production';
+    this.service.freezeCliOptsWith(cliOpts);
+    const config = await this.generateConfig();
+    webpack(config, (error, stats: any) => {
       if (stats && stats.hasErrors()) {
         throw stats.toString({
-          logging: 'warn',
+          logging: 'error',
           colors: true,
         });
       }

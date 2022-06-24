@@ -1,112 +1,112 @@
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
-import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import detect from 'detect-port';
-import { prompt } from 'inquirer';
-import config from '../utils/config';
-import { Options } from '../interfaces';
-import { WebpackCreator } from './creator';
+import Webpack from 'webpack';
+import WebpackDevServer, {
+  Configuration as DevServerConfiguration,
+} from 'webpack-dev-server';
+import Service from '../core/service';
+import WebpackConfig from '../webpack';
+import ActionFactory from './factory';
+import { ICliOptions } from '../types';
 
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
-class Dev extends WebpackCreator {
-  constructor(opts: Options) {
-    super(opts);
+class Dev extends ActionFactory {
+  private webpackConfig: WebpackConfig;
+  constructor(service: Service) {
+    super(service);
   }
 
-  public devSerConf() {
-    const userDefinedDevServerConfig = config.userConf.devServer || {};
-    const { port, host } = this.opts;
-    const defaultDevServerConfig = {
+  private get devServerConfig(): DevServerConfiguration {
+    const { serve, publicPath } = this.service.config;
+    const { host, port, proxy, staticPath } = serve;
+    return {
       port,
       host,
-      historyApiFallback: true,
-      allowedHosts: 'all',
       hot: true,
+      proxy,
       static: {
-        directory: config.defaultPaths.dist,
-        publicPath: '/',
+        directory: staticPath,
         watch: true,
+        publicPath,
       },
-      open: true,
+      setupExitSignals: false,
+      allowedHosts: 'all',
+      client: {
+        overlay: false,
+        logging: 'none',
+      },
     };
-    return { ...defaultDevServerConfig, ...userDefinedDevServerConfig };
   }
 
-  public config() {
-    const conf = {
+  protected async generateConfig() {
+    this.webpackConfig = new WebpackConfig(this.service);
+    const extraConfig = {
       devtool: 'cheap-module-source-map',
-      plugins: [
-        new ReactRefreshPlugin(),
-        this.opts.analyzer && new BundleAnalyzerPlugin(),
-      ].filter(Boolean),
+      mode: <const>'development',
     };
-    return this.mergeConfig([this.baseConfig, conf]);
-  }
-
-  private async changePort(newPort: number, port: number) {
-    const question = {
-      type: 'confirm',
-      name: 'changePort',
-      message: `port: ${port} has been used，use new port ${newPort} instead?`,
-      default: true,
+    const ret = this.webpackConfig.merge(extraConfig, {
+      devServer: this.devServerConfig,
+    });
+    const plugins: any = await this.service.apply({
+      key: this.service.hookKeySet.WEBPACK_PLUGIN,
+      context: ret.plugins,
+    });
+    ret.plugins = plugins;
+    ret.experiments = {
+      lazyCompilation: this.service.config?.experiment?.speedUp,
     };
-    const answer = await prompt([question]);
-    if (answer.changePort) {
-      return newPort;
-    } else {
-      return null;
-    }
+    return ret;
   }
 
-  private async checkPort(port: number) {
-    const newPort = await detect(port);
-    if (newPort === port) {
-      return newPort;
-    }
-    const isInteractive = process.stdout.isTTY;
-    if (isInteractive) {
-      return this.changePort(newPort, port);
-    }
-  }
-
-  private getUrlHost(host: string): string {
-    const regex = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*$/i;
-    return regex.test(host) ? host : `http://${host}`;
-  }
-
-  public async action() {
-    const { port, host } = this.devSerConf();
-    const newPort = await this.checkPort(parseInt(port));
-    if (!newPort) return;
-    const compiler = webpack(this.config());
-    const devServer = new WebpackDevServer(this.devSerConf(), compiler);
-    let isFirstCompile = true;
-
-    compiler.hooks.done.tap('done', (stats) => {
-      if (isFirstCompile) {
-        isFirstCompile = false;
-        this.successStdout('development server has been started');
-        console.log(
-          `server starts at: ${this.linkStdout(
-            this.getUrlHost(host) + ':' + port
-          )}`
-        );
-      }
-      if (stats.hasErrors()) {
-        console.log(
-          stats.toString({
-            colors: true,
-          })
-        );
-      }
+  public registerCommand(): void {
+    const cmdName = 'dev';
+    this.service.commander.registerCommand({
+      name: cmdName,
+      description: 'start devServer',
+      options: [
+        {
+          flags: '--hash',
+          description: 'output file name with hash',
+          defaultValue: true,
+        },
+        {
+          flags: '--analyzer',
+          description: 'support building analyzer',
+          defaultValue: false,
+        },
+      ],
     });
+    this.service.commander.bindAction(cmdName, this.action.bind(this));
+  }
 
-    compiler.hooks.invalid.tap('invalid', () => {
-      console.log('Compiling...');
+  protected async action(cliOpts: ICliOptions) {
+    process.title = 'ko-dev';
+    process.env.NODE_ENV = 'development';
+    this.service.freezeCliOptsWith(cliOpts);
+    const config = await this.generateConfig();
+    const compiler = Webpack(config);
+    const devServer = new WebpackDevServer(config.devServer, compiler);
+    await devServer.start();
+    const exitProcess = (callback?: () => void) => () => {
+      callback && callback();
+      process.exit(0);
+    };
+    process.stdin.on('end', () => {
+      devServer.stopCallback(() => {
+        exitProcess(() =>
+          this.successStdout('webpack devServer process exit successfully')
+        );
+      });
+      process.stdin.resume();
     });
-
-    devServer.start();
+    ['SIGINT', 'SIGTERM'].forEach(signal => {
+      process.on(
+        signal,
+        exitProcess(() =>
+          this.warningStdout(
+            'stop webpack devServer process via command signal: ',
+            signal
+          )
+        )
+      );
+    });
   }
 }
 
