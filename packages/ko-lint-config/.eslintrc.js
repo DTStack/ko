@@ -134,6 +134,7 @@ module.exports = {
         ],
         'react/react-in-jsx-scope': 0,
         'react/jsx-closing-tag-location': 0,
+        'react/jsx-boolean-value': [1, 'never'],
         'react-hooks/rules-of-hooks': 2,
         'react-hooks/exhaustive-deps': 0,
 
@@ -146,6 +147,14 @@ module.exports = {
                 beforeSelfClosing: 'always',
                 // beforeSelfClosing: 'proportional-always',
                 beforeClosing: 'proportional-always',
+            },
+        ],
+        'dt-react/jsx-wrap-multilines': 1,
+        'dt-react/self-closing-comp': [
+            1,
+            {
+                component: true,
+                html: false,
             },
         ],
 
