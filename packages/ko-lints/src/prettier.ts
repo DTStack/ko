@@ -1,11 +1,14 @@
 import { readFile, writeFile } from 'fs/promises';
-import { format, check } from 'prettier';
+import { prettier } from 'ko-lint-config';
 import LintRunnerFactory from './factory';
 import { IOpts } from './interfaces';
+
+const { format, check } = prettier;
 
 class PrettierRunner extends LintRunnerFactory {
   static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'json'];
   static readonly IGNORE_FILES = ['.prettierignore'];
+  static readonly NAME = 'prettier';
   private opts: IOpts;
   private config: Record<string, any>;
   private stdout: string[] = [];
@@ -31,6 +34,12 @@ class PrettierRunner extends LintRunnerFactory {
     const entries = await this.getEntries(patterns, [
       ...PrettierRunner.IGNORE_FILES,
     ]);
+    if (entries.length === 0) {
+      console.log(
+        `No files matched with pattern:${patterns} via ${PrettierRunner.NAME}`
+      );
+      process.exit(0);
+    }
     try {
       const formatFilesPromises = entries.map(async file => {
         const source = await readFile(file, 'utf-8');

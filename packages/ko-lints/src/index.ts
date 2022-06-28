@@ -8,7 +8,6 @@ import { IOpts, IKeys } from './interfaces';
 class Lints {
   private runner: LintRunnerFactory;
   private opts: IOpts;
-  public state: 0 | 1; // 0: success 1: failed
   constructor(opts: IOpts) {
     this.opts = opts;
   }
