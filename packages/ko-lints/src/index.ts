@@ -17,10 +17,13 @@ class Lints {
     switch (key) {
       case 'eslint':
         this.runner = new ESlintRunner(this.opts);
+        break;
       case 'prettier':
         this.runner = new PrettierRunner(this.opts);
+        break;
       case 'stylelint':
         this.runner = new StyleLintRunner(this.opts);
+        break;
     }
     this.runner.generateConfig();
     const result = await this.runner.start();

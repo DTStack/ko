@@ -5,7 +5,6 @@ import { IOpts } from './interfaces';
 class ESlintRunner extends LintRunnerFactory {
   static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx'];
   static readonly IGNORE_FILES = ['.eslintignore'];
-  static defaultConfigPath = 'ko-lint-config/.eslintrc';
   private opts: IOpts;
   private config: Record<string, any>;
   private stdout: string[] = [];
@@ -19,7 +18,10 @@ class ESlintRunner extends LintRunnerFactory {
     if (this.opts.configPath) {
       this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      this.config = require(ESlintRunner.defaultConfigPath);
+      const localConfigPath = this.detectLocalRunnerConfig('eslint');
+      if (localConfigPath) {
+        this.config = this.getConfigFromFile(localConfigPath);
+      }
     }
   }
 

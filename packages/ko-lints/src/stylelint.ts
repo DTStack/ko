@@ -5,7 +5,6 @@ import { IOpts } from './interfaces';
 class StyleLintRunner extends LintRunnerFactory {
   static readonly EXTENSIONS = ['css', 'less', 'sass', 'scss'];
   static readonly IGNORE_FILES = ['.stylelintignore'];
-  static defaultConfigPath = 'ko-lint-config/.stylelintrc';
   private opts: IOpts;
   private config: Record<string, any>;
   private stdout: string[] = [];
@@ -19,7 +18,10 @@ class StyleLintRunner extends LintRunnerFactory {
     if (this.opts.configPath) {
       this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      this.config = require(StyleLintRunner.defaultConfigPath);
+      const localConfigPath = this.detectLocalRunnerConfig('stylelint');
+      if (localConfigPath) {
+        this.config = this.getConfigFromFile(localConfigPath);
+      }
     }
   }
 
