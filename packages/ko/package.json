@@ -30,7 +30,6 @@
   "bin": {
     "ko": "./lib/cli.js"
   },
-  "main": "lib/index.js",
   "files": [
     "lib/*"
   ],
