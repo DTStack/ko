@@ -119,6 +119,7 @@ module.exports = {
                 devDependencies: false,
                 optionalDependencies: false,
                 peerDependencies: false,
+                packageDir: [process.cwd()] //TODO: should include sub directory package.json
             },
         ],
 
