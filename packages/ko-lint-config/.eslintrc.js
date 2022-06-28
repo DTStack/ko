@@ -113,7 +113,15 @@ module.exports = {
         'no-use-before-define': 0, // 使用尚未声明的变量
 
         // 控制是否可以使用没有在 package.json 内 dependencies, devDependencies, optionalDependencies, peerDependencies, bundledDependencies 中声明的扩展模块
-        'import/no-extraneous-dependencies': 0,
+        'import/no-extraneous-dependencies': [
+            2,
+            {
+                devDependencies: false,
+                optionalDependencies: false,
+                peerDependencies: false,
+                packageDir: [process.cwd()] //TODO: should include sub directory package.json
+            },
+        ],
 
         /**
          * 是否强制组件中的方法顺序，顺序如下：

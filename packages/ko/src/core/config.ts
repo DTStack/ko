@@ -16,14 +16,14 @@ class Config {
     this.generate();
   }
 
-  private get isHelpCommand() {
-    const flag = process.argv.find(arg => arg === '--help' || arg === '-h');
+  private get isDevOrBuildCommand() {
+    const flag = process.argv.find(arg => arg === 'dev' || arg === 'build');
     return !!flag;
   }
 
   private getConfigPath(path: string) {
     const absolutePath = join(process.cwd(), path);
-    !this.isHelpCommand &&
+    this.isDevOrBuildCommand &&
       assert(
         existsSync(absolutePath),
         'ko.config.js file not exist, please check if it exist'
@@ -33,7 +33,7 @@ class Config {
 
   public generate() {
     this.origin = {};
-    if (!this.isHelpCommand) {
+    if (this.isDevOrBuildCommand) {
       this.origin = require(this.path);
     }
     this.current = merge(this.default, cloneDeep(this.origin));

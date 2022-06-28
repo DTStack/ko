@@ -1,6 +1,6 @@
 {
   "name": "ko-lints",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "lint tools used by ko",
   "keywords": [
     "ko",
@@ -20,24 +20,24 @@
   },
   "license": "MIT",
   "typings": "index.d.ts",
+  "main": "lib/index.js",
   "files": [
     "lib/*",
     "index.d.ts"
   ],
   "scripts": {
-    "prepublishOnly": "tsc",
+    "prepublishOnly": "rm -rf lib && tsc",
     "build": "tsc",
     "debug": "tsc --sourcemap -w"
   },
   "dependencies": {
-    "@types/prettier": "^2.6.1",
-    "eslint": "^8.16.0",
-    "fast-glob": "^3.2.11",
-    "ko-lint-config": "workspace:*",
-    "prettier": "^2.6.2",
-    "stylelint": "^14.8.3"
+    "fast-glob": "^3.2.11"
+  },
+  "peerDependencies": {
+    "ko-lint-config": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "ko-lint-config": "workspace:*"
   }
 }

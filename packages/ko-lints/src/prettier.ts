@@ -1,12 +1,14 @@
 import { readFile, writeFile } from 'fs/promises';
-import { format, check } from 'prettier';
+import { prettier } from 'ko-lint-config';
 import LintRunnerFactory from './factory';
 import { IOpts } from './interfaces';
+
+const { format, check } = prettier;
 
 class PrettierRunner extends LintRunnerFactory {
   static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'json'];
   static readonly IGNORE_FILES = ['.prettierignore'];
-  static defaultConfigPath = 'ko-lint-config/.prettierrc';
+  static readonly NAME = 'prettier';
   private opts: IOpts;
   private config: Record<string, any>;
   private stdout: string[] = [];
@@ -20,7 +22,10 @@ class PrettierRunner extends LintRunnerFactory {
     if (this.opts.configPath) {
       this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      this.config = require(PrettierRunner.defaultConfigPath);
+      const localConfigPath = this.detectLocalRunnerConfig('prettier');
+      if (localConfigPath) {
+        this.config = this.getConfigFromFile(localConfigPath);
+      }
     }
   }
 
@@ -29,6 +34,12 @@ class PrettierRunner extends LintRunnerFactory {
     const entries = await this.getEntries(patterns, [
       ...PrettierRunner.IGNORE_FILES,
     ]);
+    if (entries.length === 0) {
+      console.log(
+        `No files matched with pattern:${patterns} via ${PrettierRunner.NAME}`
+      );
+      process.exit(0);
+    }
     try {
       const formatFilesPromises = entries.map(async file => {
         const source = await readFile(file, 'utf-8');
@@ -38,7 +49,14 @@ class PrettierRunner extends LintRunnerFactory {
           await writeFile(file, formatContent, 'utf-8');
           return true;
         } else {
-          return check(source, opts);
+          if (check(source, opts)) {
+            return true;
+          } else {
+            this.stdout.push(
+              `file ${opts.filepath} doesn't match prettier config`
+            );
+            return false;
+          }
         }
       });
       const result = await Promise.all(formatFilesPromises);

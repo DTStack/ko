@@ -10,6 +10,10 @@ type RegisterOptions = {
 type CMDProperties = {
   description: string;
   options?: RegisterOptions[];
+  args?: {
+    flags: string;
+    description: string;
+  }[];
   action?: ActionFn;
 };
 
@@ -36,6 +40,7 @@ class Commander {
   registerCommand({
     name,
     description,
+    args,
     options,
   }: CMDProperties & { name: string }) {
     assert(
@@ -47,6 +52,7 @@ class Commander {
     this.cmdSet[name] = {
       description,
       options,
+      args,
     };
   }
 
@@ -73,6 +79,11 @@ class Commander {
       const cmd = this.cmdSet[name];
       const command = this.program.command(name);
       command.description(cmd.description);
+      if (cmd.args) {
+        cmd.args.forEach(argv => {
+          command.argument(argv.flags, argv.description);
+        });
+      }
       if (cmd.options) {
         cmd.options.forEach(option => {
           command.option(option.flags, option.description, option.defaultValue);

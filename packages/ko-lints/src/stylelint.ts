@@ -1,11 +1,13 @@
-import { lint, formatters } from 'stylelint';
+import { stylelint } from 'ko-lint-config';
 import LintRunnerFactory from './factory';
 import { IOpts } from './interfaces';
+
+const { lint, formatters } = stylelint;
 
 class StyleLintRunner extends LintRunnerFactory {
   static readonly EXTENSIONS = ['css', 'less', 'sass', 'scss'];
   static readonly IGNORE_FILES = ['.stylelintignore'];
-  static defaultConfigPath = 'ko-lint-config/.stylelintrc';
+  static readonly NAME = 'stylelint';
   private opts: IOpts;
   private config: Record<string, any>;
   private stdout: string[] = [];
@@ -19,7 +21,12 @@ class StyleLintRunner extends LintRunnerFactory {
     if (this.opts.configPath) {
       this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      this.config = require(StyleLintRunner.defaultConfigPath);
+      const localConfigPath = this.detectLocalRunnerConfig(
+        StyleLintRunner.NAME
+      );
+      if (localConfigPath) {
+        this.config = this.getConfigFromFile(localConfigPath);
+      }
     }
   }
 
@@ -28,6 +35,12 @@ class StyleLintRunner extends LintRunnerFactory {
     const entries = await this.getEntries(patterns, [
       ...StyleLintRunner.IGNORE_FILES,
     ]);
+    if (entries.length === 0) {
+      console.log(
+        `No files matched with pattern:${patterns} via ${StyleLintRunner.NAME}`
+      );
+      process.exit(0);
+    }
     try {
       const result = await lint({
         fix: write,

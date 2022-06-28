@@ -44,11 +44,13 @@ class Dev extends ActionFactory {
     const ret = this.webpackConfig.merge(extraConfig, {
       devServer: this.devServerConfig,
     });
-    const plugins: any = await this.service.apply({
-      key: this.service.hookKeySet.WEBPACK_PLUGIN,
-      context: ret.plugins,
-    });
-    ret.plugins = plugins;
+    if (ret.plugins) {
+      const plugins: any = await this.service.apply({
+        key: this.service.hookKeySet.WEBPACK_PLUGIN,
+        context: ret.plugins,
+      });
+      ret.plugins = plugins;
+    }
     ret.experiments = {
       lazyCompilation: this.service.config?.experiment?.speedUp,
     };
