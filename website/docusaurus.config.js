@@ -57,7 +57,6 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          // { to: '/blog', label: 'Blog', position: 'left' },
           {
             type: 'docsVersionDropdown',
             position: 'right',
@@ -78,15 +77,15 @@ const config = {
             items: [
               {
                 label: 'Introduction',
-                to: '/docs/introduction',
+                to: '/docs/current/introduction',
               },
               {
                 label: 'Getting Started',
-                to: '/docs/getting-started',
+                to: '/docs/current/getting-started',
               },
               {
                 label: 'FAQ',
-                to: '/docs/FAQ',
+                to: '/docs/current/FAQ',
               },
             ],
           },
@@ -95,7 +94,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/ko',
               },
             ],
           },
