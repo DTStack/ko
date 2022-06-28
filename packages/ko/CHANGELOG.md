@@ -1,5 +1,16 @@
 # ko
 
+## 6.0.0
+
+### Major Changes
+
+- 84adca00: publish ko v6.0 and it's related packages
+
+### Patch Changes
+
+- Updated dependencies [84adca00]
+  - ko-lints@2.0.0
+
 ## 5.3.10
 
 ### Patch Changes
