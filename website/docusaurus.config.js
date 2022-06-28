@@ -24,6 +24,13 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/DTStack/ko/website/',
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: '6.x',
+              path: 'current',
+            },
+          }
         },
         // blog: {
         //   showReadingTime: true,
@@ -32,7 +39,7 @@ const config = {
         //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         // },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/css/custom.css')
         },
       }),
     ],
@@ -51,6 +58,11 @@ const config = {
             label: 'Docs',
           },
           // { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownActiveClassDisabled: true,
+          },
           {
             href: 'https://github.com/DTStack/ko',
             label: 'GitHub',
