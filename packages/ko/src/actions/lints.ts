@@ -21,20 +21,21 @@ class LintFactory extends ActionFactory {
     this.service.commander.registerCommand({
       name,
       description: `lint your codes via ${name}`,
+      args: [
+        {
+          flags: '<patterns>',
+          description: ` Specify ${name} lint patterns(via glob)`,
+        },
+      ],
       options: [
         {
-          flags: '--write',
+          flags: '-w, --write',
           description: 'try to fix problems automatically',
           defaultValue: false,
         },
         {
-          flags: '--configPath',
+          flags: '-c, --configPath <configPath>',
           description: `Specify ${name} config path`,
-          defaultValue: '',
-        },
-        {
-          flags: '--patterns',
-          description: `Specify ${name} patterns(via glob)`,
           defaultValue: '',
         },
       ],
@@ -42,9 +43,14 @@ class LintFactory extends ActionFactory {
     this.service.commander.bindAction(name, this.action.bind(this));
   }
 
-  protected async action(cliOpts: ILintOpts) {
+  protected async action(patterns: string | string[], cliOpts: ILintOpts) {
     const config = this.generateConfig();
-    const finalOpts = Object.freeze({ name: this.name, ...config, ...cliOpts });
+    const finalOpts = Object.freeze({
+      name: this.name,
+      ...config,
+      ...cliOpts,
+      patterns: Array.isArray(patterns) ? patterns : [patterns],
+    });
     const { name, ...opts } = finalOpts;
     assert(
       opts.patterns,
@@ -57,7 +63,7 @@ class LintFactory extends ActionFactory {
       this.successStdout('[success]', `lint via ${name}`);
       process.exit(0);
     } else {
-      this.warningStdout('[failed]', `lint via ${name}`);
+      this.warningStdout(`lint via ${name} failed:`);
       result.forEach(str => {
         this.warningStdout('[failed]', str);
       });
