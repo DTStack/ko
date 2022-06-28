@@ -1,4 +1,4 @@
-# [eslint-config-dt-insight] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url]
+# [ko-lint-config] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url]
 
 [npm-image]: https://img.shields.io/npm/v/ko-lint-config.svg
 [npm-url]: https://npmjs.org/package/ko-lint-config

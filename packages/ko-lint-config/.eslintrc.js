@@ -31,7 +31,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:@typescript-eslint/recommended',
     ],
-    plugins: ['import', 'react', 'jsx-a11y', 'react-hooks'],
+    plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
     globals: {
         expect: 'readonly',
         test: 'readonly',
@@ -141,8 +141,30 @@ module.exports = {
             { extensions: ['.tsx', '.js', '.jsx'] },
         ],
         'react/react-in-jsx-scope': 0,
+        'react/jsx-closing-tag-location': 0,
+        'react/jsx-boolean-value': [1, 'never'],
         'react-hooks/rules-of-hooks': 2,
         'react-hooks/exhaustive-deps': 0,
+
+        'jsx-quotes': 1,
+        'dt-react/jsx-closing-bracket-location': [1, 'line-aligned'],
+        'dt-react/jsx-tag-spacing': [
+            2,
+            {
+                closingSlash: 'never',
+                beforeSelfClosing: 'always',
+                // beforeSelfClosing: 'proportional-always',
+                beforeClosing: 'proportional-always',
+            },
+        ],
+        'dt-react/jsx-wrap-multilines': 1,
+        'dt-react/self-closing-comp': [
+            1,
+            {
+                component: true,
+                html: false,
+            },
+        ],
 
         'jsx-a11y/no-static-element-interactions': 0,
 
