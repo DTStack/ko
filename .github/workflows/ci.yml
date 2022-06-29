@@ -15,10 +15,8 @@ jobs:
             cache: pnpm
       - name: pnpm install
         run: pnpm install
-      - name: prettier
-        run: pnpm prettier
-      - name: eslint
-        run: pnpm eslint
+      - name: check
+        run: pnpm check
 
 # on: push
 # jobs:

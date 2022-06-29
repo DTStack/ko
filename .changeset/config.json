@@ -7,8 +7,5 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "eslint-plugin-dt-react",
-    "ko-lint-config"
-  ]
+  "ignore": []
 }
