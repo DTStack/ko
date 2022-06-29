@@ -30,7 +30,7 @@ const config = {
               label: '6.x',
               path: 'current',
             },
-          }
+          },
         },
         // blog: {
         //   showReadingTime: true,
@@ -39,7 +39,7 @@ const config = {
         //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         // },
         theme: {
-          customCss: require.resolve('./src/css/custom.css')
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],

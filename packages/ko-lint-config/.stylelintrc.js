@@ -12,7 +12,11 @@ module.exports = {
         'rule-empty-line-before': [
             'always',
             {
-                except: ['inside-block', 'first-nested', 'after-single-line-comment'],
+                except: [
+                    'inside-block',
+                    'first-nested',
+                    'after-single-line-comment',
+                ],
             },
         ],
         'alpha-value-notation': 'number', // 小数显示数字(number)或百分数(percentage)

@@ -21,16 +21,16 @@ module.exports = function isDestructuredFromPragmaImport(variable, context) {
       if (latestDef.node.type === 'VariableDeclarator' && latestDef.node.init) {
         // check for: 'variable = pragma.variable'
         if (
-          latestDef.node.init.type === 'MemberExpression'
-              && latestDef.node.init.object.type === 'Identifier'
-              && latestDef.node.init.object.name === pragma
+          latestDef.node.init.type === 'MemberExpression' &&
+          latestDef.node.init.object.type === 'Identifier' &&
+          latestDef.node.init.object.name === pragma
         ) {
           return true;
         }
         // check for: '{variable} = pragma'
         if (
-          latestDef.node.init.type === 'Identifier'
-              && latestDef.node.init.name === pragma
+          latestDef.node.init.type === 'Identifier' &&
+          latestDef.node.init.name === pragma
         ) {
           return true;
         }
@@ -44,20 +44,20 @@ module.exports = function isDestructuredFromPragmaImport(variable, context) {
         }
         // get "require('react')" from: "variable = require('react').variable"
         if (
-          !requireExpression
-              && latestDef.node.init.type === 'MemberExpression'
-              && latestDef.node.init.object.type === 'CallExpression'
+          !requireExpression &&
+          latestDef.node.init.type === 'MemberExpression' &&
+          latestDef.node.init.object.type === 'CallExpression'
         ) {
           requireExpression = latestDef.node.init.object;
         }
 
         // check proper require.
         if (
-          requireExpression
-              && requireExpression.callee
-              && requireExpression.callee.name === 'require'
-              && requireExpression.arguments[0]
-              && requireExpression.arguments[0].value === pragma.toLocaleLowerCase()
+          requireExpression &&
+          requireExpression.callee &&
+          requireExpression.callee.name === 'require' &&
+          requireExpression.arguments[0] &&
+          requireExpression.arguments[0].value === pragma.toLocaleLowerCase()
         ) {
           return true;
         }
@@ -67,9 +67,9 @@ module.exports = function isDestructuredFromPragmaImport(variable, context) {
 
       // latest definition is an import declaration: import {<variable>} from 'react'
       if (
-        latestDef.parent
-            && latestDef.parent.type === 'ImportDeclaration'
-            && latestDef.parent.source.value === pragma.toLocaleLowerCase()
+        latestDef.parent &&
+        latestDef.parent.type === 'ImportDeclaration' &&
+        latestDef.parent.source.value === pragma.toLocaleLowerCase()
       ) {
         return true;
       }
