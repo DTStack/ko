@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.0.1
+
+### Patch Changes
+
+- acb01e3e: update package.json config to include config files
+
 ## 2.0.0
 
 ### Major Changes

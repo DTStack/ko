@@ -1,5 +1,12 @@
 # ko-lints
 
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [acb01e3e]
+  - ko-lint-config@2.0.1
+
 ## 3.0.0
 
 ### Patch Changes
