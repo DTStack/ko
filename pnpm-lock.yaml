@@ -42,6 +42,16 @@ importers:
       '@babel/preset-typescript': 7.17.12_@babel+core@7.18.0
       '@babel/runtime': 7.18.0
 
+  packages/eslint-plugin-dt-react:
+    specifiers:
+      eslint: ^8.16.0
+      object.hasown: ^1.1.1
+      semver: ^7.3.7
+    dependencies:
+      eslint: 8.16.0
+      object.hasown: 1.1.1
+      semver: 7.3.7
+
   packages/ko:
     specifiers:
       '@babel/core': ^7.18.0
@@ -66,7 +76,7 @@ importers:
       esbuild-loader: ^2.19.0
       html-webpack-plugin: ^5.5.0
       jest: ^28.1.0
-      ko-lints: workspace:^2.0.0
+      ko-lints: workspace:^3.0.0
       less: ^3.13.1
       less-loader: ^9.1.0
       lodash: ^4.17.21
@@ -145,6 +155,7 @@ importers:
       '@typescript-eslint/parser': ^5.18.0
       eslint: ^8.0.0
       eslint-config-standard: ^17.0.0
+      eslint-plugin-dt-react: workspace:*
       eslint-plugin-import: ^2.26.0
       eslint-plugin-jest: ^26.1.3
       eslint-plugin-jsx-a11y: ^6.5.1
@@ -167,6 +178,7 @@ importers:
       '@typescript-eslint/parser': 5.26.0_eslint@8.16.0+typescript@4.6.4
       eslint: 8.16.0
       eslint-config-standard: 17.0.0_06f9958da8803ef60b2f7e6cf399f505
+      eslint-plugin-dt-react: link:../eslint-plugin-dt-react
       eslint-plugin-import: 2.26.0_344a44770e94ca865603797fb8acf8d9
       eslint-plugin-jest: 26.5.3_98134cd9017fbefa9ea2b9974889936b
       eslint-plugin-jsx-a11y: 6.5.1_eslint@8.16.0
