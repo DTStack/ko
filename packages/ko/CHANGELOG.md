@@ -1,5 +1,11 @@
 # ko
 
+## 6.0.1
+
+### Patch Changes
+
+- ko-lints@3.0.0
+
 ## 6.0.0
 
 ### Major Changes

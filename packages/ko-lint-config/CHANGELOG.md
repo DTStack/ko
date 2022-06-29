@@ -1,5 +1,12 @@
 # ko-lint-config
 
+## 2.0.0
+
+### Major Changes
+
+- e854ccd8: 1. add new plugin:eslint-plugin-dt-react
+  2. update eslint & prettier configs
+
 ## 1.0.0
 
 ### Major Changes
