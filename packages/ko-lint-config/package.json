@@ -4,6 +4,7 @@
   "description": "lint configs about eslint stylelint and prettier",
   "main": "index.js",
   "files": [
+    "**/*",
     "!test/**/*"
   ],
   "typings": "index.d.ts",

@@ -4,3 +4,5 @@
 /template/
 /.github/
 pnpm-lock.yaml
+**/build
+**/lib

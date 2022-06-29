@@ -3,7 +3,7 @@ const eslint = require('eslint');
 const stylelint = require('stylelint');
 
 module.exports = {
-    prettier,
-    eslint,
-    stylelint,
+  prettier,
+  eslint,
+  stylelint,
 };

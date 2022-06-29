@@ -5,8 +5,8 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write .",
+    "prettier:check": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --check .",
+    "prettier:write": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --write .",
     "check": "pnpm prettier",
     "test": "pnpm test",
     "debug:ko": "pnpm --filter ./packages/ko debug",
