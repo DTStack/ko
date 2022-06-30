@@ -30,6 +30,7 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:prettier/recommended',
     ],
     plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
     globals: {
@@ -119,7 +120,7 @@ module.exports = {
                 devDependencies: false,
                 optionalDependencies: false,
                 peerDependencies: false,
-                packageDir: [process.cwd()] //TODO: should include sub directory package.json
+                packageDir: [process.cwd()], // TODO: should include sub directory package.json
             },
         ],
 
