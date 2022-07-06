@@ -43,6 +43,8 @@ Optional arguments:
 
 * `-w, --write`: try to fix problems automatically
 * `-c, --config <path>`: overriding default config path, and use this configuration
+* `--concurrency`: use multithreading to lint files
+* `--concurrentNumber <number>`: specify threads number, default is `require('os').cpus().length`
 
 You can add ignore patterns in `.gitignore` file and `.prettierignore` file via prettier, `.eslintignore` file via eslint, `.stylelint` file via stylelint,
 all of these patterns matched files will be ignored when lint running.

@@ -36,7 +36,7 @@ export type IOptions = {
     minimizer?: boolean; // enable minimizer via esbuild in build action
     enableCssModule?: boolean; //enable css module 
   };
-  lints?: Record<IKeys, Pick<IOpts, 'configPath' | 'patterns'>>; // lint configs
+   lints?: Record<IKeys, Omit<IOpts, 'write'>>; // lint configs
 };
 ```
 
