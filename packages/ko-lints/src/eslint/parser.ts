@@ -44,7 +44,7 @@ class ESLintParser extends LintParserFactory {
     if (this.opts.configPath) {
       this.config = this.getConfigFromFile(this.opts.configPath);
     } else {
-      const localConfigPath = this.detectLocalRunnerConfig('eslint');
+      const localConfigPath = this.detectLocalRunnerConfig(this.opts.name);
       if (localConfigPath) {
         this.config = this.getConfigFromFile(localConfigPath);
       }

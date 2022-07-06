@@ -1,4 +1,5 @@
 import { Pattern } from 'fast-glob';
+import Parser from './factory/parser';
 
 export type IOpts = {
   write: boolean;
@@ -8,13 +9,21 @@ export type IOpts = {
   concurrentNumber?: number;
 };
 
-export type IParserOpts = Pick<IOpts, 'write' | 'configPath'>;
+export type IKeys = 'eslint' | 'prettier' | 'stylelint';
+
+export type IParserOpts = Pick<IOpts, 'write' | 'configPath'> & {
+  name: IKeys;
+};
 
 export type IThreadOpts = IParserOpts & {
   entries: string[];
   concurrentNumber: NonNullable<IOpts['concurrentNumber']>;
 };
 
-export type IKeys = 'eslint' | 'prettier' | 'stylelint';
-
 export type IRet = string[];
+
+export type IChildOpts = {
+  parser: Parser;
+  ignoreFiles: string[];
+  name: IKeys;
+};

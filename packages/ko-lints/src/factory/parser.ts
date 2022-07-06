@@ -1,7 +1,6 @@
 import { isAbsolute, join } from 'path';
 import { readdirSync, statSync } from 'fs';
 import assert from 'assert';
-import { IRet } from '../interfaces';
 
 abstract class LintParserFactory {
   public abstract format(file: string): Promise<string>;

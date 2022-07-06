@@ -17,12 +17,13 @@ class ThreadPool {
   }
 
   format() {
-    const { concurrentNumber, configPath, write } = this.opts;
+    const { concurrentNumber, configPath, write, name } = this.opts;
     if (this.workers.length < concurrentNumber) {
       this.workerPList.push(
         this.createWorker({
           configPath,
           write,
+          name,
         })
       );
       this.format();

@@ -28,7 +28,7 @@
   "scripts": {
     "prepublishOnly": "rm -rf lib && tsc",
     "build": "tsc",
-    "debug": "tsc --sourcemap -w"
+    "debug": "rm -rf lib && tsc --sourcemap -w"
   },
   "dependencies": {
     "fast-glob": "^3.2.11"
