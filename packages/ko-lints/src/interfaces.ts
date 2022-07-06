@@ -20,8 +20,6 @@ export type IThreadOpts = IParserOpts & {
   concurrentNumber: NonNullable<IOpts['concurrentNumber']>;
 };
 
-export type IRet = string[];
-
 export type IChildOpts = {
   parser: Parser;
   ignoreFiles: string[];

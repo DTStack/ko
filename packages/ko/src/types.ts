@@ -32,7 +32,7 @@ export type IOptions = {
     minimizer?: boolean;
     enableCssModule?: boolean;
   };
-  lints?: Record<IKeys, Pick<IOpts, 'configPath' | 'patterns'>>;
+  lints?: Record<IKeys, Omit<IOpts, 'write'>>;
 };
 
 export type ICliOptions = {

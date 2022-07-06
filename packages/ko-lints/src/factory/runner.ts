@@ -5,7 +5,7 @@ import { performance } from 'perf_hooks';
 import fg, { Pattern } from 'fast-glob';
 import MultiThreading from '../threads';
 import Parser from '../factory/parser';
-import { IChildOpts, IOpts, IRet } from '../interfaces';
+import { IChildOpts, IOpts } from '../interfaces';
 
 abstract class LintRunnerFactory {
   private opts: IOpts;
@@ -54,7 +54,7 @@ abstract class LintRunnerFactory {
   }
 
   private async run(entries: string[]) {
-    let ret: IRet;
+    let ret: string[];
     const { concurrency } = this.opts;
     if (concurrency) {
       ret = await this.runInConcurrencyMode(entries);

@@ -4,6 +4,8 @@ export type IOpts = {
   write: boolean;
   configPath: string;
   patterns: Pattern[];
+  concurrency?: boolean;
+  concurrentNumber?: number;
 };
 
 export type IKeys = 'eslint' | 'prettier' | 'stylelint';
