@@ -1,5 +1,5 @@
 import { stylelint } from 'ko-lint-config';
-import LintRunnerFactory from './factory';
+import LintRunnerFactory from './factory/runner';
 import { IOpts } from './interfaces';
 
 const { lint, formatters } = stylelint;

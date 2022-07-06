@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { prettier } from 'ko-lint-config';
-import LintRunnerFactory from './factory';
+import LintRunnerFactory from './factory/runner';
 import { IOpts } from './interfaces';
 
 const { format, check } = prettier;

@@ -13,7 +13,7 @@ declare class Lints {
   private opts;
   state: 0 | 1;
   constructor(opts: IOpts);
-  run(key: IKeys): Promise<true | string[]>;
+  run(key: IKeys): Promise<string[]>;
 }
 
 export default Lints;

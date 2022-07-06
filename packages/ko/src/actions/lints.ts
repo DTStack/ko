@@ -68,15 +68,15 @@ class LintFactory extends ActionFactory {
     process.title = finalOpts.name;
     const lintRunner = new Lints(opts);
     const result = await lintRunner.run(name);
-    if (typeof result === 'boolean' && result) {
+    if (result.length === 0) {
       this.successStdout('[success]', `lint via ${name}`);
-      process.exit(0);
     } else {
       this.warningStdout(`lint via ${name} failed:`);
       result.forEach(str => {
-        this.warningStdout('[failed]', str);
+        str && this.warningStdout('[failed]', str);
       });
     }
+    process.exit(0);
   }
 }
 

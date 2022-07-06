@@ -8,13 +8,13 @@ export type IOpts = {
   concurrentNumber?: number;
 };
 
+export type IParserOpts = Pick<IOpts, 'write' | 'configPath'>;
+
+export type IThreadOpts = IParserOpts & {
+  entries: string[];
+  concurrentNumber: NonNullable<IOpts['concurrentNumber']>;
+};
+
 export type IKeys = 'eslint' | 'prettier' | 'stylelint';
 
 export type IRet = string[];
-
-export type IFormatOpts = {
-  entries: string[];
-  write: boolean;
-  config: Record<string, any>;
-  extensions?: string[];
-};

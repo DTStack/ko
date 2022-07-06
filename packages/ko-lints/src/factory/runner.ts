@@ -1,14 +1,13 @@
-import { isAbsolute, join } from 'path';
-import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
+import { join } from 'path';
+import { existsSync, readFileSync } from 'fs';
 import { cpus } from 'os';
-import assert from 'assert';
 import fg, { Pattern } from 'fast-glob';
-import { IRet } from './interfaces';
+import { IRet } from '../interfaces';
 
 abstract class LintRunnerFactory {
-  public abstract generateConfig(): any;
   public abstract start(): Promise<IRet>;
   private cwd = process.cwd();
+
   protected async getEntries(
     patterns: Pattern[],
     ignoreFiles: string[]
@@ -40,28 +39,8 @@ abstract class LintRunnerFactory {
       }, []);
   }
 
-  protected getConcurrentNumber(num: number) {
+  protected getConcurrentNumber(num?: number) {
     return num ? num : cpus().length;
-  }
-
-  protected getConfigFromFile(filepath: string): Promise<Record<string, any>> {
-    assert(isAbsolute(filepath), 'only accept absolute config filepath');
-    return require(filepath);
-  }
-
-  protected detectLocalRunnerConfig(name: string): string {
-    const cwd = process.cwd();
-    const files = readdirSync(cwd).filter(
-      path => !statSync(path).isDirectory()
-    );
-    let ret: string = '';
-    for (let file of files) {
-      if (file.includes(name) && !file.includes('ignore')) {
-        ret = file;
-        break;
-      }
-    }
-    return ret ? join(cwd, ret) : ret;
   }
 }
 

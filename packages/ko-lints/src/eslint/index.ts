@@ -1,64 +1,61 @@
 import { performance } from 'perf_hooks';
-import LintRunnerFactory from '../factory';
-import format from './format';
-import WorkerPool from '../threads/Pool';
+import ESLintParser from './parser';
+import LintRunnerFactory from '../factory/runner';
+import MultiThreading from '../threads';
 import { IOpts, IRet } from '../interfaces';
 
-class ESlintRunner extends LintRunnerFactory {
-  static readonly EXTENSIONS = ['ts', 'tsx', 'js', 'jsx'];
+class ESLintRunner extends LintRunnerFactory {
   static readonly IGNORE_FILES = ['.eslintignore'];
   static readonly NAME = 'eslint';
   private opts: IOpts;
-  private config: Record<string, any>;
 
   constructor(opts: IOpts) {
     super();
     this.opts = opts;
-    this.generateConfig();
-  }
-
-  public generateConfig() {
-    if (this.opts.configPath) {
-      this.config = this.getConfigFromFile(this.opts.configPath);
-    } else {
-      const localConfigPath = this.detectLocalRunnerConfig('eslint');
-      if (localConfigPath) {
-        this.config = this.getConfigFromFile(localConfigPath);
-      }
-    }
   }
 
   private async run(entries: string[]) {
     let ret: IRet;
-    const { write, concurrency } = this.opts;
+    const { concurrency } = this.opts;
     if (concurrency) {
-      const workerPool = new WorkerPool({
-        concurrentNumber: this.getConcurrentNumber(
-          this.config.concurrentNumber
-        ),
-        entries,
-        write,
-      });
-      ret = await workerPool.start();
+      ret = await this.runInConcurrencyMode(entries);
     } else {
-      ret = await format({
-        entries,
-        write,
-        config: this.config,
-        extensions: ESlintRunner.EXTENSIONS,
-      });
+      ret = await this.runInNormalMode(entries);
     }
     return ret;
+  }
+
+  private async runInConcurrencyMode(entries: string[]) {
+    const { concurrentNumber, write, configPath } = this.opts;
+    const threads = new MultiThreading({
+      entries,
+      concurrentNumber: this.getConcurrentNumber(concurrentNumber),
+      write,
+      configPath,
+    });
+    return threads.batch();
+  }
+
+  private async runInNormalMode(entries: string[]) {
+    const { configPath, write } = this.opts;
+    const parser = new ESLintParser({
+      configPath,
+      write,
+    });
+    const pList = entries.map(async file => await parser.format(file));
+    const result = await Promise.all(pList);
+    return result.filter(Boolean);
   }
 
   public async start() {
     const { patterns } = this.opts;
     const entries = await this.getEntries(patterns, [
-      ...ESlintRunner.IGNORE_FILES,
+      ...ESLintRunner.IGNORE_FILES,
     ]);
-    if (entries.length === 0) {
+    const totalCount = entries.length;
+    if (totalCount === 0) {
       console.log(
-        `No files matched with pattern:${patterns} via ${ESlintRunner.NAME}`
+        `No files matched with pattern:${patterns} via ${ESLintRunner.NAME}`
       );
       process.exit(0);
     }
@@ -66,13 +63,13 @@ class ESlintRunner extends LintRunnerFactory {
     const ret = await this.run(entries);
     const endTime = performance.now();
     console.log(
-      `exec eslint with ${entries.length} files cost ${(
+      `exec eslint with ${totalCount} files cost ${(
         (endTime - startTime) /
         1000
       ).toFixed(2)}s`
     );
-    return [];
+    return ret;
   }
 }
 
-export default ESlintRunner;
+export default ESLintRunner;

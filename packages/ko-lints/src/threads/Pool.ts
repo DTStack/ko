@@ -1,64 +1,64 @@
 import { join } from 'path';
 import { Worker } from 'worker_threads';
+import { IThreadOpts, IParserOpts } from '../interfaces';
 
-type IOpts = {
-  concurrentNumber: number;
-  entries: string[];
-  write: boolean;
-};
-
-class WorkerPool {
+class ThreadPool {
   private readonly workers: Worker[] = [];
-  private readonly workerPromises: Promise<string[]>[] = [];
-  private readonly opts: IOpts;
-  constructor(opts: IOpts) {
-    console.log('use worker');
+  private readonly workerPList: Promise<boolean>[] = [];
+  private readonly opts: IThreadOpts;
+  private queue: string[];
+  private stdout: string[] = [];
+
+  constructor(opts: IThreadOpts) {
+    console.log('Using Multithreading...');
     this.opts = opts;
-    this.init();
+    this.queue = this.opts.entries;
+    this.format();
   }
 
-  init() {
-    const totalCount = this.opts.entries.length;
-    const everyEntiresCount =
-      Math.floor(totalCount / this.opts.concurrentNumber) + 1;
-    for (let i = 0; i < totalCount; i = i + everyEntiresCount) {
-      this.format(this.opts.entries.slice(i, i + everyEntiresCount));
+  format() {
+    const { concurrentNumber, configPath, write } = this.opts;
+    if (this.workers.length < concurrentNumber) {
+      this.workerPList.push(
+        this.createWorker({
+          configPath,
+          write,
+        })
+      );
+      this.format();
     }
   }
 
-  format(entries: string[]) {
-    if (this.workers.length < this.opts.concurrentNumber) {
-      this.createWorker(entries, this.opts.write);
-    }
-  }
-
-  createWorker(entries: string[], write: boolean) {
+  createWorker(opts: IParserOpts): Promise<boolean> {
     const worker = new Worker(join(__dirname, './Worker.js'), {
       workerData: {
-        entries,
-        write,
+        opts,
       },
     });
-    this.workerPromises.push(
-      new Promise((resolve, reject) => {
-        worker.on('message', (data: { result: string[] }) =>
-          resolve(data.result)
-        );
-        worker.on('error', err => reject(err));
-      })
-    );
-    this.workers.push(worker);
+    return new Promise(resolve => {
+      worker.postMessage(this.queue.shift());
+      worker.on('message', (result: string) => {
+        this.stdout.push(result);
+        if (this.queue.length === 0) {
+          resolve(true);
+        } else {
+          const next = this.queue.shift();
+          worker.postMessage(next);
+        }
+      });
+      worker.on('error', err => {
+        console.log(err);
+        process.exit(1);
+      });
+      this.workers.push(worker);
+    });
   }
 
-  async start(): Promise<string[]> {
-    return Promise.all(this.workerPromises).then(list => {
-      this.workers.forEach(worker => worker.terminate());
-      return list.reduce((prev, curr) => {
-        curr = curr.concat(prev);
-        return curr;
-      }, []);
+  async exec(): Promise<string[]> {
+    return Promise.all(this.workerPList).then(() => {
+      return this.stdout;
     });
   }
 }
 
-export default WorkerPool;
+export default ThreadPool;
