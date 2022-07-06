@@ -1,9 +1,13 @@
 import { isAbsolute, join } from 'path';
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
+import { cpus } from 'os';
 import assert from 'assert';
 import fg, { Pattern } from 'fast-glob';
+import { IRet } from './interfaces';
 
 abstract class LintRunnerFactory {
+  public abstract generateConfig(): any;
+  public abstract start(): Promise<IRet>;
   private cwd = process.cwd();
   protected async getEntries(
     patterns: Pattern[],
@@ -36,6 +40,10 @@ abstract class LintRunnerFactory {
       }, []);
   }
 
+  protected getConcurrentNumber(num: number) {
+    return num ? num : cpus().length;
+  }
+
   protected getConfigFromFile(filepath: string): Promise<Record<string, any>> {
     assert(isAbsolute(filepath), 'only accept absolute config filepath');
     return require(filepath);
@@ -55,9 +63,6 @@ abstract class LintRunnerFactory {
     }
     return ret ? join(cwd, ret) : ret;
   }
-
-  public abstract generateConfig(): any;
-  public abstract start(): Promise<true | string[]>;
 }
 
 export default LintRunnerFactory;

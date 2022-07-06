@@ -63,7 +63,7 @@ class PrettierRunner extends LintRunnerFactory {
       if (result.includes(false)) {
         return this.stdout;
       } else {
-        return true;
+        return [];
       }
     } catch (ex) {
       console.error(ex);

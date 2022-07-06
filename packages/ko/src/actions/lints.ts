@@ -38,6 +38,15 @@ class LintFactory extends ActionFactory {
           description: `Specify ${name} config path`,
           defaultValue: '',
         },
+        {
+          flags: '--concurrency',
+          description: 'Enable concurrency mode',
+          defaultValue: false,
+        },
+        {
+          flags: '--concurrentNumber <number>',
+          description: 'Specify max worker count',
+        },
       ],
     });
     this.service.commander.bindAction(name, this.action.bind(this));

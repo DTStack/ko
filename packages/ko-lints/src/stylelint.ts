@@ -51,7 +51,7 @@ class StyleLintRunner extends LintRunnerFactory {
         this.stdout = [formatters.string(result.results)];
         return this.stdout;
       } else {
-        return true;
+        return [];
       }
     } catch (ex) {
       console.error(ex);
