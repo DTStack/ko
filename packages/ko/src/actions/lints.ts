@@ -41,7 +41,7 @@ class LintFactory extends ActionFactory {
         {
           flags: '--concurrency',
           description: 'Enable concurrency mode',
-          defaultValue: false,
+          defaultValue: true,
         },
         {
           flags: '--concurrentNumber <number>',
