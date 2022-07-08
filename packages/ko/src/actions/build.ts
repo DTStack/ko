@@ -46,7 +46,6 @@ class Build extends ActionFactory {
         {
           flags: '--hash',
           description: 'output file name with hash',
-          defaultValue: true,
         },
       ],
     });

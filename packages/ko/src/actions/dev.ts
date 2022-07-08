@@ -66,12 +66,10 @@ class Dev extends ActionFactory {
         {
           flags: '--hash',
           description: 'output file name with hash',
-          defaultValue: true,
         },
         {
           flags: '--analyzer',
           description: 'support building analyzer',
-          defaultValue: false,
         },
       ],
     });

@@ -31,17 +31,14 @@ class LintFactory extends ActionFactory {
         {
           flags: '-w, --write',
           description: 'try to fix problems automatically',
-          defaultValue: false,
         },
         {
           flags: '-c, --configPath <configPath>',
           description: `Specify ${name} config path`,
-          defaultValue: '',
         },
         {
           flags: '--concurrency',
           description: 'Enable concurrency mode',
-          defaultValue: true,
         },
         {
           flags: '--concurrentNumber <number>',
