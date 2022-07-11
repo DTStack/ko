@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 1.0.1
+
+### Patch Changes
+
+- 8a65b00b: add eslint-config-prettier
+
 ## 1.0.0
 
 ### Major Changes
