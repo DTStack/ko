@@ -9,7 +9,7 @@ module.exports = {
   rules,
   configs: {
     all: {
-      pulgins: ['dt-react'],
+      plugins: ['dt-react'],
       rules,
     },
   },
