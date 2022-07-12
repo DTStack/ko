@@ -1,5 +1,11 @@
 # ko
 
+## 6.1.1
+
+### Patch Changes
+
+- 62572f85: update dependence of ko-lints
+
 ## 6.1.0
 
 ### Minor Changes
