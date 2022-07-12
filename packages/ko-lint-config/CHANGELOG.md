@@ -13,6 +13,12 @@
 - e854ccd8: 1. add new plugin:eslint-plugin-dt-react
   2. update eslint & prettier configs
 
+## 1.0.1
+
+### Patch Changes
+
+- 8a65b00b: add eslint-config-prettier
+
 ## 1.0.0
 
 ### Major Changes
