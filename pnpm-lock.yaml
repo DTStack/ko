@@ -76,7 +76,7 @@ importers:
       esbuild-loader: ^2.19.0
       html-webpack-plugin: ^5.5.0
       jest: ^28.1.0
-      ko-lints: workspace:^3.0.0
+      ko-lints: workspace:^3.1.0
       less: ^3.13.1
       less-loader: ^9.1.0
       lodash: ^4.17.21
