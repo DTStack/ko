@@ -23,7 +23,7 @@ class LintFactory extends ActionFactory {
       description: `lint your codes via ${name}`,
       args: [
         {
-          flags: '<patterns>',
+          flags: '<patterns...>',
           description: ` Specify ${name} lint patterns(via glob)`,
         },
       ],
@@ -67,13 +67,14 @@ class LintFactory extends ActionFactory {
     const result = (await lintRunner.run(name)).filter(Boolean);
     if (result.length === 0) {
       this.successStdout('[success]', `lint via ${name}`);
+      process.exit(0);
     } else {
       this.warningStdout(`lint via ${name} failed:`);
       result.forEach(str => {
         str && this.warningStdout('[failed]', str);
       });
+      process.exit(1);
     }
-    process.exit(0);
   }
 }
 
