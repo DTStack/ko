@@ -1,5 +1,14 @@
 # ko
 
+## 6.1.2
+
+### Patch Changes
+
+- ff1560a2: exit with error when lint throw errors
+
+  - exit with `process.exit(1)` when stdout length is not zero
+  - use variadic arguments in patterns
+
 ## 6.1.1
 
 ### Patch Changes
