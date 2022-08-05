@@ -105,13 +105,13 @@ module.exports = {
         'prefer-regex-literals': 0, // 正则的构造函数
         'prefer-promise-reject-errors': 0, // reject 仅接收 Error 对象
 
-        'no-mixed-operators': 0, // 允许混合使用不同的运算符
-        'no-return-assign': 0, // return 的代码中有运算
-        'no-useless-constructor': 0, // 空构造函数
-        'no-console': 0,
-        'no-debugger': 2,
-        'no-param-reassign': 2, // 给函数的入参赋值
-        'no-use-before-define': 0, // 使用尚未声明的变量
+    'no-mixed-operators': 0, // 允许混合使用不同的运算符
+    'no-return-assign': 0, // return 的代码中有运算
+    'no-useless-constructor': 0, // 空构造函数
+    'no-console': 0,
+    'no-debugger': 2,
+    'no-param-reassign': 2, // 给函数的入参赋值
+    'no-use-before-define': 0, // 使用尚未声明的变量
 
         // 控制是否可以使用没有在 package.json 内 dependencies, devDependencies, optionalDependencies, peerDependencies, bundledDependencies 中声明的扩展模块
         'import/no-extraneous-dependencies': [

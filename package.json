@@ -5,14 +5,15 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "prettier": "prettier --write .",
-    "lint": "pnpm prettier",
+    "prettier:check": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --check .",
+    "prettier:write": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --write .",
+    "check": "pnpm prettier",
     "test": "pnpm test",
     "debug:ko": "pnpm --filter ./packages/ko debug",
     "debug:ko-lints": "pnpm --filter ./packages/ko-lints debug",
     "debug": "pnpm debug:ko & pnpm debug:ko-lints",
     "docs:start": "cd website && pnpm start",
-    "changeset": "changeset",
+    "changeset": "pnpm run prettier:write && changeset",
     "bump": "changeset version",
     "release": "changeset publish"
   },

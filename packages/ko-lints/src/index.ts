@@ -1,4 +1,4 @@
-import LintRunnerFactory from './factory';
+import LintRunnerFactory from './factory/runner';
 import ESlintRunner from './eslint';
 import PrettierRunner from './prettier';
 import StyleLintRunner from './stylelint';
@@ -24,7 +24,6 @@ class Lints {
         this.runner = new StyleLintRunner(this.opts);
         break;
     }
-    this.runner.generateConfig();
     const result = await this.runner.start();
     return result;
   }

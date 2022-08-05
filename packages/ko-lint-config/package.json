@@ -1,9 +1,10 @@
 {
   "name": "ko-lint-config",
-  "version": "1.0.1",
+  "version": "2.1.0",
   "description": "lint configs about eslint stylelint and prettier",
   "main": "index.js",
   "files": [
+    "**/*",
     "!test/**/*"
   ],
   "typings": "index.d.ts",
@@ -36,7 +37,7 @@
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-dt-react": "0.0.6",
+    "eslint-plugin-dt-react": "workspace:*",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.1.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",

@@ -23,7 +23,7 @@ class LintFactory extends ActionFactory {
       description: `lint your codes via ${name}`,
       args: [
         {
-          flags: '<patterns>',
+          flags: '<patterns...>',
           description: ` Specify ${name} lint patterns(via glob)`,
         },
       ],
@@ -31,12 +31,18 @@ class LintFactory extends ActionFactory {
         {
           flags: '-w, --write',
           description: 'try to fix problems automatically',
-          defaultValue: false,
         },
         {
           flags: '-c, --configPath <configPath>',
           description: `Specify ${name} config path`,
-          defaultValue: '',
+        },
+        {
+          flags: '--concurrency',
+          description: 'Enable concurrency mode',
+        },
+        {
+          flags: '--concurrentNumber <number>',
+          description: 'Specify max worker count',
         },
       ],
     });
@@ -58,15 +64,16 @@ class LintFactory extends ActionFactory {
     );
     process.title = finalOpts.name;
     const lintRunner = new Lints(opts);
-    const result = await lintRunner.run(name);
-    if (typeof result === 'boolean' && result) {
+    const result = (await lintRunner.run(name)).filter(Boolean);
+    if (result.length === 0) {
       this.successStdout('[success]', `lint via ${name}`);
       process.exit(0);
     } else {
       this.warningStdout(`lint via ${name} failed:`);
       result.forEach(str => {
-        this.warningStdout('[failed]', str);
+        str && this.warningStdout('[failed]', str);
       });
+      process.exit(1);
     }
   }
 }

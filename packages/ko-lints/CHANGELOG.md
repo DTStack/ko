@@ -1,5 +1,43 @@
 # ko-lints
 
+## 3.1.0
+
+### Minor Changes
+
+- 1721dfa0: Support Lints & Format with concurrency mode, Add Config & Plugin of Prettier in Eslint
+
+  - `ko-lint-config`:
+
+    Add Config & Plugin of Prettier in Eslint Config
+
+  - `ko-lints`:
+
+    - Support concurrency mode with multithreading to do lint or format tasks,you can enable concurrency mode via `--concurrency` cli flag
+    - Default threads Count is `require('os').cpus().length`, you can specify it via `--concurrentNumber` like `--concurrentNumber=4`
+
+  - `ko`:
+    - Support `ko prettier`,`ko eslint`,`ko stylelint` commands with concurrency mode, you can also specify this mode with `ko.config.js`
+
+### Patch Changes
+
+- Updated dependencies [98ec512a]
+- Updated dependencies [1721dfa0]
+  - ko-lint-config@2.1.0
+
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [acb01e3e]
+  - ko-lint-config@2.0.1
+
+## 3.0.0
+
+### Patch Changes
+
+- Updated dependencies [e854ccd8]
+  - ko-lint-config@2.0.0
+
 ## 2.0.0
 
 ### Major Changes

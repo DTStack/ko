@@ -1,6 +1,6 @@
 {
   "name": "ko-lints",
-  "version": "2.0.0",
+  "version": "3.1.0",
   "description": "lint tools used by ko",
   "keywords": [
     "ko",
@@ -28,7 +28,7 @@
   "scripts": {
     "prepublishOnly": "rm -rf lib && tsc",
     "build": "tsc",
-    "debug": "tsc --sourcemap -w"
+    "debug": "rm -rf lib && tsc --sourcemap -w"
   },
   "dependencies": {
     "fast-glob": "^3.2.11"
