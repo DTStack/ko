@@ -24,14 +24,7 @@ module.exports = {
         node: true, // Node.js 全局变量和 Node.js 作用域
         browser: true, // 浏览器全局变量
     },
-    extends: [
-        'standard',
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:react-hooks/recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:prettier/recommended',
-    ],
+    extends: ['standard', 'eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
     plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
     globals: {
         expect: 'readonly',
@@ -45,7 +38,7 @@ module.exports = {
     // "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
     // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
     rules: {
-        semi: 0,
+        semi: [2, 'always'],
         strict: 0,
         indent: [
             // 缩进
@@ -64,33 +57,16 @@ module.exports = {
                 ImportDeclaration: 1, // 指定 import 语句的缩进级别
                 flatTernaryExpressions: false, // 指定是否需要缩进嵌套在其他三元表达式中的三元表达式
                 ignoreComments: false, // 指定注释是否需要需要与前一行或下一行的节点对齐
-                ignoredNodes: [
-                    'TemplateLiteral *',
-                    'JSXElement',
-                    'JSXElement > *',
-                    'JSXAttribute',
-                    'JSXIdentifier',
-                    'JSXNamespacedName',
-                    'JSXMemberExpression',
-                    'JSXSpreadAttribute',
-                    'JSXExpressionContainer',
-                    'JSXOpeningElement',
-                    'JSXClosingElement',
-                    'JSXFragment',
-                    'JSXOpeningFragment',
-                    'JSXClosingFragment',
-                    'JSXText',
-                    'JSXEmptyExpression',
-                    'JSXSpreadChild',
-                ],
+                ignoredNodes: ['TemplateLiteral *', 'JSXElement', 'JSXElement > *', 'JSXAttribute', 'JSXIdentifier', 'JSXNamespacedName', 'JSXMemberExpression', 'JSXSpreadAttribute', 'JSXExpressionContainer', 'JSXOpeningElement', 'JSXClosingElement', 'JSXFragment', 'JSXOpeningFragment', 'JSXClosingFragment', 'JSXText', 'JSXEmptyExpression', 'JSXSpreadChild'],
                 offsetTernaryExpressions: true,
             },
         ],
         eqeqeq: 0,
         'arrow-body-style': 0, // 控制箭头函数的语法形式
-        'comma-dangle': [2, 'only-multiline'], // 当最后一个元素或属性与结束或属性位于不同的行时，允许但不要求尾随逗号
+        'object-shorthand': 2, // 对象的 key 和 value 一致时要求简写
+        'comma-dangle': [2, 'always-multiline'], // 当最后一个元素或属性与结束或属性位于不同的行时，要求尾随逗号
         'lines-between-class-members': 0, // 方法间是否空行间隔开
-        'space-before-function-paren': [
+        'space-before-function-paren': [ // 箭头函数是否要求始终有小括号
             // 函数括号前的空格
             2,
             {
@@ -104,25 +80,19 @@ module.exports = {
         'multiline-ternary': 0, // 三元运算符不强制换行
         'prefer-regex-literals': 0, // 正则的构造函数
         'prefer-promise-reject-errors': 0, // reject 仅接收 Error 对象
+        'prettier/prettier': 0, // prettier 在三元运算符换行处的缩进有问题
 
-    'no-mixed-operators': 0, // 允许混合使用不同的运算符
-    'no-return-assign': 0, // return 的代码中有运算
-    'no-useless-constructor': 0, // 空构造函数
-    'no-console': 0,
-    'no-debugger': 2,
-    'no-param-reassign': 2, // 给函数的入参赋值
-    'no-use-before-define': 0, // 使用尚未声明的变量
+        'no-eval': 1,
+        'no-prototype-builtins': 0,
+        'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
+        'no-return-assign': 0, // return 的代码中有运算
+        'no-useless-constructor': 0, // 空构造函数
+        'no-console': 1,
+        'no-debugger': 2,
+        'no-param-reassign': 2, // 给函数的入参赋值
+        'no-use-before-define': 0, // 使用尚未声明的变量
 
-        // 控制是否可以使用没有在 package.json 内 dependencies, devDependencies, optionalDependencies, peerDependencies, bundledDependencies 中声明的扩展模块
-        'import/no-extraneous-dependencies': [
-            2,
-            {
-                devDependencies: false,
-                optionalDependencies: false,
-                peerDependencies: false,
-                packageDir: [process.cwd()], // TODO: should include sub directory package.json
-            },
-        ],
+        'import/no-extraneous-dependencies': 0,
 
         /**
          * 是否强制组件中的方法顺序，顺序如下：
@@ -137,10 +107,7 @@ module.exports = {
         'react/prefer-stateless-function': 0, // 是否强制将无状态的 React 组件编写为纯函数
         'react/jsx-closing-bracket-location': 0, // 验证 JSX 中右括号的位置是否与开始标签对齐
         'react/prop-types': [0, { ignore: ['children'] }], // 验证 React 组件中是否缺少 Props 属性
-        'react/jsx-filename-extension': [
-            1,
-            { extensions: ['.tsx', '.js', '.jsx'] },
-        ],
+        'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.js', '.jsx'] }],
         'react/react-in-jsx-scope': 0,
         'react/jsx-closing-tag-location': 0,
         'react/jsx-boolean-value': [1, 'never'],
@@ -169,10 +136,7 @@ module.exports = {
 
         'jsx-a11y/no-static-element-interactions': 0,
 
-        '@typescript-eslint/no-unused-vars': [
-            2,
-            { vars: 'all', args: 'none', ignoreRestSiblings: false },
-        ],
+        '@typescript-eslint/no-unused-vars': [2, { vars: 'all', args: 'none', ignoreRestSiblings: false }],
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/explicit-member-accessibility': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
