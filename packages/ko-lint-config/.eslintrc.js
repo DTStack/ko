@@ -45,7 +45,7 @@ module.exports = {
   // "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
   // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
   rules: {
-    semi: 0,
+    semi: [2, 'always'],
     strict: 0,
     indent: [
       // 缩进
@@ -88,9 +88,11 @@ module.exports = {
     ],
     eqeqeq: 0,
     'arrow-body-style': 0, // 控制箭头函数的语法形式
-    'comma-dangle': [2, 'only-multiline'], // 当最后一个元素或属性与结束或属性位于不同的行时，允许但不要求尾随逗号
+    'object-shorthand': 2, // 对象的 key 和 value 一致时要求简写
+    'comma-dangle': [2, 'always-multiline'], // 当最后一个元素或属性与结束或属性位于不同的行时，要求尾随逗号
     'lines-between-class-members': 0, // 方法间是否空行间隔开
     'space-before-function-paren': [
+      // 箭头函数是否要求始终有小括号
       // 函数括号前的空格
       2,
       {
@@ -104,25 +106,19 @@ module.exports = {
     'multiline-ternary': 0, // 三元运算符不强制换行
     'prefer-regex-literals': 0, // 正则的构造函数
     'prefer-promise-reject-errors': 0, // reject 仅接收 Error 对象
+    'prettier/prettier': 0, // prettier 在三元运算符换行处的缩进有问题
 
-    'no-mixed-operators': 0, // 允许混合使用不同的运算符
+    'no-eval': 1,
+    'no-prototype-builtins': 0,
+    'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
     'no-return-assign': 0, // return 的代码中有运算
     'no-useless-constructor': 0, // 空构造函数
-    'no-console': 0,
+    'no-console': 1,
     'no-debugger': 2,
     'no-param-reassign': 2, // 给函数的入参赋值
     'no-use-before-define': 0, // 使用尚未声明的变量
 
-    // 控制是否可以使用没有在 package.json 内 dependencies, devDependencies, optionalDependencies, peerDependencies, bundledDependencies 中声明的扩展模块
-    'import/no-extraneous-dependencies': [
-      2,
-      {
-        devDependencies: false,
-        optionalDependencies: false,
-        peerDependencies: false,
-        packageDir: [process.cwd()], // TODO: should include sub directory package.json
-      },
-    ],
+    'import/no-extraneous-dependencies': 0,
 
     /**
      * 是否强制组件中的方法顺序，顺序如下：

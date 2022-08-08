@@ -6,6 +6,13 @@ module.exports = {
   rules: {
     // null 为关闭规则
     indentation: 4, // 缩进4格
+    'at-rule-no-unknown': [
+      // 允许未知规则，如 @extend
+      true,
+      {
+        ignoreAtRules: ['mixin', 'include', 'extend'],
+      },
+    ],
     'declaration-empty-line-before': 'never', // 第一条属性声明前不允许有空行
     'selector-class-pattern': '[a-zA-Z]+', // className 的大小写
     // 规则之前的空行
@@ -25,5 +32,6 @@ module.exports = {
     'keyframes-name-pattern': null, // keyframes 推荐小写+连字符命名
     'no-empty-source': null, // 空文件
     'block-no-empty': null, // 空规则
+    'function-url-quotes': null, // url 不需要引号
   },
 };
