@@ -10,7 +10,9 @@ class ThreadPool {
   private stdout: string[] = [];
 
   constructor(opts: IThreadOpts) {
-    console.log('Using Multithreading...');
+    console.log(
+      `Using concurrent mode with ${opts.concurrentNumber} threads...`
+    );
     this.opts = opts;
     this.queue = this.opts.entries;
     this.format();
