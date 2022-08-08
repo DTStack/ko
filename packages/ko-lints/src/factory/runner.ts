@@ -49,8 +49,9 @@ abstract class LintRunnerFactory {
       }, []);
   }
 
-  protected getConcurrentNumber(num?: number) {
-    return num ? num : cpus().length;
+  protected getConcurrentNumber(entriesCount: number, num?: number) {
+    const initNumber = num ? num : cpus().length;
+    return initNumber < entriesCount ? initNumber : entriesCount;
   }
 
   private async run(entries: string[]) {
@@ -68,7 +69,10 @@ abstract class LintRunnerFactory {
     const { concurrentNumber, write, configPath } = this.opts;
     const threads = new MultiThreading({
       entries,
-      concurrentNumber: this.getConcurrentNumber(concurrentNumber),
+      concurrentNumber: this.getConcurrentNumber(
+        entries.length,
+        concurrentNumber
+      ),
       write,
       configPath,
       name: this.childOpts.name,
