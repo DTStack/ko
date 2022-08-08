@@ -1,8 +1,15 @@
 # ko-lint-config
 
+## 2.2.0
+
+### Minor Changes
+
+- 67325569: update lint config
+
 ## 2.1.0
 
 ### Minor Changes
+
 - 98ec512a: prettier printWidth
 - 1721dfa0: Support Lints & Format with concurrency mode, Add Config & Plugin of Prettier in Eslint
 
