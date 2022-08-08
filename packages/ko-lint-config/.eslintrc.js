@@ -89,7 +89,16 @@ module.exports = {
     eqeqeq: 0,
     'arrow-body-style': 0, // 控制箭头函数的语法形式
     'object-shorthand': 2, // 对象的 key 和 value 一致时要求简写
-    'comma-dangle': [2, 'always-multiline'], // 当最后一个元素或属性与结束或属性位于不同的行时，要求尾随逗号
+    'comma-dangle': [
+      2,
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ], // 当最后一个元素或属性与结束或属性位于不同的行时，要求末尾逗号
     'lines-between-class-members': 0, // 方法间是否空行间隔开
     'space-before-function-paren': [
       // 箭头函数是否要求始终有小括号
