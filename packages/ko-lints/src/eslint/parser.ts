@@ -30,6 +30,9 @@ class ESLintParser extends LintParserFactory {
     let resultText = '';
     try {
       const result = await this.eslintInstance.lintFiles(file);
+      if (this.opts.write) {
+        await eslint.ESLint.outputFixes(result);
+      }
       if (result[0].errorCount) {
         resultText = formatter.format(result) as string;
       }
