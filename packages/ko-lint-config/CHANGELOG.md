@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.1
+
+### Patch Changes
+
+- dea5d69b: update eslint comma-dangle
+
 ## 2.2.0
 
 ### Minor Changes
