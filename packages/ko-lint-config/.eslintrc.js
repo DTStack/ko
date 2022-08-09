@@ -47,9 +47,10 @@ module.exports = {
   rules: {
     semi: [2, 'always'],
     strict: 0,
+    // 缩进
     indent: [
-      // 缩进
-      2,
+      // TODO offsetTernaryExpressions
+      0,
       4,
       {
         SwitchCase: 1, // 指定 switch-case 语句的缩进级别
@@ -63,6 +64,7 @@ module.exports = {
         ObjectExpression: 1, // 指定对象中的属性的缩进级别
         ImportDeclaration: 1, // 指定 import 语句的缩进级别
         flatTernaryExpressions: false, // 指定是否需要缩进嵌套在其他三元表达式中的三元表达式
+        offsetTernaryExpressions: true, // 三元表达式的缩进
         ignoreComments: false, // 指定注释是否需要需要与前一行或下一行的节点对齐
         ignoredNodes: [
           'TemplateLiteral *',
@@ -83,7 +85,6 @@ module.exports = {
           'JSXEmptyExpression',
           'JSXSpreadChild',
         ],
-        offsetTernaryExpressions: true,
       },
     ],
     eqeqeq: 0,
@@ -121,7 +122,9 @@ module.exports = {
     'no-prototype-builtins': 0,
     'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
     'no-return-assign': 0, // return 的代码中有运算
+    'no-useless-escape': 0,
     'no-useless-constructor': 0, // 空构造函数
+    'no-template-curly-in-string': 0,
     'no-console': 1,
     'no-debugger': 2,
     'no-param-reassign': 2, // 给函数的入参赋值
@@ -189,10 +192,10 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 0, // 允许函数内容为空
     '@typescript-eslint/no-this-alias': [
       // 允许 this 别名
-      2,
+      1,
       {
         allowDestructuring: false, // 不允许从 this 中解构，默认值 true
-        allowedNames: ['self', '_this', 'that'], // 允许别名，默认值 []
+        allowedNames: ['self', '_this', 'that', 'ctx'], // 允许的别名，默认值 []
       },
     ],
 
