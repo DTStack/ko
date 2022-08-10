@@ -33,5 +33,11 @@ module.exports = {
     'no-empty-source': null, // 空文件
     'block-no-empty': null, // 空规则
     'function-url-quotes': null, // url 不需要引号
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global'],
+      },
+    ],
   },
 };

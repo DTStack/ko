@@ -45,7 +45,7 @@ module.exports = {
   // "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
   // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
   rules: {
-    semi: [2, 'always'],
+    semi: 0,
     strict: 0,
     // 缩进
     indent: [
@@ -181,6 +181,7 @@ module.exports = {
       2,
       { vars: 'all', args: 'none', ignoreRestSiblings: false },
     ],
+    '@typescript-eslint/semi': [2, 'always'],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
