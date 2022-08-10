@@ -7,7 +7,7 @@ const assetModules = [
     },
   },
   {
-    test: /\.(png|jpg|jpeg|gif|webp|svg)$/i,
+    test: /\.(png|jpg|jpeg|gif|webp|svg|ico)$/i,
     type: 'asset/resource',
     generator: {
       filename: 'images/[hash][ext][query]',
