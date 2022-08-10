@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.2
+
+### Patch Changes
+
+- b82bab70: update eslint config
+
 ## 2.2.1
 
 ### Patch Changes
