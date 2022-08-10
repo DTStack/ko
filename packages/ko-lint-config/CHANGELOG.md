@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.3
+
+### Patch Changes
+
+- 35a552d2: update eslint semi and stylelint config
+
 ## 2.2.2
 
 ### Patch Changes
