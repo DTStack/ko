@@ -129,6 +129,7 @@ module.exports = {
     'no-debugger': 2,
     'no-param-reassign': 2, // 给函数的入参赋值
     'no-use-before-define': 0, // 使用尚未声明的变量
+    'no-async-promise-executor': 1, // new Promise 构造函数中有 async
 
     'import/no-extraneous-dependencies': 0,
 
