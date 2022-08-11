@@ -3,7 +3,6 @@ import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import { ActionFactory } from './factory';
 
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { ICliOptions } from '../types';
 
@@ -21,11 +20,11 @@ class Build extends ActionFactory {
         minimizer: this.service.config.experiment?.minimizer
           ? [
               new ESBuildMinifyPlugin({
-                target: 'es2015',
+                target: 'es2020',
                 css: true,
               }),
             ]
-          : ['...', CssMinimizerPlugin.parcelCssMinify],
+          : ['...'],
       },
     } as Configuration;
     const ret = this.webpackConfig.merge(extraConfig);
