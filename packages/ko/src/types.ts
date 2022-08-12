@@ -30,6 +30,7 @@ export type IOptions = {
   experiment?: {
     speedUp?: boolean;
     minimizer?: boolean;
+    disableLazyImports?: boolean;
     enableCssModule?: boolean;
   };
   lints?: Record<IKeys, Omit<IOpts, 'write'>>;

@@ -62,6 +62,7 @@ class Config {
         speedUp: true,
         minimizer: true,
         enableCssModule: true,
+        disableLazyImports: false,
       },
     };
   }
