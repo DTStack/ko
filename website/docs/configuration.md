@@ -35,6 +35,7 @@ export type IOptions = {
     speedUp?: boolean; // enable speed up configs of dev & build actions
     minimizer?: boolean; // enable minimizer via esbuild in build action
     enableCssModule?: boolean; //enable css module 
+    disableLazyImports?: boolean; // disable lazy compilation of imports
   };
    lints?: Record<IKeys, Omit<IOpts, 'write'>>; // lint configs
 };

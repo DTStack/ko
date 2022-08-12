@@ -51,8 +51,15 @@ class Dev extends ActionFactory {
       });
       ret.plugins = plugins;
     }
+    const { speedUp, disableLazyImports } =
+      this.service.config?.experiment || {};
     ret.experiments = {
-      lazyCompilation: this.service.config?.experiment?.speedUp,
+      lazyCompilation:
+        speedUp && disableLazyImports
+          ? {
+              imports: false,
+            }
+          : speedUp,
     };
     return ret;
   }
