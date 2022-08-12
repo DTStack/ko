@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.5
+
+### Patch Changes
+
+- 472d7e0c: update eslint rules
+
 ## 2.2.4
 
 ### Patch Changes
