@@ -1,6 +1,6 @@
 {
   "name": "ko-lint-config",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "lint configs about eslint stylelint and prettier",
   "main": "index.js",
   "files": [
