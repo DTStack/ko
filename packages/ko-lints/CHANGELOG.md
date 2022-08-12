@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.5
+
+### Patch Changes
+
+- 472d7e0c: update eslint rules
+- Updated dependencies [472d7e0c]
+  - ko-lint-config@2.2.5
+
 ## 4.0.4
 
 ### Patch Changes
