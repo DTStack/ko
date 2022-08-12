@@ -1,5 +1,13 @@
 # ko
 
+## 6.2.0
+
+### Minor Changes
+
+- c77237f1: support new config
+
+  1. support disableLazyImports config when using fast refresh
+
 ## 6.1.4
 
 ### Patch Changes
