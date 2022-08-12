@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.6
+
+### Patch Changes
+
+- 5f645514: update stylelint rules
+
 ## 2.2.5
 
 ### Patch Changes
