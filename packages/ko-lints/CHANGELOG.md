@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.6
+
+### Patch Changes
+
+- 5f645514: update stylelint rules
+- Updated dependencies [5f645514]
+  - ko-lint-config@2.2.6
+
 ## 4.0.5
 
 ### Patch Changes
