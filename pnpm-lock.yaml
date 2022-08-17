@@ -42,6 +42,12 @@ importers:
       '@babel/preset-typescript': 7.17.12_@babel+core@7.18.0
       '@babel/runtime': 7.18.0
 
+  packages/dynamic-resolve-plugin:
+    specifiers:
+      webpack: ^5.72.1
+    devDependencies:
+      webpack: 5.72.1
+
   packages/eslint-plugin-dt-react:
     specifiers:
       eslint: ^8.16.0
