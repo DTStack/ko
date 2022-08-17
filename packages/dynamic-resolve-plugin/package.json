@@ -1,6 +1,6 @@
 {
   "name": "dynamic-resolve-webpack-plugin",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a webpack plugin for dynamic resolve paths",
   "main": "lib/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "debug": "rm -rf lib && tsc --sourcemap -w"
   },
   "peerDependencies": {
-    "webpack": "^5 || ^4" 
+    "webpack": "^5 || ^4"
   },
   "devDependencies": {
     "webpack": "^5.72.1"
