@@ -44,7 +44,7 @@ class Script {
                 loader: this.ESBUILD_LOADER,
                 options: {
                   loader: 'tsx',
-                  target: 'es2020',
+                  target: 'es2015',
                 },
               }
             : this.BABEL_LOADER.config,

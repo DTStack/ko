@@ -20,7 +20,7 @@ class Build extends ActionFactory {
         minimizer: this.service.config.experiment?.minimizer
           ? [
               new ESBuildMinifyPlugin({
-                target: 'es2020',
+                target: 'es2015',
                 css: true,
               }),
             ]
