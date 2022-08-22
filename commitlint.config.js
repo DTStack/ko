@@ -4,4 +4,5 @@ module.exports = {
     'type-case': [2, 'always', 'lower-case'],
     'scope-case': [0, 'always'],
   },
+  ignores: [message => message.includes('Releases:')],
 };
