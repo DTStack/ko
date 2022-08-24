@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "description": "a webpack plugin for dynamic resolve paths",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prepublishOnly": "rm -rf lib && tsc",
-    "build": "tsc",
+    "build": "rm -rf lib && tsc",
     "debug": "rm -rf lib && tsc --sourcemap -w"
   },
   "peerDependencies": {

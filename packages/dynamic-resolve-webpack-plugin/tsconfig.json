@@ -8,5 +8,6 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "outDir": "lib",
+    "declaration": true
   },
 }
