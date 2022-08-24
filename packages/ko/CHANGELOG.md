@@ -1,5 +1,11 @@
 # ko
 
+## 6.3.1
+
+### Patch Changes
+
+- 641dc7aa: update ko dependency version
+
 ## 6.2.1
 
 ### Patch Changes
