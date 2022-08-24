@@ -1,0 +1,28 @@
+{
+  "name": "auto-polyfills-webpack-plugin",
+  "version": "1.0.0",
+  "description": "a webpack plugin for auto generate polyfills",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "rm -rf lib && tsc",
+    "build": "rm -rf lib && tsc",
+    "debug": "rm -rf lib && tsc --sourcemap -w"
+  },
+  "peerDependencies": {
+    "core-js": "^3",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.72.1"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.72.1"
+  },
+  "author": "xbrave",
+  "license": "MIT",
+  "dependencies": {
+    "core-js-builder": "^3.24.1",
+    "core-js-compat": "^3.24.1",
+    "terser": "^5.15.0"
+  }
+}
