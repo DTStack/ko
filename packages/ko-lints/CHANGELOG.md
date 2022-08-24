@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.7
+
+### Patch Changes
+
+- edb4ae7e: change prettier config
+- Updated dependencies [edb4ae7e]
+  - ko-lint-config@2.2.7
+
 ## 4.0.6
 
 ### Patch Changes

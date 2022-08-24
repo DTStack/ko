@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.7
+
+### Patch Changes
+
+- edb4ae7e: change prettier config
+
 ## 2.2.6
 
 ### Patch Changes
