@@ -23,6 +23,9 @@ export type IOptions = {
   extraPostCSSPlugins?: Plugin[]; // extra post css plugins
   lessOptions?: any; // custom less options
   antdV4LessOptions?: any; // custom less options for antd v4
+  // integrated plugins options
+  dynamicResolve?: <T extends any>(request: T) => T; // dynamic resolve function
+  autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions; // auto polyfills plugin options
   // dev, or serve configs
   serve: {
     proxy?: Record<string, any>; // proxy of dev server
