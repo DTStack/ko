@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { Configuration, FileCacheOptions } from 'webpack';
+import DynamicResolveWebpackPlugin from 'dynamic-resolve-webpack-plugin';
 import { merge } from 'lodash';
 import loaders from './loaders';
 import getPlugins from './plugins';
@@ -88,6 +89,12 @@ class WebpackConfig {
         ...this.opts,
       }),
       resolve: {
+        plugins: [
+          this.opts.dynamicResolve &&
+            new DynamicResolveWebpackPlugin({
+              dynamic: this.opts.dynamicResolve,
+            }),
+        ].filter(Boolean),
         extensions: this.extensions,
         alias,
         fallback: {

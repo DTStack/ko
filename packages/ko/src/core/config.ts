@@ -64,6 +64,7 @@ class Config {
         enableCssModule: true,
         disableLazyImports: false,
       },
+      autoPolyfills: false,
     };
   }
 }
