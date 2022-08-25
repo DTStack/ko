@@ -132,7 +132,7 @@ module.exports = {
     'no-useless-escape': 0,
     'no-useless-constructor': 0, // 空构造函数
     'no-template-curly-in-string': 0,
-    'no-console': 1,
+    'no-console': 0,
     'no-debugger': 2,
     'no-param-reassign': 2, // 给函数的入参赋值
     'no-use-before-define': 0, // 使用尚未声明的变量
