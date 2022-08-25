@@ -14,9 +14,9 @@
 
 - 641dc7aa: update ko dependency version
 
-## 6.2.1
+## 6.3.0
 
-### Patch Changes
+### Minor Changes
 
 - 403d780e: release auto-polyfills-webpack-plugin, and support it in ko
 
