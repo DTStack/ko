@@ -32,8 +32,8 @@ module.exports = {
     'no-empty-source': null, // 空文件
     'block-no-empty': null, // 空规则
     'function-url-quotes': null, // url 不需要引号
-    'function-no-unknown': null,
-    'selector-id-pattern': null,
+    'function-no-unknown': null, // 未知方法名
+    'selector-id-pattern': null, // id 使用连字符和小写字母
     'selector-pseudo-class-no-unknown': [
       true,
       {
