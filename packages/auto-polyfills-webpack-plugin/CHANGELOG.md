@@ -6,9 +6,9 @@
 
 - 3508d49b: fixed bugs of can't send correct core-js-builder options
 
-## 1.0.1
+## 1.0.0
 
-### Patch Changes
+### Major Changes
 
 - 403d780e: release auto-polyfills-webpack-plugin, and support it in ko
 
