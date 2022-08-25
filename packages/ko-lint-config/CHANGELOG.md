@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.10
+
+### Patch Changes
+
+- 9554156e: stylelint version
+
 ## 2.2.9
 
 ### Patch Changes
