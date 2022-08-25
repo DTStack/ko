@@ -1,5 +1,13 @@
 # ko
 
+## 6.3.2
+
+### Patch Changes
+
+- 51287d44: update plugin dependencies
+
+  - fixed bugs of can't send correct options to core-js-builder
+
 ## 6.3.1
 
 ### Patch Changes
