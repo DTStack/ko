@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.9
+
+### Patch Changes
+
+- 205b0044: lint config
+- Updated dependencies [205b0044]
+  - ko-lint-config@2.2.9
+
 ## 4.0.8
 
 ### Patch Changes
