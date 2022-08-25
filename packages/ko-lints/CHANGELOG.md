@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.10
+
+### Patch Changes
+
+- 9554156e: stylelint version
+- Updated dependencies [9554156e]
+  - ko-lint-config@2.2.10
+
 ## 4.0.9
 
 ### Patch Changes
