@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.8
+
+### Patch Changes
+
+- 40884a3c: lint config
+
 ## 2.2.7
 
 ### Patch Changes
