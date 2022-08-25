@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.11
+
+### Patch Changes
+
+- 830b3280: ko lint tsc
+- Updated dependencies [830b3280]
+  - ko-lint-config@2.2.11
+
 ## 4.0.10
 
 ### Patch Changes

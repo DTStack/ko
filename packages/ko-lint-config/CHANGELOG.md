@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.11
+
+### Patch Changes
+
+- 830b3280: ko lint tsc
+
 ## 2.2.10
 
 ### Patch Changes
