@@ -3,7 +3,7 @@ A webpack plugin for dynamic resolve paths, you can use it to resolve paths dyna
 ## Getting Started
 1. Install as devDependencies:
 ``` bash
-pnpm install dynamic-resolve-webpack-plugin
+pnpm install dynamic-resolve-webpack-plugin -D
 ```
 
 2. custom dynamic resolve function:

@@ -1,13 +1,12 @@
 import { ResolvePluginInstance, Resolver } from 'webpack';
 
-type IOptions = {
-  source: string;
-  target: string;
+export type IOptions = {
+  source?: string;
+  target?: string;
   dynamic: <T>(request: T) => T;
 };
 
-class DynamicResolvePlugin implements ResolvePluginInstance {
-  static pluginName = 'DynamicResolvePlugin';
+class DynamicResolveWebpackPlugin implements ResolvePluginInstance {
   private opts: IOptions;
   constructor(opts: IOptions) {
     this.opts = opts;
@@ -22,12 +21,12 @@ class DynamicResolvePlugin implements ResolvePluginInstance {
     resolver.ensureHook(target);
     resolver
       .getHook(source)
-      .tapAsync(DynamicResolvePlugin.pluginName, (request, ctx, callback) => {
+      .tapAsync(DynamicResolveWebpackPlugin.name, (request, ctx, callback) => {
         const newResolve = dynamic(request);
         return resolver.doResolve(
           target,
           newResolve,
-          `${DynamicResolvePlugin.pluginName}: ${request.path}`,
+          `${DynamicResolveWebpackPlugin.name}: ${request.path}`,
           ctx,
           (err: Error, result: any) => {
             if (err) return callback(err);
@@ -39,4 +38,4 @@ class DynamicResolvePlugin implements ResolvePluginInstance {
   }
 }
 
-export default DynamicResolvePlugin;
+export default DynamicResolveWebpackPlugin;

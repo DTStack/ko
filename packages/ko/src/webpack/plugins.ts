@@ -7,10 +7,11 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import AutoPolyfillsWebpackPlugin from 'auto-polyfills-webpack-plugin';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
-  const { isProd, htmlTemplate, copy, analyzer } = opts;
+  const { isProd, htmlTemplate, copy, analyzer, autoPolyfills } = opts;
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -76,6 +77,11 @@ function getPlugins(opts: IWebpackOptions) {
       overlay: false,
     }),
     analyzer && new BundleAnalyzerPlugin(),
+    isProd &&
+      autoPolyfills &&
+      (typeof autoPolyfills === 'boolean'
+        ? new AutoPolyfillsWebpackPlugin()
+        : new AutoPolyfillsWebpackPlugin(autoPolyfills)),
   ].filter(Boolean);
 }
 

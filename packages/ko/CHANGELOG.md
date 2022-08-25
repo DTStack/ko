@@ -1,5 +1,38 @@
 # ko
 
+## 6.3.2
+
+### Patch Changes
+
+- 51287d44: update plugin dependencies
+
+  - fixed bugs of can't send correct options to core-js-builder
+
+## 6.3.1
+
+### Patch Changes
+
+- 641dc7aa: update ko dependency version
+
+## 6.3.0
+
+### Minor Changes
+
+- 403d780e: release auto-polyfills-webpack-plugin, and support it in ko
+
+  1. release auto-polyfills-webpack-plugin, find more in it's README
+  2. add auto-polyfills-webpack-plugin & dynamic-resolve-webpack-plugin into ko, and support change these plugins via config options:
+
+  ```js
+    export type IOptions = {
+      dynamicResolve?: <T extends any>(request: T) => T;
+      autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions;
+    }
+  ```
+
+- Updated dependencies [403d780e]
+  - auto-polyfills-webpack-plugin@1.0.1
+
 ## 6.2.0
 
 ### Minor Changes

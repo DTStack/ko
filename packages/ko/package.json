@@ -1,6 +1,6 @@
 {
   "name": "ko",
-  "version": "6.2.0",
+  "version": "6.3.2",
   "description": "build & lint library",
   "keywords": [
     "ko",
@@ -43,6 +43,7 @@
     "@babel/core": "^7.18.0",
     "@parcel/css": "^1.12.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "auto-polyfills-webpack-plugin": "workspace:^1.0.1",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-treasure": "^0.9.0",
@@ -56,6 +57,7 @@
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
+    "dynamic-resolve-webpack-plugin": "workspace:^2.0.0",
     "esbuild-loader": "^2.19.0",
     "html-webpack-plugin": "^5.5.0",
     "ko-lints": "workspace:^4.0.0",
