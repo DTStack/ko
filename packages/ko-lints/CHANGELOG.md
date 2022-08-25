@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.8
+
+### Patch Changes
+
+- 40884a3c: lint config
+- Updated dependencies [40884a3c]
+  - ko-lint-config@2.2.8
+
 ## 4.0.7
 
 ### Patch Changes
