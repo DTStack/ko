@@ -14,15 +14,13 @@ import { getHooks } from 'html-webpack-plugin';
 import { minify } from 'terser';
 // @ts-ignore
 import builder from 'core-js-builder';
-// @ts-ignore
-import compat from 'core-js-compat';
 
 export type IOpts = {
   cwd?: string;
   browserslistPath?: string;
   hashType?: string;
   customPrefix?: string;
-  excludeCoreJsModules?: string[];
+  excludeCoreJsModules?: (string | RegExp)[];
 };
 
 class AutoPolyfillsWebpackPlugin {
@@ -71,7 +69,6 @@ class AutoPolyfillsWebpackPlugin {
         polyfillsFiles.forEach(file => {
           const baseName = basename(file, '.js');
           const [_, originHash] = baseName.split(this.strBeforeHash);
-          console.log(originHash, this.targetHash);
           if (originHash === this.targetHash) {
             polyfillExist = true;
           } else {
@@ -124,7 +121,8 @@ class AutoPolyfillsWebpackPlugin {
     const filename = join(this.opts.cwd!, this.polyfillFilename);
     try {
       const bundleContent = await builder({
-        target: this.browserslistQuery,
+        targets: this.browserslistQuery,
+        exclude: this.opts.excludeCoreJsModules,
       });
       const { code } = await minify(bundleContent);
       writeFileSync(filename, code!);
@@ -153,12 +151,7 @@ class AutoPolyfillsWebpackPlugin {
   get browserslistQuery() {
     try {
       const content = readFileSync(this.opts.browserslistPath!, 'utf-8');
-      const { targets } = compat({
-        targets: content,
-        exclude: this.opts.excludeCoreJsModules,
-        version: this.coreJsVersion,
-      });
-      return targets;
+      return content;
     } catch (ex) {
       throw ex;
     }

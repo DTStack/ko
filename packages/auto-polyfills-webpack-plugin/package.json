@@ -22,7 +22,6 @@
   "license": "MIT",
   "dependencies": {
     "core-js-builder": "^3.24.1",
-    "core-js-compat": "^3.24.1",
     "terser": "^5.15.0"
   }
 }

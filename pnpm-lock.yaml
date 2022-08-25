@@ -27,13 +27,11 @@ importers:
   packages/auto-polyfills-webpack-plugin:
     specifiers:
       core-js-builder: ^3.24.1
-      core-js-compat: ^3.24.1
       html-webpack-plugin: ^5.5.0
       terser: ^5.15.0
       webpack: ^5.72.1
     dependencies:
       core-js-builder: 3.24.1
-      core-js-compat: 3.24.1
       terser: 5.15.0
     devDependencies:
       html-webpack-plugin: 5.5.0_webpack@5.72.1
