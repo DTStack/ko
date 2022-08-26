@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.12
+
+### Patch Changes
+
+- 8d8d981f: lock dependencies version
+
 ## 2.2.11
 
 ### Patch Changes

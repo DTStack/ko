@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.12
+
+### Patch Changes
+
+- 8d8d981f: lock dependencies version
+- Updated dependencies [8d8d981f]
+  - ko-lint-config@2.2.12
+
 ## 4.0.11
 
 ### Patch Changes
