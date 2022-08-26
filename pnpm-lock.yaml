@@ -80,7 +80,7 @@ importers:
       '@types/jest': ^27.5.1
       '@types/lodash': ^4.14.182
       '@types/webpack-bundle-analyzer': ^4.4.1
-      auto-polyfills-webpack-plugin: workspace:^1.0.0
+      auto-polyfills-webpack-plugin: workspace:^1.0.1
       autoprefixer: ^10.4.7
       babel-loader: ^8.2.5
       babel-plugin-treasure: ^0.9.0

@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "prettier:check": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --check .",
     "prettier:write": "prettier --config .prettierrc --ignore-path .gitignore --ignore-path .prettierignore --write .",
-    "check": "pnpm prettier",
+    "check": "pnpm prettier:check",
     "test": "pnpm test",
     "debug:ko": "pnpm --filter ./packages/ko debug",
     "debug:ko-lints": "pnpm --filter ./packages/ko-lints debug",
