@@ -139,6 +139,7 @@ module.exports = {
     'no-async-promise-executor': 1, // new Promise 构造函数中有 async
 
     'import/no-extraneous-dependencies': 0,
+    'import/no-absolute-path': 0,
 
     /**
      * 是否强制组件中的方法顺序，顺序如下：
