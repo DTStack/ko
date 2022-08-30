@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.13
+
+### Patch Changes
+
+- 456fd274: lint config
+- Updated dependencies [456fd274]
+  - ko-lint-config@2.2.13
+
 ## 4.0.12
 
 ### Patch Changes

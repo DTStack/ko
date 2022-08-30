@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.13
+
+### Patch Changes
+
+- 456fd274: lint config
+
 ## 2.2.12
 
 ### Patch Changes
