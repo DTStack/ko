@@ -151,7 +151,11 @@ class AutoPolyfillsWebpackPlugin {
   get browserslistQuery() {
     try {
       const content = readFileSync(this.opts.browserslistPath!, 'utf-8');
-      return content;
+      const queryList = content
+        .split('\n')
+        .map(txt => txt.replace(/#((\s)*(\w)+)*/, '').trim())
+        .filter(Boolean);
+      return queryList.join(',');
     } catch (ex) {
       throw ex;
     }
