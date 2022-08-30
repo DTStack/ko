@@ -1,5 +1,14 @@
 # ko
 
+## 6.3.3
+
+### Patch Changes
+
+- 55aa11c9: fix bug
+  - auto polyfills webpack plugin can't read browserslist correctly
+- Updated dependencies [55aa11c9]
+  - auto-polyfills-webpack-plugin@1.0.2
+
 ## 6.3.2
 
 ### Patch Changes
