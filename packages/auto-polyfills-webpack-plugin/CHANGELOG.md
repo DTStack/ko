@@ -1,5 +1,12 @@
 # auto-polyfills-webpack-plugin
 
+## 1.0.2
+
+### Patch Changes
+
+- 55aa11c9: fix bug
+  - auto polyfills webpack plugin can't read browserslist correctly
+
 ## 1.0.1
 
 ### Patch Changes
