@@ -71,7 +71,7 @@ class WebpackConfig {
       none: 'none',
     };
     const { logLevel } = this.opts;
-    return mapping[logLevel!];
+    return mapping[logLevel!] as Configuration['stats'];
   }
 
   get base() {
@@ -124,6 +124,9 @@ class WebpackConfig {
       },
       cache: this.cache,
       stats: this.stats,
+      infrastructureLogging: {
+        level: 'error',
+      },
     };
     return webpackBaseConf as Configuration;
   }
