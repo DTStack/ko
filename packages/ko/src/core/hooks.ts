@@ -18,6 +18,7 @@ class Hooks {
 
   public apply(opts: { key: string; context?: any }) {
     const hooks = this.hooks[opts.key];
+    if (!hooks) return Promise.resolve(opts.context);
     const tapInstance = new AsyncSeriesWaterfallHook(['ctx']);
     hooks[ACTION.ADD].forEach(hook => {
       tapInstance.tapPromise(
