@@ -1,5 +1,14 @@
 # ko
 
+## 6.3.4
+
+### Patch Changes
+
+- fba9a04c: support new option
+  - auto-polyfills-webpack-plugin: support longTermCache option to decide whether or not to store cache polyfills.
+- Updated dependencies [fba9a04c]
+  - auto-polyfills-webpack-plugin@1.1.0
+
 ## 6.3.3
 
 ### Patch Changes
