@@ -21,6 +21,7 @@ export type IOpts = {
   hashType?: string;
   customPrefix?: string;
   excludeCoreJsModules?: (string | RegExp)[];
+  longTermCache?: boolean;
 };
 
 class AutoPolyfillsWebpackPlugin {
@@ -45,6 +46,10 @@ class AutoPolyfillsWebpackPlugin {
     this.strBeforeHash = `${this.opts.customPrefix}-polyfills-`;
     this.opts.excludeCoreJsModules ||= [];
     this.opts.hashType ||= 'md5';
+    this.opts.longTermCache =
+      typeof this.opts.longTermCache === 'boolean' && !this.opts.longTermCache
+        ? false
+        : true;
   }
 
   apply(compiler: Compiler) {
@@ -101,10 +106,14 @@ class AutoPolyfillsWebpackPlugin {
     compiler.hooks.afterEmit.tapPromise(
       AutoPolyfillsWebpackPlugin.name,
       async () => {
+        const polyfillPath = join(this.opts.cwd!, this.polyfillFilename);
         copyFileSync(
-          join(this.opts.cwd!, this.polyfillFilename),
+          polyfillPath,
           join(compiler.options.output.path!, this.polyfillFilename)
         );
+        if (!this.opts.longTermCache) {
+          rmSync(polyfillPath);
+        }
       }
     );
   }
