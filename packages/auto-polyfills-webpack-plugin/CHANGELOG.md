@@ -1,5 +1,12 @@
 # auto-polyfills-webpack-plugin
 
+## 1.1.0
+
+### Minor Changes
+
+- fba9a04c: support new option
+  - auto-polyfills-webpack-plugin: support longTermCache option to decide whether or not to store cache polyfills.
+
 ## 1.0.2
 
 ### Patch Changes
