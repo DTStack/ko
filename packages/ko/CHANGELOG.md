@@ -1,5 +1,15 @@
 # ko
 
+## 6.4.0
+
+### Minor Changes
+
+- 3d2f19ae: new options & bugs fixed
+  - support new option: `logLevel`
+  - support new plugin key: `ModifyWebpack`
+  - change MiniCssExtractPluginLoader to style-loader in development mode
+  - fix bugs: #108, #109
+
 ## 6.3.4
 
 ### Patch Changes
