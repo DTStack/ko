@@ -13,7 +13,7 @@ export type IOptions = {
   publicPath?: string;
   hash?: boolean;
   externals?: Record<string, string>;
-  plugins?: any[];
+  plugins?: HookOptions[];
   htmlTemplate?: string;
   // style configs
   analyzer?: boolean;
@@ -37,7 +37,9 @@ export type IOptions = {
     disableLazyImports?: boolean;
     enableCssModule?: boolean;
   };
+  //misc
   lints?: Record<IKeys, Omit<IOpts, 'write'>>;
+  logLevel?: 'info' | 'warn' | 'error' | 'none';
 };
 
 export type ICliOptions = {
@@ -59,6 +61,11 @@ export type HookItem = {
 export enum ACTION {
   ADD = 'add',
   UPDATE = 'update',
+}
+
+export enum HOOK_KEY_SET {
+  WEBPACK_PLUGIN = 'WebpackPlugin',
+  MODIFY_WEBPACK = 'ModifyWebpack',
 }
 
 export type HookOptions = {

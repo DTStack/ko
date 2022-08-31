@@ -14,7 +14,7 @@ class Dev extends ActionFactory {
   }
 
   private get devServerConfig(): DevServerConfiguration {
-    const { serve, publicPath } = this.service.config;
+    const { serve, publicPath, logLevel } = this.service.config;
     const { host, port, proxy, staticPath } = serve;
     return {
       port,
@@ -30,7 +30,7 @@ class Dev extends ActionFactory {
       allowedHosts: 'all',
       client: {
         overlay: false,
-        logging: 'none',
+        logging: logLevel,
       },
     };
   }
@@ -61,6 +61,10 @@ class Dev extends ActionFactory {
             }
           : speedUp,
     };
+    await this.service.apply({
+      key: this.service.hookKeySet.MODIFY_WEBPACK,
+      context: ret,
+    });
     return ret;
   }
 

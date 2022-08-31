@@ -33,6 +33,10 @@ class Build extends ActionFactory {
       context: ret.plugins,
     });
     ret.plugins = plugins;
+    await this.service.apply({
+      key: this.service.hookKeySet.MODIFY_WEBPACK,
+      context: ret,
+    });
     return ret;
   }
 
