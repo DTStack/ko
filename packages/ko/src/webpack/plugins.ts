@@ -56,10 +56,11 @@ function getPlugins(opts: IWebpackOptions) {
           },
         },
       }),
-    new MiniCssExtractPlugin({
-      filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
-      chunkFilename: isProd ? 'css/[id].[contenthash].css' : 'css/[id].css',
-    }),
+    isProd &&
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[id].[contenthash].css',
+      }),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
       template: htmlTemplate,
