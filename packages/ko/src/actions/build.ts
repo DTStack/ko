@@ -22,7 +22,7 @@ class Build extends ActionFactory {
           new TerserWebpackPlugin({
             terserOptions: {
               compress: {
-                pure_funcs: ["console.log"]
+                ...this.service.config.experiment?.compress
               }
             }
           }),
