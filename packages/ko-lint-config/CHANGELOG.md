@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.15
+
+### Patch Changes
+
+- 0b1a315c: postcss-less
+
 ## 2.2.14
 
 ### Patch Changes

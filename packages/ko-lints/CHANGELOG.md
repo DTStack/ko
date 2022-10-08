@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.15
+
+### Patch Changes
+
+- 0b1a315c: postcss-less
+- Updated dependencies [0b1a315c]
+  - ko-lint-config@2.2.15
+
 ## 4.0.14
 
 ### Patch Changes
