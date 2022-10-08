@@ -7,6 +7,7 @@ import { getResolvePath } from '../../utils';
 import { IWebpackOptions } from '../../types';
 
 class Style {
+  private STYLE_LOADER = getResolvePath('style-loader');
   private CSS_LOADER = getResolvePath('css-loader');
   private SASS_LOADER = getResolvePath('sass-loader');
   private LESS_LOADER = getResolvePath('less-loader');
@@ -96,7 +97,7 @@ class Style {
 
   get styleLoader() {
     return {
-      loader: MiniCssExtractPluginLoader,
+      loader: this.opts.isProd ? MiniCssExtractPluginLoader : this.STYLE_LOADER,
     };
   }
 

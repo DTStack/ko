@@ -1,9 +1,5 @@
 import { AsyncSeriesWaterfallHook } from 'tapable';
-import { HookItem, ACTION, HookOptions } from '../types';
-
-enum HOOK_KEY_SET {
-  WEBPACK_PLUGIN = 'WebpackPlugin',
-}
+import { HookItem, ACTION, HOOK_KEY_SET, HookOptions } from '../types';
 
 class Hooks {
   private hooks: Record<string, Record<ACTION, HookItem[]>>;
@@ -22,6 +18,7 @@ class Hooks {
 
   public apply(opts: { key: string; context?: any }) {
     const hooks = this.hooks[opts.key];
+    if (!hooks) return Promise.resolve(opts.context);
     const tapInstance = new AsyncSeriesWaterfallHook(['ctx']);
     hooks[ACTION.ADD].forEach(hook => {
       tapInstance.tapPromise(

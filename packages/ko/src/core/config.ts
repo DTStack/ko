@@ -65,6 +65,7 @@ class Config {
         disableLazyImports: false,
       },
       autoPolyfills: false,
+      logLevel: 'error',
     };
   }
 }

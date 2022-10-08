@@ -1,5 +1,24 @@
 # ko
 
+## 6.4.0
+
+### Minor Changes
+
+- 3d2f19ae: new options & bugs fixed
+  - support new option: `logLevel`
+  - support new plugin key: `ModifyWebpack`
+  - change MiniCssExtractPluginLoader to style-loader in development mode
+  - fix bugs: #108, #109
+
+## 6.3.4
+
+### Patch Changes
+
+- fba9a04c: support new option
+  - auto-polyfills-webpack-plugin: support longTermCache option to decide whether or not to store cache polyfills.
+- Updated dependencies [fba9a04c]
+  - auto-polyfills-webpack-plugin@1.1.0
+
 ## 6.3.3
 
 ### Patch Changes
