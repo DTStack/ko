@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.14
+
+### Patch Changes
+
+- ec113a5e: add theme rules
+
 ## 2.2.13
 
 ### Patch Changes
