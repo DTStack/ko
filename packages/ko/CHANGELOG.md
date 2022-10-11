@@ -1,5 +1,11 @@
 # ko
 
+## 5.3.11
+
+### Patch Changes
+
+- c2b27e77: fix: correct worker-loader include config
+
 ## 5.3.10
 
 ### Patch Changes
