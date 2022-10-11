@@ -2,7 +2,7 @@ import webpack, { Configuration } from 'webpack';
 import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import { ActionFactory } from './factory';
-import TerserWebpackPlugin from "terser-webpack-plugin"
+import TerserWebpackPlugin from 'terser-webpack-plugin';
 
 import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { ICliOptions } from '../types';
@@ -22,18 +22,18 @@ class Build extends ActionFactory {
           new TerserWebpackPlugin({
             terserOptions: {
               compress: {
-                ...this.service.config.experiment?.compress
-              }
-            }
+                ...this.service.config.experiment?.compress,
+              },
+            },
           }),
           ...(this.service.config.experiment?.minimizer
             ? [
-              new ESBuildMinifyPlugin({
-                target: 'es2015',
-                css: true,
-              }),
-            ]
-            : ['...'])
+                new ESBuildMinifyPlugin({
+                  target: 'es2015',
+                  css: true,
+                }),
+              ]
+            : ['...']),
         ],
       },
     } as Configuration;
