@@ -1,5 +1,11 @@
 # ko
 
+## 6.4.1
+
+### Patch Changes
+
+- f8322d050: support clear console.log/info
+
 ## 6.4.0
 
 ### Minor Changes
