@@ -9,6 +9,7 @@ const scriptLoader = [
   {
     test: /\.worker.[jt]s$/,
     loader: WORKER_LOADER,
+    include: (input: string) => input.includes('node_modules/dt-react-monaco-editor/lib/languages'),
     options: {
       inline: 'fallback',
     },
