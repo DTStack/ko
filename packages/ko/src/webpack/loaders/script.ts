@@ -16,6 +16,8 @@ class Script {
       {
         test: /\.worker.[jt]s$/,
         loader: this.WORKER_LOADER,
+        include: (input: string) =>
+          input.includes('dt-react-monaco-editor/lib/languages'),
         options: {
           inline: 'fallback',
         },
