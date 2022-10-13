@@ -1,5 +1,11 @@
 # ko
 
+## 6.4.1
+
+### Patch Changes
+
+- 56e09f1d: correct worker-loader include config
+
 ## 6.4.0
 
 ### Minor Changes
