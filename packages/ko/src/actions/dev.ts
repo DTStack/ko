@@ -61,9 +61,9 @@ class Dev extends ActionFactory {
               imports: false,
             }
           : {
-            entries: false,
-            imports: true,
-          },
+              entries: false,
+              imports: true,
+            },
     };
     await this.service.apply({
       key: this.service.hookKeySet.MODIFY_WEBPACK,
