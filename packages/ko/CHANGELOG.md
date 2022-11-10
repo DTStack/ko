@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- f8322d050: support clear console.log/info
+- 56e09f1d: correct worker-loader include config
 
 ## 6.4.0
 
