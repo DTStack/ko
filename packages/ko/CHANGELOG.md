@@ -1,5 +1,15 @@
 # ko
 
+## 6.5.0
+
+### Minor Changes
+
+- 78b5730e: support clear console.log and bug fixed
+
+### Patch Changes
+
+- 1cbef1df: support clear console.log
+
 ## 6.4.1
 
 ### Patch Changes
