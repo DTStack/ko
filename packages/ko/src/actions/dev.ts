@@ -57,9 +57,13 @@ class Dev extends ActionFactory {
       lazyCompilation:
         speedUp && disableLazyImports
           ? {
+              entries: false,
               imports: false,
             }
-          : speedUp,
+          : {
+              entries: false,
+              imports: true,
+            },
     };
     await this.service.apply({
       key: this.service.hookKeySet.MODIFY_WEBPACK,

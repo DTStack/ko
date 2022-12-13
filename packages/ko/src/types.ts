@@ -36,6 +36,7 @@ export type IOptions = {
     minimizer?: boolean;
     disableLazyImports?: boolean;
     enableCssModule?: boolean;
+    compress?: any;
   };
   //misc
   lints?: Record<IKeys, Omit<IOpts, 'write'>>;
