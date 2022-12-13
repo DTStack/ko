@@ -1,5 +1,12 @@
 # ko-lints
 
+## 4.0.16
+
+### Patch Changes
+
+- Updated dependencies [ab8fd720]
+  - ko-lint-config@2.2.16
+
 ## 4.0.15
 
 ### Patch Changes

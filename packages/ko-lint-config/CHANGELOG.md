@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.16
+
+### Patch Changes
+
+- ab8fd720: some rules
+
 ## 2.2.15
 
 ### Patch Changes
