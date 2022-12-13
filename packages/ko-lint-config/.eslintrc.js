@@ -129,7 +129,7 @@ module.exports = {
     'no-prototype-builtins': 0,
     'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
     'no-return-assign': 0, // return 的代码中有运算
-    'no-useless-escape': 0,
+    'no-useless-escape': 1,
     'no-useless-constructor': 0, // 空构造函数
     'no-template-curly-in-string': 0,
     'no-console': 0,

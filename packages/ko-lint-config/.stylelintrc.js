@@ -52,5 +52,6 @@ module.exports = {
     'selector-pseudo-class-no-unknown': null, // 兼容写法
     'selector-type-no-unknown': null, // 兼容写法
     'number-max-precision': 10, // 数字中允许的小数位数
+    'value-no-vendor-prefix': null,
   },
 };
