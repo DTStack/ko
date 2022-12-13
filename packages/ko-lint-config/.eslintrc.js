@@ -87,6 +87,13 @@ module.exports = {
         ],
       },
     ],
+    // 建议驼峰命名
+    camelcase: [
+      1,
+      {
+        ignoreDestructuring: true, // 忽略解构时的驼峰命名校验
+      },
+    ],
     eqeqeq: 0,
     'arrow-body-style': 0, // 控制箭头函数的语法形式
     'object-shorthand': 2, // 对象的 key 和 value 一致时要求简写
@@ -122,15 +129,17 @@ module.exports = {
     'no-prototype-builtins': 0,
     'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
     'no-return-assign': 0, // return 的代码中有运算
-    'no-useless-escape': 0,
+    'no-useless-escape': 1,
     'no-useless-constructor': 0, // 空构造函数
     'no-template-curly-in-string': 0,
-    'no-console': 1,
+    'no-console': 0,
     'no-debugger': 2,
     'no-param-reassign': 2, // 给函数的入参赋值
     'no-use-before-define': 0, // 使用尚未声明的变量
+    'no-async-promise-executor': 1, // new Promise 构造函数中有 async
 
     'import/no-extraneous-dependencies': 0,
+    'import/no-absolute-path': 0,
 
     /**
      * 是否强制组件中的方法顺序，顺序如下：
@@ -197,6 +206,14 @@ module.exports = {
       {
         allowDestructuring: false, // 不允许从 this 中解构，默认值 true
         allowedNames: ['self', '_this', 'that', 'ctx'], // 允许的别名，默认值 []
+      },
+    ],
+    '@typescript-eslint/no-unused-vars': [
+      2,
+      {
+        argsIgnorePattern: '^_', // 函数参数忽略以下划线开头的变量
+        destructuredArrayIgnorePattern: '^_', // 解构数组忽略以下划线开头的变量
+        caughtErrorsIgnorePattern: '^err', // 捕获错误忽略以 err 开头的变量
       },
     ],
 

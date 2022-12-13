@@ -1,5 +1,83 @@
 # ko-lint-config
 
+## 2.2.16
+
+### Patch Changes
+
+- ab8fd720: some rules
+
+## 2.2.15
+
+### Patch Changes
+
+- 0b1a315c: postcss-less
+
+## 2.2.14
+
+### Patch Changes
+
+- ec113a5e: add theme rules
+
+## 2.2.13
+
+### Patch Changes
+
+- 456fd274: lint config
+
+## 2.2.12
+
+### Patch Changes
+
+- 8d8d981f: lock dependencies version
+
+## 2.2.11
+
+### Patch Changes
+
+- 830b3280: ko lint tsc
+
+## 2.2.10
+
+### Patch Changes
+
+- 9554156e: stylelint version
+
+## 2.2.9
+
+### Patch Changes
+
+- 205b0044: lint config
+
+## 2.2.8
+
+### Patch Changes
+
+- 40884a3c: lint config
+
+## 2.2.7
+
+### Patch Changes
+
+- edb4ae7e: change prettier config
+
+## 2.2.6
+
+### Patch Changes
+
+- 5f645514: update stylelint rules
+
+## 2.2.5
+
+### Patch Changes
+
+- 472d7e0c: update eslint rules
+
+## 2.2.4
+
+### Patch Changes
+
+- 25de5d7e: update eslint rules
+
 ## 2.2.3
 
 ### Patch Changes

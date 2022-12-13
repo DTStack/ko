@@ -34,7 +34,7 @@ class StyleLintParser extends LintParserFactory {
         files: file,
       });
       if (result.errored) {
-        resultText = formatters.string(result.results);
+        resultText = formatters.string(result.results, result);
       }
       return resultText;
     } catch (ex) {
