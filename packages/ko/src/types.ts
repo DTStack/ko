@@ -29,6 +29,7 @@ export type IOptions = {
     host: string;
     port: number;
     staticPath?: string;
+    historyApiFallback?: any;
   };
   // experimental features
   experiment?: {
