@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.1
+
+### Patch Changes
+
+- b23e6cbb: devserver added historyApiFallback configuration to resolve resource path 404 issues
+
 ## 6.5.0
 
 ### Minor Changes
