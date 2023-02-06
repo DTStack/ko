@@ -113,7 +113,7 @@ module.exports = {
       // 函数括号前的空格
       2,
       {
-        anonymous: 'always', // 匿名函数表达式，例如 function () {}
+        anonymous: 'never', // 匿名函数表达式，例如 function () {}
         named: 'never', // 命名函数表达式，例如 function foo () {}
         asyncArrow: 'always', // 异步箭头函数表达式，例如 async () => {}
       },
