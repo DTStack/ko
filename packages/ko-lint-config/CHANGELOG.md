@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.17
+
+### Patch Changes
+
+- 7a0c20ff: space-before-function-paren anonymous
+
 ## 2.2.16
 
 ### Patch Changes

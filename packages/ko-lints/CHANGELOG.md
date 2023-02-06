@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.17
+
+### Patch Changes
+
+- 7a0c20ff: space-before-function-paren anonymous
+- Updated dependencies [7a0c20ff]
+  - ko-lint-config@2.2.17
+
 ## 4.0.16
 
 ### Patch Changes
