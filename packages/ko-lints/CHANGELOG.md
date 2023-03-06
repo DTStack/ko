@@ -1,5 +1,13 @@
 # ko-lints
 
+## 4.0.19
+
+### Patch Changes
+
+- abcf6b77: react hooks eslint rule
+- Updated dependencies [abcf6b77]
+  - ko-lint-config@2.2.19
+
 ## 4.0.18
 
 ### Patch Changes
