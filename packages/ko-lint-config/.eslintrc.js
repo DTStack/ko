@@ -162,7 +162,7 @@ module.exports = {
     'react/jsx-closing-tag-location': 0,
     'react/jsx-boolean-value': [1, 'never'],
     'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 0,
+    'react-hooks/exhaustive-deps': 1,
 
     'jsx-quotes': 1,
     'dt-react/jsx-closing-bracket-location': [1, 'line-aligned'],
