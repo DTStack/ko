@@ -22,7 +22,6 @@ export type IOptions = {
   analyzer?: boolean; // show output files with an interactive zoomable treemap
   extraPostCSSPlugins?: Plugin[]; // extra post css plugins
   lessOptions?: any; // custom less options
-  antdV4LessOptions?: any; // custom less options for antd v4
   // integrated plugins options
   dynamicResolve?: <T extends any>(request: T) => T; // dynamic resolve function
   autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions; // auto polyfills plugin options
