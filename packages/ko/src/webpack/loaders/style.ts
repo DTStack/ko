@@ -44,22 +44,11 @@ class Style {
       enableCssModule && this.sassCssModuleConfig,
       {
         test: /\.less$/,
-        exclude: [this.realAntdV4Path],
         use: [
           this.styleLoader,
           this.cssLoader,
           this.postCSSLoader,
           this.lessLoader,
-        ],
-      },
-      {
-        test: /\.less$/,
-        include: [this.realAntdV4Path],
-        use: [
-          this.styleLoader,
-          this.cssLoader,
-          this.postCSSLoader,
-          this.antdV4LessLoader,
         ],
       },
     ];
@@ -86,13 +75,6 @@ class Style {
         this.sassLoader,
       ],
     };
-  }
-
-  //TODO: remove when upgrade to antd v4
-  get realAntdV4Path() {
-    const antdV4Path = join(this.opts.cwd, 'node_modules/antd-v4');
-    const ret = existsSync(antdV4Path) ? realpathSync(antdV4Path) : antdV4Path;
-    return ret;
   }
 
   get styleLoader() {
@@ -126,17 +108,6 @@ class Style {
       options: {
         sourceMap: true,
         lessOptions,
-      },
-    };
-  }
-
-  get antdV4LessLoader() {
-    const { antdV4LessOptions = {} } = this.opts;
-    return {
-      loader: this.LESS_LOADER,
-      options: {
-        sourceMap: true,
-        lessOptions: antdV4LessOptions,
       },
     };
   }
