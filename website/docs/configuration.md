@@ -31,6 +31,7 @@ export type IOptions = {
     host: string; // host of dev server
     port: number; // port of dev server
     staticPath?: string; // static path that will be watch of dev server
+    compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // log after successful compilation, as same as friendly-errors-webpack-plugin
   };
   // experimental features
   experiment?: {

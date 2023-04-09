@@ -29,6 +29,7 @@ export type IOptions = {
     port: number;
     staticPath?: string;
     historyApiFallback?: any;
+    compilationSuccessInfo?: { messages: string[]; notes?: string[] };
   };
   // experimental features
   experiment?: {
