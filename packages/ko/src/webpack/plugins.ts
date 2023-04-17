@@ -12,7 +12,14 @@ import FriendlyErrorsWebpackPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
-  const { isProd, htmlTemplate, copy, analyzer, autoPolyfills, serve: { host, port, compilationSuccessInfo } } = opts;
+  const {
+    isProd,
+    htmlTemplate,
+    copy,
+    analyzer,
+    autoPolyfills,
+    serve: { host, port, compilationSuccessInfo },
+  } = opts;
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
