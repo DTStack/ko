@@ -6,6 +6,8 @@ import Service from '../core/service';
 import WebpackConfig from '../webpack';
 import ActionFactory from './factory';
 import { ICliOptions } from '../types';
+import detect from 'detect-port';
+import inquirer from 'inquirer';
 
 class Dev extends ActionFactory {
   private webpackConfig: WebpackConfig;
@@ -92,13 +94,44 @@ class Dev extends ActionFactory {
     this.service.commander.bindAction(cmdName, this.action.bind(this));
   }
 
+  private async changePort(newPort: number, port: number) {
+    const question = {
+      type: 'confirm',
+      name: 'changePort',
+      message: `port: ${port} has been used，use new port ${newPort} instead?`,
+      default: true,
+    };
+    const answer = await inquirer.prompt([question]);
+    if (answer.changePort) {
+      return newPort;
+    }
+    this.errorStdout(`so sorry, ${port} already in use！！`);
+    process.exit(0);
+  }
+
+  private async checkPort(port: number) {
+    const newPort = await detect(port);
+    if (newPort === port) {
+      return newPort;
+    }
+    const isInteractive = process.stdout.isTTY;
+    if (isInteractive) {
+      return this.changePort(newPort, port);
+    }
+  }
+
   protected async action(cliOpts: ICliOptions) {
     process.title = 'ko-dev';
     process.env.NODE_ENV = 'development';
     this.service.freezeCliOptsWith(cliOpts);
     const config = await this.generateConfig();
+    const port = config.devServer?.port as number;
+    const newPort = (await this.checkPort(port)) as number;
     const compiler = Webpack(config);
-    const devServer = new WebpackDevServer(config.devServer, compiler);
+    const devServer = new WebpackDevServer(
+      { ...config.devServer, port: newPort },
+      compiler
+    );
     await devServer.start();
     const exitProcess = (callback?: () => void) => () => {
       callback && callback();

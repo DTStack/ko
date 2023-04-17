@@ -19,7 +19,6 @@ export type IOptions = {
   analyzer?: boolean;
   extraPostCSSPlugins?: Plugin[];
   lessOptions?: any;
-  antdV4LessOptions?: any;
   // integrated plugins options
   dynamicResolve?: <T extends any>(request: T) => T;
   autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions;
@@ -30,6 +29,7 @@ export type IOptions = {
     port: number;
     staticPath?: string;
     historyApiFallback?: any;
+    compilationSuccessInfo?: { messages: string[]; notes?: string[] };
   };
   // experimental features
   experiment?: {

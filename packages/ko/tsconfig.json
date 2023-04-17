@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node14/tsconfig.json",
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "index.d.ts"],
   "exclude": ["src/**/*.test.ts"],
   "compilerOptions": {
     "allowJs": true,
