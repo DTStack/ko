@@ -1,5 +1,29 @@
 # ko-lints
 
+## 4.0.19
+
+### Patch Changes
+
+- abcf6b77: react hooks eslint rule
+- Updated dependencies [abcf6b77]
+  - ko-lint-config@2.2.19
+
+## 4.0.18
+
+### Patch Changes
+
+- 2f66429b: space-before-function-paren
+- Updated dependencies [2f66429b]
+  - ko-lint-config@2.2.18
+
+## 4.0.17
+
+### Patch Changes
+
+- 7a0c20ff: space-before-function-paren anonymous
+- Updated dependencies [7a0c20ff]
+  - ko-lint-config@2.2.17
+
 ## 4.0.16
 
 ### Patch Changes

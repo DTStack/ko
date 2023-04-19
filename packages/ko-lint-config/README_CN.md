@@ -35,7 +35,7 @@
 ## 安装
 
 ``` bash
-pnpm add ko-lint-config -D
+pnpm add ko-lint-config@lastest -D
 ```
 
 ## 使用
