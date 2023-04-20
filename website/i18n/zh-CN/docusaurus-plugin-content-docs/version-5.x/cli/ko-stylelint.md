@@ -17,9 +17,9 @@ title: ko stylelint
 您可以使用`pnpm`或`npx`在命令行上运行`ko stylelint`，如下所示：
 
 ``` bash
-# Run on files:
+# 指定lint文件
 npx stylelint file1.js
-# Run on multiple files via glob syntax
+# 通过glob语法prettier多个文件
 npx ko stylelint "src/**"
 ```
 

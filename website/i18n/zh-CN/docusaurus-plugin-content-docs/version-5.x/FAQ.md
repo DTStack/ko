@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: FAQ
+title: 常见问题
 ---
 
 ## 如何覆盖 webpack 配置
@@ -27,9 +27,9 @@ module.exports = {
 
 ## 如何 polyfill Node.js 核心模块：
 
-Webpack 5 不再自动 polyfill Node.js 核心模块，这意味着如果您在浏览器或类似环境中使用它们，您将不得不从 npm 安装兼容的模块并自行包含它们。如果您的目标环境是浏览器，则只需安装一些包并将 **resolve.fallback** 添加到 **ko.config.js** 中。
+Webpack 5 不再自动 polyfill Node.js 核心模块，这意味着如果您在浏览器或类似环境中使用它们，您必须从 npm 安装兼容的模块并引用它们。如果您的目标环境是浏览器，则只需安装一些包并将 **resolve.fallback** 添加到 **ko.config.js** 中。
 :::tip
-从 v5.3.4 开始，ko 在内部 polyfill 这些核心模块，因此您不必安装以下软件包并添加配置。
+从 v5.3.4 开始，ko 在内部 polyfill 这些核心模块，因此您不必再安装以下包并配置。
 :::
 
 ### 安装 browserify 包：
@@ -73,7 +73,7 @@ module.exports = {
 ## 如何使用 Web Workers
 
 :::caution
-为了兼容性，我们在 ko 中内部使用 `work-loader`。因此，您可以迁移到 ko 而无需考虑更新导入 Worker 代码。但是，建议使用以下示例中的方式使用 worker。
+为了保证兼容性，我们在 ko 中内部使用了 `worker-loader`。因此，您可以在不更新导入 Worker 代码的情况下迁移到 ko。但是，建议使用以下示例中的方式使用 worker。
 :::
 
 您可以在 ko 中不使用 [worker-loader](https://github.com/webpack-contrib/worker-loader) 使用 [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)，就像这样：
@@ -82,7 +82,7 @@ module.exports = {
 ```js
 new Worker(new URL('./worker.js', import.meta.url));
 ```
-And you should update your project **tsconfig.json** into these configs:
+您需要修改项目中 **tsconfig.json** 的如下配置:
 ```json
 "compilerOptions": {         
   "module": "esnext",         
@@ -91,14 +91,14 @@ And you should update your project **tsconfig.json** into these configs:
 ```
 
 ## 为什么我的插件不起作用
-您的一些插件可能太旧，无法适应 webpack(v5) 的最新版本，因此您应该将插件更新到最新版本。您的一些插件通常在项目中使用，例如：
+您的一些插件可能太旧，无法适应 webpack(v5) 的最新版本，因此您应该将插件更新到最新版本。一些常用的插件例如：
 * [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin#patterns)
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
 并确保在迁移到 ko 时具有正确的插件配置。
 
 ## 为什么我的插件不起作用
-您的一些插件可能太旧，无法适应 webpack(v5) 的最新版本，因此您应该将插件更新到最新版本。您的一些插件通常在项目中使用，例如：
+您的一些插件可能太旧，无法适应 webpack(v5) 的最新版本，因此您应该将插件更新到最新版本。例如：
 * [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin#patterns)
 * [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 

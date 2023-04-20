@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: 构建
+title: ko build
 ---
 
-使用内部的 webpack 实例来打包文件，默认情况下编译后的文件将被写入 **dist** 目录。您可以通过 **ko.config.js** 更改此行为。
+使用内部的 webpack 实例来构建打包，默认情况下编译后的文件将被写入 **dist** 目录。您可以通过 **ko.config.js** 更改此行为。
 
 可选参数：
 

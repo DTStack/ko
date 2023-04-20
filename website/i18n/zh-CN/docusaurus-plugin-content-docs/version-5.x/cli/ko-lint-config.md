@@ -5,11 +5,11 @@ title: ko-lint-config
 
 `ko-lint-config` 为您节省时间的三种方式：
 
-- **无需配置** - 在项目中强制执行代码质量的更简单方法。没有配置规则。它只是起作用。
+- **无需配置** - 让您更容易的在项目中强制使用代码检查。无需进行额外的配置就可以运行。
 - **自动格式化代码** - 只需运行 `pnpm lint-fix`，就可以告别混乱或不一致的代码。
-- **尽早捕获样式问题和程序员错误** - 减少代码审查过程中的手动审核，并将简单的事情留给工具来节省时间。
+- **发现样式问题和程序错误** - 减少代码审查过程中的手动审核，并将简单的事情留给工具来节省时间。
 
-毫不犹豫。不再维护 `.eslintrc`。现在就试试吧！
+别犹豫了，别再维护 `.eslintrc`。现在就试试吧！
 
 ## 详细规则
 - **需要四个空格** – 缩进
@@ -22,19 +22,20 @@ title: ko-lint-config
 - **允许但不要求尾随逗号** - 当最后一个元素或属性在不同行时，与结尾或属性不同行
 - **函数内容允许为空**
 - **允许使用 this 别名** - 别名可选 `self` `_this` `that'，不能从中解构出来
-- **不需要调试器**
-- **不建议使用控制台**
+- **不允许debugger**
+- **不允许使用控制台打印**
 
 
-## Install
+## 安装
 
 ``` bash
 pnpm add ko-lint-config -D
 ```
 
-## Usage
+## 使用
 
-&emsp;&emsp;How to get Code Style Guide: <a href="https://dtstack.yuque.com/rd-center/sm6war/eeyxxe" target="_black">如何引入 Code Style Guide</a>
+ <a href="https://dtstack.yuque.com/rd-center/sm6war/eeyxxe" target="_black">如何引入 Code Style Guide</a>
+
 
 1、Then, add this to your `.eslintrc.js`、`.prettierrc.js`、`.stylelintrc.js` file:
 
@@ -56,9 +57,9 @@ module.exports = {
 }
 ```
 
-You should not override settings. Because this is a Code Style Guide for group.
+你不应该覆盖这些配置，因为统一代码规范是属于团队的
 
-2、Add script to `package.json`:
+2、在`package.json`中添加如下脚本:
 
 ``` json
 "scripts": {
@@ -75,7 +76,7 @@ You should not override settings. Because this is a Code Style Guide for group.
 
 在极少数情况下，您需要打破规则并隐藏由 `Code Style Guide` 生成的错误。
 
-`ko-lint-config` 在幕后使用 [ESLint](http://eslint.org/)，您可以像直接使用 ESLint 一样正常隐藏错误。stylelint 与 eslint 相同。
+`ko-lint-config` 底层使用 [ESLint](http://eslint.org/)，您可以像直接使用 ESLint 一样正常隐藏错误。stylelint 与 eslint 相同。
 
 在特定行上禁用 **所有规则**：
 
@@ -83,13 +84,13 @@ You should not override settings. Because this is a Code Style Guide for group.
 file = 'I know what I am doing' // eslint-disable-line
 ```
 
-Or, disable **only** the `"no-use-before-define"` rule:
+或者, 禁用 **指定** 规则 `"no-use-before-define"`:
 
 ```js
 file = 'I know what I am doing' // eslint-disable-line no-use-before-define
 ```
 
-Or, disable the `"no-use-before-define"` rule for **multiple lines**:
+或者, 对**多行**禁用 `"no-use-before-define"` 规则:
 
 ```js
 /* eslint-disable no-use-before-define */

@@ -17,9 +17,9 @@ title: ko eslint
 您可以使用`pnpm`或`npx`在命令行上运行`ko eslint`，如下所示：
 
 ``` bash
-# Run on files:
+# lint指定文件
 npx eslint file1.js
-# Run on multiple files via glob syntax
+# 通过glob语法lint多个文件
 npx ko eslint "src/**"
 ```
 
