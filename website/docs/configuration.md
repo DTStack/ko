@@ -22,7 +22,6 @@ export type IOptions = {
   analyzer?: boolean; // show output files with an interactive zoomable treemap
   extraPostCSSPlugins?: Plugin[]; // extra post css plugins
   lessOptions?: any; // custom less options
-  antdV4LessOptions?: any; // custom less options for antd v4
   // integrated plugins options
   dynamicResolve?: <T extends any>(request: T) => T; // dynamic resolve function
   autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions; // auto polyfills plugin options
@@ -32,6 +31,7 @@ export type IOptions = {
     host: string; // host of dev server
     port: number; // port of dev server
     staticPath?: string; // static path that will be watch of dev server
+    compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // log after successful compilation, as same as friendly-errors-webpack-plugin
   };
   // experimental features
   experiment?: {
