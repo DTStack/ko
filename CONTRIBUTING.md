@@ -1,8 +1,3 @@
----
-sidebar_position: 6
-title: Contributing
----
-
 # Contributing to ko
 
 We use **pnpm workspace** to manage our packages. so make sure you use **pnpm** as package manager than **npm** or **yarn**.
@@ -15,7 +10,7 @@ pnpm install
 
 ## Code Structure
 
-as a **monorepo**, ko now maintain 4 packages in packages directory:
+as a **monorepo**, ko now maintain 5 packages in packages directory:
 
 * **ko**: main package
 * **ko-lints**: code format cli, include **eslint**, **prettier** and **stylelint**, can be integrated in ko or use individually

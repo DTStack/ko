@@ -1,5 +1,5 @@
 # ko
-
+English | [简体中文](./README_CN.md)
 ## Simple, yet powerful, tool for managing your react applications. 
 
 <a href="https://www.npmjs.com/package/ko"><img alt="NPM Status" src="https://img.shields.io/npm/v/ko.svg?style=flat"></a>
@@ -23,13 +23,13 @@ pnpm add ko --save-dev
 ```
 
 ## Documents
-* [Introduction](https://dtstack.github.io/ko/docs/introduction)
-* [Getting Started](https://dtstack.github.io/ko/docs/getting-started)
-* [FAQ](https://dtstack.github.io/ko/docs/FAQ)
+* [Introduction](https://dtstack.github.io/ko/zh-CN/docs/current/introduction)
+* [Getting Started](https://dtstack.github.io/ko/zh-CN/docs/current/getting-started)
+* [FAQ](https://dtstack.github.io/ko/zh-CN/docs/current/FAQ)
 
 ## Contributing
 
-We'd love to have your helping hand on `ko`! See [CONTRIBUTING](https://dtstack.github.io/ko/docs/contributing/) for more information on how to get started.
+We'd love to have your helping hand on `ko`! See [CONTRIBUTING](../../CONTRIBUTING.md) for more information on how to get started.
 
 ## License
 
