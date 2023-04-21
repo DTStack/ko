@@ -1,5 +1,14 @@
 # ko
 
+## 6.5.2
+
+### Patch Changes
+
+- 723774e0e: optimize devServer complation log and add dev log config
+- 8006d5d49: add port select when port used
+- 14e59d909: add --max_old_space_size
+- 2640cddf5: remove antd4Options when antd upgrade to 4+
+
 ## 6.5.1
 
 ### Patch Changes
