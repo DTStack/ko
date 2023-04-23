@@ -1,0 +1,30 @@
+{
+  "link.title.Docs": {
+    "message": "文档",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Community": {
+    "message": "社区",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.item.label.Introduction": {
+    "message": "介绍",
+    "description": "The label of footer link with label=Introduction linking to /docs/current/introduction"
+  },
+  "link.item.label.Getting Started": {
+    "message": "入门指南",
+    "description": "The label of footer link with label=Getting Started linking to /docs/current/getting-started"
+  },
+  "link.item.label.FAQ": {
+    "message": "常见问题",
+    "description": "The label of footer link with label=FAQ linking to /docs/current/FAQ"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/ko"
+  },
+  "copyright": {
+    "message": "Copyright © 2023 DTStack, Inc. 数栈 UED 团队",
+    "description": "The footer copyright"
+  }
+}

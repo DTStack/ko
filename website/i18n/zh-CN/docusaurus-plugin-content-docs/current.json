@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "6.x",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Advanced": {
+    "message": "高级选项",
+    "description": "The label for category Advanced in sidebar tutorialSidebar"
+  }
+}

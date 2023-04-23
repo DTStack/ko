@@ -1,3 +1,14 @@
 {
-    
+  "version.label": {
+    "message": "5.x",
+    "description": "The label for version 5.x"
+  },
+  "sidebar.tutorialSidebar.category.Command Line Interface": {
+    "message": "命令行界面",
+    "description": "The label for category Command Line Interface in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Advanced": {
+    "message": "高级选项",
+    "description": "The label for category Advanced in sidebar tutorialSidebar"
+  }
 }
