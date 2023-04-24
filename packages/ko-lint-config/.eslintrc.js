@@ -221,5 +221,38 @@ module.exports = {
     // standard 要求 callback 内的值不为具体值
     'standard/no-callback-literal': 0,
     'n/no-callback-literal': 0,
+    "import/order": ["error", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+      "newlines-between": "always",
+      "alphabetize": {"order": "asc", "caseInsensitive": true},
+      "pathGroups": [
+        {
+          "pattern": "react*",
+          "group": "external",
+          "position": "before"
+        },
+        {
+          "pattern": "@/**",
+          "group": "internal",
+          "position": "before"
+        },
+        {
+          "pattern": "*.scss",
+          "group": "index",
+          "position": "after"
+        },
+        {
+          "pattern": "*.css",
+          "group": "index",
+          "position": "after"
+        },
+        {
+          "pattern": "*.less",
+          "group": "index",
+          "position": "after"
+        }
+      ],
+      "pathGroupsExcludedImportTypes": []
+    }]
   },
 };
