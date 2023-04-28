@@ -32,7 +32,8 @@
     "ko": "./lib/cli.js"
   },
   "files": [
-    "lib/*"
+    "lib/*",
+    "template"
   ],
   "scripts": {
     "prepublishOnly": "rm -rf lib && tsc",
