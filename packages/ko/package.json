@@ -29,7 +29,8 @@
   "license": "MIT",
   "author": "DTStack",
   "bin": {
-    "ko": "./lib/cli.js"
+    "ko": "./lib/cli.js",
+    "create-ko": "./lib/actions/init.js"
   },
   "files": [
     "lib/*",
