@@ -1,0 +1,26 @@
+{
+    "name": "ko-project",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "ko dev",
+        "build": "ko build",
+        "prettier": "ko prettier ./**/*.{ts,tsx,js,jsx} --concurrency",
+        "prettier:fix": "ko prettier ./**/*.{ts,tsx,js,jsx} --write --concurrency",
+        "eslint": "ko eslint ./**/*.{ts,tsx,js,jsx} --concurrency",
+        "eslint:fix": "ko eslint ./**/*.{ts,tsx,js,jsx} --write --concurrency",
+        "stylelint": "ko stylelint ./**/*.{css,sass,scss,less} --concurrency",
+        "stylelint:fix": "ko stylelint ./**/*.{css,sass,scss,less} --write --concurrency"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.37",
+        "@types/react-dom": "^18.0.11",
+        "typescript": "^5.0.2",
+        "ko": "^6.5.2",
+        "ko-lint-config": "^2.2.19"
+    }
+}
