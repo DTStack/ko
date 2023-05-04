@@ -7,6 +7,20 @@ title: 入门指南
 
 * Node.js 版本: Node.js 14+
 
+## 命令行创建 React 项目
+您可以使用 CLI 通过 TypeScript 创建 React 项目。
+``` bash
+pnpm create ko
+# 或者
+npm create ko
+# 或者
+yarn create ko
+```
+
+稍等片刻后，您可以在终端中看到“Creating project in...”。
+
+然后进入文件夹并安装依赖项。
+
 ## 安装 ko
 
 你可以使用 npm、yarn 或 pnpm 来安装 ko：
