@@ -1,0 +1,13 @@
+{
+    "extends": "@tsconfig/node14/tsconfig.json",
+    "include": ["src/**/*.ts", "index.d.ts"],
+    "exclude": ["src/**/*.test.ts"],
+    "compilerOptions": {
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "strict": true,
+      "strictPropertyInitialization": false,
+      "outDir": "lib",
+    },
+  }

@@ -29,12 +29,10 @@
   "license": "MIT",
   "author": "DTStack",
   "bin": {
-    "ko": "./lib/cli.js",
-    "create-ko": "./lib/actions/init.js"
+    "ko": "./lib/cli.js"
   },
   "files": [
-    "lib/*",
-    "template"
+    "lib/*"
   ],
   "scripts": {
     "prepublishOnly": "rm -rf lib && tsc",
