@@ -1,3 +1,3 @@
 module.exports = {
-    extends: ['ko-lint-config/.stylelintrc'],
+  extends: ['ko-lint-config/.stylelintrc'],
 };
