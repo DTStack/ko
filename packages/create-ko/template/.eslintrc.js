@@ -1,3 +1,3 @@
 module.exports = {
-    extends: [require.resolve('ko-lint-config/.eslintrc')],
+  extends: [require.resolve('ko-lint-config/.eslintrc')],
 };
