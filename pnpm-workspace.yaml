@@ -1,4 +1,4 @@
 packages:
   - 'packages/**'
   - 'website'
-  - '!packages/ko/src/template'
+  - '!packages/create-ko/template'
