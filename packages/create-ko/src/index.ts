@@ -32,6 +32,14 @@ function init() {
     .action(async (args: { c?: boolean; config?: boolean }) => {
       const { c = false, config = false } = args ?? {};
       if (c || config) {
+        try {
+          const fileTemplate = path.join(TEMPLATE_PATH, 'ko.config.js');
+          const fileCreate = path.join(CURRENT_PATH, 'ko.config.js');
+          copy(fileTemplate, fileCreate);
+          console.log(`Create ko.config.js success in ${fileCreate} `);
+        } catch (error) {
+          console.error('Create ko.config.js fail.');
+        }
         return;
       }
       const question = [
