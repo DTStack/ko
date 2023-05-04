@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 const FILE_PATH = path.dirname(__filename);
-const TEMPLATE_PATH = path.join(FILE_PATH, '../../template');
+const TEMPLATE_PATH = path.join(FILE_PATH, '../template');
 const CURRENT_PATH = process.cwd();
 
 function isEmpty(path: string) {

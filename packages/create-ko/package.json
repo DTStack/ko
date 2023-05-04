@@ -9,8 +9,12 @@
   },
   "main": "./src/index.ts",
   "bin": {
-    "create": "./lib/cli.js"
+    "create-ko": "./lib/index.js"
   },
+  "files": [
+    "lib/*",
+    "template"
+  ],
   "scripts": {
     "build": "tsc"
   },
