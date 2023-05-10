@@ -32,7 +32,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
+  plugins: ['simple-import-sort', 'import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
   globals: {
     expect: 'readonly',
     test: 'readonly',
@@ -221,48 +221,40 @@ module.exports = {
     // standard 要求 callback 内的值不为具体值
     'standard/no-callback-literal': 0,
     'n/no-callback-literal': 0,
-    'import/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
-        'newlines-between': 'always',
-        alphabetize: { order: 'asc', caseInsensitive: true },
-        pathGroups: [
-          {
-            pattern: 'react*',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: '@/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '*.scss',
-            group: 'index',
-            position: 'after',
-          },
-          {
-            pattern: '*.css',
-            group: 'index',
-            position: 'after',
-          },
-          {
-            pattern: '*.less',
-            group: 'index',
-            position: 'after',
-          },
-        ],
-        pathGroupsExcludedImportTypes: [],
-      },
-    ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'warn',
+          {
+            groups: [
+              [
+                // Packages `react` related packages come first.
+                '^react',
+                '^@?\\w',
+                // Internal packages.
+                '^(@|components)(/.*|$)',
+                // Side effect imports.
+                '^\\u0000',
+                // Parent imports. Put `..` last.
+                '^\\.\\.(?!/?$)',
+                '^\\.\\./?$',
+                // Other relative imports. Put same-folder imports and `.` last.
+                '^\\./(?=.*/)(?!/?$)',
+                '^\\.(?!/?$)',
+                '^\\./?$',
+              ],
+              // Style imports.
+              ['^.+\\.?(sc|sa|le|c)ss$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };
