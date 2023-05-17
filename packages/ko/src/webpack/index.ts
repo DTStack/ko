@@ -63,17 +63,6 @@ class WebpackConfig {
     return require(pkgPath).version;
   }
 
-  get stats() {
-    const mapping: Record<NonNullable<IOptions['logLevel']>, string> = {
-      info: 'normal',
-      error: 'errors-only',
-      warn: 'errors-warnings',
-      none: 'none',
-    };
-    const { logLevel } = this.opts;
-    return mapping[logLevel!] as Configuration['stats'];
-  }
-
   get base() {
     const { cwd, publicPath, entry, outputPath, alias, hash, analyzer } =
       this.opts;
@@ -123,7 +112,7 @@ class WebpackConfig {
         hints: false,
       },
       cache: this.cache,
-      stats: this.stats,
+      stats: 'none',
       infrastructureLogging: {
         level: 'error',
       },

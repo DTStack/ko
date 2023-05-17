@@ -41,5 +41,4 @@ export type IOptions = {
     disableLazyImports?: boolean; // 是否禁用导入懒编译
   };
    lints?: Record<IKeys, Omit<IOpts, 'write'>>; // lint 配置
-   logLevel?: 'info' | 'warn' | 'error' | 'none'; // 控制日志级别
 };

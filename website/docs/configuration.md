@@ -41,7 +41,6 @@ export type IOptions = {
     disableLazyImports?: boolean; // disable lazy compilation of imports
   };
    lints?: Record<IKeys, Omit<IOpts, 'write'>>; // lint configs
-   logLevel?: 'info' | 'warn' | 'error' | 'none'; //control log level
 };
 ```
 
