@@ -7,6 +7,19 @@ title: Getting Started
 
 * Node.js version: Node.js 14+
 
+## Create a React Project in One Line
+Your can use CLI to create a React Project with TypeScript.
+``` bash
+pnpm create ko
+# or
+npm create ko
+# or
+yarn create ko
+```
+After waiting a second, you could see `Creating project in...` in terminal.
+
+And then just going into the folder and install dependencies.
+
 ## Install ko
 
 You can install ko using npm, yarn or pnpm:
