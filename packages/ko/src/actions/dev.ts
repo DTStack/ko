@@ -30,6 +30,9 @@ class Dev extends ActionFactory {
       },
       setupExitSignals: false,
       allowedHosts: 'all',
+      client: {
+        overlay: false,
+      },
       historyApiFallback,
     };
   }
