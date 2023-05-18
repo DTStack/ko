@@ -202,6 +202,7 @@ importers:
       eslint-plugin-promise: 6.0.0
       eslint-plugin-react: 7.30.1
       eslint-plugin-react-hooks: 4.6.0
+      eslint-plugin-simple-import-sort: ^10.0.0
       eslint-plugin-sort-requires: 2.1.0
       postcss: 8.4.14
       postcss-less: 6.0.0
@@ -228,6 +229,7 @@ importers:
       eslint-plugin-promise: 6.0.0_eslint@8.22.0
       eslint-plugin-react: 7.30.1_eslint@8.22.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.22.0
+      eslint-plugin-simple-import-sort: 10.0.0_eslint@8.22.0
       eslint-plugin-sort-requires: 2.1.0
       postcss: 8.4.14
       postcss-less: 6.0.0_postcss@8.4.14
@@ -8024,6 +8026,14 @@ packages:
       resolve: 2.0.0-next.3
       semver: 6.3.0
       string.prototype.matchall: 4.0.7
+    dev: false
+
+  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.22.0:
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.22.0
     dev: false
 
   /eslint-plugin-sort-requires/2.1.0:
