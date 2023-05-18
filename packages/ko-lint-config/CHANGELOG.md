@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.20
+
+### Patch Changes
+
+- 4d4b037c: eslint import sort
+
 ## 2.2.19
 
 ### Patch Changes
@@ -149,8 +155,7 @@
 
 ### Major Changes
 
-- e854ccd8: 1. add new plugin:eslint-plugin-dt-react
-  2. update eslint & prettier configs
+- e854ccd8: 1. add new plugin:eslint-plugin-dt-react 2. update eslint & prettier configs
 
 ## 1.0.1
 
