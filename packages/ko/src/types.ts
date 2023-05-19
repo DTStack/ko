@@ -41,7 +41,6 @@ export type IOptions = {
   };
   //misc
   lints?: Record<IKeys, Omit<IOpts, 'write'>>;
-  logLevel?: 'info' | 'warn' | 'error' | 'none';
 };
 
 export type ICliOptions = {

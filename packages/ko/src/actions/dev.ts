@@ -16,7 +16,7 @@ class Dev extends ActionFactory {
   }
 
   private get devServerConfig(): DevServerConfiguration {
-    const { serve, publicPath, logLevel } = this.service.config;
+    const { serve, publicPath } = this.service.config;
     const { host, port, proxy, staticPath, historyApiFallback = false } = serve;
     return {
       port,
@@ -32,7 +32,6 @@ class Dev extends ActionFactory {
       allowedHosts: 'all',
       client: {
         overlay: false,
-        logging: logLevel,
       },
       historyApiFallback,
     };

@@ -32,7 +32,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
+  plugins: [
+    'simple-import-sort',
+    'import',
+    'react',
+    'jsx-a11y',
+    'react-hooks',
+    'dt-react',
+  ],
   globals: {
     expect: 'readonly',
     test: 'readonly',
@@ -186,10 +193,6 @@ module.exports = {
 
     'jsx-a11y/no-static-element-interactions': 0,
 
-    '@typescript-eslint/no-unused-vars': [
-      2,
-      { vars: 'all', args: 'none', ignoreRestSiblings: false },
-    ],
     '@typescript-eslint/semi': [2, 'always'],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
@@ -221,5 +224,43 @@ module.exports = {
     // standard 要求 callback 内的值不为具体值
     'standard/no-callback-literal': 0,
     'n/no-callback-literal': 0,
+    'simple-import-sort/imports': 2,
+    'simple-import-sort/exports': 2,
   },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          2,
+          {
+            // group 内规则在不同数组会在 import 语句中间添加换行以区分
+            groups: [
+              [
+                // Packages `react` related packages come first
+                '^react',
+                '^@?\\w',
+                // Side effect imports
+                '^\\u0000',
+              ],
+              [
+                // Internal packages
+                '^(@|components)(/.*|$)',
+                // Parent imports. Put `..` last
+                '^\\.\\.(?!/?$)',
+                '^\\.\\./?$',
+                // Other relative imports. Put same-folder imports and `.` last
+                '^\\./(?=.*/)(?!/?$)',
+                '^\\.(?!/?$)',
+                '^\\./?$',
+                // Style imports
+                '^.+\\.?(sc|sa|le|c)ss$',
+              ],
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };

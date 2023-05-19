@@ -1,6 +1,6 @@
 {
   "name": "ko-lint-config",
-  "version": "2.2.19",
+  "version": "2.2.20",
   "description": "lint configs about eslint stylelint and prettier",
   "main": "index.js",
   "files": [
@@ -46,10 +46,11 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sort-requires": "2.1.0",
     "postcss": "8.4.14",
-    "postcss-scss": "4.0.4",
     "postcss-less": "6.0.0",
+    "postcss-scss": "4.0.4",
     "prettier": "2.7.1",
     "stylelint": "14.11.0",
     "stylelint-config-standard": "25.0.0",
