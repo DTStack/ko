@@ -1,5 +1,6 @@
 import { AsyncSeriesWaterfallHook } from 'tapable';
 import { HookItem, ACTION, HOOK_KEY_SET, HookOptions } from '../types';
+import webpack from 'webpack';
 
 class Hooks {
   private hooks: Record<string, Record<ACTION, HookItem[]>>;
@@ -24,7 +25,7 @@ class Hooks {
       tapInstance.tapPromise(
         { name: hook.name, stage: hook.stage, before: hook.before },
         async (ctx: any) => {
-          const result = await hook.fn(ctx);
+          const result = await hook.fn(ctx, webpack);
           return ctx.concat(result);
         }
       );
@@ -33,7 +34,7 @@ class Hooks {
       tapInstance.tapPromise(
         { name: hook.name, stage: hook.stage, before: hook.before },
         async ctx => {
-          const result = await hook.fn(ctx);
+          const result = await hook.fn(ctx, webpack);
           return result;
         }
       );
