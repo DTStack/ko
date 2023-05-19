@@ -1,5 +1,0 @@
----
-'ko': patch
----
-
-remove logLevel
