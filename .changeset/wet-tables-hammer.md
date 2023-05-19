@@ -1,5 +1,5 @@
 ---
-'create-ko': major
+'create-ko': patch
 ---
 
 add init project
