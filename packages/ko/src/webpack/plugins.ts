@@ -9,6 +9,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import AutoPolyfillsWebpackPlugin from 'auto-polyfills-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from '@nuxt/friendly-errors-webpack-plugin';
+import PurgeCacheWebpackPlugin from './custom-plugins/purge-cache-webpack-plugin';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
@@ -93,6 +94,7 @@ function getPlugins(opts: IWebpackOptions) {
           notes: [],
         },
       }),
+    !isProd && new PurgeCacheWebpackPlugin(),
     isProd &&
       autoPolyfills &&
       (typeof autoPolyfills === 'boolean'

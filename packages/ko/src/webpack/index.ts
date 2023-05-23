@@ -46,6 +46,7 @@ class WebpackConfig {
     };
     if (type === 'filesystem') {
       (cache as FileCacheOptions).version = this.projectVersion;
+      (cache as FileCacheOptions).maxAge = 7 * 24 * 3600000;
     } else {
       (
         cache as Exclude<
