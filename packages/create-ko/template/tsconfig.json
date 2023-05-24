@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "noEmit": true, // Don't emit; allow Babel to transform files.
+        "outDir": "./dist/",
+        "baseUrl": ".",
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["es6", "es2018", "dom"],
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "downlevelIteration": true,
+        "paths": {
+            "@/*": ["./src/*"],
+            "styles/*": ["./src/styles/*"]
+        },
+        "typeRoots": ["node", "node_modules/@types", "./typings"]
+    },
+    "exclude": ["node_modules", "dist", "src/public/**/*"],
+    "include": ["./**/*.ts", "./**/*.tsx", "src/**/*"]
+}

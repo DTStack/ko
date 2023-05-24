@@ -1,0 +1,30 @@
+{
+  "name": "create-ko",
+  "version": "1.0.1",
+  "description": "create react project with ko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DTStack/ko",
+    "directory": "packages/create-ko"
+  },
+  "main": "./src/index.ts",
+  "bin": {
+    "create-ko": "./lib/index.js"
+  },
+  "files": [
+    "lib/*",
+    "template"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.2.0",
+    "inquirer": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.2"
+  }
+}

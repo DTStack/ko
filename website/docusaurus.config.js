@@ -44,7 +44,19 @@ const config = {
       }),
     ],
   ],
-
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh-CN'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en-GB',
+      },
+      // You can omit a locale (e.g. fr) if you don't need to override the defaults
+      'zh-CN': {
+        htmlLang: 'zh-CN',
+      },
+    },
+  },
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -56,6 +68,10 @@ const config = {
             docId: 'introduction',
             position: 'left',
             label: 'Docs',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
           },
           {
             type: 'docsVersionDropdown',

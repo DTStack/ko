@@ -1,5 +1,14 @@
 # ko
 
+## 6.5.3
+
+### Patch Changes
+
+- 6f22b5770: support error show browser use error-overlay-webpack-plugin
+- b3373de34: exposed webpack for plugin to use
+- e10197713: remove logLevel
+- d2bd06d31: support chinese docs
+
 ## 6.5.2
 
 ### Patch Changes
