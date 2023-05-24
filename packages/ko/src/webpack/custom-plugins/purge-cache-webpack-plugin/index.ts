@@ -5,7 +5,7 @@ import path from 'path';
 class PurgeCacheWebpackPlugin {
   WEBPACK_PULGIN_NAME = 'PurgeCacheWebpackPlugin';
 
-  async purgeCacheFiles(
+  purgeCacheFiles(
     directory: string,
     maxAge: number,
     callback: (errors?: Error[]) => void
@@ -13,7 +13,6 @@ class PurgeCacheWebpackPlugin {
     fs.readdir(directory)
       .then(files => {
         const expiredPacks = [];
-
         if (files.length === 0) return callback();
 
         for (const file of files) {
