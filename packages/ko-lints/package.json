@@ -34,10 +34,10 @@
     "fast-glob": "^3.2.11"
   },
   "peerDependencies": {
-    "ko-lint-config": "workspace:*"
+    "ko-lint-config": "workspace:*",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
-    "typescript": "^4.6.4",
     "ko-lint-config": "workspace:*"
   }
 }
