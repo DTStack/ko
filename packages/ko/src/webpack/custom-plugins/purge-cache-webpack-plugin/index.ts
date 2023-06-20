@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 class PurgeCacheWebpackPlugin {
-  WEBPACK_PULGIN_NAME = 'PurgeCacheWebpackPlugin';
+  WEBPACK_PLUGIN_NAME = 'PurgeCacheWebpackPlugin';
 
   purgeCacheFiles(
     directory: string,
@@ -50,12 +50,12 @@ class PurgeCacheWebpackPlugin {
 
   apply(compiler: Compiler) {
     compiler.hooks.done.tapAsync(
-      { name: this.WEBPACK_PULGIN_NAME },
+      { name: this.WEBPACK_PLUGIN_NAME },
       (_, callback) => {
         const { type, maxAge, cacheLocation } = compiler.options.cache as any;
         if (type === 'filesystem') {
           const logger = compiler.getInfrastructureLogger(
-            this.WEBPACK_PULGIN_NAME
+            this.WEBPACK_PLUGIN_NAME
           );
           this.purgeCacheFiles(cacheLocation, maxAge, errors => {
             if (errors?.length) {
