@@ -8,10 +8,19 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import AutoPolyfillsWebpackPlugin from 'auto-polyfills-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from '@nuxt/friendly-errors-webpack-plugin';
+import ErrorOverlayPlugin from 'error-overlay-webpack-plugin';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
-  const { isProd, htmlTemplate, copy, analyzer, autoPolyfills } = opts;
+  const {
+    isProd,
+    htmlTemplate,
+    copy,
+    analyzer,
+    autoPolyfills,
+    serve: { host, port, compilationSuccessInfo },
+  } = opts;
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -56,10 +65,11 @@ function getPlugins(opts: IWebpackOptions) {
           },
         },
       }),
-    new MiniCssExtractPlugin({
-      filename: isProd ? 'css/[name].[contenthash].css' : 'css/[name].css',
-      chunkFilename: isProd ? 'css/[id].[contenthash].css' : 'css/[id].css',
-    }),
+    isProd &&
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash].css',
+        chunkFilename: 'css/[id].[contenthash].css',
+      }),
     new CaseSensitivePathsPlugin(),
     new HtmlWebpackPlugin({
       template: htmlTemplate,
@@ -77,6 +87,14 @@ function getPlugins(opts: IWebpackOptions) {
       overlay: false,
     }),
     analyzer && new BundleAnalyzerPlugin(),
+    !isProd &&
+      new FriendlyErrorsWebpackPlugin({
+        compilationSuccessInfo: compilationSuccessInfo ?? {
+          messages: [`Your application is running at http://${host}:${port}`],
+          notes: [],
+        },
+      }),
+    !isProd && new ErrorOverlayPlugin(),
     isProd &&
       autoPolyfills &&
       (typeof autoPolyfills === 'boolean'

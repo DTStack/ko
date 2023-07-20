@@ -32,7 +32,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: ['import', 'react', 'jsx-a11y', 'react-hooks', 'dt-react'],
+  plugins: [
+    'simple-import-sort',
+    'import',
+    'react',
+    'jsx-a11y',
+    'react-hooks',
+    'dt-react',
+  ],
   globals: {
     expect: 'readonly',
     test: 'readonly',
@@ -113,7 +120,7 @@ module.exports = {
       // 函数括号前的空格
       2,
       {
-        anonymous: 'always', // 匿名函数表达式，例如 function () {}
+        anonymous: 'always', // 匿名函数表达式，例如 function () {} 需要 prettier@2.7.1
         named: 'never', // 命名函数表达式，例如 function foo () {}
         asyncArrow: 'always', // 异步箭头函数表达式，例如 async () => {}
       },
@@ -129,7 +136,7 @@ module.exports = {
     'no-prototype-builtins': 0,
     'no-mixed-operators': 1, // 混合使用不同的运算符，建议添加括号增加代码的可读性
     'no-return-assign': 0, // return 的代码中有运算
-    'no-useless-escape': 0,
+    'no-useless-escape': 1,
     'no-useless-constructor': 0, // 空构造函数
     'no-template-curly-in-string': 0,
     'no-console': 0,
@@ -139,6 +146,7 @@ module.exports = {
     'no-async-promise-executor': 1, // new Promise 构造函数中有 async
 
     'import/no-extraneous-dependencies': 0,
+    'import/no-absolute-path': 0,
 
     /**
      * 是否强制组件中的方法顺序，顺序如下：
@@ -161,7 +169,7 @@ module.exports = {
     'react/jsx-closing-tag-location': 0,
     'react/jsx-boolean-value': [1, 'never'],
     'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 0,
+    'react-hooks/exhaustive-deps': 1,
 
     'jsx-quotes': 1,
     'dt-react/jsx-closing-bracket-location': [1, 'line-aligned'],
@@ -185,10 +193,6 @@ module.exports = {
 
     'jsx-a11y/no-static-element-interactions': 0,
 
-    '@typescript-eslint/no-unused-vars': [
-      2,
-      { vars: 'all', args: 'none', ignoreRestSiblings: false },
-    ],
     '@typescript-eslint/semi': [2, 'always'],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
@@ -220,5 +224,43 @@ module.exports = {
     // standard 要求 callback 内的值不为具体值
     'standard/no-callback-literal': 0,
     'n/no-callback-literal': 0,
+    'simple-import-sort/imports': 2,
+    'simple-import-sort/exports': 2,
   },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          2,
+          {
+            // group 内规则在不同数组会在 import 语句中间添加换行以区分
+            groups: [
+              [
+                // Packages `react` related packages come first
+                '^react',
+                '^@?\\w',
+                // Side effect imports
+                '^\\u0000',
+              ],
+              [
+                // Internal packages
+                '^(@|components)(/.*|$)',
+                // Parent imports. Put `..` last
+                '^\\.\\.(?!/?$)',
+                '^\\.\\./?$',
+                // Other relative imports. Put same-folder imports and `.` last
+                '^\\./(?=.*/)(?!/?$)',
+                '^\\.(?!/?$)',
+                '^\\./?$',
+                // Style imports
+                '^.+\\.?(sc|sa|le|c)ss$',
+              ],
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };

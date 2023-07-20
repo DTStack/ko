@@ -1,5 +1,75 @@
 # ko-lints
 
+## 4.0.20
+
+### Patch Changes
+
+- Updated dependencies [4d4b037c]
+  - ko-lint-config@2.2.20
+
+## 4.0.19
+
+### Patch Changes
+
+- abcf6b77: react hooks eslint rule
+- Updated dependencies [abcf6b77]
+  - ko-lint-config@2.2.19
+
+## 4.0.18
+
+### Patch Changes
+
+- 2f66429b: space-before-function-paren
+- Updated dependencies [2f66429b]
+  - ko-lint-config@2.2.18
+
+## 4.0.17
+
+### Patch Changes
+
+- 7a0c20ff: space-before-function-paren anonymous
+- Updated dependencies [7a0c20ff]
+  - ko-lint-config@2.2.17
+
+## 4.0.16
+
+### Patch Changes
+
+- Updated dependencies [ab8fd720]
+  - ko-lint-config@2.2.16
+
+## 4.0.15
+
+### Patch Changes
+
+- 0b1a315c: postcss-less
+- Updated dependencies [0b1a315c]
+  - ko-lint-config@2.2.15
+
+## 4.0.14
+
+### Patch Changes
+
+- ec113a5e: add theme rules
+- Updated dependencies [ec113a5e]
+  - ko-lint-config@2.2.14
+
+## 4.0.13
+
+### Patch Changes
+
+- 456fd274: lint config
+- Updated dependencies [456fd274]
+  - ko-lint-config@2.2.13
+
+## 4.0.12
+
+### Patch Changes
+
+- 8d8d981f: lock dependencies version
+- Updated dependencies [8d8d981f]
+  - ko-lint-config@2.2.12
+
 ## 4.0.11
 
 ### Patch Changes

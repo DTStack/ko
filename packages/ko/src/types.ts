@@ -13,13 +13,12 @@ export type IOptions = {
   publicPath?: string;
   hash?: boolean;
   externals?: Record<string, string>;
-  plugins?: any[];
+  plugins?: HookOptions[];
   htmlTemplate?: string;
   // style configs
   analyzer?: boolean;
   extraPostCSSPlugins?: Plugin[];
   lessOptions?: any;
-  antdV4LessOptions?: any;
   // integrated plugins options
   dynamicResolve?: <T extends any>(request: T) => T;
   autoPolyfills: boolean | AutoPolyfillsWebpackPluginOptions;
@@ -29,6 +28,8 @@ export type IOptions = {
     host: string;
     port: number;
     staticPath?: string;
+    historyApiFallback?: any;
+    compilationSuccessInfo?: { messages: string[]; notes?: string[] };
   };
   // experimental features
   experiment?: {
@@ -36,7 +37,9 @@ export type IOptions = {
     minimizer?: boolean;
     disableLazyImports?: boolean;
     enableCssModule?: boolean;
+    compress?: any;
   };
+  //misc
   lints?: Record<IKeys, Omit<IOpts, 'write'>>;
 };
 
@@ -59,6 +62,11 @@ export type HookItem = {
 export enum ACTION {
   ADD = 'add',
   UPDATE = 'update',
+}
+
+export enum HOOK_KEY_SET {
+  WEBPACK_PLUGIN = 'WebpackPlugin',
+  MODIFY_WEBPACK = 'ModifyWebpack',
 }
 
 export type HookOptions = {

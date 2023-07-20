@@ -112,8 +112,9 @@ class WebpackConfig {
         hints: false,
       },
       cache: this.cache,
-      stats: {
-        cachedModules: false,
+      stats: 'none',
+      infrastructureLogging: {
+        level: 'error',
       },
     };
     return webpackBaseConf as Configuration;

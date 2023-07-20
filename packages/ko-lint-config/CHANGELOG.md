@@ -1,5 +1,59 @@
 # ko-lint-config
 
+## 2.2.20
+
+### Patch Changes
+
+- 4d4b037c: eslint import sort
+
+## 2.2.19
+
+### Patch Changes
+
+- abcf6b77: react hooks eslint rule
+
+## 2.2.18
+
+### Patch Changes
+
+- 2f66429b: space-before-function-paren
+
+## 2.2.17
+
+### Patch Changes
+
+- 7a0c20ff: space-before-function-paren anonymous
+
+## 2.2.16
+
+### Patch Changes
+
+- ab8fd720: some rules
+
+## 2.2.15
+
+### Patch Changes
+
+- 0b1a315c: postcss-less
+
+## 2.2.14
+
+### Patch Changes
+
+- ec113a5e: add theme rules
+
+## 2.2.13
+
+### Patch Changes
+
+- 456fd274: lint config
+
+## 2.2.12
+
+### Patch Changes
+
+- 8d8d981f: lock dependencies version
+
 ## 2.2.11
 
 ### Patch Changes
@@ -101,8 +155,7 @@
 
 ### Major Changes
 
-- e854ccd8: 1. add new plugin:eslint-plugin-dt-react
-  2. update eslint & prettier configs
+- e854ccd8: 1. add new plugin:eslint-plugin-dt-react 2. update eslint & prettier configs
 
 ## 1.0.1
 

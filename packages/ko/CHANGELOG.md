@@ -1,5 +1,73 @@
 # ko
 
+## 6.5.3
+
+### Patch Changes
+
+- 6f22b5770: support error show browser use error-overlay-webpack-plugin
+- b3373de34: exposed webpack for plugin to use
+- e10197713: remove logLevel
+- d2bd06d31: support chinese docs
+
+## 6.5.2
+
+### Patch Changes
+
+- 723774e0e: optimize devServer complation log and add dev log config
+- 8006d5d49: add port select when port used
+- 14e59d909: add --max_old_space_size
+- 2640cddf5: remove antd4Options when antd upgrade to 4+
+
+## 6.5.1
+
+### Patch Changes
+
+- b23e6cbb: devserver added historyApiFallback configuration to resolve resource path 404 issues
+
+## 6.5.0
+
+### Minor Changes
+
+- 78b5730e: support clear console.log and bug fixed
+
+### Patch Changes
+
+- 1cbef1df: support clear console.log
+
+## 6.4.1
+
+### Patch Changes
+
+- 56e09f1d: correct worker-loader include config
+
+## 6.4.0
+
+### Minor Changes
+
+- 3d2f19ae: new options & bugs fixed
+  - support new option: `logLevel`
+  - support new plugin key: `ModifyWebpack`
+  - change MiniCssExtractPluginLoader to style-loader in development mode
+  - fix bugs: #108, #109
+
+## 6.3.4
+
+### Patch Changes
+
+- fba9a04c: support new option
+  - auto-polyfills-webpack-plugin: support longTermCache option to decide whether or not to store cache polyfills.
+- Updated dependencies [fba9a04c]
+  - auto-polyfills-webpack-plugin@1.1.0
+
+## 6.3.3
+
+### Patch Changes
+
+- 55aa11c9: fix bug
+  - auto polyfills webpack plugin can't read browserslist correctly
+- Updated dependencies [55aa11c9]
+  - auto-polyfills-webpack-plugin@1.0.2
+
 ## 6.3.2
 
 ### Patch Changes
