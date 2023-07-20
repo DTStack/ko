@@ -202,6 +202,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/ban-types': 0,
+    '@typescript-eslint/ban-ts-comment': 1,
     '@typescript-eslint/no-empty-function': 0, // 允许函数内容为空
     '@typescript-eslint/no-this-alias': [
       // 允许 this 别名

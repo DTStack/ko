@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.21
+
+### Patch Changes
+
+- 7f809f46: eslint ts-ignore warning
+
 ## 2.2.20
 
 ### Patch Changes
