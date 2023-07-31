@@ -5,6 +5,9 @@ const finalKoConfig = (function () {
   const APP_PATH = path.resolve(ROOT_PATH, 'src');
   const BUILD_PATH = path.resolve(ROOT_PATH, `dist`);
   const WEB_PUBLIC = path.resolve(APP_PATH, 'public');
+  /**
+   * @type {import("ko/lib/types").IOptions}
+   */
   const baseKoConfig = {
     entry: path.join(APP_PATH, './main.tsx'),
     outputPath: BUILD_PATH,
