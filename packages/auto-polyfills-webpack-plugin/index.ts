@@ -148,9 +148,12 @@ class AutoPolyfillsWebpackPlugin {
 
   get coreJsVersion() {
     try {
-      const coreJsPathList = require.resolve('core-js').split('/');
+      const coreJsPath = require.resolve('core-js');
+      // Windows’s path separator is \\, MacOS and Linux is /
+      const splitKey = coreJsPath.includes('/') ? '/' : '\\';
+      const coreJsPathList = coreJsPath.split(splitKey);
       coreJsPathList.pop();
-      const coreJsPkg = join(coreJsPathList.join('/'), './package.json');
+      const coreJsPkg = join(coreJsPathList.join(splitKey), './package.json');
       return require(coreJsPkg).version;
     } catch (ex) {
       throw ex;
