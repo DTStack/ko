@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.3.0
+
+### Minor Changes
+
+- 7921a2637: support pnpm@7.33.0
+
 ## 2.2.20
 
 ### Patch Changes

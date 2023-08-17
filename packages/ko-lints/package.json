@@ -1,6 +1,6 @@
 {
   "name": "ko-lints",
-  "version": "4.0.20",
+  "version": "5.0.0",
   "description": "lint tools used by ko",
   "keywords": [
     "ko",
