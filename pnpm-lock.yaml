@@ -116,7 +116,7 @@ importers:
       html-webpack-plugin: ^5.5.0
       inquirer: ^8.2.2
       jest: ^28.1.0
-      ko-lints: workspace:^4.0.0
+      ko-lints: workspace:^5.0.0
       less: ^3.13.1
       less-loader: ^9.1.0
       lodash: ^4.17.21
