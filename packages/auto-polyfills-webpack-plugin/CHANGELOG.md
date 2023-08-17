@@ -1,5 +1,11 @@
 # auto-polyfills-webpack-plugin
 
+## 1.1.1
+
+### Patch Changes
+
+- 4e63e269: support Windows
+
 ## 1.1.0
 
 ### Minor Changes

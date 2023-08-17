@@ -1,6 +1,6 @@
 {
   "name": "ko",
-  "version": "6.5.3",
+  "version": "6.5.4",
   "description": "build & lint library",
   "keywords": [
     "ko",
@@ -45,7 +45,7 @@
     "@nuxt/friendly-errors-webpack-plugin": "^2.5.2",
     "@parcel/css": "^1.12.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
-    "auto-polyfills-webpack-plugin": "workspace:1.1.0",
+    "auto-polyfills-webpack-plugin": "workspace:1.1.1",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-treasure": "^0.9.0",
