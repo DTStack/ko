@@ -5,6 +5,11 @@
 ### Minor Changes
 
 - 7921a2637: support pnpm@7.33.0
+## 2.2.21
+
+### Patch Changes
+
+- 7f809f46: eslint ts-ignore warning
 
 ## 2.2.20
 

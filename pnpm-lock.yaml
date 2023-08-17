@@ -7163,6 +7163,7 @@ packages:
   /deepmerge/4.3.0:
     resolution: {integrity: sha512-z2wJZXrmeHdvYJp/Ux55wIjqo81G5Bp4c+oELTW+7ar6SogWHajt5a9gO3s3IDaGSAXjDk0vlQKN3rms8ab3og==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /default-gateway/6.0.3:
     resolution: {integrity: sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==}
@@ -8739,18 +8740,18 @@ packages:
       vue-template-compiler:
         optional: true
     dependencies:
-      '@babel/code-frame': 7.18.6
+      '@babel/code-frame': 7.16.7
       '@types/json-schema': 7.0.11
       chalk: 4.1.2
       chokidar: 3.5.3
       cosmiconfig: 6.0.0
-      deepmerge: 4.3.0
+      deepmerge: 4.2.2
       fs-extra: 9.1.0
       glob: 7.2.3
       memfs: 3.4.13
       minimatch: 3.1.2
       schema-utils: 2.7.0
-      semver: 7.3.8
+      semver: 7.3.7
       tapable: 1.1.3
       typescript: 4.6.4
       webpack: 5.72.1
@@ -13561,9 +13562,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@babel/code-frame': 7.18.6
-      address: 1.2.2
-      browserslist: 4.21.5
+      '@babel/code-frame': 7.16.7
+      address: 1.2.0
+      browserslist: 4.20.3
       chalk: 4.1.2
       cross-spawn: 7.0.3
       detect-port-alt: 1.1.6

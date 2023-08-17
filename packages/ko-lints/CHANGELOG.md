@@ -10,6 +10,12 @@
 
 - Updated dependencies [7921a2637]
   - ko-lint-config@2.3.0
+## 4.0.21
+
+### Patch Changes
+
+- Updated dependencies [7f809f46]
+  - ko-lint-config@2.2.21
 
 ## 4.0.20
 
