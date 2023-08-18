@@ -1,5 +1,13 @@
 # ko
 
+## 6.5.4
+
+### Patch Changes
+
+- 4e63e269: support Windows
+- Updated dependencies [4e63e269]
+  - auto-polyfills-webpack-plugin@1.1.1
+
 ## 6.5.3
 
 ### Patch Changes
