@@ -83,7 +83,7 @@
     "tapable": "^2.2.1",
     "terser-webpack-plugin": "^5.3.6",
     "thread-loader": "^3.0.4",
-    "webpack": "^5.72.1",
+    "webpack": "^5.76.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-dev-server": "4.9.0",
     "webpackbar": "^5.0.2",
