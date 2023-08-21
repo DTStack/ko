@@ -7,7 +7,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import AutoPolyfillsWebpackPlugin from 'auto-polyfills-webpack-plugin';
+import AutoPolyfillsWebpackPlugin from '@dtinsight/auto-polyfills-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import ErrorOverlayPlugin from 'error-overlay-webpack-plugin';
 import { IWebpackOptions } from '../types';

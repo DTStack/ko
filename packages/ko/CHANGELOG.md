@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.5
+
+### Patch Changes
+
+- c5a16cf83: update dependencies auto-polyfills-webpack-plugin because add scope
+
 ## 6.5.4
 
 ### Patch Changes

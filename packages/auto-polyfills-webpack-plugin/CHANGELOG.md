@@ -1,5 +1,11 @@
 # auto-polyfills-webpack-plugin
 
+## 2.0.0
+
+### Major Changes
+
+- ded1b6ee5: add new scope for packages
+
 ## 1.1.1
 
 ### Patch Changes
