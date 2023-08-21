@@ -45,7 +45,7 @@
     "@nuxt/friendly-errors-webpack-plugin": "^2.5.2",
     "@parcel/css": "^1.12.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
-    "auto-polyfills-webpack-plugin": "workspace:1.1.1",
+    "@dtinsight/auto-polyfills-webpack-plugin": "workspace:2.0.0",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-treasure": "^0.9.0",

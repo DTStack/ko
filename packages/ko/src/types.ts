@@ -1,7 +1,7 @@
 import { Pattern } from 'copy-webpack-plugin';
 import { Plugin } from 'postcss';
 import { IKeys, IOpts } from 'ko-lints';
-import { IOpts as AutoPolyfillsWebpackPluginOptions } from 'auto-polyfills-webpack-plugin';
+import { IOpts as AutoPolyfillsWebpackPluginOptions } from '@dtinsight/auto-polyfills-webpack-plugin';
 
 export type IOptions = {
   //common configs
