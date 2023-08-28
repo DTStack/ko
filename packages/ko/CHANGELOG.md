@@ -1,18 +1,13 @@
 # ko
 
-## 6.5.5
+## 6.5.8
 
 ### Patch Changes
 
 - c5a16cf83: update dependencies auto-polyfills-webpack-plugin because add scope
-
-## 6.5.4
-
-### Patch Changes
-
 - 4e63e269: support Windows
 - Updated dependencies [4e63e269]
-  - auto-polyfills-webpack-plugin@1.1.1
+- auto-polyfills-webpack-plugin@1.1.1
 
 ## 6.5.3
 
