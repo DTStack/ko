@@ -1,6 +1,6 @@
 {
   "name": "ko-lint-config",
-  "version": "2.2.21",
+  "version": "2.3.0",
   "description": "lint configs about eslint stylelint and prettier",
   "main": "index.js",
   "files": [
@@ -58,8 +58,10 @@
     "stylelint-scss": "4.3.0"
   },
   "devDependencies": {
-    "tape": "^5.5.2",
-    "typescript": "4.7.4"
+    "tape": "^5.5.2"
+  },
+  "peerDependencies": {
+    "typescript": "^4.6.4"
   },
   "engines": {
     "node": ">=14"

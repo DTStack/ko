@@ -1,5 +1,15 @@
 # ko-lints
 
+## 5.0.0
+
+### Minor Changes
+
+- 7921a2637: support pnpm@7.33.0
+
+### Patch Changes
+
+- Updated dependencies [7921a2637]
+  - ko-lint-config@2.3.0
 ## 4.0.21
 
 ### Patch Changes

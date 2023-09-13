@@ -1,5 +1,19 @@
 # ko
 
+## 6.6.0
+
+### Minor Changes
+
+- 7921a2637: support pnpm@7.33.0
+
+### Patch Changes
+
+- 81500dcee: auto purge expired cache files
+- e76ee46e8: update webpack-dev-server to v4.14.0
+- f7eef14db: add jsdoc and .d.ts file
+- Updated dependencies [7921a2637]
+  - ko-lints@5.0.0
+
 ## 6.5.8
 
 ### Patch Changes

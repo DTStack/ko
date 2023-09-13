@@ -1,6 +1,6 @@
 {
   "name": "ko-lints",
-  "version": "4.0.21",
+  "version": "5.0.0",
   "description": "lint tools used by ko",
   "keywords": [
     "ko",
@@ -34,10 +34,10 @@
     "fast-glob": "^3.2.11"
   },
   "peerDependencies": {
-    "ko-lint-config": "workspace:*"
+    "ko-lint-config": "workspace:*",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
-    "typescript": "^4.6.4",
     "ko-lint-config": "workspace:*"
   }
 }
