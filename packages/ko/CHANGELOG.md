@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.9
+
+### Patch Changes
+
+- fa12b04b8: transform antlr4-c3 file &&=
+
 ## 6.5.8
 
 ### Patch Changes
