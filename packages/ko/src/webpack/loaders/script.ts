@@ -28,6 +28,8 @@ class Script {
           // internal modules dt-common compatible
           if (input.includes('node_modules/dt-common/src/')) {
             return true;
+          } else if (input.includes('antlr4-c3')) {
+            return true;
           } else if (input.includes('node_modules')) {
             return false;
           } else {
