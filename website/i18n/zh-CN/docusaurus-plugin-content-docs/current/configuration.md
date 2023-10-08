@@ -18,6 +18,7 @@ export type IOptions = {
   externals?: Record<string, string>; // 从输出的Bundle中需要排除的依赖
   plugins?: any[]; // ko 内部插件，您可以定义自己的 ko 插件。
   htmlTemplate?: string; // 输出 HTML 文件模板
+  htmlChunks?: 'all' | string[]; // 添加到 HTML 中的 chunk
   // 样式配置
   analyzer?: boolean; // 显示带有可缩放的交互式树状图的输出文件
   extraPostCSSPlugins?: Plugin[]; // 额外的 postcss 插件
