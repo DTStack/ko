@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.10
+
+### Patch Changes
+
+- 63e89263e: add htmlChunks to configure the chunks of HtmlWebpackPlugin
+
 ## 6.5.9
 
 ### Patch Changes
