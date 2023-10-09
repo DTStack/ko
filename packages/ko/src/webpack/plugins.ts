@@ -16,11 +16,18 @@ function getPlugins(opts: IWebpackOptions) {
   const {
     isProd,
     htmlTemplate,
+    htmlChunks,
     copy,
     analyzer,
     autoPolyfills,
     serve: { host, port, compilationSuccessInfo },
   } = opts;
+  const htmlOptions: HtmlWebpackPlugin.Options = {
+    template: htmlTemplate,
+  };
+  if (htmlChunks) {
+    htmlOptions.chunks = htmlChunks;
+  }
   return [
     new IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
@@ -71,9 +78,7 @@ function getPlugins(opts: IWebpackOptions) {
         chunkFilename: 'css/[id].[contenthash].css',
       }),
     new CaseSensitivePathsPlugin(),
-    new HtmlWebpackPlugin({
-      template: htmlTemplate,
-    }),
+    new HtmlWebpackPlugin(htmlOptions),
     copy &&
       new CopyWebpackPlugin({
         patterns: copy,

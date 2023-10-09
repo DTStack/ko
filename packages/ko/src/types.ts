@@ -15,6 +15,7 @@ export type IOptions = {
   externals?: Record<string, string>;
   plugins?: HookOptions[];
   htmlTemplate?: string;
+  htmlChunks?: 'all' | string[];
   // style configs
   analyzer?: boolean;
   extraPostCSSPlugins?: Plugin[];
