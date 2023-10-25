@@ -18,6 +18,7 @@ export type IOptions = {
   externals?: Record<string, string>; //excluding dependencies from the output bundles
   plugins?: any[]; // ko internal plugins, you can define your own plugin of ko.
   htmlTemplate?: string; //output html file template 
+  htmlChunks?: 'all' | string[]; // add only some chunks to html
   // style configs
   analyzer?: boolean; // show output files with an interactive zoomable treemap
   extraPostCSSPlugins?: Plugin[]; // extra post css plugins
