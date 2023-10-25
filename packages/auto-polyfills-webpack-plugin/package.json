@@ -12,11 +12,11 @@
   "peerDependencies": {
     "core-js": "^3",
     "html-webpack-plugin": "^5.5.0",
-    "webpack": "^5.72.1"
+    "webpack": "^5.76.0"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0",
-    "webpack": "^5.72.1"
+    "webpack": "^5.76.0"
   },
   "author": "xbrave",
   "license": "MIT",
