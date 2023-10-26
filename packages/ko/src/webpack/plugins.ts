@@ -10,6 +10,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import AutoPolyfillsWebpackPlugin from '@dtinsight/auto-polyfills-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from '@nuxt/friendly-errors-webpack-plugin';
 import ErrorOverlayPlugin from 'error-overlay-webpack-plugin';
+import PurgeCacheWebpackPlugin from './custom-plugins/purge-cache-webpack-plugin';
 import { IWebpackOptions } from '../types';
 
 function getPlugins(opts: IWebpackOptions) {
@@ -100,6 +101,7 @@ function getPlugins(opts: IWebpackOptions) {
         },
       }),
     !isProd && new ErrorOverlayPlugin(),
+    !isProd && new PurgeCacheWebpackPlugin(),
     isProd &&
       autoPolyfills &&
       (typeof autoPolyfills === 'boolean'
