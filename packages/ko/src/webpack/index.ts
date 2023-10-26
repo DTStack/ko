@@ -34,7 +34,7 @@ class WebpackConfig {
     return merge(this.base, ...opts);
   }
 
-  get cache() {
+  get cache(): FileCacheOptions {
     const { experiment } = this.opts;
     const type = experiment?.speedUp
       ? 'filesystem'
@@ -46,6 +46,7 @@ class WebpackConfig {
     };
     if (type === 'filesystem') {
       (cache as FileCacheOptions).version = this.projectVersion;
+      (cache as FileCacheOptions).maxAge = 7 * 24 * 3600000;
     } else {
       (
         cache as Exclude<
@@ -54,7 +55,7 @@ class WebpackConfig {
         >
       ).maxGenerations = 1;
     }
-    return cache;
+    return cache as FileCacheOptions;
   }
 
   get projectVersion(): string {
