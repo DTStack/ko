@@ -34,7 +34,7 @@ class WebpackConfig {
     return merge(this.base, ...opts);
   }
 
-  get cache() {
+  get cache(): FileCacheOptions {
     const { experiment } = this.opts;
     const type = experiment?.speedUp
       ? 'filesystem'
@@ -54,7 +54,7 @@ class WebpackConfig {
         >
       ).maxGenerations = 1;
     }
-    return cache;
+    return cache as FileCacheOptions;
   }
 
   get projectVersion(): string {
