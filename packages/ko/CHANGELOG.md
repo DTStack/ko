@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.11
+
+### Patch Changes
+
+- 22089fe9: scriptLoader with antlr4ng
+
 ## 6.5.10
 
 ### Patch Changes
