@@ -106,6 +106,7 @@ class WebpackConfig {
           stream: require.resolve('stream-browserify'),
           buffer: require.resolve('buffer/'),
           string_decoder: require.resolve('string_decoder/'),
+          querystring: require.resolve('querystring-es3'),
         },
       },
       performance: {

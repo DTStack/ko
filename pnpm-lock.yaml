@@ -124,6 +124,7 @@ importers:
       postcss: ^8.4.14
       postcss-loader: ^7.0.0
       postcss-url: ^10.1.3
+      querystring-es3: ^0.2.1
       react-refresh: ^0.13.0
       sass: ^1.52.1
       sass-loader: ^13.0.0
@@ -174,6 +175,7 @@ importers:
       postcss: 8.4.21
       postcss-loader: 7.1.0_postcss@8.4.21+webpack@5.76.2
       postcss-url: 10.1.3_postcss@8.4.21
+      querystring-es3: 0.2.1
       react-refresh: 0.13.0
       sass: 1.59.3
       sass-loader: 13.2.0_sass@1.59.3+webpack@5.76.2
