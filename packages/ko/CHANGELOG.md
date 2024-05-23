@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.12
+
+### Patch Changes
+
+- 27d20ed0: fix cant resolve querystring problem
+
 ## 6.5.11
 
 ### Patch Changes
