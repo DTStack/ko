@@ -1,5 +1,16 @@
 # ko
 
+## 6.6.0
+
+### Minor Changes
+
+- dd8e687d7: add jsdoc description and export .d.ts file
+- b1a004f68: support auto purge cache when cache pack expired by maxAge
+
+### Patch Changes
+
+- 4d4071220: update webpack-dev-server to 4.14.0 and remove error-overlay-webpack-plugin
+
 ## 6.5.12
 
 ### Patch Changes
@@ -11,6 +22,7 @@
 ### Patch Changes
 
 - 22089fe9: scriptLoader with antlr4ng
+
 
 ## 6.5.10
 
