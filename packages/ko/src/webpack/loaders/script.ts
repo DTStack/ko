@@ -17,7 +17,7 @@ class Script {
         test: /\.worker.[jt]s$/,
         loader: this.WORKER_LOADER,
         include: (input: string) =>
-          input.includes('dt-react-monaco-editor/lib/languages'),
+          /dt-react-monaco-editor[\\/]lib[\\/]languages/.test(input),
         options: {
           inline: 'fallback',
         },
@@ -26,7 +26,7 @@ class Script {
         test: /\.m?(t|j)sx?$/,
         include: (input: string) => {
           // internal modules dt-common compatible
-          if (input.includes('node_modules/dt-common/src/')) {
+          if (/node_modules[\\/]dt-common[\\/]src[\\/]/.test(input)) {
             return true;
           } else if (input.includes('antlr4-c3')) {
             return true;
