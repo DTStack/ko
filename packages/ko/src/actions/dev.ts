@@ -17,12 +17,26 @@ class Dev extends ActionFactory {
 
   private get devServerConfig(): DevServerConfiguration {
     const { serve, publicPath } = this.service.config;
-    const { host, port, proxy, staticPath, historyApiFallback = false } = serve;
+    const {
+      host,
+      port,
+      proxy,
+      client = {
+        overlay: {
+          errors: true,
+          warnings: false,
+          runtimeErrors: true,
+        },
+      },
+      staticPath,
+      historyApiFallback = false,
+    } = serve;
     return {
       port,
       host,
       hot: true,
       proxy,
+      client,
       static: {
         directory: staticPath,
         watch: true,
@@ -30,13 +44,6 @@ class Dev extends ActionFactory {
       },
       setupExitSignals: false,
       allowedHosts: 'all',
-      client: {
-        overlay: {
-          errors: true,
-          warnings: false,
-          runtimeErrors: true,
-        },
-      },
       historyApiFallback,
     };
   }

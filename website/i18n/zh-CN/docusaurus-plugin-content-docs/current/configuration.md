@@ -32,6 +32,7 @@ export type IOptions = {
     host: string; // 开发服务器的主机名
     port: number; // 开发服务器的端口
     staticPath?: string; // 监视的资源路径
+    client?: boolean | ClientConfiguration | undefined; // 日志、错误捕获等配置项
     compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // 成功编译后的日志，与 friendly-errors-webpack-plugin 相同
   };
   // 实验性功能

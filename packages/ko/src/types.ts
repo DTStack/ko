@@ -2,6 +2,7 @@ import { Pattern } from 'copy-webpack-plugin';
 import { Plugin } from 'postcss';
 import { IKeys, IOpts } from 'ko-lints';
 import { IOpts as AutoPolyfillsWebpackPluginOptions } from '@dtinsight/auto-polyfills-webpack-plugin';
+import { ClientConfiguration } from 'webpack-dev-server';
 
 export type IOptions = {
   //common configs
@@ -86,6 +87,7 @@ export type IOptions = {
   // dev, or serve configs
   /**
    * Options for the development server.
+   * Docs url: https://webpack.js.org/configuration/dev-server/
    * @param {{proxy?: Record<string, any>, host: string, port: number, staticPath?: string, historyApiFallback?: any, compilationSuccessInfo?: { messages: string[]; notes?: string[] }}}
    */
   serve: {
@@ -93,6 +95,7 @@ export type IOptions = {
     host: string;
     port: number;
     staticPath?: string;
+    client?: boolean | ClientConfiguration | undefined;
     historyApiFallback?: any;
     compilationSuccessInfo?: { messages: string[]; notes?: string[] };
   };

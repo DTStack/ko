@@ -6,6 +6,8 @@ title: Configuration
 You can custom ko's action via **ko.config.js**, below are supported configurations:
 
 ``` typescript
+import { ClientConfiguration } from 'webpack-dev-server';
+
 export type IOptions = {
   //common configs
   cwd: string; //current working directory
@@ -32,6 +34,7 @@ export type IOptions = {
     host: string; // host of dev server
     port: number; // port of dev server
     staticPath?: string; // static path that will be watch of dev server
+    client?: boolean | ClientConfiguration | undefined; // client of dev server
     compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // log after successful compilation, as same as friendly-errors-webpack-plugin
   };
   // experimental features
