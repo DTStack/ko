@@ -1,5 +1,12 @@
 # ko
 
+## 6.6.1
+
+### Patch Changes
+
+- a7956c18: support window path with \\
+- df0754e2: ko.config.js support devServer client
+
 ## 6.6.0
 
 ### Minor Changes
@@ -22,7 +29,6 @@
 ### Patch Changes
 
 - 22089fe9: scriptLoader with antlr4ng
-
 
 ## 6.5.10
 
