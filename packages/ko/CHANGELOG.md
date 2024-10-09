@@ -1,5 +1,11 @@
 # ko
 
+## 6.5.13
+
+### Patch Changes
+
+- c943c40d: support window path with \\
+
 ## 6.5.12
 
 ### Patch Changes
