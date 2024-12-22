@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.2
+
+### Patch Changes
+
+- e6e6058b8: change detect-port version to auto increment port
+
 ## 6.6.1
 
 ### Patch Changes
