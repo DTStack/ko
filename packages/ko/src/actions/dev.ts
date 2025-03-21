@@ -30,6 +30,7 @@ class Dev extends ActionFactory {
       },
       staticPath,
       historyApiFallback = false,
+      ...others
     } = serve;
     return {
       port,
@@ -45,6 +46,7 @@ class Dev extends ActionFactory {
       setupExitSignals: false,
       allowedHosts: 'all',
       historyApiFallback,
+      ...others,
     };
   }
 
