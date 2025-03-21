@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.3
+
+### Patch Changes
+
+- 59059b5d: feat: #174 support more dev-server configs
+
 ## 6.6.2
 
 ### Patch Changes
