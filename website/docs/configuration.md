@@ -36,6 +36,7 @@ export type IOptions = {
     staticPath?: string; // static path that will be watch of dev server
     client?: boolean | ClientConfiguration | undefined; // client of dev server
     compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // log after successful compilation, as same as friendly-errors-webpack-plugin
+    // other all webpack-dev-server supported configs
   };
   // experimental features
   experiment?: {

@@ -2,7 +2,17 @@ import { Pattern } from 'copy-webpack-plugin';
 import { Plugin } from 'postcss';
 import { IKeys, IOpts } from 'ko-lints';
 import { IOpts as AutoPolyfillsWebpackPluginOptions } from '@dtinsight/auto-polyfills-webpack-plugin';
-import { ClientConfiguration } from 'webpack-dev-server';
+import { ClientConfiguration, Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+
+export interface IServeConfig extends WebpackDevServerConfiguration {
+  proxy?: Record<string, any>;
+  host: string;
+  port: number;
+  staticPath?: string;
+  client?: boolean | ClientConfiguration | undefined;
+  historyApiFallback?: any;
+  compilationSuccessInfo?: { messages: string[]; notes?: string[] };
+}
 
 export type IOptions = {
   //common configs
@@ -88,17 +98,9 @@ export type IOptions = {
   /**
    * Options for the development server.
    * Docs url: https://webpack.js.org/configuration/dev-server/
-   * @param {{proxy?: Record<string, any>, host: string, port: number, staticPath?: string, historyApiFallback?: any, compilationSuccessInfo?: { messages: string[]; notes?: string[] }}}
+   * @param {IServeConfig}
    */
-  serve: {
-    proxy?: Record<string, any>;
-    host: string;
-    port: number;
-    staticPath?: string;
-    client?: boolean | ClientConfiguration | undefined;
-    historyApiFallback?: any;
-    compilationSuccessInfo?: { messages: string[]; notes?: string[] };
-  };
+  serve: IServeConfig;
   // experimental features
   /**
    * Experimental features to enable.
