@@ -8,6 +8,7 @@ import ActionFactory from './factory';
 import { ICliOptions } from '../types';
 import detect from 'detect-port';
 import inquirer from 'inquirer';
+import { omit } from 'lodash';
 
 class Dev extends ActionFactory {
   private webpackConfig: WebpackConfig;
@@ -137,11 +138,12 @@ class Dev extends ActionFactory {
     process.env.NODE_ENV = 'development';
     this.service.freezeCliOptsWith(cliOpts);
     const config = await this.generateConfig();
-    const port = config.devServer?.port as number;
+    const serverConfig = omit(config.devServer, 'compilationSuccessInfo');
+    const port = serverConfig.port as number;
     const newPort = (await this.checkPort(port)) as number;
     const compiler = Webpack(config);
     const devServer = new WebpackDevServer(
-      { ...config.devServer, port: newPort },
+      { ...serverConfig, port: newPort },
       compiler
     );
     await devServer.start();
