@@ -34,6 +34,7 @@ export type IOptions = {
     staticPath?: string; // 监视的资源路径
     client?: boolean | ClientConfiguration | undefined; // 日志、错误捕获等配置项
     compilationSuccessInfo?: { messages: string[]; notes?: string[] }; // 成功编译后的日志，与 friendly-errors-webpack-plugin 相同
+    // 其他所有 webpack-dev-server 支持的配置项
   };
   // 实验性功能
   experiment?: {
