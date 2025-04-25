@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.4
+
+### Patch Changes
+
+- f129ff51: remove compilationSuccessInfo in serverConfig to pass schema validate
+
 ## 6.6.3
 
 ### Patch Changes
