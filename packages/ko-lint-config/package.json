@@ -48,7 +48,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-sort-requires": "2.1.0",
-    "postcss": "8.4.14",
+    "postcss": "8.4.31",
     "postcss-less": "6.0.0",
     "postcss-scss": "4.0.4",
     "prettier": "2.7.1",
