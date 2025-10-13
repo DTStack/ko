@@ -24,6 +24,12 @@ class Style {
       {
         test: /\.css$/,
         use: [this.styleLoader, this.cssLoader, this.postCSSLoader],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [this.styleLoader, this.cssLoader],
+        include: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/,
