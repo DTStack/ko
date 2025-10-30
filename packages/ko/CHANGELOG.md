@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.6
+
+### Patch Changes
+
+- 2b6232e9: fix: #178 optimize postcss-loader exclude
+
 ## 6.6.4
 
 ### Patch Changes
