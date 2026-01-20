@@ -32,6 +32,8 @@ class Script {
             return true;
           } else if (input.includes('antlr4ng')) {
             return true;
+          } else if (input.includes('immer')) {
+            return true;
           } else if (input.includes('node_modules')) {
             return false;
           } else {
