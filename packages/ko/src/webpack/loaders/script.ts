@@ -42,8 +42,9 @@ class Script {
             return true;
           } else if (input.includes('node_modules')) {
             return false;
+
           } else {
-            return true;
+            return false;
           }
         },
         use: [
