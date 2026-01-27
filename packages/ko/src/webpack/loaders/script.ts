@@ -17,9 +17,11 @@ class Script {
         test: /\.worker.[jt]s$/,
         loader: this.WORKER_LOADER,
         include: (input: string) =>
-          /dt-react-monaco-editor[\\/]lib[\\/]languages/.test(input),
+          /dt-react-monaco-editor[\\/]lib[\\/]languages/.test(input) ||
+          input.includes('monaco-sql-languages'),
         options: {
           inline: 'fallback',
+          chunkFilename: '[name].[contenthash].worker.js',
         },
       },
       {
@@ -31,6 +33,12 @@ class Script {
           } else if (input.includes('antlr4-c3')) {
             return true;
           } else if (input.includes('antlr4ng')) {
+            return true;
+          } else if (input.includes('immer')) {
+            return true;
+          } else if (input.includes('react-grid-layout')) {
+            return true;
+          } else if (input.includes('monaco-sql-languages')) {
             return true;
           } else if (input.includes('node_modules')) {
             return false;
