@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.0",
+    "core-js": "^3.30.0",
     "@dtinsight/auto-polyfills-webpack-plugin": "workspace:2.0.0",
     "@nuxt/friendly-errors-webpack-plugin": "^2.5.2",
     "@parcel/css": "^1.12.2",
