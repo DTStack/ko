@@ -97,7 +97,13 @@ class WebpackConfig {
             }),
         ].filter(Boolean),
         extensions: this.extensions,
-        alias,
+        alias: {
+          ...alias,
+          // 只 alias core-js v3 的 modules 路径，不影响 v2 的 library 路径
+          'core-js/modules': require
+            .resolve('core-js')
+            .replace(/\/index\.js$/, '/modules'),
+        },
         fallback: {
           fs: false,
           path: false,

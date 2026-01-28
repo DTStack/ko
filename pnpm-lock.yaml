@@ -105,6 +105,7 @@ importers:
       clean-webpack-plugin: ^4.0.0
       commander: ^9.2.0
       copy-webpack-plugin: ^11.0.0
+      core-js: ^3.30.0
       crypto-browserify: ^3.12.0
       css-loader: ^6.7.1
       css-minimizer-webpack-plugin: ^4.0.0
@@ -156,6 +157,7 @@ importers:
       clean-webpack-plugin: 4.0.0_webpack@5.76.2
       commander: 9.5.0
       copy-webpack-plugin: 11.0.0_webpack@5.76.2
+      core-js: 3.48.0
       crypto-browserify: 3.12.0
       css-loader: 6.7.3_webpack@5.76.2
       css-minimizer-webpack-plugin: 4.2.2_c2a19e8688155f5787d39be946a96e47
@@ -6573,6 +6575,11 @@ packages:
 
   /core-js/3.24.1:
     resolution: {integrity: sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg==}
+    requiresBuild: true
+    dev: false
+
+  /core-js/3.48.0:
+    resolution: {integrity: sha512-zpEHTy1fjTMZCKLHUZoVeylt9XrzaIN2rbPXEt0k+q7JE5CkCZdo6bNq55bn24a69CH7ErAVLKijxJja4fw+UQ==}
     requiresBuild: true
     dev: false
 

@@ -22,15 +22,59 @@ class Script {
           inline: 'fallback',
         },
       },
+      // Monaco worker 依赖专用规则（注入 corejs 兼容 chrome 66）
       {
         test: /\.m?(t|j)sx?$/,
         include: (input: string) => {
+          return (
+            input.includes('monaco-sql-languages') ||
+            input.includes('dt-sql-parser') ||
+            input.includes('antlr4ng') ||
+            input.includes('antlr4-c3')
+          );
+        },
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              presets: [
+                [
+                  require.resolve('@babel/preset-env'),
+                  {
+                    useBuiltIns: 'usage',
+                    corejs: 3,
+                    targets: 'chrome >= 66',
+                  },
+                ],
+                [require.resolve('@babel/preset-typescript')],
+              ],
+              babelrc: false,
+              configFile: false,
+              cacheDirectory: true,
+              cacheCompression: false,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.m?(t|j)sx?$/,
+        include: (input: string) => {
+          if (
+            input.includes('monaco-sql-languages') ||
+            input.includes('dt-sql-parser') ||
+            input.includes('antlr4ng') ||
+            input.includes('antlr4-c3')
+          ) {
+            return false;
+          }
           // internal modules dt-common compatible
           if (/node_modules[\\/]dt-common[\\/]src[\\/]/.test(input)) {
             return true;
-          } else if (input.includes('antlr4-c3')) {
+          } else if (input.includes('immer')) {
             return true;
-          } else if (input.includes('antlr4ng')) {
+          } else if (input.includes('react-grid-layout')) {
+            return true;
+          } else if (input.includes('monaco-editor')) {
             return true;
           } else if (input.includes('node_modules')) {
             return false;
