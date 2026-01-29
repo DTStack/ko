@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.7
+
+### Patch Changes
+
+- 6175dd18: fix(ko): #180 add babel rule for monaco deps to support Chrome 66
+
 ## 6.6.6
 
 ### Patch Changes
