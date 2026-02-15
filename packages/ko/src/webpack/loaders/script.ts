@@ -76,6 +76,8 @@ class Script {
             return true;
           } else if (input.includes('monaco-editor')) {
             return true;
+          } else if (input.includes('immer')) {
+            return true;
           } else if (input.includes('node_modules')) {
             return false;
           } else {
