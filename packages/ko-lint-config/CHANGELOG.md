@@ -1,5 +1,11 @@
 # ko-lint-config
 
+## 2.2.22
+
+### Patch Changes
+
+- 7d010512: optimize ts no-unused-vars
+
 ## 2.2.21
 
 ### Patch Changes
