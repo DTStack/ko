@@ -62,6 +62,22 @@ export type IOptions = {
    */
   plugins?: HookOptions[];
   /**
+   * Additional packages/paths to transpile via Babel, on top of ko's defaults.
+   *
+   * ko already transpiles these by default (they publish ES2020+ syntax):
+   * - `immer`
+   * - `react-grid-layout`
+   * - `monaco-editor`
+   * - internal `dt-common` source (`node_modules/dt-common/src/**`)
+   *
+   * You do not need to re-list them here. Use this to add your own
+   * ES2020+ packages that ko doesn't know about. Entries are matched
+   * as substring against the file path.
+   *
+   * @param {string[]}
+   */
+  babelIncludes?: string[];
+  /**
    * The path to the HTML template to use for the application.
    * @param {string}
    */

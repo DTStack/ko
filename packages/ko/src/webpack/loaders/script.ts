@@ -76,7 +76,11 @@ class Script {
             return true;
           } else if (input.includes('monaco-editor')) {
             return true;
-          } else if (input.includes('node_modules')) {
+          }
+          if (this.opts.babelIncludes?.some(item => item && input.includes(item))) {
+            return true;
+          }
+          if (input.includes('node_modules')) {
             return false;
           } else {
             return true;
