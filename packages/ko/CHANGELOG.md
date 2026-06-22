@@ -1,5 +1,11 @@
 # ko
 
+## 6.6.8
+
+### Patch Changes
+
+- 0f665b4b: feat(ko): #180 expose babelIncludes option for ES2020+ packages
+
 ## 6.6.7
 
 ### Patch Changes
