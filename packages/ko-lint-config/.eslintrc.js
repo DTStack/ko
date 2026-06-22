@@ -218,6 +218,7 @@ module.exports = {
         argsIgnorePattern: '^_', // 函数参数忽略以下划线开头的变量
         destructuredArrayIgnorePattern: '^_', // 解构数组忽略以下划线开头的变量
         caughtErrorsIgnorePattern: '^err', // 捕获错误忽略以 err 开头的变量
+        ignoreRestSiblings: true, // 允许对象解构时忽略被排除字段
       },
     ],
 
